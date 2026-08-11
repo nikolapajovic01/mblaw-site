@@ -19,7 +19,8 @@ const manrope = Manrope({
 });
 
 const navItems = [
-  { label: "O NAMA", active: true },
+  { label: "POČETNA", active: true },
+  { label: "O NAMA" },
   { label: "OBLASTI PRAKSE" },
   { label: "TIM" },
   { label: "UVIDI" },
@@ -42,6 +43,7 @@ export default function MbLawHero() {
         priority
         sizes="100vw"
         className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] object-cover object-[78%_0%] md:object-[55%_0%]"
+        style={{ animation: "mbFade 1.6s ease-out both, mbZoom 26s ease-out both" }}
       />
 
       {/* readability scrim */}
@@ -61,7 +63,10 @@ export default function MbLawHero() {
       />
 
       {/* header */}
-      <header className="relative z-40 flex items-center justify-between px-6 pt-6 md:px-[72px] md:pt-[30px]">
+      <header
+        className="relative z-40 flex items-center justify-between px-6 pt-6 md:px-[72px] md:pt-[30px]"
+        style={{ animation: "mbFade 1s ease-out .1s both" }}
+      >
         <div className="flex items-center gap-3">
           <Image
             src="/mb/mb-logo.png"
@@ -154,7 +159,10 @@ export default function MbLawHero() {
 
       {/* content */}
       <div className="relative z-20 flex flex-1 flex-col justify-center px-6 py-6 md:w-[620px] md:px-[72px] md:py-0">
-        <div className="flex flex-wrap items-center gap-3 text-[11.5px] font-semibold tracking-[0.2em] text-[#C0B9AE] sm:gap-4">
+        <div
+          className="flex flex-wrap items-center gap-3 text-[11.5px] font-semibold tracking-[0.2em] text-[#C0B9AE] sm:gap-4"
+          style={{ animation: "mbUp .9s cubic-bezier(.2,.7,.2,1) .25s both" }}
+        >
           <span>ADVOKATSKA KANCELARIJA</span>
           <span className="h-[13px] w-px bg-[#4A443C]" />
           <span className="text-[#8C877D]">BEOGRAD, SRBIJA</span>
@@ -162,20 +170,29 @@ export default function MbLawHero() {
 
         <h1
           className="mt-4 text-[34px] font-bold leading-[1.1] tracking-[-0.02em] text-[#F1EEE7] sm:text-[48px] md:mt-6 md:whitespace-nowrap md:text-[64px] md:leading-[1.06] lg:text-[74px]"
-          style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+          style={{
+            fontFamily: "var(--font-mb-serif), Georgia, serif",
+            animation: "mbUp 1.05s cubic-bezier(.2,.7,.2,1) .38s both",
+          }}
         >
           Gde pravo postaje
           <br />
           vaša prednost.
         </h1>
 
-        <p className="mt-4 max-w-[520px] text-[15px] font-normal leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:leading-[1.72]">
+        <p
+          className="mt-4 max-w-[520px] text-[15px] font-normal leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:leading-[1.72]"
+          style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .56s both" }}
+        >
           Sveobuhvatna pravna podrška domaćim i međunarodnim klijentima - uz
           strateški pristup, razumevanje njihovih potreba i pouzdanu zaštitu
           poslovnih i ličnih interesa.
         </p>
 
-        <div className="mt-6 flex flex-wrap items-center gap-5 md:mt-9 md:gap-6">
+        <div
+          className="mt-6 flex flex-wrap items-center gap-5 md:mt-9 md:gap-6"
+          style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .72s both" }}
+        >
           <a
             href="#"
             className="inline-flex h-[52px] items-center bg-[#C78B3E] px-8 text-[11px] font-semibold tracking-[0.17em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C]"
