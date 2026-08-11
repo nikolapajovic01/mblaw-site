@@ -160,12 +160,12 @@ export default function MbLawHero() {
       {/* content */}
       <div className="relative z-20 flex flex-1 flex-col justify-center px-6 py-6 md:w-[620px] md:px-[72px] md:py-0">
         <div
-          className="flex flex-wrap items-center gap-3 text-[11.5px] font-semibold tracking-[0.2em] text-[#C0B9AE] sm:gap-4"
+          className="flex flex-nowrap items-center gap-2 text-[8.5px] font-semibold tracking-[0.12em] text-[#C0B9AE] sm:gap-4 sm:text-[11.5px] sm:tracking-[0.2em]"
           style={{ animation: "mbUp .9s cubic-bezier(.2,.7,.2,1) .25s both" }}
         >
-          <span>ADVOKATSKA KANCELARIJA</span>
-          <span className="h-[13px] w-px bg-[#4A443C]" />
-          <span className="text-[#8C877D]">BEOGRAD, SRBIJA</span>
+          <span className="whitespace-nowrap">ADVOKATSKA KANCELARIJA</span>
+          <span className="h-[13px] w-px shrink-0 bg-[#4A443C]" />
+          <span className="whitespace-nowrap text-[#8C877D]">BEOGRAD, SRBIJA</span>
         </div>
 
         <h1
@@ -190,20 +190,36 @@ export default function MbLawHero() {
         </p>
 
         <div
-          className="mt-6 flex flex-wrap items-center gap-5 md:mt-9 md:gap-6"
+          className="mt-6 flex flex-wrap items-center gap-4 sm:gap-5 md:mt-9 md:flex-nowrap md:gap-6"
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .72s both" }}
         >
           <a
             href="#"
-            className="inline-flex h-[52px] items-center bg-[#C78B3E] px-8 text-[11px] font-semibold tracking-[0.17em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C]"
+            className="inline-flex h-[44px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[9.5px] font-semibold tracking-[0.1em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
           >
             ZAKAŽITE KONSULTACIJU
           </a>
           <a
             href="#"
-            className="inline-block border-b border-[#3A3831] pb-1.5 text-[12.5px] font-medium leading-none tracking-[0.15em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7]"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b border-[#3A3831] pb-1.5 text-[10px] font-medium leading-none tracking-[0.1em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7] sm:text-[12.5px] sm:tracking-[0.15em]"
           >
-            ISTRAŽITE OBLASTI PRAKSE ↘
+            ISTRAŽITE OBLASTI PRAKSE
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 12 12"
+              fill="none"
+              className="shrink-0"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 3L9 9M9 3V9H3"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </a>
         </div>
       </div>
