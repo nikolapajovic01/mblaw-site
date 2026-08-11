@@ -1,19 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
-import Footer from "@/components/Footer";
 import "./globals.css";
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "MB Law – Marković, Bogdanović i partneri | Advokatska kancelarija Beograd",
@@ -23,13 +9,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="sr"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-white text-neutral-900">
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="sr" className="h-full antialiased">
+      <body className="flex min-h-dvh flex-col items-center justify-center bg-[#1B1916]">
+        {children}
       </body>
     </html>
   );

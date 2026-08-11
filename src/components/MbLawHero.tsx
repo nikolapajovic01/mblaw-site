@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Source_Serif_4, Manrope } from "next/font/google";
 
@@ -24,9 +27,11 @@ const navItems = [
 ];
 
 export default function MbLawHero() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <section
-      className={`${sourceSerif.variable} ${manrope.variable} relative flex min-h-[760px] w-full flex-col overflow-hidden bg-[#1B1916] md:h-[960px]`}
+      className={`${sourceSerif.variable} ${manrope.variable} relative flex h-dvh max-h-[860px] min-h-[600px] w-full flex-col overflow-hidden bg-[#1B1916]`}
       style={{ fontFamily: "var(--font-mb-sans), Helvetica, sans-serif" }}
     >
       {/* background photo */}
@@ -36,7 +41,7 @@ export default function MbLawHero() {
         fill
         priority
         sizes="100vw"
-        className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] object-cover object-[75%_center] md:object-center"
+        className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] object-cover object-[78%_0%] md:object-[55%_0%]"
       />
 
       {/* readability scrim */}
@@ -44,7 +49,7 @@ export default function MbLawHero() {
         className="pointer-events-none absolute inset-0 z-[4]"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(23,21,18,0.94) 0%, rgba(23,21,18,0.7) 30%, rgba(23,21,18,0.55) 100%)",
+            "linear-gradient(to bottom, rgba(23,21,18,0.9) 0%, rgba(23,21,18,0.6) 20%, rgba(23,21,18,0.42) 40%, rgba(23,21,18,0.42) 100%)",
         }}
       />
       <div
@@ -78,7 +83,7 @@ export default function MbLawHero() {
           </div>
         </div>
 
-        <nav className="flex items-center gap-6 text-xs font-semibold tracking-[0.13em] lg:gap-9">
+        <nav className="flex items-center gap-4 text-xs font-semibold tracking-[0.13em] sm:gap-6 lg:gap-9">
           <div className="hidden items-center gap-9 lg:flex">
             {navItems.map((item) => (
               <a
@@ -102,13 +107,53 @@ export default function MbLawHero() {
               EN
             </a>
           </div>
+
+          <button
+            type="button"
+            aria-label={menuOpen ? "Zatvori meni" : "Otvori meni"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+            className="flex h-7 w-7 flex-col items-center justify-center gap-[5px] lg:hidden"
+          >
+            <span
+              className={`h-px w-5 bg-[#F1EEE7] transition-transform duration-300 ${
+                menuOpen ? "translate-y-[3px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-5 bg-[#F1EEE7] transition-transform duration-300 ${
+                menuOpen ? "-translate-y-[3px] -rotate-45" : ""
+              }`}
+            />
+          </button>
         </nav>
       </header>
 
       <div className="relative z-30 mx-6 mt-6 hidden h-px bg-[#2A2723] md:mx-[72px] md:block" />
 
+      {/* mobile menu overlay */}
+      <div
+        className={`absolute inset-0 z-30 flex flex-col items-start justify-center gap-7 bg-[#171512] px-6 transition-opacity duration-300 lg:hidden ${
+          menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        {navItems.map((item) => (
+          <a
+            key={item.label}
+            href="#"
+            onClick={() => setMenuOpen(false)}
+            className={`text-2xl font-semibold tracking-wide no-underline ${
+              item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
+            }`}
+            style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
       {/* content */}
-      <div className="relative z-20 flex flex-1 flex-col justify-center px-6 py-16 md:absolute md:left-[72px] md:top-[322px] md:w-[620px] md:flex-none md:px-0 md:py-0">
+      <div className="relative z-20 flex flex-1 flex-col justify-center px-6 py-6 md:w-[620px] md:px-[72px] md:py-0">
         <div className="flex flex-wrap items-center gap-3 text-[11.5px] font-semibold tracking-[0.2em] text-[#C0B9AE] sm:gap-4">
           <span>ADVOKATSKA KANCELARIJA</span>
           <span className="h-[13px] w-px bg-[#4A443C]" />
@@ -116,7 +161,7 @@ export default function MbLawHero() {
         </div>
 
         <h1
-          className="mt-6 text-[38px] font-bold leading-[1.1] tracking-[-0.02em] text-[#F1EEE7] sm:text-[52px] md:mt-[30px] md:whitespace-nowrap md:text-[74px] md:leading-[1.04]"
+          className="mt-4 text-[34px] font-bold leading-[1.1] tracking-[-0.02em] text-[#F1EEE7] sm:text-[48px] md:mt-6 md:whitespace-nowrap md:text-[64px] md:leading-[1.06] lg:text-[74px]"
           style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
         >
           Gde pravo postaje
@@ -124,13 +169,13 @@ export default function MbLawHero() {
           vaša prednost.
         </h1>
 
-        <p className="mt-6 max-w-[520px] text-[15px] font-normal leading-[1.72] text-[#ACA69D] md:mt-[30px] md:text-[16.5px]">
+        <p className="mt-4 max-w-[520px] text-[15px] font-normal leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:leading-[1.72]">
           Sveobuhvatna pravna podrška domaćim i međunarodnim klijentima - uz
           strateški pristup, razumevanje njihovih potreba i pouzdanu zaštitu
           poslovnih i ličnih interesa.
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center gap-5 md:mt-11 md:gap-6">
+        <div className="mt-6 flex flex-wrap items-center gap-5 md:mt-9 md:gap-6">
           <a
             href="#"
             className="inline-flex h-[52px] items-center bg-[#C78B3E] px-8 text-[11px] font-semibold tracking-[0.17em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C]"
