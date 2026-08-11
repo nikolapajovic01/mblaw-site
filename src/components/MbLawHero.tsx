@@ -21,7 +21,7 @@ const manrope = Manrope({
 const navItems = [
   { label: "POČETNA", active: true },
   { label: "O NAMA" },
-  { label: "OBLASTI PRAKSE" },
+  { label: "OBLASTI RADA" },
   { label: "TIM" },
   { label: "UVIDI" },
   { label: "KONTAKT" },
@@ -203,7 +203,7 @@ export default function MbLawHero() {
             href="#"
             className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b border-[#3A3831] pb-1.5 text-[10px] font-medium leading-none tracking-[0.1em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7] sm:text-[12.5px] sm:tracking-[0.15em]"
           >
-            ISTRAŽITE OBLASTI PRAKSE
+            ISTRAŽITE OBLASTI RADA
             <svg
               width="11"
               height="11"
