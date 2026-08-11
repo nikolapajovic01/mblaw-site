@@ -1,35 +1,10 @@
 import { practiceAreas } from "@/lib/nav";
+import MbLawHero from "@/components/MbLawHero";
 
 export default function Home() {
   return (
     <>
-      <section className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-6 pb-24 pt-20 md:pt-32">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
-          Advokatska kancelarija · Beograd
-        </p>
-        <h1 className="max-w-3xl font-serif text-4xl leading-tight text-neutral-900 md:text-6xl md:leading-tight">
-          Pravna podrška na kojoj počivaju najvažnije odluke vaše kompanije.
-        </h1>
-        <p className="max-w-2xl text-lg leading-8 text-neutral-600">
-          MB Law – Marković, Bogdanović i partneri okuplja tim advokata sa
-          višegodišnjim iskustvom u privrednom pravu, nekretninama, radnim
-          odnosima i krivičnoj odbrani.
-        </p>
-        <div className="flex flex-col gap-4 sm:flex-row">
-          <a
-            href="#kontakt"
-            className="rounded-full bg-neutral-900 px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
-          >
-            Zakažite konsultacije
-          </a>
-          <a
-            href="#oblasti-prava"
-            className="rounded-full border border-neutral-300 px-7 py-3.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-100"
-          >
-            Oblasti prava
-          </a>
-        </div>
-      </section>
+      <MbLawHero />
 
       <section
         id="oblasti-prava"
