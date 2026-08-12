@@ -197,36 +197,38 @@ export default function MbLawHero() {
         </p>
 
         <div
-          className="mt-6 flex flex-wrap items-center gap-4 sm:gap-5 md:mt-9 md:flex-nowrap md:gap-6"
+          className="mt-12 flex flex-wrap items-center gap-[26px] sm:gap-5 md:mt-9 md:flex-nowrap md:gap-6"
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .72s both" }}
         >
           <a
             href="#"
-            className="inline-flex h-[44px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[11px] font-semibold tracking-[0.08em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
+            className="inline-flex h-[50px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[11px] font-semibold tracking-[0.08em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
           >
             ZAKAŽITE KONSULTACIJU
           </a>
           <a
             href="#"
-            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b border-[#3A3831] pb-1.5 text-[10.5px] font-semibold leading-none tracking-[0.06em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7] sm:text-[12.5px] sm:font-medium sm:tracking-[0.15em]"
+            className="group inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap text-[10.5px] font-semibold tracking-[0.06em] text-[#CFC9BF] no-underline transition-colors hover:text-[#F1EEE7] sm:min-h-0 sm:text-[12.5px] sm:font-medium sm:tracking-[0.15em]"
           >
-            ISTRAŽITE OBLASTI RADA
-            <svg
-              width="11"
-              height="11"
-              viewBox="0 0 12 12"
-              fill="none"
-              className="shrink-0"
-              aria-hidden="true"
-            >
-              <path
-                d="M3 3L9 9M9 3V9H3"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <span className="inline-flex items-center gap-1.5 border-b border-[#3A3831] pb-1.5 leading-none transition-colors group-hover:border-[#C78B3E]">
+              ISTRAŽITE OBLASTI RADA
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 12 12"
+                fill="none"
+                className="shrink-0"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 3L9 9M9 3V9H3"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </a>
         </div>
       </div>
