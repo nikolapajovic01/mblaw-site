@@ -55,6 +55,13 @@ export default function MbLawHero() {
         }}
       />
       <div
+        className="pointer-events-none absolute inset-0 z-[4] md:hidden"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(15,13,11,0.35) 0%, rgba(15,13,11,0.5) 45%, rgba(15,13,11,0.68) 100%)",
+        }}
+      />
+      <div
         className="pointer-events-none absolute inset-0 z-[4] hidden md:block"
         style={{
           background:
@@ -181,7 +188,7 @@ export default function MbLawHero() {
         </h1>
 
         <p
-          className="mt-4 max-w-[520px] text-[16px] font-normal leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:leading-[1.72]"
+          className="mt-4 max-w-[520px] text-[16px] font-medium leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:font-normal md:leading-[1.72]"
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .56s both" }}
         >
           Sveobuhvatna pravna podrška domaćim i međunarodnim klijentima - uz
@@ -201,11 +208,9 @@ export default function MbLawHero() {
           </a>
           <a
             href="#"
-            className="inline-flex shrink-0 items-center gap-1.5 border-b border-[#3A3831] pb-1.5 text-[12px] font-medium leading-tight tracking-[0.08em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7] sm:whitespace-nowrap sm:text-[12.5px] sm:tracking-[0.15em] sm:leading-none"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b border-[#3A3831] pb-1.5 text-[10.5px] font-semibold leading-none tracking-[0.06em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7] sm:text-[12.5px] sm:font-medium sm:tracking-[0.15em]"
           >
-            <span className="max-w-[140px] sm:max-w-none">
-              ISTRAŽITE OBLASTI RADA
-            </span>
+            ISTRAŽITE OBLASTI RADA
             <svg
               width="11"
               height="11"
