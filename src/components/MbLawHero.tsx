@@ -160,7 +160,7 @@ export default function MbLawHero() {
       {/* content */}
       <div className="relative z-20 flex flex-1 flex-col justify-center px-6 py-6 md:w-[620px] md:px-[72px] md:py-0">
         <div
-          className="flex flex-nowrap items-center gap-2 text-[8.5px] font-semibold tracking-[0.12em] text-[#C0B9AE] sm:gap-4 sm:text-[11.5px] sm:tracking-[0.2em]"
+          className="flex flex-nowrap items-center gap-2 text-[11px] font-semibold tracking-[0.08em] text-[#C0B9AE] sm:gap-4 sm:text-[11.5px] sm:tracking-[0.2em]"
           style={{ animation: "mbUp .9s cubic-bezier(.2,.7,.2,1) .25s both" }}
         >
           <span className="whitespace-nowrap">ADVOKATSKA KANCELARIJA</span>
@@ -181,7 +181,7 @@ export default function MbLawHero() {
         </h1>
 
         <p
-          className="mt-4 max-w-[520px] text-[15px] font-normal leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:leading-[1.72]"
+          className="mt-4 max-w-[520px] text-[16px] font-normal leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:leading-[1.72]"
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .56s both" }}
         >
           Sveobuhvatna pravna podrška domaćim i međunarodnim klijentima - uz
@@ -195,15 +195,17 @@ export default function MbLawHero() {
         >
           <a
             href="#"
-            className="inline-flex h-[44px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[9.5px] font-semibold tracking-[0.1em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
+            className="inline-flex h-[44px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[11px] font-semibold tracking-[0.08em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
           >
             ZAKAŽITE KONSULTACIJU
           </a>
           <a
             href="#"
-            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b border-[#3A3831] pb-1.5 text-[10px] font-medium leading-none tracking-[0.1em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7] sm:text-[12.5px] sm:tracking-[0.15em]"
+            className="inline-flex shrink-0 items-center gap-1.5 border-b border-[#3A3831] pb-1.5 text-[12px] font-medium leading-tight tracking-[0.08em] text-[#CFC9BF] no-underline transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7] sm:whitespace-nowrap sm:text-[12.5px] sm:tracking-[0.15em] sm:leading-none"
           >
-            ISTRAŽITE OBLASTI RADA
+            <span className="max-w-[140px] sm:max-w-none">
+              ISTRAŽITE OBLASTI RADA
+            </span>
             <svg
               width="11"
               height="11"
