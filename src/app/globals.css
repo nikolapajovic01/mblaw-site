@@ -36,11 +36,186 @@ body {
   }
 }
 
-@keyframes mbZoom {
+@keyframes mbSettle {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes mbBreathe {
   from {
     transform: scale(1);
   }
   to {
-    transform: scale(1.05);
+    transform: scale(1.045);
   }
+}
+
+@keyframes mbClipReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes mbLineDraw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes mbLightSweep {
+  0% {
+    background-position: 130% 20%;
+  }
+  50% {
+    background-position: -30% 60%;
+  }
+  100% {
+    background-position: 130% 20%;
+  }
+}
+
+/* First visit intro overlay.
+   Hidden by default: only the inline bootstrap script may reveal it, so a
+   failed or disabled bundle can never leave the site behind a locked curtain. */
+[data-mb-intro-ui] {
+  display: none;
+}
+
+html[data-mb-intro="active"] [data-mb-intro-ui],
+html[data-mb-intro="leaving"] [data-mb-intro-ui] {
+  display: block;
+}
+
+html[data-mb-intro="active"],
+html[data-mb-intro="active"] body,
+html[data-mb-intro="leaving"],
+html[data-mb-intro="leaving"] body {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-mb-intro-ui] {
+    display: none !important;
+  }
+}
+
+@keyframes mbIntroLift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Same exit, but holding first: this is the timeline the overlay follows on its
+   own, so it clears itself even if the intro script never gets to shorten it.
+   The hold ends at 84.1%, which is 2750ms of the 3270ms total. */
+@keyframes mbIntroLiftHold {
+  0%,
+  84.1% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+html[data-mb-intro="active"] [data-mb-intro-panel] {
+  animation: mbIntroLiftHold 3270ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+/* A separate animation name, not a shortened delay, so the lift always starts
+   from the panel's resting position instead of snapping to the end. */
+html[data-mb-intro="leaving"] [data-mb-intro-panel] {
+  animation: mbIntroLift 520ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes mbScrollCue {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(220%);
+    opacity: 0;
+  }
+}
+
+@keyframes mbAboutIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mbAboutPhotoIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mb-about-animate {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Light parchment sections: stronger contrast on warm backgrounds */
+.mb-light-section {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mb-light-section .mb-light-eyebrow {
+  color: #6b6459;
+  font-weight: 600;
+}
+
+.mb-light-section .mb-light-heading {
+  color: #171512;
+}
+
+.mb-light-section .mb-light-body {
+  color: #2a2723;
+  font-weight: 500;
+}
+
+.mb-light-section .mb-light-muted {
+  color: #4a443c;
+  font-weight: 500;
+}
+
+.mb-light-section .mb-light-link {
+  color: #2a2723;
+  font-weight: 600;
+}
+
+.mb-section-shell {
+  width: 100%;
 }

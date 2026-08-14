@@ -2,21 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Source_Serif_4, Manrope } from "next/font/google";
-
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-mb-serif",
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mb-sans",
-  display: "swap",
-});
+import Link from "next/link";
 
 const navItems = [
   { label: "POČETNA", active: true },
@@ -31,10 +17,7 @@ export default function MbLawHero() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <section
-      className={`${sourceSerif.variable} ${manrope.variable} relative flex h-dvh max-h-[860px] min-h-[600px] w-full flex-col overflow-hidden bg-[#1B1916]`}
-      style={{ fontFamily: "var(--font-mb-sans), Helvetica, sans-serif" }}
-    >
+    <section className="relative flex h-dvh max-h-[860px] min-h-[600px] w-full flex-col overflow-hidden bg-[#1B1916]">
       {/* background photo */}
       <Image
         src="/mb/hero-bg.webp"
@@ -43,7 +26,22 @@ export default function MbLawHero() {
         priority
         sizes="100vw"
         className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] object-cover object-[78%_0%] md:object-[55%_0%]"
-        style={{ animation: "mbFade 1.6s ease-out both, mbZoom 26s ease-out both" }}
+        style={{
+          animation:
+            "mbFade 1.6s ease-out both, mbSettle 2.2s cubic-bezier(.16,1,.3,1) both, mbBreathe 22s ease-in-out 2.2s infinite alternate",
+        }}
+      />
+
+      {/* light sweep: slow traveling highlight across the statue */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[2] mix-blend-soft-light"
+        style={{
+          background:
+            "linear-gradient(115deg, transparent 38%, rgba(199,139,62,0.4) 48%, rgba(255,229,186,0.22) 52%, transparent 62%)",
+          backgroundSize: "260% 260%",
+          animation: "mbLightSweep 11s ease-in-out 2.4s infinite",
+        }}
       />
 
       {/* readability scrim */}
@@ -74,26 +72,39 @@ export default function MbLawHero() {
         className="relative z-40 flex items-center justify-between px-6 pt-6 md:px-[72px] md:pt-[30px]"
         style={{ animation: "mbFade 1s ease-out .1s both" }}
       >
-        <div className="flex items-center gap-3">
-          <Image
-            src="/mb/mb-logo.png"
-            alt="Marković Bogdanović"
-            width={63}
-            height={63}
-            className="block h-11 w-11 object-contain md:h-[63px] md:w-[63px]"
-          />
-          <span className="hidden h-10 w-px bg-[#2A2723] sm:block" />
-          <div className="hidden flex-col gap-1 sm:flex">
-            <span className="text-[13px] font-semibold leading-[1.32] tracking-[0.13em] text-[#EDE9E1]">
-              MARKOVIĆ
-              <br />
-              BOGDANOVIĆ
+        <Link
+          href="/"
+          aria-label="MB Law – Marković, Bogdanović & Partners, početna strana"
+          className="flex items-center gap-2 no-underline sm:gap-3"
+        >
+          <div className="inline-flex w-11 flex-col items-stretch md:w-[63px]">
+            <Image
+              src="/mb/mb-logo.webp"
+              alt="MB Law – Marković, Bogdanović & Partners"
+              width={63}
+              height={63}
+              className="block h-11 w-full object-contain md:h-[63px]"
+            />
+            <div
+              className="-mt-1 flex w-full justify-between text-[17.5px] font-bold uppercase leading-none text-[#EDE9E1] md:-mt-1.5 md:text-[21.5px]"
+              style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+              aria-hidden="true"
+            >
+              <span>L</span>
+              <span>A</span>
+              <span>W</span>
+            </div>
+          </div>
+          <span className="h-11 w-px shrink-0 bg-[#2A2723] md:h-14" />
+          <div className="flex min-w-0 max-w-[128px] flex-col gap-0.5 sm:max-w-none">
+            <span className="text-[10.5px] font-semibold leading-[1.15] tracking-[0.03em] text-[#EDE9E1] sm:text-[14px] sm:leading-[1.2] sm:tracking-[0.09em] md:text-[15px]">
+              MARKOVIĆ I BOGDANOVIĆ
             </span>
-            <span className="text-[8.5px] font-medium tracking-[0.21em] text-[#89837A]">
-              ADVOKATSKA KANCELARIJA
+            <span className="text-[7px] font-medium leading-[1.35] tracking-[0.06em] text-[#89837A] sm:text-[9px] sm:leading-normal sm:tracking-[0.21em]">
+              ZAJEDNIČKA ADVOKATSKA KANCELARIJA
             </span>
           </div>
-        </div>
+        </Link>
 
         <nav className="flex items-center gap-4 text-xs font-semibold tracking-[0.13em] sm:gap-6 lg:gap-9">
           <div className="hidden items-center gap-9 lg:flex">
@@ -141,7 +152,10 @@ export default function MbLawHero() {
         </nav>
       </header>
 
-      <div className="relative z-30 mx-6 mt-6 hidden h-px bg-[#2A2723] md:mx-[72px] md:block" />
+      <div
+        className="relative z-30 mx-6 mt-6 hidden h-px origin-left bg-[#2A2723] md:mx-[72px] md:block"
+        style={{ animation: "mbLineDraw 1.1s cubic-bezier(.16,1,.3,1) .9s both" }}
+      />
 
       {/* mobile menu overlay */}
       <div
@@ -176,15 +190,22 @@ export default function MbLawHero() {
         </div>
 
         <h1
-          className="mt-4 text-[34px] font-bold leading-[1.1] tracking-[-0.02em] text-[#F1EEE7] sm:text-[48px] md:mt-6 md:whitespace-nowrap md:text-[64px] md:leading-[1.06] lg:text-[74px]"
-          style={{
-            fontFamily: "var(--font-mb-serif), Georgia, serif",
-            animation: "mbUp 1.05s cubic-bezier(.2,.7,.2,1) .38s both",
-          }}
+          className="mt-4 text-[34px] font-bold leading-[1.1] tracking-[-0.02em] text-[#F1EEE7] sm:text-[48px] md:mt-6 md:text-[64px] md:leading-[1.06] lg:text-[74px]"
+          style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
         >
-          Gde pravo postaje
+          <span
+            className="inline-block md:whitespace-nowrap"
+            style={{ animation: "mbClipReveal 1s cubic-bezier(.16,1,.3,1) .32s both" }}
+          >
+            Gde pravo postaje
+          </span>
           <br />
-          vaša prednost.
+          <span
+            className="inline-block md:whitespace-nowrap"
+            style={{ animation: "mbClipReveal 1s cubic-bezier(.16,1,.3,1) .48s both" }}
+          >
+            vaša prednost.
+          </span>
         </h1>
 
         <p
@@ -230,6 +251,20 @@ export default function MbLawHero() {
               </svg>
             </span>
           </a>
+        </div>
+      </div>
+
+      {/* scroll cue */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-8 z-20 hidden justify-center md:flex"
+        style={{ animation: "mbFade 1s ease-out 1.8s both" }}
+      >
+        <div className="relative h-9 w-px overflow-hidden bg-[#3A3831]/70">
+          <span
+            className="absolute inset-x-0 top-0 h-1/2 bg-[#C78B3E]"
+            style={{ animation: "mbScrollCue 2.4s ease-in-out infinite" }}
+          />
         </div>
       </div>
 

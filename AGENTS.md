@@ -7,3 +7,15 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+# Project conventions
+
+## Copy
+
+Never use em dashes (`—`) in site copy, headings, metadata, or `aria-label`s. Use a comma, a colon, or a plain hyphen with spaces (`-`) instead. The existing hero copy uses the spaced hyphen.
+
+## Typography
+
+Fonts are declared once in `src/app/layout.tsx` and consumed everywhere through the CSS variables `--font-mb-serif` (headings) and `--font-mb-sans` (body, navigation, labels). Do not re-declare `next/font` families inside components.
+
+Always include `latin-ext` in `subsets`. Plain `latin` does not cover the Serbian diacritics `ć č š ž đ`, which then fall back to a different font and visibly break the line.
