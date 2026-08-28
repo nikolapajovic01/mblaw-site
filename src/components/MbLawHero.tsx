@@ -5,12 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navItems = [
-  { label: "POČETNA", active: true },
-  { label: "O NAMA" },
-  { label: "OBLASTI RADA" },
-  { label: "TIM" },
-  { label: "UVIDI" },
-  { label: "KONTAKT" },
+  { label: "POČETNA", href: "/", active: true },
+  { label: "O NAMA", href: "#" },
+  { label: "OBLASTI RADA", href: "/oblasti-rada" },
+  { label: "TIM", href: "#" },
+  { label: "UVIDI", href: "#" },
+  { label: "KONTAKT", href: "#" },
 ];
 
 export default function MbLawHero() {
@@ -19,51 +19,44 @@ export default function MbLawHero() {
   return (
     <section className="relative flex h-dvh max-h-[860px] min-h-[600px] w-full flex-col overflow-hidden bg-[#1B1916]">
       {/* background photo */}
-      <Image
-        src="/mb/hero-bg.webp"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] object-cover object-[78%_0%] md:object-[55%_0%]"
-        style={{
-          animation:
-            "mbFade 1.6s ease-out both, mbSettle 2.2s cubic-bezier(.16,1,.3,1) both, mbBreathe 22s ease-in-out 2.2s infinite alternate",
-        }}
-      />
-
-      {/* light sweep: slow traveling highlight across the statue */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[2] mix-blend-soft-light"
+        className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] bg-[#1B1916] bg-cover bg-[50%_42%] bg-no-repeat brightness-[1.08] contrast-[1.04] saturate-[1.06]"
+        style={{ backgroundImage: "url(/mb/mwlawfirma.webp)" }}
+      />
+
+      {/* light sweep */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[2] mix-blend-soft-light opacity-60"
         style={{
           background:
-            "linear-gradient(115deg, transparent 38%, rgba(199,139,62,0.4) 48%, rgba(255,229,186,0.22) 52%, transparent 62%)",
+            "linear-gradient(115deg, transparent 38%, rgba(199,139,62,0.28) 48%, rgba(255,229,186,0.14) 52%, transparent 62%)",
           backgroundSize: "260% 260%",
           animation: "mbLightSweep 11s ease-in-out 2.4s infinite",
         }}
       />
 
-      {/* readability scrim */}
+      {/* readability scrim: lighter for dark library photo */}
       <div
         className="pointer-events-none absolute inset-0 z-[4]"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(23,21,18,0.9) 0%, rgba(23,21,18,0.6) 20%, rgba(23,21,18,0.42) 40%, rgba(23,21,18,0.42) 100%)",
+            "linear-gradient(to bottom, rgba(23,21,18,0.62) 0%, rgba(23,21,18,0.28) 22%, rgba(23,21,18,0.12) 48%, rgba(23,21,18,0.32) 100%)",
         }}
       />
       <div
         className="pointer-events-none absolute inset-0 z-[4] md:hidden"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(15,13,11,0.35) 0%, rgba(15,13,11,0.5) 45%, rgba(15,13,11,0.68) 100%)",
+            "linear-gradient(to bottom, rgba(15,13,11,0.18) 0%, rgba(15,13,11,0.28) 50%, rgba(15,13,11,0.52) 100%)",
         }}
       />
       <div
         className="pointer-events-none absolute inset-0 z-[4] hidden md:block"
         style={{
           background:
-            "linear-gradient(to right, rgba(23,21,18,0.94) 0%, rgba(23,21,18,0.86) 24%, rgba(23,21,18,0.42) 46%, rgba(23,21,18,0) 62%)",
+            "linear-gradient(to right, rgba(23,21,18,0.72) 0%, rgba(23,21,18,0.48) 28%, rgba(23,21,18,0.14) 50%, transparent 68%)",
         }}
       />
 
@@ -109,9 +102,9 @@ export default function MbLawHero() {
         <nav className="flex items-center gap-4 text-xs font-semibold tracking-[0.13em] sm:gap-6 lg:gap-9">
           <div className="hidden items-center gap-9 lg:flex">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href="#"
+                href={item.href}
                 className={`group relative inline-flex items-center gap-2 pb-1.5 no-underline transition-colors ${
                   item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2] hover:text-[#C78B3E]"
                 }`}
@@ -119,7 +112,7 @@ export default function MbLawHero() {
                 {item.active && <span className="h-1 w-1 bg-[#C78B3E]" />}
                 {item.label}
                 <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-300 ease-out group-hover:scale-x-100" />
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -164,9 +157,9 @@ export default function MbLawHero() {
         }`}
       >
         {navItems.map((item) => (
-          <a
+          <Link
             key={item.label}
-            href="#"
+            href={item.href}
             onClick={() => setMenuOpen(false)}
             className={`text-2xl font-semibold tracking-wide no-underline ${
               item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
@@ -174,7 +167,7 @@ export default function MbLawHero() {
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
             {item.label}
-          </a>
+          </Link>
         ))}
       </div>
 
@@ -222,13 +215,13 @@ export default function MbLawHero() {
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .72s both" }}
         >
           <a
-            href="#"
+            href="mailto:office@mblaw.rs"
             className="inline-flex h-[50px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[11px] font-semibold tracking-[0.08em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
           >
             ZAKAŽITE KONSULTACIJU
           </a>
-          <a
-            href="#"
+          <Link
+            href="/oblasti-rada"
             className="group inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap text-[10.5px] font-semibold tracking-[0.06em] text-[#CFC9BF] no-underline transition-colors hover:text-[#F1EEE7] sm:min-h-0 sm:text-[12.5px] sm:font-medium sm:tracking-[0.15em]"
           >
             <span className="inline-flex items-center gap-1.5 border-b border-[#3A3831] pb-1.5 leading-none transition-colors group-hover:border-[#C78B3E]">
@@ -250,7 +243,7 @@ export default function MbLawHero() {
                 />
               </svg>
             </span>
-          </a>
+          </Link>
         </div>
       </div>
 

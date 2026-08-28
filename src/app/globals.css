@@ -54,6 +54,19 @@ body {
   }
 }
 
+/* Hero photo: static background, no opacity/transform animations. */
+.mb-hero-photo {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mb-hero-photo {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 @keyframes mbClipReveal {
   from {
     clip-path: inset(0 100% 0 0);
