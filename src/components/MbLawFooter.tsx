@@ -7,11 +7,11 @@ import type { CSSProperties } from "react";
 
 const navLinks = [
   { label: "Početna", href: "/" },
-  { label: "O nama", href: "#" },
+  { label: "O nama", href: "/o-nama" },
   { label: "Oblasti rada", href: "#" },
-  { label: "Tim", href: "#" },
-  { label: "Uvidi", href: "#" },
-  { label: "Kontakt", href: "#" },
+  { label: "Tim", href: "/tim" },
+  { label: "Uvidi", href: "/uvidi" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 const practiceLinks = [

@@ -95,7 +95,7 @@ export default function MbLawAbout() {
           </p>
           <div className="mb-about-animate mt-8" style={reveal(0.48)}>
             <Link
-              href="#"
+              href="/o-nama"
               className="group inline-flex items-center gap-1.5 text-[12.5px] tracking-[0.15em] no-underline transition-colors hover:text-[#171512] mb-light-link"
             >
               <span className="border-b border-[#C9C0AF] pb-1.5 leading-none transition-colors group-hover:border-[#C78B3E]">

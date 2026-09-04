@@ -3,18 +3,25 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import MbLawLangSwitch from "@/components/MbLawLangSwitch";
+import {
+  PracticeAreasMobile,
+  PracticeAreasTrigger,
+  usePracticeAreasHover,
+} from "@/components/MbLawPracticeAreasMenu";
 
 const navItems = [
   { label: "POČETNA", href: "/", active: true },
-  { label: "O NAMA", href: "#" },
+  { label: "O NAMA", href: "/o-nama" },
   { label: "OBLASTI RADA", href: "/oblasti-rada" },
-  { label: "TIM", href: "#" },
-  { label: "UVIDI", href: "#" },
-  { label: "KONTAKT", href: "#" },
+  { label: "TIM", href: "/tim" },
+  { label: "UVIDI", href: "/uvidi" },
+  { label: "KONTAKT", href: "/kontakt" },
 ];
 
 export default function MbLawHero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const areas = usePracticeAreasHover();
 
   return (
     <section className="relative flex h-dvh max-h-[860px] min-h-[600px] w-full flex-col overflow-hidden bg-[#1B1916]">
@@ -101,28 +108,37 @@ export default function MbLawHero() {
 
         <nav className="flex items-center gap-4 text-xs font-semibold tracking-[0.13em] sm:gap-6 lg:gap-9">
           <div className="hidden items-center gap-9 lg:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`group relative inline-flex items-center gap-2 pb-1.5 no-underline transition-colors ${
-                  item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2] hover:text-[#C78B3E]"
-                }`}
-              >
-                {item.active && <span className="h-1 w-1 bg-[#C78B3E]" />}
-                {item.label}
-                <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-300 ease-out group-hover:scale-x-100" />
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              if (item.label === "OBLASTI RADA") {
+                return (
+                  <PracticeAreasTrigger
+                    key={item.label}
+                    href={item.href}
+                    isActive={item.active}
+                    open={areas.open}
+                    onEnter={areas.onEnter}
+                    onLeave={areas.onLeave}
+                  />
+                );
+              }
+
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`group relative inline-flex items-center gap-2 pb-1.5 no-underline transition-colors ${
+                    item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2] hover:text-[#C78B3E]"
+                  }`}
+                >
+                  {item.active && <span className="h-1 w-1 bg-[#C78B3E]" />}
+                  {item.label}
+                  <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                </Link>
+              );
+            })}
           </div>
 
-          <div className="inline-flex h-7 items-center gap-2 border border-[#363129] px-2.5 text-[11px] font-semibold tracking-[0.12em]">
-            <span className="text-[#F1EEE7]">SR</span>
-            <span className="h-[11px] w-px rotate-[18deg] bg-[#3E382F]" />
-            <a href="#" className="text-[#77726A] no-underline transition-colors hover:text-[#F1EEE7]">
-              EN
-            </a>
-          </div>
+          <MbLawLangSwitch />
 
           <button
             type="button"
@@ -152,23 +168,35 @@ export default function MbLawHero() {
 
       {/* mobile menu overlay */}
       <div
-        className={`absolute inset-0 z-30 flex flex-col items-start justify-center gap-7 bg-[#171512] px-6 transition-opacity duration-300 lg:hidden ${
+        className={`absolute inset-0 z-30 flex flex-col items-start justify-start gap-7 overflow-y-auto bg-[#171512] px-6 pb-12 pt-28 transition-opacity duration-300 lg:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        {navItems.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            onClick={() => setMenuOpen(false)}
-            className={`text-2xl font-semibold tracking-wide no-underline ${
-              item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
-            }`}
-            style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {navItems.map((item) => {
+          if (item.label === "OBLASTI RADA") {
+            return (
+              <PracticeAreasMobile
+                key={item.label}
+                isActive={item.active}
+                onNavigate={() => setMenuOpen(false)}
+              />
+            );
+          }
+
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setMenuOpen(false)}
+              className={`text-2xl font-semibold tracking-wide no-underline ${
+                item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
+              }`}
+              style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
       </div>
 
       {/* content */}
@@ -214,12 +242,12 @@ export default function MbLawHero() {
           className="mt-12 flex flex-wrap items-center gap-[26px] sm:gap-5 md:mt-9 md:flex-nowrap md:gap-6"
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .72s both" }}
         >
-          <a
-            href="mailto:office@mblaw.rs"
+          <Link
+            href="/kontakt"
             className="inline-flex h-[50px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[11px] font-semibold tracking-[0.08em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
           >
             ZAKAŽITE KONSULTACIJU
-          </a>
+          </Link>
           <Link
             href="/oblasti-rada"
             className="group inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap text-[10.5px] font-semibold tracking-[0.06em] text-[#CFC9BF] no-underline transition-colors hover:text-[#F1EEE7] sm:min-h-0 sm:text-[12.5px] sm:font-medium sm:tracking-[0.15em]"

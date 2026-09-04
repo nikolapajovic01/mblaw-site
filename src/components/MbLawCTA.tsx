@@ -83,7 +83,7 @@ export default function MbLawCTA() {
 
           <div className="mt-8">
             <Link
-              href="#"
+              href="/kontakt"
               className="inline-flex h-[54px] w-full items-center justify-center bg-[#C78B3E] px-10 text-[12px] font-semibold tracking-[0.16em] text-[#171512] no-underline transition-colors hover:bg-[#D89B4C] sm:w-auto"
             >
               ZAKAŽITE KONSULTACIJU
