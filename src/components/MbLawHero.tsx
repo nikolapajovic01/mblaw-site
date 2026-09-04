@@ -69,7 +69,9 @@ export default function MbLawHero() {
 
       {/* header */}
       <header
-        className="relative z-40 flex items-center justify-between px-6 pt-6 md:px-[72px] md:pt-[30px]"
+        className={`relative z-40 flex items-center justify-between px-6 pt-6 md:px-[72px] md:pt-[30px] ${
+          menuOpen ? "bg-[#171512] pb-6" : ""
+        }`}
         style={{ animation: "mbFade 1s ease-out .1s both" }}
       >
         <Link
@@ -178,6 +180,7 @@ export default function MbLawHero() {
               <PracticeAreasMobile
                 key={item.label}
                 isActive={item.active}
+                menuOpen={menuOpen}
                 onNavigate={() => setMenuOpen(false)}
               />
             );

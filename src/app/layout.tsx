@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Newsreader, Instrument_Sans } from "next/font/google";
+import MbLawMobileActions from "@/components/MbLawMobileActions";
 import "./globals.css";
 
 // latin-ext covers the Serbian diacritics (ć č š ž đ); plain latin does not.
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         style={{ fontFamily: "var(--font-mb-sans), Helvetica, sans-serif" }}
       >
         {children}
+        <MbLawMobileActions />
       </body>
     </html>
   );

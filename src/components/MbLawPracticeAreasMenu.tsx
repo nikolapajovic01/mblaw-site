@@ -169,48 +169,102 @@ export function PracticeAreasTrigger({
 export function PracticeAreasMobile({
   isActive,
   onNavigate,
+  menuOpen = false,
 }: {
   isActive?: boolean;
   onNavigate: () => void;
+  menuOpen?: boolean;
 }) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!menuOpen) setOpen(false);
+  }, [menuOpen]);
+
   return (
     <div className="w-full">
-      <Link
-        href="/oblasti-rada"
-        onClick={onNavigate}
-        className={`text-2xl font-semibold tracking-wide no-underline ${
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls="mb-mobile-practice-areas"
+        onClick={() => setOpen((value) => !value)}
+        className={`inline-flex items-center gap-2.5 bg-transparent p-0 text-left text-2xl font-semibold tracking-wide ${
           isActive ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
         }`}
         style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
       >
         OBLASTI RADA
-      </Link>
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
+          className={`shrink-0 transition-transform duration-300 ${open ? "-rotate-180" : ""}`}
+        >
+          <path
+            d="M2.5 4.5 6 8l3.5-3.5"
+            stroke="currentColor"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
 
-      <div className="mt-5 flex flex-col">
-        {practiceMenuGroups.map((group, index) => (
+      <div
+        id="mb-mobile-practice-areas"
+        className={open ? "mt-5 flex flex-col" : "hidden"}
+      >
+          {practiceMenuGroups.map((group, index) => (
+            <Link
+              key={group.slug}
+              href={getPracticeGroupHref(group)}
+              onClick={onNavigate}
+              className="grid grid-cols-[28px_minmax(0,1fr)] gap-x-0 border-b border-[#2A2723] py-3 no-underline"
+            >
+              <span className="text-[10px] font-semibold tracking-[0.12em] text-[#C78B3E]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span>
+                <span
+                  className="block text-[15px] font-semibold leading-snug text-[#EDE9E1]"
+                  style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+                >
+                  {group.title}
+                </span>
+                <span className="mt-0.5 block text-[12.5px] text-[#7A746B]">
+                  {group.navLine}
+                </span>
+              </span>
+            </Link>
+          ))}
           <Link
-            key={group.slug}
-            href={getPracticeGroupHref(group)}
+            href="/oblasti-rada"
             onClick={onNavigate}
-            className="grid grid-cols-[28px_minmax(0,1fr)] gap-x-0 border-b border-[#2A2723] py-3 no-underline"
+            className="flex items-center justify-between py-3.5 no-underline"
           >
-            <span className="text-[10px] font-semibold tracking-[0.12em] text-[#C78B3E]">
-              {String(index + 1).padStart(2, "0")}
+            <span className="text-[11px] font-semibold tracking-[0.16em] text-[#7A746B]">
+              SVE OBLASTI
             </span>
-            <span>
-              <span
-                className="block text-[15px] font-semibold leading-snug text-[#EDE9E1]"
-                style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
-              >
-                {group.title}
-              </span>
-              <span className="mt-0.5 block text-[12.5px] text-[#7A746B]">
-                {group.navLine}
-              </span>
-            </span>
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+              className="text-[#7A746B]"
+            >
+              <path
+                d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
-        ))}
-      </div>
+        </div>
     </div>
   );
 }

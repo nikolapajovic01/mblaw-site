@@ -30,11 +30,17 @@ export default function MbLawSiteHeader({
   const areas = usePracticeAreasHover();
 
   return (
-    <header className={`relative z-40 w-full ${overlay ? "" : "bg-[#1B1916]"}`}>
+    <header
+      className={`relative z-40 w-full ${
+        menuOpen ? "bg-[#171512]" : overlay ? "" : "bg-[#1B1916]"
+      }`}
+    >
       <div
         className={`relative z-40 flex items-center justify-between px-6 md:px-[72px] ${
-          overlay ? "py-6 md:pt-[30px] md:pb-0" : "py-6 md:py-[30px]"
-        }`}
+          overlay
+            ? `py-6 md:pt-[30px] ${menuOpen ? "md:pb-6" : "md:pb-0"}`
+            : "py-6 md:py-[30px]"
+        } ${menuOpen ? "bg-[#171512]" : ""}`}
       >
         <Link
           href="/"
@@ -127,7 +133,9 @@ export default function MbLawSiteHeader({
         </nav>
       </div>
 
-      {overlay ? null : <div className="h-px w-full bg-[#2A2723]" />}
+      {overlay && !menuOpen ? null : (
+        <div className="relative z-40 h-px w-full bg-[#2A2723]" />
+      )}
 
       <div
         className={`z-30 flex flex-col items-start gap-7 overflow-y-auto bg-[#171512] px-6 py-10 transition-opacity duration-300 lg:hidden ${
@@ -142,6 +150,7 @@ export default function MbLawSiteHeader({
               <PracticeAreasMobile
                 key={item.label}
                 isActive={item.label === active}
+                menuOpen={menuOpen}
                 onNavigate={() => setMenuOpen(false)}
               />
             );
