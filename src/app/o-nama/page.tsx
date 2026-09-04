@@ -109,39 +109,41 @@ export default function AboutPage() {
         }}
       />
 
-      <section className="relative flex h-[50dvh] min-h-[380px] w-full flex-col overflow-hidden bg-[#1B1916] md:min-h-[440px]">
-        <Image
-          src="/mb/kancelarijaSlika1.webp"
-          alt="Kancelarija MB Law u Resavskoj 68 u Beogradu"
-          fill
-          sizes="100vw"
-          className="pointer-events-none absolute inset-0 z-[1] object-cover object-[72%_58%] md:object-[62%_62%]"
-          priority
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[2]"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(23,21,18,0.62) 0%, rgba(23,21,18,0.28) 22%, rgba(23,21,18,0.12) 48%, rgba(23,21,18,0.38) 100%)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[2] md:hidden"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(15,13,11,0.28) 0%, rgba(15,13,11,0.38) 50%, rgba(15,13,11,0.62) 100%)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[2] hidden md:block"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(23,21,18,0.78) 0%, rgba(23,21,18,0.52) 28%, rgba(23,21,18,0.16) 52%, transparent 70%)",
-          }}
-        />
+      <section className="relative flex h-[50dvh] min-h-[380px] w-full flex-col bg-[#1B1916] md:min-h-[440px]">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <Image
+            src="/mb/kancelarijaSlika1.webp"
+            alt="Kancelarija MB Law u Resavskoj 68 u Beogradu"
+            fill
+            sizes="100vw"
+            className="absolute inset-0 z-[1] object-cover object-[72%_58%] md:object-[62%_62%]"
+            priority
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-[2]"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(23,21,18,0.62) 0%, rgba(23,21,18,0.28) 22%, rgba(23,21,18,0.12) 48%, rgba(23,21,18,0.38) 100%)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-[2] md:hidden"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(15,13,11,0.28) 0%, rgba(15,13,11,0.38) 50%, rgba(15,13,11,0.62) 100%)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-[2] hidden md:block"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(23,21,18,0.78) 0%, rgba(23,21,18,0.52) 28%, rgba(23,21,18,0.16) 52%, transparent 70%)",
+            }}
+          />
+        </div>
 
         <MbLawSiteHeader active="O NAMA" overlay />
 
