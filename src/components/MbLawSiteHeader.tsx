@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MbLawLangSwitch from "@/components/MbLawLangSwitch";
@@ -9,6 +8,7 @@ import {
   PracticeAreasTrigger,
   usePracticeAreasHover,
 } from "@/components/MbLawPracticeAreasMenu";
+import { useMobileMenu } from "@/components/useLockBodyScroll";
 
 const navItems = [
   { label: "POČETNA", href: "/" },
@@ -26,7 +26,7 @@ export default function MbLawSiteHeader({
   active?: string;
   overlay?: boolean;
 }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { menuOpen, setMenuOpen, menuId } = useMobileMenu();
   const areas = usePracticeAreasHover();
 
   return (
@@ -117,6 +117,7 @@ export default function MbLawSiteHeader({
             type="button"
             aria-label={menuOpen ? "Zatvori meni" : "Otvori meni"}
             aria-expanded={menuOpen}
+            aria-controls={menuId}
             onClick={() => setMenuOpen((v) => !v)}
             className="flex h-7 w-7 flex-col items-center justify-center gap-[5px] lg:hidden"
           >
@@ -140,12 +141,14 @@ export default function MbLawSiteHeader({
       </div>
 
       <div
-        className={`z-30 flex flex-col items-start gap-7 overflow-y-auto bg-[#171512] px-6 py-10 transition-opacity duration-300 lg:hidden ${
-          overlay
-            ? "fixed inset-0 pt-28"
-            : "fixed inset-x-0 top-[72px] bottom-0"
-        } ${menuOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        id={menuId}
+        className={`fixed inset-0 z-30 flex flex-col bg-[#171512] px-6 pb-12 pt-36 transition-opacity duration-300 lg:hidden ${
+          menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        aria-hidden={!menuOpen}
+        {...(!menuOpen ? { inert: true } : {})}
       >
+        <nav className="flex min-h-0 flex-1 flex-col items-start gap-7 overflow-y-auto overscroll-contain">
         {navItems.map((item) => {
           if (item.label === "OBLASTI RADA") {
             return (
@@ -172,6 +175,7 @@ export default function MbLawSiteHeader({
             </Link>
           );
         })}
+        </nav>
       </div>
     </header>
   );
