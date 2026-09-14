@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { getPracticeGroupHref, practiceMenuGroups } from "@/data/practice-areas";
+import {
+  getPracticeGroupHref,
+  getPracticeGroupNavTitle,
+  practiceMenuGroups,
+} from "@/data/practice-areas";
 
 export function usePracticeAreasHover(openDelay = 80, closeDelay = 180) {
   const [open, setOpen] = useState(false);
@@ -123,7 +127,7 @@ export function PracticeAreasTrigger({
                       className="block text-[14.5px] font-semibold normal-case leading-[1.22] tracking-[-0.01em] text-[#EDE9E1] transition-colors duration-200 group-hover/item:text-[#C78B3E]"
                       style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
                     >
-                      {group.title}
+                      {getPracticeGroupNavTitle(group)}
                     </span>
                     <span className="mt-0.5 block text-[12px] font-normal normal-case leading-snug tracking-normal text-[#7A746B] transition-colors duration-200 group-hover/item:text-[#A39E94]">
                       {group.navLine}
@@ -231,7 +235,7 @@ export function PracticeAreasMobile({
                   className="block text-[15px] font-semibold leading-snug text-[#EDE9E1]"
                   style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
                 >
-                  {group.title}
+                  {getPracticeGroupNavTitle(group)}
                 </span>
                 <span className="mt-0.5 block text-[12.5px] text-[#7A746B]">
                   {group.navLine}

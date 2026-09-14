@@ -4,21 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import {
+  getPracticeGroupHref,
+  getPracticeGroupNavTitle,
+  practiceMenuGroups,
+} from "@/data/practice-areas";
 
 const navLinks = [
   { label: "Početna", href: "/" },
   { label: "O nama", href: "/o-nama" },
-  { label: "Oblasti rada", href: "#" },
+  { label: "Oblasti rada", href: "/oblasti-rada" },
   { label: "Tim", href: "/tim" },
   { label: "Uvidi", href: "/uvidi" },
   { label: "Kontakt", href: "/kontakt" },
-];
-
-const practiceLinks = [
-  { label: "Privredno pravo", href: "#" },
-  { label: "Nekretnine", href: "#" },
-  { label: "Radno pravo", href: "#" },
-  { label: "Kazneno pravo", href: "#" },
 ];
 
 const legalLinks = [
@@ -148,13 +146,13 @@ export default function MbLawFooter() {
               OBLASTI RADA
             </span>
             <ul className="mt-6 flex flex-col gap-3.5">
-              {practiceLinks.map((item) => (
-                <li key={item.label}>
+              {practiceMenuGroups.map((group) => (
+                <li key={group.slug}>
                   <Link
-                    href={item.href}
+                    href={getPracticeGroupHref(group)}
                     className="text-[14.5px] text-[#ACA69D] no-underline transition-colors hover:text-[#C78B3E]"
                   >
-                    {item.label}
+                    {getPracticeGroupNavTitle(group)}
                   </Link>
                 </li>
               ))}

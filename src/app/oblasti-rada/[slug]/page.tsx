@@ -81,7 +81,7 @@ export default async function PracticeAreaPage({
 }: PageProps<"/oblasti-rada/[slug]">) {
   const { slug } = await params;
   const groupPage = getPracticeMenuGroup(slug);
-  if (groupPage && groupPage.areaSlugs.length === 1) {
+  if (groupPage && groupPage.areaSlugs.length === 1 && !getPracticeArea(slug)) {
     redirect(`/oblasti-rada/${groupPage.areaSlugs[0]}`);
   }
   if (groupPage && !getPracticeArea(slug)) {
@@ -312,26 +312,55 @@ function PracticeGroupHub({ group }: { group: PracticeMenuGroup }) {
         <PracticeMonogram />
       </div>
 
-      <ol className="mt-14 grid border-t border-[#C9C0AF] md:grid-cols-2 md:gap-x-[72px]">
+      <ol
+        className={`mt-14 grid border-t border-l border-[#C9C0AF] ${
+          areas.length === 2
+            ? "md:grid-cols-2"
+            : areas.length === 3
+              ? "md:grid-cols-3"
+              : "md:grid-cols-2 xl:grid-cols-3"
+        }`}
+      >
         {areas.map((area, index) => (
-          <li key={area.slug}>
+          <li key={area.slug} className="border-b border-r border-[#C9C0AF]">
             <Link
               href={`/oblasti-rada/${area.slug}`}
-              className="group/row grid grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-x-1 border-b border-[#C9C0AF] py-7 no-underline md:grid-cols-[3.25rem_minmax(0,1fr)] md:py-8"
+              className="group/row relative flex h-full flex-col px-5 py-7 no-underline md:px-6 md:py-8"
             >
-              <span className="pt-1.5 text-[11px] font-semibold tracking-[0.18em] text-[#C78B3E]">
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-500 group-hover/row:scale-x-100 motion-reduce:transition-none motion-reduce:group-hover/row:scale-x-0"
+              />
+              <span className="text-[11px] font-semibold tracking-[0.18em] text-[#C78B3E]">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="min-w-0">
-                <span
-                  className="block text-[20px] font-semibold leading-[1.2] tracking-[-0.01em] transition-colors group-hover/row:text-[#C78B3E] md:text-[22px] mb-light-heading"
-                  style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+              <span
+                className="mt-4 block text-[20px] font-semibold leading-[1.2] tracking-[-0.01em] transition-colors duration-300 group-hover/row:text-[#C78B3E] md:text-[22px] mb-light-heading"
+                style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+              >
+                {area.title}
+              </span>
+              <span className="mt-3 block text-[15px] leading-[1.7] md:text-[15.5px] mb-light-muted">
+                {area.summary}
+              </span>
+              <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[10.5px] font-semibold tracking-[0.16em] text-[#8A8173] transition-colors duration-300 group-hover/row:text-[#C78B3E]">
+                DETALJI
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                  className="shrink-0 transition-transform duration-300 group-hover/row:translate-x-0.5"
                 >
-                  {area.title}
-                </span>
-                <span className="mt-2 block text-[15px] leading-[1.7] md:text-[15.5px] mb-light-muted">
-                  {area.summary}
-                </span>
+                  <path
+                    d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </span>
             </Link>
           </li>

@@ -21,338 +21,233 @@ export type PracticeArea = {
 
 export const practiceAreas: PracticeArea[] = [
   {
-    slug: "privredno-pravo",
+    slug: "korporativno-pravo",
     no: "01",
-    title: "Privredno pravo",
+    title: "Korporativno pravo",
     summary:
-      "Osnivanje, upravljanje i restrukturiranje privrednih društava, ugovori i transakcije.",
+      "Osnivanje i registracija društava, vlasnička struktura, ugovori, M&A, due diligence i korporativno upravljanje.",
     intro: [
-      "MB Law – Marković, Bogdanović & Partners pruža kompletne usluge u oblasti kompanijskog i trgovinskog prava, s posebnim akcentom na pravnu podršku u poslovanju. Iskusni tim advokata ima dugogodišnje iskustvo u radu sa domaćim i inostranim pravnim subjektima, u svim sektorima privrede.",
+      "Savetujemo pri izboru forme i strukture društva, kroz osnivanje, vlasničke i statusne promene, ugovore, transakcije i usklađenost poslovanja.",
     ],
     sections: [
       {
         heading: "Usluge obuhvataju",
         items: [
           {
-            label: "Izbor strukture kompanije",
-            desc: "Savetovanje u odabiru optimalne pravne forme prema ciljevima i potrebama klijenta.",
+            label: "Izbor pravne forme i korporativne strukture",
+            desc: "Savetovanje pri izboru optimalne pravne forme i načina organizovanja poslovanja prema ciljevima i potrebama klijenta.",
           },
           {
             label: "Osnivanje i registracija",
-            desc: "Uključujući pripremu dokumentacije i potpuni pravni proces osnivanja.",
+            desc: "Kompletna pravna podrška pri osnivanju i registraciji privrednih društava, uključujući pripremu osnivačkih i drugih potrebnih akata i dokumentacije.",
           },
           {
             label: "Promena vlasničke strukture",
-            desc: "Stručno savetovanje i podrška u slučaju promene vlasništva.",
+            desc: "Savetovanje i pravna podrška pri prenosu udela i akcija, pristupanju novih članova, istupanju postojećih članova i drugim promenama vlasničke strukture društva.",
           },
           {
             label: "Zakonska usklađenost",
-            desc: "Obezbeđivanje usklađenosti poslovanja sa svim relevantnim zakonima i regulativama.",
+            desc: "Savetovanje u vezi sa usklađenošću poslovanja sa važećim propisima i pravovremeno prilagođavanje poslovanja regulatornim promenama.",
           },
           {
             label: "Savetovanje pri donošenju odluka",
-            desc: "Pružanje pravnih mišljenja i preporuka u ključnim poslovnim odlukama.",
+            desc: "Pravna analiza, mišljenja i preporuke prilikom donošenja važnih korporativnih i poslovnih odluka.",
           },
           {
             label: "Ugovori i sporazumi",
-            desc: "Izrada, pregovaranje i tumačenje ugovora prema najvišim profesionalnim standardima.",
+            desc: "Izrada, pregovaranje i tumačenje ugovora i drugih poslovnih sporazuma, uz poseban fokus na zaštitu pravnih i komercijalnih interesa klijenta.",
           },
           {
-            label: "Statusne promene i akvizicije",
-            desc: "Uključuju kompletne pravne usluge u procesu promene organizacione ili vlasničke strukture.",
+            label: "Statusne promene i reorganizacije",
+            desc: "Pravna podrška pri pripajanju, spajanju, podeli i izdvajanju, kao i promeni pravne forme i drugim oblicima korporativne reorganizacije.",
           },
           {
-            label: "Spajanja i preuzimanja",
-            desc: "Pravna podrška u svim fazama transakcije - od pisma o namerama i pravne analize, preko pregovaranja transakcione dokumentacije, do zatvaranja i postupanja nakon zatvaranja.",
+            label: "Spajanja i preuzimanja (M&A)",
+            desc: "Pravna podrška u svim fazama transakcije - od pisma o namerama i pravne analize, preko pregovaranja i izrade transakcione dokumentacije, do zatvaranja transakcije i posttransakcionog postupanja.",
           },
           {
             label: "Pravni due diligence",
-            desc: "Sprovođenje pravne analize privrednog subjekta pred transakciju, finansiranje ili ulazak novog investitora, uz izradu izveštaja s procenom utvrđenih rizika.",
+            desc: "Sprovođenje sveobuhvatne pravne analize privrednog subjekta pred transakciju, finansiranje ili ulazak novog investitora, uz izradu izveštaja sa identifikacijom i procenom utvrđenih pravnih rizika.",
           },
           {
             label: "Korporativno upravljanje",
-            desc: "Savetovanje o odnosima između organa društva, izradi ugovora članova društva i internih akata, kao i o odgovornosti zakonskih zastupnika i članova organa.",
+            desc: "Savetovanje o odnosima između organa društva, odnosima između članova društva, izradi internih i korporativnih akata, kao i o odgovornosti zakonskih zastupnika i članova organa društva.",
           },
           {
             label: "Usklađenost i sprečavanje pranja novca",
-            desc: "Izrada internih procedura, politika poznavanja klijenta i programa usklađenosti, uključujući postupanje u skladu s međunarodnim sankcionim režimima.",
+            desc: "Izrada internih procedura, politika poznavanja klijenta (KYC) i programa usklađenosti, uključujući postupanje u vezi sa propisima o sprečavanju pranja novca i finansiranja terorizma, stvarnim vlasnicima i primenjivim međunarodnim restriktivnim merama.",
           },
           {
             label: "Likvidacija i prestanak društva",
-            desc: "Vođenje postupka dobrovoljne likvidacije i postupanje s poveriocima do brisanja iz registra.",
+            desc: "Pravna podrška i vođenje postupka dobrovoljne likvidacije, uređenje odnosa sa poveriocima i sprovođenje potrebnih korporativnih i registracionih radnji do brisanja društva iz registra.",
           },
         ],
       },
     ],
-  },
-  {
-    slug: "stecaj-i-restrukturiranje",
-    no: "02",
-    title: "Stečaj i restrukturiranje",
-    summary:
-      "Zastupanje stečajnih dužnika, poverilaca i članova odbora poverilaca u postupcima stečaja i reorganizacije.",
-    intro: [
-      "MB Law – Marković, Bogdanović & Partners pruža pravnu podršku u postupcima stečaja, reorganizacije i restrukturiranja, zastupajući stečajne dužnike, poverioce, kupce stečajne mase i članove odbora poverilaca. Ova oblast zahteva istovremeno razumevanje procesnih pravila i poslovne logike, jer se odluke donose u kratkim rokovima i s trajnim posledicama za imovinu klijenta.",
-    ],
-    sections: [
-      {
-        heading: "Usluge uključuju",
-        items: [
-          {
-            label: "Prijava i zaštita potraživanja",
-            desc: "Priprema i podnošenje prijava potraživanja, zastupanje na ispitnim ročištima i osporavanje potraživanja drugih poverilaca.",
-          },
-          {
-            label: "Pokretanje stečajnog postupka",
-            desc: "Sastavljanje i podnošenje predloga za otvaranje stečaja, kao i zastupanje dužnika u postupku pokrenutom po predlogu poverioca.",
-          },
-          {
-            label: "Unapred pripremljeni plan reorganizacije",
-            desc: "Pravna priprema, izrada i sprovođenje plana reorganizacije, uz koordinaciju s finansijskim savetnicima i revizorima.",
-          },
-          {
-            label: "Zastupanje u organima poverilaca",
-            desc: "Učešće i zastupanje interesa klijenata u skupštini i odboru poverilaca.",
-          },
-          {
-            label: "Kupovina stečajne mase",
-            desc: "Pravna analiza i podrška u postupcima prodaje imovine stečajnog dužnika, uključujući javna nadmetanja i neposredne pogodbe.",
-          },
-          {
-            label: "Pobijanje pravnih radnji stečajnog dužnika",
-            desc: "Vođenje postupaka pobijanja, kao i zaštita klijenata od zahteva za pobijanje.",
-          },
-          {
-            label: "Odgovornost organa društva",
-            desc: "Savetovanje i zastupanje u vezi s odgovornošću zakonskih zastupnika i članova organa za obaveze društva.",
-          },
-        ],
-      },
-    ],
-    closing:
-      "Naš pristup usmeren je na očuvanje vrednosti - kod dužnika kroz održivo restrukturiranje, a kod poverilaca kroz najviši mogući stepen naplate u okviru zakonskih mogućnosti.",
   },
   {
     slug: "poresko-i-carinsko-pravo",
     no: "03",
     title: "Poresko i carinsko pravo",
     summary:
-      "Zastupanje u poreskoj kontroli, upravnom postupku i upravnom sporu pred Upravnim sudom.",
+      "Poreska kontrola, pravna sredstva, transferne cene, carinski postupci i upravni spor pred Upravnim sudom.",
     intro: [
-      "Poreski i carinski postupci pripadaju oblastima u kojima se greška učinjena u ranoj fazi kasnije teško ispravlja. MB Law – Marković, Bogdanović & Partners pruža podršku klijentima od trenutka pokretanja kontrole, preko upravnog postupka, do vođenja upravnog spora pred Upravnim sudom.",
+      "Poreski i carinski postupci pripadaju oblastima u kojima se greška učinjena u ranoj fazi kasnije teško ispravlja. MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć klijentima od trenutka pokretanja kontrole, preko prvostepenog i drugostepenog poreskog ili carinskog postupka, do vođenja upravnog spora pred Upravnim sudom.",
     ],
     sections: [
       {
-        heading: "Usluge uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
             label: "Poreska kontrola i inspekcijski nadzor",
-            desc: "Zastupanje i savetovanje tokom postupka kontrole, priprema dokumentacije i komunikacija s poreskim organima.",
+            desc: "Zastupanje i savetovanje tokom postupka kontrole, priprema dokumentacije i komunikacija s poreskim organima, uključujući pravnu analizu nalaza kontrole i pravovremeno reagovanje na utvrđene nepravilnosti.",
           },
           {
             label: "Pravna sredstva u poreskom postupku",
-            desc: "Izrada primedbi na zapisnik o kontroli, žalbi na poreska rešenja i tužbi u upravnom sporu.",
+            desc: "Izrada primedbi na zapisnik o kontroli, žalbi na poreska rešenja i tužbi u upravnom sporu pred Upravnim sudom, kao i zastupanje u postupcima po drugim raspoloživim pravnim sredstvima.",
           },
           {
             label: "Poreski tretman transakcija",
-            desc: "Pravna mišljenja o poreskom tretmanu konkretnih poslovnih odnosa, uz savetovanje pri strukturiranju transakcija s fokusom na usklađenost i predvidivost.",
+            desc: "Pravna mišljenja o poreskom tretmanu konkretnih poslovnih odnosa, uz savetovanje pri strukturiranju transakcija s fokusom na poštovanje važećih poreskih propisa i pravnu predvidivost poslovne odluke.",
           },
           {
             label: "Transferne cene i međunarodno poresko pravo",
-            desc: "Savetovanje o primeni ugovora o izbegavanju dvostrukog oporezivanja i o dokumentacionim obavezama.",
+            desc: "Savetovanje o primeni ugovora o izbegavanju dvostrukog oporezivanja i o dokumentacionim obavezama u vezi sa transakcijama između povezanih lica.",
           },
           {
             label: "Carinski postupci",
-            desc: "Zastupanje u postupcima carinjenja, svrstavanja robe, određivanja carinske vrednosti i porekla robe.",
+            desc: "Zastupanje u postupcima uvoza, izvoza i drugim carinskim postupcima, uključujući pitanja tarifnog svrstavanja robe, određivanja carinske vrednosti i porekla robe.",
           },
           {
-            label: "Carinski prekršaji i naknadna naplata",
-            desc: "Odbrana u prekršajnim postupcima pred carinskim organima i vođenje postupaka po rešenjima o naknadnoj naplati dažbina.",
-          },
-        ],
-      },
-    ],
-    closing:
-      "Naš cilj je da klijentima obezbedimo predvidivost u poreskim i carinskim pitanjima i da svaki postupak vodimo tako da se sva pravna sredstva iskoriste u punom obimu i u zakonskim rokovima.",
-  },
-  {
-    slug: "bankarsko-i-finansijsko-pravo",
-    no: "04",
-    title: "Bankarsko i finansijsko pravo",
-    summary:
-      "Pravna podrška učesnicima na finansijskom tržištu u odnosima s bankama i finansijskim institucijama.",
-    intro: [
-      "MB Law – Marković, Bogdanović & Partners pruža pravnu podršku učesnicima na finansijskom tržištu, kao i privrednim subjektima i fizičkim licima u odnosima s bankama i drugim finansijskim institucijama.",
-    ],
-    sections: [
-      {
-        heading: "Usluge uključuju",
-        items: [
-          {
-            label: "Kreditni poslovi i obezbeđenje",
-            desc: "Izrada i pregovaranje ugovora o kreditu, jemstvu, zalozi i hipoteci, uključujući analizu i uspostavljanje sredstava obezbeđenja.",
+            label: "Carinski prekršaji",
+            desc: "Odbrana fizičkih i pravnih lica, kao i odgovornih lica u pravnim licima, u prekršajnim postupcima koji proizlaze iz povreda carinskih propisa.",
           },
           {
-            label: "Sporovi s finansijskim institucijama",
-            desc: "Zastupanje u sporovima o ništavosti pojedinih ugovornih odredbi, obračunu kamate i naplati troškova obrade kredita.",
+            label: "Naknadna naplata carinskih dažbina",
+            desc: "Zastupanje u postupcima u kojima carinski organ naknadno utvrđuje carinski dug ili druga uvozna davanja, uključujući osporavanje činjeničnog i pravnog osnova donetih odluka.",
           },
           {
-            label: "Regulatorna usklađenost",
-            desc: "Savetovanje u vezi s propisima Narodne banke Srbije, sprečavanjem pranja novca i finansiranja terorizma i primenom mera poznavanja klijenta.",
-          },
-          {
-            label: "Lizing i faktoring",
-            desc: "Pravna podrška u zaključenju i sprovođenju ugovora o finansijskom lizingu i faktoringu.",
-          },
-          {
-            label: "Tržište kapitala",
-            desc: "Savetovanje pri izdavanju hartija od vrednosti, javnim ponudama i ispunjavanju obaveza izveštavanja.",
-          },
-          {
-            label: "Digitalna imovina i platne usluge",
-            desc: "Pravna analiza poslovnih modela u oblasti digitalne imovine, platnih usluga i elektronskog novca, uz procenu obaveze licenciranja.",
+            label: "Poreklo i carinska vrednost robe",
+            desc: "Pravna pomoć u sporovima koji se odnose na dokazivanje porekla robe, primenu preferencijalnog tretmana i način utvrđivanja carinske vrednosti.",
           },
         ],
       },
     ],
-    closing:
-      "Naš pristup kombinuje poznavanje regulatornog okvira s razumevanjem komercijalne strukture transakcije, kako bi se pravna zaštita klijenta obezbedila pre nego što spor nastane.",
   },
   {
-    slug: "javne-nabavke-koncesije-i-jpp",
-    no: "05",
-    title: "Javne nabavke, koncesije i javno-privatno partnerstvo",
+    slug: "prekrsajno-pravo",
+    no: "02",
+    title: "Prekršajno pravo",
     summary:
-      "Zastupanje naručilaca i ponuđača u svim fazama postupka javnih nabavki, koncesija i JPP.",
+      "Odbrana u prekršajnom postupku, nalog, zastarelost, žalba i odgovornost pravnih i odgovornih lica.",
     intro: [
-      "Postupci javnih nabavki vode se u kratkim i strogim rokovima, u kojima propuštena radnja najčešće ne može da se nadoknadi. MB Law – Marković, Bogdanović & Partners zastupa i naručioce i ponuđače u svim fazama postupka.",
+      "Zastupanje u prekršajnim postupcima, od prvog kontakta sa nadležnim organom do pravnosnažnog okončanja postupka.",
     ],
     sections: [
       {
-        heading: "Usluge uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
-            label: "Priprema dokumentacije o nabavci",
-            desc: "Izrada i pravna kontrola dokumentacije, tehničkih specifikacija i modela ugovora.",
+            label: "Prekršajni postupci",
+            desc: "Odbrana fizičkih lica, preduzetnika, pravnih lica i odgovornih lica u pravnim licima u svim fazama prekršajnog postupka, bez obzira na to da li je postupak iniciran zahtevom za pokretanje prekršajnog postupka ili izdavanjem prekršajnog naloga. Pravna pomoć obuhvata analizu predmeta, pripremu pisane odbrane, zastupanje pred sudom, predlaganje i osporavanje dokaza, kao i sastavljanje žalbi i drugih pravnih sredstava.",
           },
           {
-            label: "Podrška ponuđačima",
-            desc: "Analiza dokumentacije, priprema ponuda, pravna provera uslova za učešće i sastavljanje zahteva za dodatnim informacijama i pojašnjenjima.",
+            label: "Prekršajni nalog i zahtev za sudsko odlučivanje",
+            desc: "Posebnu pažnju posvećujemo predmetima započetim izdavanjem prekršajnog naloga. Lice koje ne prihvata odgovornost ima rok od osam dana od prijema naloga da podnese zahtev za sudsko odlučivanje. Već u ovoj fazi analiziramo činjenični opis, pravnu kvalifikaciju i raspoložive dokaze i, kada okolnosti predmeta to opravdavaju, uz zahtev pripremamo i pisanu odbranu i predlažemo dokaze.",
           },
           {
-            label: "Zaštita prava u postupku",
-            desc: "Izrada i podnošenje zahteva za zaštitu prava, zastupanje pred Republičkom komisijom za zaštitu prava u postupcima javnih nabavki i vođenje upravnog spora protiv njenih odluka.",
+            label: "Zastarelost prekršajnog gonjenja i izvršenja",
+            desc: "Praćenje rokova predstavlja sastavni deo naše odbrane. U svakom predmetu posebno analiziramo relativnu i apsolutnu zastarelost pokretanja i vođenja postupka, kao i zastarelost izvršenja izrečenih sankcija.",
           },
           {
-            label: "Ugovori o javnoj nabavci",
-            desc: "Savetovanje u vezi s izvršenjem, izmenama i raskidom ugovora zaključenih u postupku javne nabavke.",
+            label: "Žalbeni postupak",
+            desc: "Sastavljamo žalbe protiv prvostepenih prekršajnih odluka i zastupamo klijente u postupku pred Prekršajnim apelacionim sudom, sa posebnim fokusom na bitne povrede postupka, pogrešnu primenu materijalnog prava i nedostatke u utvrđenom činjeničnom stanju.",
           },
           {
-            label: "Koncesije",
-            desc: "Pravna podrška u postupcima davanja koncesija, izradi koncesionih akata i koncesionih ugovora.",
-          },
-          {
-            label: "Javno-privatno partnerstvo",
-            desc: "Savetovanje pri strukturiranju projekata javno-privatnog partnerstva, izradi predloga projekta i vođenju postupka pred nadležnim organima.",
+            label: "Pravna lica i odgovorna lica",
+            desc: "Posebnu pažnju posvećujemo prekršajnoj odgovornosti privrednih društava, preduzetnika i odgovornih lica, naročito kada vođenje postupka ili izrečene sankcije mogu imati neposredne posledice na poslovanje klijenta.",
           },
         ],
       },
     ],
-    closing:
-      "Naš cilj je da klijentima obezbedimo pravnu sigurnost u postupku u kome je rok jednako važan kao i sadržina - od pripreme dokumentacije do konačne odluke.",
   },
   {
-    slug: "kazneno-pravo",
-    no: "06",
-    title: "Kazneno pravo",
+    slug: "privredni-prestupi",
+    no: "02",
+    title: "Privredni prestupi",
     summary:
-      "Odbrana u krivičnom, prekršajnom postupku i postupcima privrednih prestupa pred svim sudovima u Srbiji.",
+      "Zastupanje pravnih i odgovornih lica, analiza dokumentacije i preventiva u postupcima za privredne prestupe.",
     intro: [
-      "MB Law – Marković, Bogdanović & Partners ima dugu tradiciju zastupanja u zahtevnim krivičnim postupcima pred svim sudovima i tužilaštvima u Srbiji. S velikim iskustvom u odbrani u krivičnim postupcima pred svim sudovima opšte nadležnosti kao i pred posebnim odeljenjima Viših sudova i to za organizovani kriminal, ratne zločine, visokotehnološki kriminal i borbu protiv korupcije, kancelarija obezbeđuje najviši nivo pravne zaštite svakom klijentu.",
+      "Zastupanje u postupcima za privredne prestupe, od prvog kontakta sa nadležnim organom do pravnosnažnog okončanja postupka.",
     ],
     sections: [
       {
-        heading: "Krivični postupak",
+        heading: "Usluge obuhvataju",
         items: [
           {
-            desc: "Naša ekspertiza u oblasti krivičnog prava omogućava klijentima sveobuhvatnu pravnu zaštitu i odbranu u predmetima u kojima su osumnjičeni ili optuženi za najteža krivična dela. Tokom poslednje decenije naši advokati su učestvovali u odbranama više javno propraćenih predmeta. Bilo da se suočavate sa optužbom ili tražite ostvarenje pravde, naši timovi će vas profesionalno i energično zastupati pred sudom i posvetiti se zaštiti vaših prava.",
+            label: "Odbrana pravnih i odgovornih lica",
+            desc: "Zastupanje pravnih lica i odgovornih lica u postupcima za privredne prestupe, od pokretanja postupka do njegovog pravnosnažnog okončanja.",
           },
           {
-            label: "Zadržavanje do 48 sati",
-            desc: "Prema odredbama Zakonika o krivičnom postupku, javni tužilac i policija (po nalogu nadležnog tužilaštva) ovlašćeni su da donesu rešenje o zadržavanju do 48 časova, nakon čega lice biva pušteno ili se predlaže određivanje pritvora, o čemu odlučuje sud. MB Law – Marković, Bogdanović & Partners obezbeđuje pravnu pomoć okrivljenima od trenutka dovođenja u policijsku stanicu pa do okončanja postupka, s fokusom na pravovremenu i ciljanu odbranu.",
+            label: "Analiza poslovne dokumentacije",
+            desc: "U predmetima koji proizlaze iz poslovanja privrednih subjekata analiziramo relevantnu poslovnu, računovodstvenu i drugu dokumentaciju radi utvrđivanja činjeničnog i pravnog osnova odgovornosti.",
           },
           {
-            label: "Hitne intervencije i dežurni servisi",
-            desc: "U izuzetnim i opravdanim slučajevima, kada je potrebno preduzeti hitne radnje van redovnog radnog vremena, na raspolaganju našim klijentima stoje dežurni telefoni dostupni 00-24. U takvim situacijama, MB Law – Marković, Bogdanović & Partners garantuje brz odziv i organizovanu pravnu podršku.",
+            label: "Strategija odbrane i zastupanje pred sudom",
+            desc: "Pripremamo pisane odbrane, dokazne predloge i pravne lekove i zastupamo klijente pred nadležnim sudovima tokom čitavog postupka.",
+          },
+          {
+            label: "Preventivno savetovanje",
+            desc: "Pružamo pravnu podršku privrednim subjektima radi usklađivanja poslovanja sa važećim propisima i smanjenja rizika od odgovornosti za privredne prestupe.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "krivicno-pravo",
+    no: "02",
+    title: "Krivično pravo",
+    summary:
+      "Odbrana u krivičnom postupku, posebna nadležnost, pritvor, oštećeni, privredni kriminal, oduzimanje imovine i ekstradicija.",
+    intro: [
+      "Zastupanje u krivičnim postupcima, od prvog kontakta sa nadležnim organom do pravnosnažnog okončanja postupka.",
+    ],
+    sections: [
+      {
+        heading: "Usluge obuhvataju",
+        items: [
+          {
+            label: "Odbrana u krivičnim postupcima",
+            desc: "Zastupanje osumnjičenih, okrivljenih i optuženih tokom predistražnog postupka, istrage, optuženja i glavnog pretresa, kao i u postupcima po redovnim i vanrednim pravnim lekovima. Posebnu pažnju posvećujemo složenim predmetima i odbranama u postupcima za najteža krivična dela.",
+          },
+          {
+            label: "Postupci posebne nadležnosti",
+            desc: "Odbrana i zastupanje u postupcima iz oblasti organizovanog kriminala, ratnih zločina, suzbijanja korupcije i visokotehnološkog kriminala, pred nadležnim javnim tužilaštvima i sudovima.",
+          },
+          {
+            label: "Zadržavanje do 48 časova i pritvor",
+            desc: "Kancelarija pruža pravnu pomoć od trenutka lišenja slobode i zadržavanja, tokom saslušanja pred javnim tužiocem, kao i u postupku odlučivanja o određivanju, produženju, ukidanju ili zameni pritvora blažom merom.",
           },
           {
             label: "Zastupanje oštećenih lica",
-            desc: "Osim odbrane okrivljenih, kancelarija zastupa i oštećena lica - sastavljanjem i podnošenjem krivičnih prijava, zastupanjem tokom celog postupka i podnošenjem imovinskopravnog zahteva radi naknade štete.",
-          },
-        ],
-      },
-      {
-        heading: "Prekršajni postupak",
-        items: [
-          {
-            desc: "MB Law – Marković, Bogdanović & Partners pruža sveobuhvatnu odbranu u svim prekršajnim postupcima, kako pokrenutim na osnovu Zahteva za pokretanje prekršajnog postupka, tako i u slučajevima izdatih Prekršajnih naloga.",
+            desc: "Pored odbrane okrivljenih, zastupamo i lica oštećena krivičnim delom, uključujući sastavljanje krivičnih prijava, zastupanje tokom postupka i ostvarivanje imovinskopravnih zahteva radi naknade štete.",
           },
           {
-            desc: "Kada je postupak pokrenut na osnovu Zahteva, obezbeđujemo kompletnu pravnu podršku od trenutka prijema obaveštenja do konačnog okončanja postupka, s fokusom na stratešku odbranu i zaštitu prava klijenta.",
+            label: "Privredni i finansijski kriminal",
+            desc: "Zastupanje fizičkih i pravnih lica u postupcima za krivična dela protiv privrede, službene dužnosti, platnog prometa i druga dela povezana sa poslovanjem, uključujući predmete koji zahtevaju analizu obimne poslovne i finansijske dokumentacije i saradnju sa stručnjacima odgovarajućih oblasti.",
           },
           {
-            desc: "U slučaju izdavanja Prekršajnog naloga neophodno je podneti zahtev za sudsko odlučivanje u roku od 8 dana od dana izdavanja, a neretko se ispostavi efikasnim dostaviti i pripremljenu pisanu odbranu zajedno sa zahtevom. Uspeh odbrane u ovakvim situacijama u velikoj meri zavisi od blagovremene reakcije, te je stoga od suštinskog značaja da odmah nakon izdavanja naloga kontaktirate svog izabranog branioca i na taj način drastično povećate šanse za povoljno okončanje postupka.",
+            label: "Oduzimanje imovine proistekle iz krivičnog dela",
+            desc: "Zastupanje u postupcima privremenog i trajnog oduzimanja imovine proistekle iz krivičnog dela, uključujući zaštitu prava trećih lica čija je imovina obuhvaćena merom.",
           },
           {
-            desc: "Značajan broj prekršajnih postupaka iz portfolia MB Law - Marković, Bogdanović & Partners okončan je obustavom usled nastupanja apsolutne zastarelosti ili donošenjem oslobađajućih presuda. Obe vrste okončanja predstavljaju povoljan ishod za klijente kancelarije.",
-          },
-        ],
-      },
-      {
-        heading: "Privredni prestupi",
-        intro: [
-          "MB Law – Marković, Bogdanović & Partners zastupa klijente u postupcima privrednih prestupa, zastupajući i pravna lica i odgovorna lica u pravnim licima. Naša advokatska kancelarija deluje u svim fazama postupka - od preduzimanja inicijalnih istražnih radnji, preko odbrane pred nadležnim organima i sudovima, do rešavanja posledica koje proizilaze iz eventualnih novčanih kazni, oduzimanja imovinske koristi ili drugih mera.",
-          "Obezbeđujemo pravnu podršku prilagođenu specifičnostima privrednih delatnosti: analiziramo poslovnu dokumentaciju, koordiniramo veštačenja i ekspertize, pripremamo pravne podneske i strategiju odbrane, i zastupamo klijente u pregovorima sa nadležnim organima. Poseban akcenat stavljamo na prevenciju poslovnih rizika i usklađivanje poslovanja sa važećim propisima kako bismo umanjili mogućnost pokretanja postupka i izbegli bilo kakve negativne posledice na poslovanje klijenta.",
-        ],
-      },
-      {
-        heading: "Privredni i finansijski kriminal",
-        intro: [
-          "Kancelarija zastupa okrivljena fizička i pravna lica u postupcima za krivična dela protiv privrede, službene dužnosti i platnog prometa. Ovi predmeti počivaju na obimnoj poslovnoj dokumentaciji i finansijskim veštačenjima, zbog čega odbrana zahteva pripremu koja teče uporedo sa samim postupkom, kao i saradnju s ekonomskim stručnjacima.",
-        ],
-        items: [
-          {
-            label: "Poreska krivična dela",
-            desc: "Odbrana u postupcima za poresku utaju, neuplaćivanje poreza po odbitku i s njima povezana dela, uz koordinaciju s paralelnim poreskim postupkom.",
+            label: "Odgovornost pravnih lica za krivična dela",
+            desc: "Odbrana pravnih lica u postupcima po Zakonu o odgovornosti pravnih lica za krivična dela i savetovanje u vezi sa pravnim posledicama krivične odgovornosti pravnog lica.",
           },
           {
-            label: "Postupci oduzimanja imovine",
-            desc: "Zastupanje u postupcima privremenog i trajnog oduzimanja imovine proistekle iz krivičnog dela, uključujući zastupanje trećih lica čija je imovina obuhvaćena merom.",
-          },
-          {
-            label: "Odgovornost pravnih lica",
-            desc: "Odbrana pravnih lica u postupcima po Zakonu o odgovornosti pravnih lica za krivična dela i savetovanje o merama za smanjenje rizika.",
-          },
-        ],
-      },
-      {
-        heading: "Međunarodna pravna pomoć i ekstradicija",
-        items: [
-          {
-            label: "Postupci izdavanja",
-            desc: "Zastupanje u ekstradicionim postupcima, po molbama za izdavanje i u postupcima ekstradicionog pritvora.",
-          },
-          {
-            label: "Međunarodne poternice",
-            desc: "Postupanje u vezi s međunarodnim poternicama i podnošenje zahteva za brisanje podataka iz evidencija Interpola.",
-          },
-          {
-            label: "Prenos postupka i izvršenja kazne",
-            desc: "Vođenje postupaka preuzimanja i prenosa krivičnog gonjenja, kao i priznanja i izvršenja stranih krivičnih presuda.",
-          },
-          {
-            label: "Pravna pomoć u dokaznim radnjama",
-            desc: "Postupanje po zamolnicama stranih organa i pribavljanje dokaza iz inostranstva.",
+            label: "Međunarodna pravna pomoć i ekstradicija",
+            desc: "Zastupanje u postupcima ekstradicije i ekstradicionog pritvora, postupanje u vezi sa međunarodnim poternicama, prenosom krivičnog gonjenja i izvršenja kazne, priznanjem i izvršenjem stranih krivičnih presuda, kao i drugim oblicima međunarodne pravne pomoći.",
           },
         ],
       },
@@ -361,94 +256,108 @@ export const practiceAreas: PracticeArea[] = [
   {
     slug: "prava-stranaca",
     no: "07",
-    title: "Pravna podrška za strana pravna i fizička lica",
+    title: "Prava stranaca",
     summary:
-      "Radne i boravišne dozvole, državljanstvo i poslovno prisustvo stranih lica u Srbiji.",
+      "Jedinstvena dozvola, vize, boravak, ulaganja, kupovina nepokretnosti i državljanstvo za strana lica.",
     intro: [
-      "MB Law – Marković, Bogdanović & Partners pruža sveobuhvatnu pravnu podršku stranim pravnim i fizičkim licima koja žele da poslovno ili lično budu prisutni u Srbiji. Strani državljani i njihovi poslovni partneri mogu se osloniti na našu ekspertizu u oblasti zakonodavstva o strancima, uključujući pribavljanje radnih i boravišnih dozvola, kao i vođenje svih relevantnih postupaka u skladu s pozitivnim propisima.",
+      "MB Law - Marković, Bogdanović & Partners pruža sveobuhvatnu pravnu podršku stranim pravnim i fizičkim licima koja žele da borave, rade, investiraju ili posluju u Srbiji. Strani državljani i njihovi poslovni partneri mogu se osloniti na našu ekspertizu u oblasti zakonodavstva o strancima, uključujući regulisanje boravka i prava na rad, pribavljanje viza i jedinstvenih dozvola za privremeni boravak i rad, kao i vođenje svih relevantnih postupaka u skladu sa važećim propisima Republike Srbije.",
     ],
     sections: [
       {
-        heading: "Naše usluge u oblasti prava stranaca obuhvataju",
+        heading: "Usluge obuhvataju",
         items: [
           {
-            label: "Pribavljanje radnih i boravišnih dozvola",
-            desc: "Kompletnu pravnu podršku u procesu podnošenja zahteva za izdavanje radne i boravišne dozvole, od pripreme dokumentacije, preko zastupanja pred nadležnim institucijama, do dobijanja dozvole.",
+            label: "Jedinstvena dozvola za privremeni boravak i rad",
+            desc: "Pravna podrška u postupku pribavljanja i produženja jedinstvene dozvole za privremeni boravak i rad, uključujući pripremu dokumentacije, podnošenje zahteva i zastupanje pred nadležnim organima.",
           },
           {
-            label: "Upravljanje u skladu sa Zakonom o strancima",
-            desc: "Savetovanje i primena zakonskih odredbi u skladu sa najnovijim zakonodavnim promenama, uključujući pitanja viznog režima, produženja boravka, dobijanja dozvola za rad i ostalih uslova za legalan boravak i rad stranaca u Srbiji.",
+            label: "Vize za kraći i duži boravak",
+            desc: "Pravna pomoć u postupcima pribavljanja vize C i vize D, uključujući analizu osnova za boravak, pripremu dokumentacije i podršku tokom postupka podnošenja zahteva.",
+          },
+          {
+            label: "Regulisanje statusa stranaca",
+            desc: "Savetovanje u vezi sa viznim režimom, zakonitim boravkom, produženjem boravka, pravom na rad i drugim pitanjima statusa stranih državljana u Republici Srbiji.",
           },
           {
             label: "Privremeni i stalni boravak",
-            desc: "Pomoć u pripremi i podnošenju zahteva za privremeni ili stalni boravak, kao i vođenje postupaka pred nadležnim organima.",
+            desc: "Pravna pomoć u pripremi i podnošenju zahteva za privremeni boravak i stalno nastanjenje, kao i vođenje postupaka pred nadležnim organima.",
+          },
+          {
+            label: "Prijava boravišta stranca",
+            desc: "Pravna pomoć u vezi sa prijavom mesta boravka stranog državljanina u Republici Srbiji i drugim povezanim administrativnim obavezama.",
           },
           {
             label: "Zastupanje i pravno savetovanje",
-            desc: "Zastupanje stranaca u svim pravnim radnjama i procesima vezanim za legalnost boravka i rada, kao i u slučajevima eventualnih pravnih problema ili sporova.",
+            desc: "Zastupanje stranaca pred državnim organima, sudovima, poslovnim bankama, osiguravajućim društvima i drugim institucijama u pitanjima koja se odnose na njihov boravak, rad, poslovanje i ostvarivanje prava u Srbiji.",
           },
           {
             label: "Ulaganja i poslovne strukture",
-            desc: "Pravni saveti i podrška stranim investitorima pri uspostavljanju poslovnih subjekata, osnivanju pravnih lica, pridruživanju i pokretanju poslovnih aktivnosti u skladu sa Zakonom o strancima i drugim relevantnim propisima.",
+            desc: "Savetovanje stranih investitora pri osnivanju privrednih društava, izboru odgovarajuće pravne forme, ulaganju u postojeća društva i pokretanju poslovnih aktivnosti u Republici Srbiji.",
+          },
+          {
+            label: "Otvaranje bankovnih računa",
+            desc: "Pravna podrška stranim fizičkim i pravnim licima u postupcima otvaranja računa kod poslovnih banaka u Republici Srbiji i pribavljanju dokumentacije koju banke zahtevaju u okviru svojih procedura.",
+          },
+          {
+            label: "Kupovina nepokretnosti",
+            desc: "Savetovanje i zastupanje stranih fizičkih i pravnih lica pri kupovini nepokretnosti u Republici Srbiji, uključujući proveru uslova za sticanje prava svojine, pravnu analizu nepokretnosti i pripremu ugovorne dokumentacije.",
           },
           {
             label: "Državljanstvo",
-            desc: "Pravna podrška u postupcima prijema u državljanstvo Republike Srbije - po osnovu porekla, braka, rođenja na teritoriji Republike Srbije i posebnog interesa - kao i u postupcima utvrđivanja i prestanka državljanstva.",
+            desc: "Pravna podrška u postupcima prijema u državljanstvo Republike Srbije po osnovu porekla, braka, rođenja, prijema i drugih zakonom predviđenih osnova, kao i u postupcima utvrđivanja i prestanka državljanstva.",
           },
           {
             label: "Statusna i lična pitanja stranaca",
-            desc: "Prijava boravišta, upis u matične knjige, priznanje stranih javnih isprava i pribavljanje potvrda potrebnih za ostvarivanje prava u Srbiji.",
+            desc: "Pravna pomoć u vezi sa upisom u matične knjige, priznavanjem i korišćenjem stranih javnih isprava, pribavljanjem potvrda i drugom dokumentacijom potrebnom za ostvarivanje prava u Srbiji.",
           },
         ],
       },
     ],
-    closing:
-      "Tim advokata specijalizovan za prava stranih pravnih i fizičkih lica i migraciona pravila garantuje pravnu sigurnost i svu podršku potrebnu za uspešan poslovni ili lični boravak u Srbiji, kao i usklađenost sa svim relevantnim propisima.",
   },
   {
     slug: "radno-pravo",
     no: "08",
     title: "Radno pravo",
     summary:
-      "Radni odnosi, interna akta, otkazi i zastupanje u radnim sporovima poslodavaca i zaposlenih.",
+      "Savetovanje i zastupanje poslodavaca i zaposlenih u ugovorima, otkazima, sporovima i usklađenosti sa propisima o radu.",
     intro: [
-      "Radno pravo predstavlja jednu od najzahtevnijih pravnih oblasti u Srbiji. MB Law – Marković, Bogdanović & Partners pruža punu stručnu podršku u svim pravnim aspektima radnih odnosa, s ciljem zaštite prava i interesa poslodavaca i zaposlenih.",
+      "Radno pravo predstavlja jednu od najzahtevnijih pravnih oblasti u Srbiji. MB Law - Marković, Bogdanović & Partners pruža sveobuhvatnu pravnu pomoć u svim pravnim aspektima radnih odnosa, zastupajući podjednako poslodavce i zaposlene u savetodavnim, pregovaračkim i sudskim postupcima.",
     ],
     sections: [
       {
-        heading: "Usluge uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
             label: "Savetovanje za poslodavce i zaposlene",
-            desc: "Pružanje jasnih i preciznih smernica u vezi s pravima i obavezama u radnom odnosu.",
+            desc: "Pružanje jasnih i preciznih pravnih mišljenja i saveta u vezi s pravima i obavezama iz radnog odnosa.",
           },
           {
-            label: "Proces pregovaranja, izrada ugovora i opštih akata",
-            desc: "Sastavljanje ugovora o radu, aneksa i opštih akata poslodavaca u skladu s najvišim standardima.",
+            label: "Ugovori o radu i opšti akti poslodavca",
+            desc: "Pregovaranje, izrada i analiza ugovora o radu, aneksa ugovora, pravilnika o radu, pravilnika o organizaciji i sistematizaciji poslova i drugih opštih akata poslodavaca iz oblasti radnih odnosa.",
           },
           {
-            label: "Zaštita od diskriminacije i zlostavljanja",
-            desc: "Zastupanje u postupcima zaštite od kršenja radnih prava i zastupanje učesnika u postupku.",
+            label: "Zaštita od diskriminacije i zlostavljanja na radu",
+            desc: "Zastupanje zaposlenih i poslodavaca u postupcima povodom diskriminacije, zlostavljanja na radu i drugih oblika povrede prava zaposlenih.",
           },
           {
-            label: "Sporazumni prestanci radnih odnosa i otkazi",
-            desc: "Sporazumni prestanci radnih odnosa i postupci davanja otkaza zaposlenom predstavljaju jedne od najdelikatnijih i najsloženijih procesa u okviru radnog prava, gde i najsitnija nepažnja može rezultirati ozbiljnim posledicama za obe strane - kako za poslodavce, tako i za zaposlene. Naš tim advokata uspešno zastupa poslodavce u ovim postupcima osiguravajući na taj način njihovu pravnu sigurnost, ali sa druge strane zastupa i zaposlene kojima su povređena prava u smislu Zakona o radu i drugih relevantnih propisa.",
+            label: "Prestanak radnog odnosa i otkaz ugovora o radu",
+            desc: "Postupci prestanka radnog odnosa predstavljaju jedan od najosetljivijih segmenata radnog prava, jer procesna ili materijalnopravna greška može dovesti do poništaja rešenja o otkazu, vraćanja zaposlenog na rad i obaveze naknade štete. Poslodavcima pružamo pravnu pomoć pri pripremi i sprovođenju postupka prestanka radnog odnosa, dok zaposlene zastupamo kada je do prestanka radnog odnosa došlo protivno zakonu ili uz povredu njihovih prava.",
           },
           {
-            label: "Radni sporovi i arbitraža",
-            desc: "Rešavanje sporova putem alternativnih metoda, uz zaštitu prava i interesa klijenata.",
+            label: "Radni sporovi i mirno rešavanje sporova",
+            desc: "Zastupanje pred nadležnim sudovima, kao i u postupcima mirnog rešavanja individualnih i kolektivnih radnih sporova kada su za to ispunjeni zakonski uslovi.",
           },
           {
             label: "Usklađenost sa zakonodavstvom",
-            desc: "Kontinuirano usklađivanje poslovnih procesa s relevantnim propisima iz oblasti radnog prava.",
+            desc: "Savetovanje poslodavaca u vezi sa usklađivanjem internih procedura, ugovora i opštih akata sa važećim propisima iz oblasti rada.",
           },
           {
-            label: "Naknada štete",
-            desc: "Posebnu pažnju posvećujemo pravima zaposlenih u situacijama kada su pretrpeli povrede ili štetu tokom obavljanja radnih zadataka ili usled povezanosti sa radom, ali i poslodavcima kod kojih je ova šteta nastala. Pravna podrška obuhvata analizu pravne osnove za potraživanje naknade štete, uključujući fizičke povrede i profesionalne bolesti.",
+            label: "Naknada štete nastale na radu i u vezi sa radom",
+            desc: "Zastupamo zaposlene u postupcima za naknadu materijalne i nematerijalne štete nastale usled povrede na radu, profesionalne bolesti ili druge štete u vezi sa radom. Istovremeno pružamo pravnu pomoć poslodavcima u postupcima utvrđivanja odgovornosti i visine štete, kao i u vezi sa pravnim posledicama povrede na radu.",
           },
           {
             label: "Kolektivno radno pravo",
-            desc: "Zastupanje u pregovorima o kolektivnim ugovorima, u odnosima s reprezentativnim sindikatima i u postupcima organizovanja i sprovođenja štrajka.",
+            desc: "Zastupanje u pregovorima o kolektivnim ugovorima, u odnosima s reprezentativnim sindikatima i u postupcima u vezi sa organizovanjem i sprovođenjem štrajka.",
           },
           {
             label: "Zaštita uzbunjivača",
@@ -456,11 +365,11 @@ export const practiceAreas: PracticeArea[] = [
           },
           {
             label: "Angažovanja izvan radnog odnosa",
-            desc: "Izrada i analiza ugovora o delu, ugovora o privremenim i povremenim poslovima, dopunskom radu i saradnji s preduzetnicima, uz procenu rizika prekvalifikacije u radni odnos.",
+            desc: "Izrada i analiza ugovora o delu, ugovora o privremenim i povremenim poslovima, dopunskom radu i saradnji s preduzetnicima, uz procenu pravnih rizika konkretnog modela angažovanja.",
           },
           {
             label: "Upućivanje zaposlenih i rad na daljinu",
-            desc: "Savetovanje o upućivanju zaposlenih u inostranstvo i iz inostranstva, radu od kuće i radu na daljinu, uz pitanja merodavnog prava i socijalnog osiguranja.",
+            desc: "Savetovanje o upućivanju zaposlenih na rad u inostranstvo, angažovanju stranih radnika u Srbiji, radu od kuće i radu na daljinu, uz pitanja merodavnog prava i socijalnog osiguranja.",
           },
         ],
       },
@@ -471,9 +380,9 @@ export const practiceAreas: PracticeArea[] = [
     no: "09",
     title: "Građansko pravo",
     summary:
-      "Imovinski i ugovorni odnosi, nasledstvo i zaštita prava fizičkih i pravnih lica.",
+      "Imovinski i ugovorni odnosi, porodično i nasledno pravo, naknada štete, stvarna prava i medijacija.",
     intro: [
-      "MB Law – Marković, Bogdanović & Partners pruža pravnu podršku u širokom spektru građanskopravnih odnosa. Tim advokata posvećen je zaštiti prava fizičkih i pravnih lica, s fokusom na imovinske odnose, ugovorne odnose, nasledstvo i druga važna pitanja iz sfera građanskih prava.",
+      "MB Law - Marković, Bogdanović & Partners pruža pravnu podršku u širokom spektru građanskopravnih odnosa. Tim advokata posvećen je zaštiti prava fizičkih i pravnih lica, s fokusom na imovinske odnose, ugovorne odnose, nasledstvo, porodične odnose i druga pitanja iz oblasti građanskog prava.",
     ],
     sections: [
       {
@@ -481,19 +390,23 @@ export const practiceAreas: PracticeArea[] = [
         items: [
           {
             label: "Rešavanje sporova",
-            desc: "Efikasno zastupanje putem pregovora, medijacije i sudskih postupaka, s posebnim akcentom na kreativna i najefikasnija rešenja. MB Law – Marković, Bogdanović & Partners se posebno ponosi načinom na koji se pristupa rešavanju sporova sudskim putem, onda kada je to komplikovano i kada je potrebno naći kreativno rešenje za konkretan pravni problem.",
+            desc: "Efikasno zastupanje putem pregovora, medijacije i sudskih postupaka, s posebnim akcentom na kreativna i najefikasnija rešenja. MB Law - Marković, Bogdanović & Partners se posebno ponosi načinom na koji se pristupa rešavanju sporova sudskim putem, onda kada je to komplikovano i kada je potrebno naći kreativno rešenje za konkretan pravni problem.",
+          },
+          {
+            label: "Naknada štete",
+            desc: "Jedna od ključnih komponenti građanskog prava je i naknada štete, koja se odnosi na obavezu nadoknade štete koja je nanesena jednoj strani usled povrede prava ili neispunjavanja ugovornih obaveza. Naši iskusni advokati pružaju stručno vođstvo u procesima koji se odnose na naknadu štete, bilo da je reč o materijalnoj ili nematerijalnoj šteti.",
           },
           {
             label: "Ugovorni odnosi",
             desc: "Pravne usluge vezane za izradu, interpretaciju i izvršenje različitih vrsta ugovora, obezbeđujući jasnoću i zaštitu interesa naših klijenata. Naš pristup izradi ugovora specifičan je iz razloga što svaki ugovor radimo „ad hoc\", dakle za konkretno činjenično i pravno stanje.",
           },
           {
-            label: "Zakonsko i testamentalno nasleđivanje",
-            desc: "Pružanje stručne podrške u postupcima nasledstva, izradi testamenta, izradi naslednopravnih ugovora, i zastupanju u svim parničnim i vanparničnim postupcima.",
+            label: "Porodično pravo",
+            desc: "Savetovanje i zastupanje u svim porodičnopravnim postupcima, uključujući razvod braka, vršenje roditeljskog prava, uređivanje ličnih odnosa roditelja i dece, izdržavanje, deobu bračne tekovine, utvrđivanje i osporavanje očinstva i materinstva, izradu bračnih ugovora, kao i zaštitu od nasilja u porodici.",
           },
           {
-            label: "Naknada štete",
-            desc: "Jedna od ključnih komponenti građanskog prava je i naknada štete, koja se odnosi na obavezu nadoknade štete koja je nanesena jednoj strani usled povrede prava ili neispunjavanja ugovornih obaveza. Naši iskusni advokati pružaju stručno vođstvo u procesima koji se odnose na naknadu štete, bilo da je reč o materijalnoj ili nematerijalnoj šteti.",
+            label: "Nasledno pravo",
+            desc: "Pružanje stručne podrške u ostavinskim postupcima, izradi testamenta, izradi naslednopravnih ugovora.",
           },
           {
             label: "Stvarna prava i susedski odnosi",
@@ -512,41 +425,49 @@ export const practiceAreas: PracticeArea[] = [
     ],
   },
   {
-    slug: "nekretnine-i-gradjevinarstvo",
+    slug: "nepokretnosti",
     no: "10",
-    title: "Nekretnine i građevinarstvo",
+    title: "Nepokretnosti i građevinarstvo",
     summary:
-      "Pravna podrška u svim segmentima vezanim za nepokretnosti i građevinarstvo, od procene do realizacije projekata.",
+      "Pravna procena, ugovori, katastar, ozakonjenje, građevinski projekti, zakup i zaštita investicije.",
     intro: [
-      "Ova oblast predstavlja jedan od najvažnijih sektora u razvoju modernog društva i ekonomije. MB Law – Marković, Bogdanović & Partners nudi kompletnu pravnu podršku u svim segmentima vezanim za nepokretnosti i građevinarstvo, od pravne procene, preko pripreme dokumentacije, do realizacije velikih projekata.",
+      "Ova oblast predstavlja jedan od najvažnijih sektora privrede i investicionog razvoja. MB Law - Marković, Bogdanović & Partners nudi kompletnu pravnu podršku u svim segmentima vezanim za nepokretnosti i građevinarstvo, od pravne procene i provere pravnog statusa nepokretnosti, preko pripreme i pregovaranja ugovorne dokumentacije, do realizacije investicionih i građevinskih projekata.",
     ],
     sections: [
       {
-        heading: "Naše usluge u sektoru nepokretnosti i građevinarstva uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
             label: "Pravna procena i due diligence",
-            desc: "Detaljna analiza svojinskopravnih, urbanističkih i građevinskih dokumenata za uspešnu realizaciju projekata.",
+            desc: "Detaljna analiza svojinskopravnih, urbanističkih i građevinskih pitanja, tereta, ograničenja, dozvola i druge relevantne dokumentacije pre kupovine, investiranja ili realizacije projekta.",
           },
           {
             label: "Ugovori u sektoru nepokretnosti",
-            desc: "Izrada kupoprodajnih ugovora, ugovora o zakupu, ugovora o građenju, ugovora o suinvestiranju, ugovora između investitora i izvođača radova, kao i učestvovanje u pregovorima u vezi sa zaključenjem svih ugovora.",
+            desc: "Izrada predugovora i ugovora o kupoprodaji, ugovora o zakupu, ugovora o građenju, ugovora o suinvestiranju, ugovora između investitora i izvođača radova, kao i zastupanje u pregovorima u vezi sa zaključenjem transakcione i projektne dokumentacije.",
+          },
+          {
+            label: "Katastar nepokretnosti",
+            desc: "Pravna podrška u postupcima upisa prava svojine i drugih stvarnih prava, zabeležbi i predbeležbi, kao i u postupcima ispravke i usklađivanja podataka u katastru nepokretnosti.",
           },
           {
             label: "Podrška u građevinarstvu",
-            desc: "Savetovanje u vezi s dozvolama, urbanističkim planovima i regulativom, kao i rešavanje imovinsko-pravnih pitanja vezanih za zemljište.",
+            desc: "Savetovanje u vezi sa lokacijskim uslovima, građevinskim i upotrebnim dozvolama, planskim dokumentima i propisima iz oblasti planiranja i izgradnje, kao i rešavanje imovinsko-pravnih pitanja vezanih za zemljište.",
+          },
+          {
+            label: "Ozakonjenje objekata",
+            desc: "Pravna analiza statusa nezakonito izgrađenih objekata, priprema i pribavljanje potrebne dokumentacije i zastupanje u postupcima ozakonjenja pred nadležnim organima, u skladu sa Zakonom o posebnim uslovima za evidentiranje i upis prava na nepokretnostima (Svoj na svome).",
           },
           {
             label: "Javne nabavke i koncesije",
-            desc: "Pravna podrška investitorima u okviru javnih nabavki, koncesija i velikih infrastrukturnih projekata.",
+            desc: "Pravna podrška investitorima u postupcima javnih nabavki, koncesija i velikih infrastrukturnih projekata.",
           },
           {
             label: "Upravljanje rizicima i pravna zaštita",
-            desc: "Kreiranje strategija za minimizaciju pravnih rizika i zaštitu investicija.",
+            desc: "Identifikacija pravnih rizika u vezi sa sticanjem, razvojem i korišćenjem nepokretnosti, kao i pravno strukturiranje transakcija radi zaštite investicije.",
           },
           {
             label: "Zakup i upravljanje nepokretnostima",
-            desc: "Izrada ugovora o zakupu poslovnog i stambenog prostora, savetovanje u vezi s upravljanjem zgradom i odnosima u stambenim zajednicama.",
+            desc: "Izrada ugovora o zakupu poslovnog i stambenog prostora, savetovanje u vezi sa upravljanjem zgradom i odnosima u stambenim zajednicama.",
           },
           {
             label: "Eksproprijacija i restitucija",
@@ -554,73 +475,69 @@ export const practiceAreas: PracticeArea[] = [
           },
           {
             label: "Poljoprivredno zemljište",
-            desc: "Pravna analiza i postupci u vezi s prometom i zakupom poljoprivrednog zemljišta, kao i s pravom preče kupovine.",
+            desc: "Pravna analiza i postupci u vezi sa prometom i zakupom poljoprivrednog zemljišta, kao i sa pravom preče kupovine.",
           },
         ],
       },
     ],
-    closing:
-      "Naša ekspertiza omogućava klijentima da sigurno i efikasno realizuju velike projekte u sektoru nepokretnosti i građevinarstva, uz potpunu pravnu sigurnost i usklađenost sa svim relevantnim propisima.",
   },
   {
     slug: "naplata-potrazivanja-i-izvrsenje",
     no: "11",
     title: "Naplata potraživanja i izvršni postupak",
     summary:
-      "Zastupanje poverilaca u naplati potraživanja i dužnika u zaštiti od neosnovanog izvršenja.",
+      "Zastupanje poverilaca u naplati potraživanja i dužnika radi zaštite njihovih prava u izvršnom postupku.",
     intro: [
-      "Naplata potraživanja je oblast u kojoj ishod u velikoj meri zavisi od brzine reakcije i pravilnog izbora sredstava. MB Law – Marković, Bogdanović & Partners zastupa poverioce u naplati, ali i dužnike u zaštiti od nezakonitog ili neosnovanog izvršenja.",
+      "Naplata potraživanja je oblast u kojoj ishod u velikoj meri zavisi od brzine reakcije i pravilnog izbora pravnog puta i sredstava izvršenja. MB Law - Marković, Bogdanović & Partners zastupa poverioce u postupcima naplate potraživanja, ali i dužnike radi zaštite njihovih prava u izvršnom postupku.",
     ],
     sections: [
       {
-        heading: "Usluge uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
             label: "Vansudska naplata",
-            desc: "Analiza dokumentacije, opomene pred utuženje i pregovaranje sporazuma o otplati i reprogramu duga.",
+            desc: "Analiza dokumentacije, opomene pred utuženje i pregovaranje o sporazumima o otplati i reprogramu duga.",
           },
           {
-            label: "Postupci pred sudom",
-            desc: "Vođenje postupaka po predlogu za izvršenje na osnovu izvršne i verodostojne isprave, kao i parničnih postupaka radi utvrđivanja potraživanja.",
+            label: "Pokretanje i vođenje izvršnog postupka",
+            desc: "Podnošenje predloga za izvršenje na osnovu izvršnih i verodostojnih isprava, kao i vođenje parničnih postupaka kada je prethodno potrebno utvrditi postojanje potraživanja.",
           },
           {
             label: "Sprovođenje izvršenja",
-            desc: "Predlaganje i praćenje sredstava izvršenja - na novčanim sredstvima na računu, na zaradi, na nepokretnostima i pokretnim stvarima - uz koordinaciju s javnim izvršiteljima.",
+            desc: "Predlaganje i praćenje sredstava izvršenja na novčanim sredstvima, zaradi, nepokretnostima i pokretnim stvarima, uz postupanje pred javnim izvršiteljima.",
           },
           {
             label: "Obezbeđenje potraživanja",
-            desc: "Predlozi za određivanje privremenih mera i mera obezbeđenja radi sprečavanja umanjenja imovine dužnika tokom postupka.",
+            desc: "Predlozi za određivanje privremenih mera i drugih sredstava obezbeđenja radi sprečavanja otuđenja ili umanjenja imovine dužnika tokom postupka.",
           },
           {
             label: "Zaštita dužnika",
-            desc: "Izrada prigovora i žalbi u izvršnom postupku, zahteva za odlaganje izvršenja i postupanje u slučaju blokade računa ili zastarelog potraživanja.",
+            desc: "Izrada prigovora i žalbi, zahteva za odlaganje izvršenja i drugih pravnih sredstava radi zaštite dužnika od nedozvoljenog ili neosnovanog izvršenja.",
           },
           {
             label: "Priznanje i izvršenje stranih odluka",
-            desc: "Vođenje postupaka priznanja i izvršenja stranih sudskih i arbitražnih odluka pred domaćim sudovima.",
+            desc: "Vođenje postupaka priznanja i izvršenja stranih sudskih i arbitražnih odluka u Republici Srbiji.",
           },
           {
             label: "Naplata u stečaju i likvidaciji",
-            desc: "Prijava potraživanja i zastupanje poverilaca kada nad dužnikom bude otvoren stečaj ili pokrenuta likvidacija.",
+            desc: "Prijava potraživanja i zastupanje poverilaca kada je nad dužnikom otvoren stečaj ili se sprovodi likvidacija.",
           },
         ],
       },
     ],
-    closing:
-      "Naš pristup polazi od procene stvarne naplativosti pre pokretanja postupka, kako bi klijent unapred znao šta može da očekuje i koje su realne mogućnosti naplate.",
   },
   {
     slug: "naknada-stete",
     no: "12",
-    title: "Naknada štete",
+    title: "Naknada štete i prava iz osiguranja",
     summary:
-      "Zastupanje oštećenih lica i lica prema kojima je zahtev za naknadu postavljen, uključujući sporove s osiguravačima.",
+      "Zastupanje oštećenih i lica prema kojima je zahtev postavljen, uključujući sporove s društvima za osiguranje.",
     intro: [
-      "MB Law – Marković, Bogdanović & Partners zastupa oštećena lica u postupcima naknade materijalne i nematerijalne štete, kao i lica i privredne subjekte prema kojima je zahtev za naknadu postavljen. Posebno mesto u praksi kancelarije zauzimaju sporovi s društvima za osiguranje.",
+      "MB Law - Marković, Bogdanović & Partners zastupa oštećena lica u postupcima naknade materijalne i nematerijalne štete, kao i lica i privredne subjekte prema kojima je zahtev za naknadu postavljen. Posebno mesto u praksi kancelarije zauzimaju sporovi s društvima za osiguranje.",
     ],
     sections: [
       {
-        heading: "Usluge uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
             label: "Šteta iz saobraćajnih nezgoda",
@@ -628,7 +545,7 @@ export const practiceAreas: PracticeArea[] = [
           },
           {
             label: "Sporovi s društvima za osiguranje",
-            desc: "Zastupanje u slučajevima odbijanja isplate, delimične isplate ili neopravdano niske ponude osiguravača.",
+            desc: "Zastupanje u slučajevima odbijanja isplate, delimične isplate ili spora u pogledu osnova ili visine naknade iz osiguranja.",
           },
           {
             label: "Nematerijalna šteta",
@@ -648,200 +565,48 @@ export const practiceAreas: PracticeArea[] = [
           },
           {
             label: "Koordinacija veštačenja",
-            desc: "Priprema i praćenje medicinskih, saobraćajnih i ekonomskih veštačenja, kao ključnog dokaznog sredstva u ovim postupcima.",
+            desc: "Priprema i praćenje medicinskih, saobraćajnih i ekonomskih veštačenja, koja često imaju značajnu dokaznu ulogu u ovim postupcima.",
           },
         ],
       },
     ],
-    closing:
-      "Naš cilj je da oštećeno lice ne pristane na manje od onoga na šta ima pravo, a da lice od koga se naknada zahteva ne odgovara u obimu većem od zakonom određenog.",
-  },
-  {
-    slug: "nasledno-pravo",
-    no: "13",
-    title: "Nasledno pravo",
-    summary: "Ostavinski postupci, testamenti i sporovi o nasleđivanju, uz diskreciju i pažnju porodičnim odnosima.",
-    intro: [
-      "Nasledni odnosi po pravilu nastaju u okolnostima u kojima su porodični odnosi već osetljivi. MB Law – Marković, Bogdanović & Partners ovim postupcima pristupa s diskrecijom i s ciljem da se pravno stanje uredi trajno i bez naknadnih sporova.",
-    ],
-    sections: [
-      {
-        heading: "Usluge uključuju",
-        items: [
-          {
-            label: "Ostavinski postupak",
-            desc: "Zastupanje naslednika pred sudom i javnim beležnikom, od pokretanja postupka do pravnosnažnog rešenja o nasleđivanju.",
-          },
-          {
-            label: "Izrada testamenta",
-            desc: "Sastavljanje svih zakonom predviđenih formi testamenta, uz savetovanje o pravnim posledicama pojedinih raspolaganja.",
-          },
-          {
-            label: "Naslednopravni ugovori",
-            desc: "Izrada ugovora o doživotnom izdržavanju, ugovora o ustupanju i raspodeli imovine za života i ugovora o poklonu.",
-          },
-          {
-            label: "Nužni deo",
-            desc: "Zastupanje u postupcima zaštite nužnog dela i smanjenja raspolaganja kojima je nužni deo povređen.",
-          },
-          {
-            label: "Sporovi o nasleđivanju",
-            desc: "Postupci utvrđivanja prava na nasleđe, poništaja testamenta, utvrđivanja nedostojnosti za nasleđivanje i odlučivanja o naslednoj izjavi.",
-          },
-          {
-            label: "Deoba nasleđene imovine",
-            desc: "Vođenje postupaka fizičke i civilne deobe, kao i sporazumne deobe nasledničke zajednice.",
-          },
-          {
-            label: "Nasleđivanje s inostranim elementom",
-            desc: "Postupanje kada se ostavina ili naslednici nalaze u inostranstvu, uključujući pitanja merodavnog prava i priznanja stranih odluka.",
-          },
-        ],
-      },
-    ],
-    closing:
-      "Naš cilj je da nasledni postupak bude okončan tako da imovinski odnosi u porodici budu jasno i konačno uređeni.",
-  },
-  {
-    slug: "ozakonjenje-i-upis-nepokretnosti",
-    no: "14",
-    title: "Ozakonjenje i upis nepokretnosti",
-    summary:
-      "Postupci ozakonjenja, upisa i ispravke podataka u katastru nepokretnosti.",
-    intro: [
-      "Neupisana ili neozakonjena nepokretnost pravno postoji u ograničenom obimu - ne može se u punom obimu prometovati, opterećivati ni koristiti kao sredstvo obezbeđenja. MB Law – Marković, Bogdanović & Partners vodi postupke ozakonjenja i upisa od prikupljanja dokumentacije do konačnog rešenja.",
-    ],
-    sections: [
-      {
-        heading: "Usluge uključuju",
-        items: [
-          {
-            label: "Postupak ozakonjenja",
-            desc: "Vođenje postupka pred nadležnim organom, priprema dokumentacije i koordinacija s geodetskim i projektantskim stručnjacima.",
-          },
-          {
-            label: "Upis prava u katastar",
-            desc: "Podnošenje zahteva za upis prava svojine i drugih stvarnih prava, kao i postupanje po žalbama na rešenja Službe za katastar nepokretnosti.",
-          },
-          {
-            label: "Ispravka podataka i uknjižba",
-            desc: "Postupci ispravke grešaka u katastru, upisa objekata i posebnih delova objekta.",
-          },
-          {
-            label: "Etažiranje",
-            desc: "Pravna podrška u postupku deobe objekta na posebne delove i upisa etažne svojine.",
-          },
-          {
-            label: "Priključci i infrastruktura",
-            desc: "Postupanje u vezi s priključcima na komunalnu infrastrukturu i pribavljanjem potrebnih odobrenja.",
-          },
-          {
-            label: "Pravni status građevinskog zemljišta",
-            desc: "Postupci konverzije prava korišćenja u pravo svojine i regulisanja odnosa na zemljištu ispod i oko objekta.",
-          },
-          {
-            label: "Odnosi na neupisanim objektima",
-            desc: "Uređivanje pravnog statusa objekata izgrađenih bez odobrenja, uključujući sporove između srodnika, suinvestitora i sunaslednika.",
-          },
-        ],
-      },
-    ],
-    closing:
-      "Naš cilj je da nepokretnost dovedemo u stanje u kome je pravno sigurna - upisana, prometljiva i podobna za opterećenje.",
-  },
-  {
-    slug: "porodicno-pravo",
-    no: "15",
-    title: "Porodično pravo",
-    summary:
-      "Razvod braka, starateljstvo, imovinski odnosi i zaštita od nasilja u porodici.",
-    intro: [
-      "U oblasti porodičnog prava, MB Law – Marković, Bogdanović & Partners pruža stručnu pravnu pomoć u najosetljivijim i najkompleksnijim slučajevima, kao što su razvod braka, starateljstvo, prava roditelja i dece i imovinski odnosi unutar porodice. S velikom pažnjom, posvećenošću i diskrecijom, zastupamo interese klijenata i nastojimo da se postignu najcelishodnija rešenja.",
-    ],
-    sections: [
-      {
-        heading: "Naše usluge uključuju",
-        items: [
-          {
-            label: "Razvod braka",
-            desc: "Podrška i zastupanje u postupcima razvoda braka, s posebnim naglaskom na zaštitu interesa klijenata i interesa dece. Brak se u našem zakonodavstvu može razvesti zaključenjem sporazuma pred sudom ili podnošenjem tužbe nadležnom sudu. U oba slučaja neophodno je doneti prave odluke u pravo vreme, kako bi ovi postupci prošli uz što manje neprijatnosti.",
-          },
-          {
-            label: "Zaštita od nasilja u porodici",
-            desc: "Posvećeni smo zaštiti vaših prava i sigurnosti, pružajući podršku i zastupanje u slučajevima nasilja u porodici, te se zalažemo za obezbeđivanje odgovarajućih mera zaštite. Takođe, vaninstitucionalnim delovanjem i pre svega edukacijom ljudi, držanjem predavanja i čestim gostovanjima na televizijama s nacionalnom frekvencijom trudimo se da promenimo svest učinioca i na taj način preventivno delujemo.",
-          },
-          {
-            label: "Starateljstvo i prava dece",
-            desc: "Zastupanje u sporovima oko starateljstva, prava i obaveza roditelja, uz fokus na zaštitu interesa deteta.",
-          },
-          {
-            label: "Podela bračne tekovine",
-            desc: "Pravne strategije za pravičnu podelu bračne tekovine, uz zaštitu prava svih članova porodice.",
-          },
-          {
-            label: "Zakonsko izdržavanje",
-            desc: "Zastupanje u postupcima utvrđivanja, povećanja, smanjenja i prinudne naplate izdržavanja, kako izdržavanja deteta tako i izdržavanja supružnika.",
-          },
-          {
-            label: "Utvrđivanje i osporavanje očinstva i materinstva",
-            desc: "Vođenje postupaka utvrđivanja porodičnog statusa, uz koordinaciju potrebnih veštačenja.",
-          },
-          {
-            label: "Vanbračna zajednica",
-            desc: "Uređivanje imovinskih odnosa u vanbračnoj zajednici i postupci utvrđivanja njenog postojanja i trajanja, kao i prava koja iz nje proizlaze.",
-          },
-          {
-            label: "Bračni i predbračni ugovori",
-            desc: "Izrada ugovora o imovinskim odnosima supružnika i budućih supružnika.",
-          },
-          {
-            label: "Odnosi s inostranim elementom",
-            desc: "Postupci u kojima jedna strana ili dete žive u inostranstvu, uključujući pitanja nadležnosti, priznanja stranih odluka i međunarodne otmice dece.",
-          },
-        ],
-      },
-    ],
-    closing:
-      "Naš cilj je da klijentima omogućimo pravnu sigurnost, mir i stabilnost u najosetljivijim porodičnim situacijama, vodeći računa o najboljem interesu članova porodice.",
   },
   {
     slug: "upravni-postupci-i-sporovi",
     no: "16",
     title: "Upravni postupci i upravni sporovi",
     summary:
-      "Zastupanje pred organima uprave i Upravnim sudom u odnosima građana i pravnih lica s državom.",
+      "Zastupanje u upravnim postupcima pred organima javne vlasti i u upravnim sporovima pred Upravnim sudom.",
     intro: [
-      "Upravni postupci i upravni sporovi predstavljaju posebnu granu prava koja se odnosi na odnose između građana ili pravnih lica i državnih organa. Ova oblast je od izuzetnog značaja jer se u njoj odlučuje o pravima, obavezama i pravnim interesima stranaka u postupcima pred organima javne vlasti.",
-      "Advokatska kancelarija MB Law – Marković, Bogdanović & Partners pruža punu pravnu podršku klijentima tokom celog procesa - od pokretanja i vođenja upravnog postupka, preko zastupanja pred nadležnim organima, pa sve do vođenja upravnog spora pred Upravnim sudom. Poseban naglasak stavlja se na blagovremeno i pravilno korišćenje svih pravnih sredstava, kako bi se klijentima obezbedila najefikasnija zaštita njihovih prava i interesa.",
-      "Naš tim advokata poseduje značajno iskustvo u različitim vrstama upravnih postupaka, uključujući pitanja iz oblasti građevinskog prava, imovinsko-pravnih odnosa, poreskih i carinskih postupaka, prava stranaca, socijalnog i penzijskog osiguranja, kao i brojnih drugih specifičnih upravnih oblasti.",
+      "MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć u upravnim postupcima pred organima javne vlasti i u upravnim sporovima pred Upravnim sudom. Zastupanje obuhvata postupke iz oblasti imovinskih odnosa, građevinarstva, prava stranaca, penzijskog i socijalnog osiguranja, inspekcijskog nadzora i drugih upravnih oblasti.",
     ],
     sections: [
       {
-        heading: "Usluge uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
             label: "Vođenje upravnog postupka",
-            desc: "Pokretanje postupka, priprema zahteva i dokumentacije i zastupanje pred organima uprave u prvom stepenu.",
+            desc: "Pokretanje postupka, priprema zahteva i dokumentacije i zastupanje pred nadležnim organima.",
           },
           {
             label: "Pravna sredstva",
-            desc: "Izrada žalbi i prigovora, predloga za ponavljanje postupka, kao i zahteva za ispravku, izmenu i poništaj rešenja.",
+            desc: "Izrada žalbi, prigovora i drugih pravnih sredstava u upravnom postupku.",
           },
           {
             label: "Upravni spor",
-            desc: "Sastavljanje tužbe i zastupanje pred Upravnim sudom, uključujući predlog za odlaganje izvršenja rešenja do okončanja spora.",
+            desc: "Sastavljanje tužbe i zastupanje pred Upravnim sudom, uključujući predloge za odlaganje izvršenja.",
           },
           {
             label: "Ćutanje uprave",
-            desc: "Postupanje u slučajevima kada organ ne odluči u zakonskom roku, uključujući podnošenje tužbe zbog nedonošenja rešenja.",
+            desc: "Postupanje kada nadležni organ ne odluči u zakonskom roku.",
           },
           {
             label: "Penzijsko i socijalno osiguranje",
-            desc: "Postupci ostvarivanja prava na starosnu, invalidsku i porodičnu penziju, utvrđivanja penzijskog staža i vođenje sporova s Republičkim fondom za penzijsko i invalidsko osiguranje.",
+            desc: "Zastupanje u postupcima ostvarivanja i zaštite prava iz penzijskog i socijalnog osiguranja.",
           },
           {
             label: "Inspekcijski nadzor",
-            desc: "Zastupanje tokom inspekcijskog nadzora i u postupcima po nalozima i merama inspekcijskih organa.",
+            desc: "Zastupanje tokom inspekcijskog nadzora i u postupcima povodom izrečenih mera.",
           },
           {
             label: "Registri i evidencije",
@@ -850,21 +615,19 @@ export const practiceAreas: PracticeArea[] = [
         ],
       },
     ],
-    closing:
-      "Cilj kancelarije je da klijentima omogući da složene administrativne procese prođu uz što manje opterećenja, uz profesionalnu i stratešku pravnu podršku u svakoj fazi postupka.",
   },
   {
     slug: "zastita-podataka-o-licnosti",
     no: "17",
     title: "Zaštita podataka o ličnosti",
     summary:
-      "Usklađivanje poslovanja sa Zakonom o zaštiti podataka o ličnosti i GDPR-om.",
+      "Usklađivanje poslovanja sa Zakonom o zaštiti podataka o ličnosti i GDPR-om, kada je njegova primena relevantna.",
     intro: [
-      "Obrada podataka o ličnosti danas je sastavni deo gotovo svakog poslovnog procesa, a obaveze rukovaoca i obrađivača široke su i praćene visokim kaznama. MB Law – Marković, Bogdanović & Partners pruža podršku u usklađivanju poslovanja sa Zakonom o zaštiti podataka o ličnosti i Opštom uredbom o zaštiti podataka (GDPR).",
+      "Obrada podataka o ličnosti danas je sastavni deo gotovo svakog poslovnog procesa, a obaveze rukovaoca i obrađivača zahtevaju jasno uređene interne procedure i dokumentaciju. MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć u usklađivanju poslovanja sa Zakonom o zaštiti podataka o ličnosti i GDPR-om kada je njegova primena relevantna.",
     ],
     sections: [
       {
-        heading: "Usluge uključuju",
+        heading: "Usluge obuhvataju",
         items: [
           {
             label: "Procena usklađenosti",
@@ -876,23 +639,23 @@ export const practiceAreas: PracticeArea[] = [
           },
           {
             label: "Ugovorni okvir",
-            desc: "Izrada ugovora o obradi podataka i sporazuma o zajedničkoj obradi, kao i klauzula o poverljivosti.",
+            desc: "Izrada ugovora o obradi podataka, sporazuma o zajedničkoj obradi i klauzula o poverljivosti.",
           },
           {
             label: "Prenos podataka u inostranstvo",
-            desc: "Savetovanje o osnovima prenosa, standardnim ugovornim klauzulama i proceni uticaja prenosa.",
+            desc: "Savetovanje o pravnim osnovima prenosa i potrebnim zaštitnim merama.",
           },
           {
-            label: "Procena uticaja na zaštitu podataka",
-            desc: "Sprovođenje procene uticaja za obrade visokog rizika i savetovanje o merama ublažavanja rizika.",
+            label: "Procena uticaja",
+            desc: "Pravna podrška pri sprovođenju procene uticaja na zaštitu podataka kod obrada visokog rizika.",
           },
           {
             label: "Povreda podataka o ličnosti",
-            desc: "Postupanje u slučaju incidenta, uključujući obaveštavanje Poverenika i lica na koja se podaci odnose u zakonskim rokovima.",
+            desc: "Pravna pomoć u slučaju incidenta, uključujući procenu obaveze prijave Povereniku i obaveštavanja lica na koja se podaci odnose.",
           },
           {
             label: "Zastupanje pred Poverenikom",
-            desc: "Zastupanje u postupcima nadzora i po pritužbama lica na koja se podaci odnose.",
+            desc: "Zastupanje u postupcima nadzora i po pritužbama.",
           },
           {
             label: "Lice za zaštitu podataka",
@@ -901,133 +664,35 @@ export const practiceAreas: PracticeArea[] = [
         ],
       },
     ],
-    closing:
-      "Naš cilj je usklađenost primenjiva u praksi - dokumentacija koja odgovara stvarnim procesima klijenta, a ne formalni set akata bez upotrebne vrednosti.",
-  },
-  {
-    slug: "medicinsko-pravo",
-    no: "18",
-    title: "Medicinsko pravo",
-    summary:
-      "Zastupanje pacijenata, zdravstvenih ustanova i zdravstvenih radnika u postupcima vezanim za pruženu zdravstvenu uslugu.",
-    intro: [
-      "Postupci u kojima se ispituje pružena zdravstvena usluga zahtevaju istovremeno pravno i medicinsko razumevanje predmeta. MB Law – Marković, Bogdanović & Partners zastupa pacijente u ostvarivanju njihovih prava, kao i zdravstvene ustanove i zdravstvene radnike u postupcima koji se protiv njih vode.",
-    ],
-    sections: [
-      {
-        heading: "Usluge uključuju",
-        items: [
-          {
-            label: "Prava pacijenata",
-            desc: "Savetovanje i zastupanje u vezi s pravom na obaveštenost, pristankom na medicinsku meru, pristupom medicinskoj dokumentaciji i zaštitom privatnosti pacijenta.",
-          },
-          {
-            label: "Naknada štete zbog pružene zdravstvene usluge",
-            desc: "Vođenje postupaka naknade štete, uključujući pripremu i koordinaciju medicinskih veštačenja.",
-          },
-          {
-            label: "Postupci pred zaštitnikom prava pacijenata",
-            desc: "Podnošenje prigovora i zastupanje po prigovorima, kao i postupanje pred nadzornim organima.",
-          },
-          {
-            label: "Zastupanje zdravstvenih ustanova",
-            desc: "Odbrana ustanova i zdravstvenih radnika u parničnim, prekršajnim i krivičnim postupcima, kao i u postupcima profesionalne odgovornosti.",
-          },
-          {
-            label: "Ugovorni odnosi u zdravstvu",
-            desc: "Izrada ugovora o pružanju zdravstvenih usluga, ugovora o kliničkim ispitivanjima i ugovora s dobavljačima.",
-          },
-          {
-            label: "Regulatorna pitanja",
-            desc: "Savetovanje u vezi s propisima o lekovima i medicinskim sredstvima, uslovima za obavljanje zdravstvene delatnosti i oglašavanjem.",
-          },
-          {
-            label: "Osiguranje od profesionalne odgovornosti",
-            desc: "Savetovanje o obimu pokrića i zastupanje u odnosu s osiguravačem.",
-          },
-        ],
-      },
-    ],
-    closing:
-      "Naš pristup ovim predmetima je uzdržan i zasnovan na dokazima - medicinska dokumentacija i veštačenje temelj su svakog zahteva, bez obzira na to koju stranu zastupamo.",
-  },
-  {
-    slug: "resavanje-sporova-i-arbitraza",
-    no: "19",
-    title: "Rešavanje sporova i arbitraža",
-    summary:
-      "Procena i zastupanje u sporovima, od pregovora i medijacije do domaće i međunarodne arbitraže.",
-    intro: [
-      "Ne završava se svaki spor pred sudom, i ne treba svaki spor tako ni da počne. MB Law – Marković, Bogdanović & Partners procenjuje koji je način rešavanja spora u konkretnom slučaju najefikasniji i zastupa klijente u svim vrstama postupaka.",
-    ],
-    sections: [
-      {
-        heading: "Usluge uključuju",
-        items: [
-          {
-            label: "Procena spora i strategija",
-            desc: "Analiza pravnog i činjeničnog stanja, procena rizika i troškova i preporuka o načinu vođenja spora.",
-          },
-          {
-            label: "Pregovori i poravnanje",
-            desc: "Vođenje pregovora i izrada sporazuma o vansudskom rešenju spora, kao i sudskih poravnanja.",
-          },
-          {
-            label: "Medijacija",
-            desc: "Zastupanje u postupku medijacije i priprema sporazuma o rešavanju spora putem medijacije.",
-          },
-          {
-            label: "Arbitraža",
-            desc: "Zastupanje u domaćim i međunarodnim arbitražnim postupcima, uključujući postupke pred Stalnom arbitražom pri Privrednoj komori Srbije.",
-          },
-          {
-            label: "Klauzule o rešavanju sporova",
-            desc: "Izrada i analiza arbitražnih klauzula, kao i ugovaranje merodavnog prava i mesta arbitraže.",
-          },
-          {
-            label: "Sporovi s inostranim elementom",
-            desc: "Postupci u kojima se javljaju pitanja nadležnosti, merodavnog prava i dostavljanja u inostranstvo.",
-          },
-          {
-            label: "Priznanje i izvršenje arbitražnih odluka",
-            desc: "Vođenje postupaka priznanja i izvršenja stranih arbitražnih odluka.",
-          },
-        ],
-      },
-    ],
-    closing:
-      "Naš cilj je da klijent u spor ulazi s jasnom procenom ishoda, troška i vremena, i da svaki postupak vodimo do najcelishodnijeg rešenja.",
   },
   {
     slug: "posebne-oblasti-ekspertize",
     no: "20",
-    title: "Posebne oblasti ekspertize",
+    title: "Okrenuti budućnosti",
     summary:
-      "Pravo životne sredine, IT i intelektualna svojina, i podrška startapima i inovatorima.",
+      "Pravo životne sredine, IT i intelektualna svojina, i pravna podrška startapima, inovatorima i investitorima.",
     intro: [
-      "Advokatska kancelarija MB Law – Marković, Bogdanović & Partners posvećuje posebnu pažnju modernim i dinamičnim oblastima prava, koje prate razvoj tržišta, tehnologije i društvenih potreba. Razumevanje specifičnosti ovih oblasti omogućava našoj advokatskoj kancelariji da pruži inovativna i praktična pravna rešenja, prilagođena izazovima današnjeg poslovnog okruženja.",
+      "MB Law - Marković, Bogdanović & Partners prati razvoj pravnih oblasti koje nastaju i menjaju se zajedno sa tehnologijom, novim poslovnim modelima i regulatornim zahtevima.",
     ],
     sections: [
       {
         heading: "Posebne oblasti stručnosti obuhvataju",
         items: [
           {
-            label: "Pravo životne sredine (Environmental Law)",
-            desc: "Savetovanje i zastupanje u vezi s ekološkim propisima i regulativama, podrška pravnim licima u postizanju usklađenosti sa standardima zaštite životne sredine i održivog poslovanja.",
+            label: "Pravo životne sredine",
+            desc: "Savetovanje i zastupanje u vezi sa propisima o zaštiti životne sredine, regulatornim obavezama i usklađivanjem poslovanja.",
           },
           {
-            label: "Informacione tehnologije i intelektualna svojina (IT & IP Law)",
-            desc: "Pravna zaštita softverskih rešenja, brendova, patenata i autorskih prava, kao i savetovanje u vezi s digitalnim poslovanjem, e-trgovinom, zaštitom podataka i IT ugovorima.",
+            label: "Informacione tehnologije i intelektualna svojina (IT & IP law)",
+            desc: "Pravna zaštita softvera, autorskih prava, žigova, patenata i drugih prava intelektualne svojine, kao i izrada i analiza IT ugovora i pravna podrška digitalnom poslovanju.",
           },
           {
             label: "Inovacije i moderne industrije",
-            desc: "Pratimo razvoj novih sektora privrede i tehnologije, pružajući pravnu podršku startap kompanijama, inovatorima i investitorima u svim fazama razvoja njihovih projekata.",
+            desc: "Pravna podrška startap kompanijama, inovatorima i investitorima pri strukturiranju poslovanja, zaštiti intelektualne svojine, ugovornim odnosima i investicionim transakcijama.",
           },
         ],
       },
     ],
-    closing:
-      "Kombinujući pravno znanje s razumevanjem savremenih tržišnih trendova, MB Law – Marković, Bogdanović & Partners klijentima omogućava sigurnost i stabilnost u poslovanju koje se razvija i transformiše pod uticajem novih tehnologija i globalnih izazova.",
   },
 ];
 
@@ -1036,16 +701,13 @@ export function getPracticeArea(slug: string): PracticeArea | undefined {
 }
 
 const areaTags: Record<string, string> = {
-  "javne-nabavke-koncesije-i-jpp": "Javne nabavke i JPP",
   "prava-stranaca": "Prava stranaca",
   "naplata-potrazivanja-i-izvrsenje": "Naplata i izvršenje",
-  "ozakonjenje-i-upis-nepokretnosti": "Ozakonjenje i upis",
+  "naknada-stete": "Naknada i osiguranje",
   "upravni-postupci-i-sporovi": "Upravni postupci",
   "zastita-podataka-o-licnosti": "Zaštita podataka",
   "posebne-oblasti-ekspertize": "IT, IP i inovacije",
   "poresko-i-carinsko-pravo": "Poresko i carinsko",
-  "bankarsko-i-finansijsko-pravo": "Bankarsko i finansijsko",
-  "resavanje-sporova-i-arbitraza": "Sporovi i arbitraža",
 };
 
 export function getPracticeAreaTag(area: PracticeArea): string {
@@ -1059,80 +721,80 @@ export function getPracticeGroupForArea(slug: string) {
 export type PracticeMenuGroup = {
   slug: string;
   title: string;
+  navTitle?: string;
   summary: string;
   navLine: string;
   areaSlugs: string[];
 };
 
+export function getPracticeGroupNavTitle(group: PracticeMenuGroup) {
+  return group.navTitle ?? group.title;
+}
+
 export const practiceMenuGroups: PracticeMenuGroup[] = [
   {
-    slug: "poslovanje-i-kompanije",
-    title: "Poslovanje i kompanije",
-    navLine: "Privreda, M&A, porez, nabavke i IT",
+    slug: "korporativno-pravo",
+    title: "Korporativno pravo",
+    navLine: "Osnivanje, M&A, ugovori i usklađenost",
     summary:
-      "Privredno i korporativno pravo, ugovori, M&A, radno pravo za poslodavce, poresko i carinsko pravo, bankarsko pravo, javne nabavke, zaštita podataka i IT/IP",
-    areaSlugs: [
-      "privredno-pravo",
-      "radno-pravo",
-      "poresko-i-carinsko-pravo",
-      "bankarsko-i-finansijsko-pravo",
-      "javne-nabavke-koncesije-i-jpp",
-      "zastita-podataka-o-licnosti",
-      "posebne-oblasti-ekspertize",
-    ],
-  },
-  {
-    slug: "sporovi-naplata-i-restrukturiranje",
-    title: "Sporovi, naplata i restrukturiranje",
-    navLine: "Sporovi, izvršenje i stečaj",
-    summary:
-      "Rešavanje sporova, arbitraža, naplata potraživanja, izvršenje, stečaj i restrukturiranje, upravni postupci i sporovi",
-    areaSlugs: [
-      "resavanje-sporova-i-arbitraza",
-      "naplata-potrazivanja-i-izvrsenje",
-      "stecaj-i-restrukturiranje",
-      "upravni-postupci-i-sporovi",
-    ],
+      "Osnivanje i registracija društava, vlasnička struktura, ugovori, M&A, due diligence i korporativno upravljanje.",
+    areaSlugs: ["korporativno-pravo"],
   },
   {
     slug: "krivicno-i-prekrsajno-pravo",
     title: "Krivično i prekršajno pravo",
-    navLine: "Odbrana, prekršaji i privredni kriminal",
+    navLine: "Prekršaji, prestupi i krivična odbrana",
     summary:
-      "Krivična odbrana, prekršaji, privredni prestupi, privredni i finansijski kriminal, ekstradicija i međunarodna pravna pomoć",
-    areaSlugs: ["kazneno-pravo"],
+      "MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć i zastupanje u prekršajnim postupcima, postupcima za privredne prestupe i krivičnim postupcima, od prvog kontakta sa nadležnim organom do pravnosnažnog okončanja postupka.",
+    areaSlugs: ["prekrsajno-pravo", "privredni-prestupi", "krivicno-pravo"],
   },
   {
-    slug: "strani-klijenti-i-ulaganja",
-    title: "Strani klijenti i ulaganja",
-    navLine: "Ulaganja, boravak i statusna pitanja",
+    slug: "gradjansko-pravo",
+    title: "Građansko pravo",
+    navLine: "Imovina, ugovori, porodica i nasledstvo",
     summary:
-      "Osnivanje firmi i ulaganja u Srbiji, boravak i rad stranaca, državljanstvo i statusna pitanja",
+      "Imovinski i ugovorni odnosi, porodično i nasledno pravo, naknada štete, stvarna prava i medijacija.",
+    areaSlugs: ["gradjansko-pravo"],
+  },
+  {
+    slug: "nepokretnosti",
+    title: "Nepokretnosti i građevinarstvo",
+    navTitle: "Nepokretnosti",
+    navLine: "Kupoprodaja, projekti i katastar",
+    summary:
+      "Pravna procena, ugovori, katastar, ozakonjenje, građevinski projekti, zakup i zaštita investicije.",
+    areaSlugs: ["nepokretnosti"],
+  },
+  {
+    slug: "prava-stranaca",
+    title: "Prava stranaca",
+    navLine: "Boravak, rad, ulaganja i državljanstvo",
+    summary:
+      "Jedinstvena dozvola, vize, boravak, ulaganja, kupovina nepokretnosti i državljanstvo za strana lica.",
     areaSlugs: ["prava-stranaca"],
   },
   {
-    slug: "nekretnine",
-    title: "Nekretnine i građevinarstvo",
-    navLine: "Kupoprodaja, projekti i katastar",
+    slug: "poresko-i-carinsko-pravo",
+    title: "Poresko i carinsko pravo",
+    navTitle: "Poresko pravo",
+    navLine: "Kontrola, žalbe, carina i upravni spor",
     summary:
-      "Kupoprodaja i pravne provere, zakup, građevinski projekti, ugovori, katastar i upis, imovinski i susedski odnosi",
-    areaSlugs: [
-      "nekretnine-i-gradjevinarstvo",
-      "ozakonjenje-i-upis-nepokretnosti",
-      "gradjansko-pravo",
-    ],
+      "Poreska kontrola, pravna sredstva, transferne cene, carinski postupci i upravni spor pred Upravnim sudom.",
+    areaSlugs: ["poresko-i-carinsko-pravo"],
   },
   {
-    slug: "privatni-klijenti",
-    title: "Privatni klijenti",
-    navLine: "Porodica, nasledstvo i naknada štete",
+    slug: "ostale-oblasti-rada",
+    title: "Ostale oblasti rada",
+    navLine: "Rad, naplata, šteta, uprava i podaci",
     summary:
-      "Porodično, nasledno, naknada štete, medicinsko pravo i zaštita prava zaposlenih",
+      "Radno pravo, naplata potraživanja, naknada štete i osiguranje, upravni postupci, zaštita podataka i oblasti koje prate tehnologiju i nove poslovne modele.",
     areaSlugs: [
-      "porodicno-pravo",
-      "nasledno-pravo",
+      "radno-pravo",
+      "naplata-potrazivanja-i-izvrsenje",
       "naknada-stete",
-      "medicinsko-pravo",
+      "upravni-postupci-i-sporovi",
+      "zastita-podataka-o-licnosti",
+      "posebne-oblasti-ekspertize",
     ],
   },
 ];

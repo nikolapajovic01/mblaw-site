@@ -3,7 +3,12 @@ import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawCTA from "@/components/MbLawCTA";
 import MbLawTeamCards from "@/components/MbLawTeamCards";
-import { attorneys } from "@/data/team";
+import MbLawTeamNetwork from "@/components/MbLawTeamNetwork";
+import {
+  TEAM_HEADING,
+  TEAM_PARTNERS_LABEL,
+  getPublishedAttorneys,
+} from "@/data/team";
 
 const FIRM_NAME = "MB Law – Marković, Bogdanović & Partners";
 const FIRM_URL = "https://mblaw.rs";
@@ -11,7 +16,7 @@ const FIRM_URL = "https://mblaw.rs";
 export const metadata: Metadata = {
   title: `Tim | ${FIRM_NAME}`,
   description:
-    "Osnivački partneri advokatske kancelarije Marković i Bogdanović u Beogradu. Dušan S. Marković i Milovan M. Bogdanović vode predmete lično.",
+    "Upoznajte pravni tim advokatske kancelarije MB Law u Beogradu. Partneri Dušan S. Marković, Milovan M. Bogdanović i Isidora Marković.",
 };
 
 function buildJsonLd() {
@@ -22,12 +27,10 @@ function buildJsonLd() {
     url: `${FIRM_URL}/tim`,
     name: `Tim | ${FIRM_NAME}`,
     description:
-      "Osnivački partneri advokatske kancelarije Marković i Bogdanović.",
+      "Partneri advokatske kancelarije MB Law: Dušan S. Marković, Milovan M. Bogdanović i Isidora Marković.",
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: attorneys
-        .filter((attorney) => !attorney.comingSoon)
-        .map((attorney, index) => ({
+      itemListElement: getPublishedAttorneys().map((attorney, index) => ({
           "@type": "ListItem",
           position: index + 1,
           url: `${FIRM_URL}/tim/${attorney.slug}`,
@@ -76,21 +79,24 @@ export default function TeamPage() {
               TIM
             </span>
             <h1
-              className="mt-5 max-w-[16ch] text-[32px] font-bold leading-[1.12] tracking-[-0.02em] sm:text-[40px] md:text-[46px] mb-light-heading"
+              className="mt-5 whitespace-nowrap text-[22px] font-bold leading-[1.12] tracking-[-0.02em] sm:text-[32px] md:text-[40px] lg:text-[46px] mb-light-heading"
               style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
             >
-              Osnivački partneri.
+              {TEAM_HEADING}
             </h1>
-            <p className="mt-5 max-w-[48ch] text-[16px] leading-[1.75] md:text-[17px] mb-light-body">
-              Od prvog razgovora klijent zna ko vodi predmet. Dušan i Milovan
-              vode predmete lično, uz isti standard pažnje i odgovornosti.
-            </p>
 
             <div className="mt-12 border-t border-[#C9C0AF] pt-10">
-              <MbLawTeamCards />
+              <span className="block text-[10.5px] font-semibold tracking-[0.22em] text-[#C78B3E]">
+                {TEAM_PARTNERS_LABEL}
+              </span>
+              <div className="mt-6">
+                <MbLawTeamCards />
+              </div>
             </div>
           </div>
         </section>
+
+        <MbLawTeamNetwork />
 
         <MbLawCTA />
       </main>

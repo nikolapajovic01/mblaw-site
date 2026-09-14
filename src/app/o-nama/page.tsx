@@ -48,7 +48,7 @@ const copy = {
     {
       no: "02",
       title: "Jedan partner odgovara.",
-      text: "Predmet preuzima Dušan ili Milovan. Gde je potrebna uža specijalizacija, angažujemo saradnike i partnere za tu oblast, pod njihovim vođenjem. Klijent uvek zna ko vodi spis, i ko stoji iza svakog koraka.",
+      text: "Predmet preuzima jedan od partnera. Gde je potrebna uža specijalizacija, angažujemo saradnike i partnere za tu oblast, pod njihovim vođenjem. Klijent uvek zna ko vodi spis, i ko stoji iza svakog koraka.",
     },
     {
       no: "03",
@@ -64,7 +64,15 @@ export const metadata: Metadata = {
 };
 
 function buildJsonLd() {
-  const founders = getPublishedAttorneys().map((attorney) => ({
+  const founders = getPublishedAttorneys()
+    .filter((attorney) => attorney.founder)
+    .map((attorney) => ({
+      "@type": "Person" as const,
+      name: attorney.name,
+      jobTitle: attorney.role,
+      url: `${FIRM_URL}/tim/${attorney.slug}`,
+    }));
+  const partners = getPublishedAttorneys().map((attorney) => ({
     "@type": "Person" as const,
     name: attorney.name,
     jobTitle: attorney.role,
@@ -81,6 +89,7 @@ function buildJsonLd() {
     telephone: FIRM_PHONE,
     foundingDate: FOUNDING_DATE,
     founder: founders,
+    employee: partners,
     areaServed: [
       { "@type": "City", name: "Belgrade" },
       { "@type": "Country", name: "Serbia" },
@@ -96,7 +105,7 @@ function buildJsonLd() {
 
 export default function AboutPage() {
   const jsonLd = buildJsonLd();
-  const founders = getPublishedAttorneys();
+  const partners = getPublishedAttorneys();
 
   return (
     <>
@@ -221,7 +230,7 @@ export default function AboutPage() {
               ))}
 
               <ul className="mt-12 grid gap-8 border-t border-[#C9C0AF] pt-8 sm:grid-cols-2 sm:gap-x-10">
-                {founders.map((attorney) => (
+                {partners.map((attorney) => (
                   <li key={attorney.slug}>
                     <Link
                       href={`/tim/${attorney.slug}`}

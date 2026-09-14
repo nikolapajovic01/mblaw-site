@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import MbLawTeamCards from "@/components/MbLawTeamCards";
+import { TEAM_HEADING, TEAM_PARTNERS_LABEL } from "@/data/team";
 
 export default function MbLawTeam() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -95,22 +96,23 @@ export default function MbLawTeam() {
             TIM
           </span>
           <h2
-            className="mt-5 text-[29px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[35px] md:mt-2.5 md:text-[30px] mb-light-heading"
+            className="mt-5 whitespace-nowrap text-[22px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[29px] md:mt-2.5 md:text-[30px] mb-light-heading"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            Osnivački partneri.
+            {TEAM_HEADING}
           </h2>
-          <p className="mt-3 max-w-[48ch] text-[14.5px] leading-[1.6] md:mt-1.5 md:text-[14px] mb-light-muted">
-            Osnivački partneri vode svaki predmet lično, uz isti standard rada,
-            pažnje i odgovornosti prema klijentu.
-          </p>
         </header>
 
         <div
           className="mt-7 border-t border-[#C9C0AF]/80 pt-7 md:mt-4 md:pt-4"
           style={reveal(0.08)}
         >
-          <MbLawTeamCards visible={visible} />
+          <span className="block text-[10.5px] font-semibold tracking-[0.22em] text-[#C78B3E]">
+            {TEAM_PARTNERS_LABEL}
+          </span>
+          <div className="mt-5 md:mt-4">
+            <MbLawTeamCards visible={visible} />
+          </div>
         </div>
       </div>
     </section>

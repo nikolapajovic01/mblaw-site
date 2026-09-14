@@ -73,7 +73,7 @@ export default function MbLawPracticeAreas() {
             className="mt-3 text-[26px] font-bold leading-[1.14] tracking-[-0.015em] text-[#F1EEE7] sm:text-[30px] md:text-[34px]"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            Šest celina u kojima vodimo predmete.
+            Ključne oblasti naše pravne prakse.
           </h2>
         </header>
 

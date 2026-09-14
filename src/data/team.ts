@@ -3,15 +3,6 @@ export type AttorneyFocus = {
   href: string;
 };
 
-export type AttorneyAppearance = {
-  outlet: string;
-  title: string;
-  year: string;
-  href: string;
-  image?: string;
-  imagePosition?: string;
-};
-
 export type Attorney = {
   slug: string;
   name: string;
@@ -20,80 +11,88 @@ export type Attorney = {
   detail: string;
   paragraphs: string[];
   focus: AttorneyFocus[];
-  appearances?: AttorneyAppearance[];
   linkedIn: string;
   photo?: string;
   comingSoon?: boolean;
+  founder?: boolean;
 };
+
+export const TEAM_HEADING = "Upoznajte Vaš pravni tim.";
+export const TEAM_PARTNERS_LABEL = "Partneri";
+export const TEAM_NETWORK_LEAD =
+  "Pored partnera, kancelariju čini i širi tim internih saradnika, uz razvijenu mrežu saradnje sa advokatskim kancelarijama i pravnim profesionalcima širom Evrope i Bliskog istoka.";
+export const TEAM_NETWORK_SUPPORT =
+  "Ovakva organizacija advokatskoj kancelariji omogućava da, kada priroda predmeta to zahteva, klijentima pruži koordinisanu pravnu podršku i izvan granica Srbije.";
+export const TEAM_NETWORK_COPY = `${TEAM_NETWORK_LEAD} ${TEAM_NETWORK_SUPPORT}`;
 
 export const attorneys: Attorney[] = [
   {
     slug: "dusan-s-markovic",
     name: "Dušan S. Marković",
-    role: "Osnivač",
-    bio: "Specijalizovan za privredno i imovinsko pravo, sa fokusom na složene transakcije, restrukturiranje i dugoročnu zaštitu poslovnih interesa klijenata.",
+    role: "Partner",
+    bio: "Praksa usmerena na korporativno i privredno pravo, radno pravo, rešavanje sporova, nepokretnosti, investicije i zastupanje u složenim postupcima.",
     detail:
-      "Lično vodi pregovore, due diligence i sporove visoke vrednosti za domaće i inostrane klijente u svakom predmetu.",
+      "Njegov pristup zasniva se na detaljnoj analizi pravnog i činjeničnog okvira, jasnoj strategiji i neposrednom radu sa klijentom tokom celog angažmana.",
     paragraphs: [
-      "Advokat Dušan S. Marković je osnivač kancelarije MB Law - Marković, Bogdanović & Partners. Specijalizovan je za privredno i imovinsko pravo, sa fokusom na složene transakcije, restrukturiranje i dugoročnu zaštitu poslovnih interesa klijenata.",
-      "Lično vodi pregovore, due diligence i sporove visoke vrednosti za domaće i inostrane klijente. Rad na predmetu počinje od strukture posla i procene rizika, a ne od šablona, kako bi strategija odgovarala konkretnom cilju klijenta.",
-      "U korporativnim i imovinskim pitanjima insistira na jasnoj dokumentaciji, predvidivim koracima i odgovornosti koja ostaje na advokatu koji vodi predmet, od prvog saveta do zatvaranja transakcije ili okončanja spora.",
+      "Dušan S. Marković je advokat i jedan od osnivača MB Law - Marković, Bogdanović & Partners. Njegova praksa usmerena je na korporativno i privredno pravo, radno pravo, rešavanje sporova, nepokretnosti, investicije i zastupanje klijenata u složenim sudskim i drugim postupcima.",
+      "Tokom dosadašnje prakse savetovao je domaće i međunarodne privredne subjekte u vezi sa osnivanjem i poslovanjem u Srbiji, ugovornim odnosima, korporativnim promenama i investicionim pitanjima, dok značajan deo njegove prakse čini i zastupanje fizičkih i pravnih lica u građanskim, privrednim, odštetnim i drugim sporovima.",
+      "Značajan deo njegove prakse čini zastupanje pred sudovima različite stvarne i mesne nadležnosti, u predmetima koji zahtevaju detaljnu procesnu strategiju, pažljivu analizu dokaza i kontinuirano vođenje postupka od njegovog pokretanja do pravnosnažnog okončanja.",
+      "Njegov pristup zasniva se na detaljnoj analizi pravnog i činjeničnog okvira, jasnoj strategiji i neposrednom radu sa klijentom tokom celog angažmana.",
     ],
     focus: [
-      { label: "Privredno pravo", href: "/oblasti-rada/privredno-pravo" },
-      { label: "Stečaj i restrukturiranje", href: "/oblasti-rada/stecaj-i-restrukturiranje" },
-      { label: "Nekretnine i građevinarstvo", href: "/oblasti-rada/nekretnine-i-gradjevinarstvo" },
-    ],
-    appearances: [
-      {
-        outlet: "PRVA",
-        title: "Da li poslodavci smeju da vas nadziru.",
-        year: "2022",
-        href: "https://www.youtube.com/watch?v=cGSk1RZlgXE&t=83s",
-        image: "/mb/dusan-prva-video-nadzor.webp",
-      },
-      {
-        outlet: "PRVA",
-        title: "Koja su prava putnika nakon otkazanog ili pomerenog avionskog leta.",
-        year: "2022",
-        href: "https://www.youtube.com/watch?v=_XifLeC-m6I&t=332s",
-        image: "/mb/dusan-prva-prava-putnika.webp",
-      },
+      { label: "Korporativno pravo", href: "/oblasti-rada/korporativno-pravo" },
+      { label: "Radno pravo", href: "/oblasti-rada/radno-pravo" },
+      { label: "Nepokretnosti i građevinarstvo", href: "/oblasti-rada/nepokretnosti" },
+      { label: "Građansko pravo", href: "/oblasti-rada/gradjansko-pravo" },
     ],
     linkedIn: "#",
     photo: "/mb/dusan-s-markovic.webp",
+    founder: true,
   },
   {
     slug: "milovan-m-bogdanovic",
     name: "Milovan M. Bogdanović",
-    role: "Osnivač",
-    bio: "Iskustvo u kaznenoj odbrani i radnim sporovima, uz praktičan pristup koji spaja preciznu analizu sa jasnom strategijom u svakom postupku.",
+    role: "Partner",
+    bio: "Praksa usmerena na korporativno i privredno pravo, finansijsko pravo, pravnu podršku privrednim subjektima i nepokretnosti.",
     detail:
-      "Zastupa klijente pred sudovima i organima, uz diskretan pristup od prvog saveta do završetka predmeta u svakom slučaju.",
+      "Njegov pristup zasniva se na povezivanju pravne analize sa poslovnim ciljevima klijenta, uz fokus na jasno strukturirana, praktična i dugoročno održiva pravna rešenja.",
     paragraphs: [
-      "Advokat Milovan M. Bogdanović je osnivač kancelarije MB Law - Marković, Bogdanović & Partners. Iskustvo gradi u kaznenoj odbrani i radnim sporovima, uz pristup koji spaja preciznu analizu sa jasnom strategijom u svakom postupku.",
-      "Zastupa klijente pred sudovima i organima od prvog saveta do završetka predmeta. U hitnim situacijama, kao i u postupcima koji zahtevaju diskreciju, rad se vodi lično, sa fokusom na rokove, dokaze i zaštitu prava klijenta.",
-      "U radnim i kaznenim predmetima insistira na mirnoj proceni činjenica pre svake radnje, kako bi odbrana ili spor bili vođeni ciljano, bez nepotrebnog širenja postupka i uz punu odgovornost prema klijentu.",
+      "Milovan M. Bogdanović je advokat i jedan od osnivača MB Law - Marković, Bogdanović & Partners. Njegova praksa prvenstveno je usmerena na korporativno i privredno pravo, finansijsko pravo, pravnu podršku privrednim subjektima, kao i na oblast nepokretnosti i građevinarstva.",
+      "Pre osnivanja zajedničke advokatske kancelarije, sarađivao je sa međunarodnom advokatskom kancelarijom, gde je stekao iskustvo u radu na složenim korporativnim pitanjima, poslovnim transakcijama i pravnom savetovanju domaćih i međunarodnih klijenata.",
+      "Značajan deo njegove prakse obuhvata pravne due diligence procese, korporativno strukturiranje, pripremu i analizu ugovora, kao i savetovanje u vezi sa poslovnim transakcijama, promenama vlasničke strukture i investicionim projektima.",
+      "Posebno iskustvo ima u pravnim pitanjima vezanim za nepokretnosti i građevinarstvo, uključujući pravnu proveru nepokretnosti, ugovorno strukturiranje projekata, investicione transakcije i rešavanje imovinskopravnih pitanja povezanih sa razvojem i korišćenjem nepokretnosti.",
+      "Njegov pristup zasniva se na povezivanju pravne analize sa poslovnim ciljevima klijenta, uz fokus na jasno strukturirana, praktična i dugoročno održiva pravna rešenja.",
     ],
     focus: [
-      { label: "Kazneno pravo", href: "/oblasti-rada/kazneno-pravo" },
-      { label: "Radno pravo", href: "/oblasti-rada/radno-pravo" },
-      { label: "Rešavanje sporova i arbitraža", href: "/oblasti-rada/resavanje-sporova-i-arbitraza" },
+      { label: "Korporativno pravo", href: "/oblasti-rada/korporativno-pravo" },
+      { label: "Nepokretnosti i građevinarstvo", href: "/oblasti-rada/nepokretnosti" },
     ],
     linkedIn: "#",
     photo: "/mb/milovan-m-bogdanovic.webp",
+    founder: true,
   },
   {
-    slug: "treci-partner",
-    name: "Partner",
-    role: "Uskoro",
-    bio: "Treći član tima pridružuje se kancelariji. Profil, fotografija i oblasti rada biće objavljeni ovde.",
+    slug: "isidora-markovic",
+    name: "Isidora Marković",
+    role: "Partner",
+    bio: "Praksa usmerena na građansko pravo, rešavanje sporova, naknadu štete, osiguranje i zastupanje pred sudovima.",
     detail:
-      "Do tada, osnivački partneri vode predmete lično, uz isti standard pažnje i odgovornosti prema klijentu.",
-    paragraphs: [],
-    focus: [],
+      "Njen pristup zasniva se na detaljnoj analizi činjenica i dokaza, jasnoj procesnoj strategiji i neposrednoj komunikaciji sa klijentom tokom čitavog postupka.",
+    paragraphs: [
+      "Isidora Marković je advokat i partner u MB Law - Marković, Bogdanović & Partners. Njena praksa prvenstveno je usmerena na građansko pravo, rešavanje sporova, naknadu štete, osiguranje i druga pitanja koja zahtevaju zastupanje pred sudovima i pažljivo vođenje parničnog postupka.",
+      "Tokom dosadašnje prakse stekla je značajno iskustvo u zastupanju fizičkih i pravnih lica u širokom spektru parničnih i drugih građanskopravnih postupaka pred sudovima i drugim nadležnim organima.",
+      "Poseban deo njene prakse čine predmeti naknade materijalne i nematerijalne štete, uključujući sporove sa društvima za osiguranje, kao i druga pitanja koja zahtevaju pažljivu pravnu analizu i zastupanje interesa klijenta.",
+      "Pored zastupanja u sporovima, bavi se i savetovanjem klijenata u vezi sa različitim pitanjima iz oblasti građanskog prava, sa ciljem da se pravni rizici prepoznaju i reše pre nego što prerastu u spor.",
+      "Njen pristup zasniva se na detaljnoj analizi činjenica i dokaza, jasnoj procesnoj strategiji i neposrednoj komunikaciji sa klijentom tokom čitavog postupka.",
+    ],
+    focus: [
+      { label: "Građansko pravo", href: "/oblasti-rada/gradjansko-pravo" },
+      {
+        label: "Naknada štete i prava iz osiguranja",
+        href: "/oblasti-rada/naknada-stete",
+      },
+    ],
     linkedIn: "#",
-    comingSoon: true,
   },
 ];
 

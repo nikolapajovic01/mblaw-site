@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "Oblasti rada | MB Law – Marković, Bogdanović & Partners",
   description:
-    "Šest celina rada advokatske kancelarije MB Law u Beogradu: poslovanje, sporovi, krivično pravo, strani klijenti, nekretnine i privatni klijenti.",
+    "Oblasti rada advokatske kancelarije MB Law u Beogradu: korporativno pravo, krivično i prekršajno pravo, građansko pravo, nepokretnosti, prava stranaca, poresko pravo i ostale oblasti rada.",
 };
 
 export default function PracticeAreasIndexPage() {
@@ -69,7 +69,7 @@ export default function PracticeAreasIndexPage() {
             className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-0.02em] text-[#F1EEE7] sm:text-[40px] md:mt-4 md:text-[48px] md:leading-[1.08] lg:text-[54px]"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            Šest celina u kojima vodimo predmete.
+            Ključne oblasti naše pravne prakse.
           </h1>
           <p className="mt-3 max-w-[46ch] text-[15.5px] font-medium leading-[1.6] text-[#ACA69D] md:mt-4 md:text-[16.5px] md:font-normal md:leading-[1.7]">
             Svaka celina okuplja srodne oblasti. Otvorite temu koja vas se tiče.
@@ -93,58 +93,80 @@ export default function PracticeAreasIndexPage() {
       <main className="w-full bg-[#171512]">
         <section className="px-6 py-16 md:px-[72px] md:py-20">
           <ol className="grid border-t border-l border-[#2A2723] md:grid-cols-2 xl:grid-cols-3">
-            {practiceMenuGroups.map((group, index) => (
-              <li
-                key={group.slug}
-                id={group.slug}
-                className="group relative scroll-mt-10 border-b border-r border-[#2A2723]"
-              >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-500 group-hover:scale-x-100 motion-reduce:transition-none motion-reduce:group-hover:scale-x-0"
-                />
-                <div className="flex h-full flex-col px-5 py-7 md:px-7 md:py-8">
-                  <span className="text-[11px] font-semibold tracking-[0.2em] text-[#C78B3E]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h2
-                    className="mt-4 text-[22px] font-semibold leading-[1.18] tracking-[-0.01em] md:text-[24px]"
-                    style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+            {practiceMenuGroups.map((group, index) => {
+              const isOther = group.slug === "ostale-oblasti-rada";
+
+              return (
+                <li
+                  key={group.slug}
+                  id={group.slug}
+                  className={`group relative scroll-mt-10 border-b border-r border-[#2A2723] ${
+                    isOther ? "md:col-span-2 xl:col-span-3" : ""
+                  }`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-500 group-hover:scale-x-100 motion-reduce:transition-none motion-reduce:group-hover:scale-x-0"
+                  />
+                  <div
+                    className={
+                      isOther
+                        ? "flex flex-col gap-6 px-5 py-7 md:flex-row md:items-end md:justify-between md:gap-10 md:px-7 md:py-8"
+                        : "flex h-full flex-col px-5 py-7 md:px-7 md:py-8"
+                    }
                   >
-                    <Link
-                      href={getPracticeGroupHref(group)}
-                      className="text-[#EDE9E1] no-underline transition-colors hover:text-[#C78B3E]"
-                    >
-                      {group.title}
-                    </Link>
-                  </h2>
-                  <p className="mt-3 text-[13.5px] leading-[1.55] text-[#8C877D]">
-                    {group.navLine}
-                  </p>
-                  <ul className="mt-auto flex flex-wrap gap-x-1 gap-y-1.5 pt-6">
-                    {group.areaSlugs.map((slug, i) => {
-                      const area = getPracticeArea(slug);
-                      if (!area) return null;
-                      return (
-                        <li key={area.slug} className="inline-flex items-center">
-                          {i > 0 ? (
-                            <span aria-hidden="true" className="mr-1 text-[#3A3530]">
-                              ·
-                            </span>
-                          ) : null}
-                          <Link
-                            href={`/oblasti-rada/${area.slug}`}
-                            className="text-[12.5px] text-[#C2BCB2] no-underline transition-colors hover:text-[#C78B3E]"
-                          >
-                            {getPracticeAreaTag(area)}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </li>
-            ))}
+                    <div className={isOther ? "max-w-[420px]" : ""}>
+                      <span className="text-[11px] font-semibold tracking-[0.2em] text-[#C78B3E]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h2
+                        className="mt-4 text-[22px] font-semibold leading-[1.18] tracking-[-0.01em] md:text-[24px]"
+                        style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+                      >
+                        <Link
+                          href={getPracticeGroupHref(group)}
+                          className="text-[#EDE9E1] no-underline transition-colors hover:text-[#C78B3E]"
+                        >
+                          {group.title}
+                        </Link>
+                      </h2>
+                      <p className="mt-3 text-[13.5px] leading-[1.55] text-[#8C877D]">
+                        {group.navLine}
+                      </p>
+                    </div>
+                    {group.areaSlugs.length > 1 ? (
+                      <ul
+                        className={
+                          isOther
+                            ? "flex flex-wrap items-center gap-x-1 gap-y-1.5 md:max-w-[520px] md:justify-end"
+                            : "mt-auto flex flex-wrap gap-x-1 gap-y-1.5 pt-6"
+                        }
+                      >
+                        {group.areaSlugs.map((slug, i) => {
+                          const area = getPracticeArea(slug);
+                          if (!area) return null;
+                          return (
+                            <li key={area.slug} className="inline-flex items-center">
+                              {i > 0 ? (
+                                <span aria-hidden="true" className="mr-1 text-[#3A3530]">
+                                  ·
+                                </span>
+                              ) : null}
+                              <Link
+                                href={`/oblasti-rada/${area.slug}`}
+                                className="text-[12.5px] text-[#C2BCB2] no-underline transition-colors hover:text-[#C78B3E]"
+                              >
+                                {getPracticeAreaTag(area)}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : null}
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </section>
       </main>

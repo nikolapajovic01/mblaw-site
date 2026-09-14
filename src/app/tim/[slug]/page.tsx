@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
-import { getAttorney, getPublishedAttorneys, type AttorneyAppearance } from "@/data/team";
+import { getAttorney, getPublishedAttorneys } from "@/data/team";
 
 export function generateStaticParams() {
   return getPublishedAttorneys().map((attorney) => ({ slug: attorney.slug }));
@@ -36,92 +36,23 @@ function revealFade(delay: number): CSSProperties {
   };
 }
 
-function AppearanceCard({ appearance }: { appearance: AttorneyAppearance }) {
-  const className = "group block h-full no-underline";
-  const label = `${appearance.title}, ${appearance.outlet}, ${appearance.year}`;
-  const body = (
-    <>
-      <span className="relative block aspect-video overflow-hidden bg-[#141210]">
-        {appearance.image ? (
-          <Image
-            src={appearance.image}
-            alt=""
-            fill
-            sizes="(max-width: 640px) 100vw, 50vw"
-            className="object-cover"
-            style={{ objectPosition: appearance.imagePosition ?? "50% 50%" }}
-          />
-        ) : (
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 bg-[linear-gradient(135deg,#1E1B17_0%,#141210_55%,#1A1714_100%)]"
-          />
-        )}
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,18,16,0.55)_0%,rgba(20,18,16,0.08)_42%,rgba(20,18,16,0.18)_100%)]"
-        />
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          <span className="inline-flex h-12 w-12 items-center justify-center border border-[#F1EEE7]/75 bg-[#171512]/40 text-[#F1EEE7] transition-colors group-hover:border-[#C78B3E] group-hover:text-[#C78B3E]">
-            <svg width="12" height="13" viewBox="0 0 9 10" fill="currentColor">
-              <path d="M1 0.8v8.4L8.2 5 1 .8z" />
-            </svg>
-          </span>
-        </span>
-        <span className="absolute inset-x-0 bottom-0 flex items-end justify-between px-4 py-3.5 md:px-5">
-          <span className="text-[10px] font-semibold tracking-[0.2em] text-[#C78B3E]">
-            {appearance.outlet}
-          </span>
-          <span className="text-[10px] font-semibold tracking-[0.16em] text-[#EDE9E1]/80">
-            {appearance.year}
-          </span>
-        </span>
-      </span>
-      <span
-        className="mt-4 block text-[18px] font-semibold leading-[1.28] tracking-[-0.01em] mb-light-heading md:text-[20px]"
-        style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
-      >
-        {appearance.title}
-      </span>
-      <span className="mt-3 inline-flex items-center gap-1.5 text-[10.5px] font-semibold tracking-[0.14em] mb-light-muted transition-colors group-hover:text-[#C78B3E]">
-        POGLEDAJTE
-        <svg
-          width="10"
-          height="10"
-          viewBox="0 0 12 12"
-          fill="none"
-          aria-hidden="true"
-          className="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-        >
-          <path
-            d="M3 3L9 9M9 3V9H3"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
-    </>
-  );
-
-  if (!appearance.href) {
-    return <div className={className}>{body}</div>;
-  }
-
+function PortraitPlaceholder({ name }: { name: string }) {
   return (
-    <Link
-      href={appearance.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      className={className}
-    >
-      {body}
-    </Link>
+    <div className="relative flex h-full w-full flex-col items-center justify-end pb-2">
+      <svg
+        viewBox="0 0 120 280"
+        fill="none"
+        aria-hidden="true"
+        className="h-[74%] w-auto text-[#C9C0AF]"
+      >
+        <ellipse cx="60" cy="248" rx="34" ry="6" fill="currentColor" opacity="0.45" />
+        <path
+          d="M60 34c-18 0-32 14-32 32v8c0 10 4 18 10 24-8 6-14 18-14 32v98c0 8 6 14 14 14h44c8 0 14-6 14-14V130c0-14-6-26-14-32 6-6 10-14 10-24v-8c0-18-14-32-32-32z"
+          fill="currentColor"
+        />
+      </svg>
+      <span className="sr-only">Fotografija: {name}</span>
+    </div>
   );
 }
 
@@ -138,12 +69,7 @@ function Portrait({ name, photo }: { name: string; photo?: string }) {
           priority
         />
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-end pb-5">
-          <span className="text-[9px] font-medium tracking-[0.2em] text-[#9A9184]">
-            USKORO
-          </span>
-          <span className="sr-only">Fotografija uskoro: {name}</span>
-        </div>
+        <PortraitPlaceholder name={name} />
       )}
     </div>
   );
@@ -281,21 +207,6 @@ export default async function AttorneyPage({
                 <Portrait name={attorney.name} photo={attorney.photo} />
               </div>
             </div>
-
-            {attorney.appearances && attorney.appearances.length > 0 ? (
-              <div className="relative mt-14 border-t border-[#C9C0AF] pt-10 md:mt-16 md:pt-12">
-                <span className="block text-[10.5px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-                  GOSTOVANJA
-                </span>
-                <ul className="mt-8 grid gap-8 sm:grid-cols-2 sm:gap-x-[72px] sm:gap-y-10">
-                  {attorney.appearances.map((appearance) => (
-                    <li key={`${appearance.outlet}-${appearance.year}-${appearance.title}`}>
-                      <AppearanceCard appearance={appearance} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
           </div>
         </section>
 
@@ -314,7 +225,7 @@ export default async function AttorneyPage({
                 href="/tim"
                 className="no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
               >
-                Svi osnivači
+                Svi partneri
               </Link>
               <Link
                 href={`/tim/${other.slug}`}
