@@ -28,7 +28,7 @@ const copy = {
   storyEyebrow: "O KANCELARIJI",
   storyTitle: "Ko smo.",
   storyImage: "/mb/ChatGPT Image Sep 4, 2026, 04_43_02 PM.webp",
-  storyPortrait: "/slike jpg/ChatGPT Image Sep 21, 2026, 11_28_33 PM.png",
+  storyPortrait: "/slike jpg/ChatGPT Image Sep 21, 2026, 11_28_33 PM.webp",
   storyParagraphs: [
     "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku domaćim i međunarodnim klijentima u poslovnim, građanskim i spornim pitanjima.",
     "Naš način rada je jednostavan: klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i kome se obraća. Partneri su neposredno uključeni u vođenje predmeta, dok tim kancelarije obezbeđuje kapacitet za svakodnevni rad, analizu i realizaciju.",

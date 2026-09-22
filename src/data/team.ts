@@ -47,7 +47,7 @@ export const attorneys: Attorney[] = [
       { label: "Građansko pravo", href: "/oblasti-rada/gradjansko-pravo" },
     ],
     linkedIn: "#",
-    photo: "/slike jpg/IMG_7277.jpeg",
+    photo: "/slike jpg/IMG_7277.webp",
     founder: true,
   },
   {
@@ -71,18 +71,18 @@ export const attorneys: Attorney[] = [
       { label: "Prava stranaca", href: "/oblasti-rada/prava-stranaca" },
     ],
     linkedIn: "#",
-    photo: "/slike jpg/IMG_7276.jpeg",
+    photo: "/slike jpg/IMG_7276.webp",
     founder: true,
   },
   {
     slug: "isidora-markovic",
-    name: "Isidora Marković",
+    name: "Isidora V. Marković",
     role: "Partner",
     bio: "Praksa usmerena na građansko pravo, rešavanje sporova, naknadu štete, osiguranje i zastupanje pred sudovima.",
     detail:
       "Njen pristup zasniva se na detaljnoj analizi činjenica i dokaza, jasnoj procesnoj strategiji i neposrednoj komunikaciji sa klijentom tokom čitavog postupka.",
     paragraphs: [
-      "Isidora Marković je advokat i partner u MB Law - Zajednička advokatska kancelarija Marković i Bogdanović. Njena praksa prvenstveno je usmerena na građansko pravo, rešavanje sporova, naknadu štete, osiguranje i druga pitanja koja zahtevaju zastupanje pred sudovima i pažljivo vođenje parničnog postupka.",
+      "Isidora V. Marković je advokat i partner u MB Law - Zajednička advokatska kancelarija Marković i Bogdanović. Njena praksa prvenstveno je usmerena na građansko pravo, rešavanje sporova, naknadu štete, osiguranje i druga pitanja koja zahtevaju zastupanje pred sudovima i pažljivo vođenje parničnog postupka.",
       "Tokom dosadašnje prakse stekla je značajno iskustvo u zastupanju fizičkih i pravnih lica u širokom spektru parničnih i drugih građanskopravnih postupaka pred sudovima i drugim nadležnim organima.",
       "Poseban deo njene prakse čine predmeti naknade materijalne i nematerijalne štete, uključujući sporove sa društvima za osiguranje, kao i druga pitanja koja zahtevaju pažljivu pravnu analizu i zastupanje interesa klijenta.",
       "Pored zastupanja u sporovima, bavi se i savetovanjem klijenata u vezi sa različitim pitanjima iz oblasti građanskog prava, sa ciljem da se pravni rizici prepoznaju i reše pre nego što prerastu u spor.",
@@ -96,7 +96,7 @@ export const attorneys: Attorney[] = [
       },
     ],
     linkedIn: "#",
-    photo: "/slike jpg/IMG_7279.jpeg",
+    photo: "/slike jpg/IsidoraNovaSlika.webp",
   },
 ];
 

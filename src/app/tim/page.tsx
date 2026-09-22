@@ -16,7 +16,7 @@ const FIRM_URL = "https://mblaw.rs";
 export const metadata: Metadata = {
   title: `Tim | ${FIRM_NAME}`,
   description:
-    "Upoznajte pravni tim advokatske kancelarije MB Law u Beogradu. Partneri Dušan S. Marković, Milovan M. Bogdanović i Isidora Marković.",
+    "Upoznajte pravni tim advokatske kancelarije MB Law u Beogradu. Partneri Dušan S. Marković, Milovan M. Bogdanović i Isidora V. Marković.",
 };
 
 function buildJsonLd() {
@@ -27,7 +27,7 @@ function buildJsonLd() {
     url: `${FIRM_URL}/tim`,
     name: `Tim | ${FIRM_NAME}`,
     description:
-      "Partneri advokatske kancelarije MB Law: Dušan S. Marković, Milovan M. Bogdanović i Isidora Marković.",
+      "Partneri advokatske kancelarije MB Law: Dušan S. Marković, Milovan M. Bogdanović i Isidora V. Marković.",
     mainEntity: {
       "@type": "ItemList",
       itemListElement: getPublishedAttorneys().map((attorney, index) => ({
