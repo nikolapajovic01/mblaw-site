@@ -19,7 +19,7 @@ export async function generateMetadata({
   if (!attorney) return {};
 
   return {
-    title: `${attorney.name} | MB Law - Marković, Bogdanović & Partners`,
+    title: `${attorney.name} | MB Law - Zajednička advokatska kancelarija Marković i Bogdanović`,
     description: attorney.bio,
   };
 }
@@ -65,7 +65,7 @@ function Portrait({ name, photo }: { name: string; photo?: string }) {
           alt={name}
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-cover object-[50%_8%]"
+          className="object-cover object-[50%_18%]"
           priority
         />
       ) : (
@@ -142,8 +142,8 @@ export default async function AttorneyPage({
                   }}
                 />
                 <div className="mb-about-animate" style={revealUp(0.16)}>
-                <span className="mt-7 block text-[10.5px] tracking-[0.26em] md:text-[11px] mb-light-eyebrow">
-                  {attorney.role.toUpperCase()}
+                <span className="mt-7 block text-[13px] font-semibold tracking-[0.12em] text-[#C78B3E]">
+                  {attorney.role}
                 </span>
                 <h1
                   className="mt-4 text-[32px] font-bold leading-[1.12] tracking-[-0.02em] sm:text-[40px] md:text-[46px] mb-light-heading"
@@ -164,30 +164,6 @@ export default async function AttorneyPage({
                     {paragraph}
                   </p>
                 ))}
-
-                {attorney.focus.length > 0 ? (
-                  <div className="mt-10 max-w-[54ch] border-t border-[#C9C0AF] pt-8">
-                    <span className="block text-[10.5px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-                      OBLASTI RADA
-                    </span>
-                    <ul className="mt-5 flex flex-col gap-3.5">
-                      {attorney.focus.map((item) => (
-                        <li key={item.href}>
-                          <Link
-                            href={item.href}
-                            className="group inline-flex items-center gap-2.5 text-[15px] no-underline transition-colors hover:text-[#C78B3E] mb-light-heading"
-                          >
-                            <span
-                              aria-hidden="true"
-                              className="h-1 w-1 shrink-0 bg-[#C78B3E]"
-                            />
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null}
 
                 <div className="mt-10">
                   <Link

@@ -45,13 +45,13 @@ export default function MbLawSiteHeader({
         >
         <Link
           href="/"
-          aria-label="MB Law – Marković, Bogdanović & Partners, početna strana"
+          aria-label="MB Law - Zajednička advokatska kancelarija Marković i Bogdanović, početna strana"
           className="flex items-center gap-2 no-underline sm:gap-3"
         >
           <div className="inline-flex w-11 flex-col items-stretch md:w-[63px]">
             <Image
               src="/mb/mb-logo.webp"
-              alt="MB Law – Marković, Bogdanović & Partners"
+              alt="MB Law - Zajednička advokatska kancelarija Marković i Bogdanović"
               width={63}
               height={63}
               className="block h-11 w-full object-contain md:h-[63px]"

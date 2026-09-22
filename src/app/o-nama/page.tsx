@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawCTA from "@/components/MbLawCTA";
 import MbLawApproach from "@/components/MbLawApproach";
 import { getPublishedAttorneys } from "@/data/team";
 
-const FIRM_NAME = "MB Law – Marković, Bogdanović & Partners";
+const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
 const FIRM_EMAIL = "office@mblaw.rs";
 const FIRM_PHONE = "+381112223344";
@@ -21,39 +20,40 @@ const FOUNDING_DATE = "";
 const copy = {
   metaTitle: `O nama | ${FIRM_NAME}`,
   metaDescription:
-    "Zajednička advokatska kancelarija Marković i Bogdanović u Beogradu. Osnivači vode predmete lično, za domaće i inostrane klijente.",
+    "Zajednička advokatska kancelarija Marković i Bogdanović. Klijent od početka zna ko vodi predmet, ko donosi odluke i kome se obraća.",
   heroEyebrow: "O NAMA",
   heroTitle: "Od pitanja do rešenja.",
   heroLead:
-    "Zajednička advokatska kancelarija Marković i Bogdanović, sa sedištem u Resavskoj 68 u Beogradu.",
-  storyEyebrow: "PRIČA",
-  storyTitle: "Kako je kancelarija nastala.",
+    "Pravna podrška domaćim i međunarodnim klijentima u poslovnim, građanskim i spornim pitanjima.",
+  storyEyebrow: "O KANCELARIJI",
+  storyTitle: "Ko smo.",
   storyImage: "/mb/ChatGPT Image Sep 4, 2026, 04_43_02 PM.webp",
-  storyPortrait: "/mb/kancelarijaSlika.webp",
+  storyPortrait: "/slike jpg/ChatGPT Image Sep 21, 2026, 11_28_33 PM.png",
   storyParagraphs: [
-    "MB Law je zajednička advokatska kancelarija Dušana S. Markovića i Milovana M. Bogdanovića, izgrađena na jednoj jednostavnoj ideji: klijent od prvog razgovora zna ko vodi njegov predmet, i ta osoba ostaje uz njega do kraja.",
-    "Zastupamo domaća i strana pravna i fizička lica, a svima dugujemo isto: jasan odgovor umesto uopštene utehe. Iz svakog razgovora izlazite znajući tri stvari: šta je moguće uraditi, do kog roka, i gde leži stvaran rizik.",
-    "Ne posežemo za gotovim obrascima. Svaki predmet počinje od činjenica koje su pred nama i propisa koji ih uređuju. Plan dolazi tek posle, nikada pre.",
+    "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku domaćim i međunarodnim klijentima u poslovnim, građanskim i spornim pitanjima.",
+    "Naš način rada je jednostavan: klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i kome se obraća. Partneri su neposredno uključeni u vođenje predmeta, dok tim kancelarije obezbeđuje kapacitet za svakodnevni rad, analizu i realizaciju.",
+    "Cilj nam je da predmet bude vođen brzo, jasno i sa konkretnom odgovornošću advokata koji ga preuzima.",
+    "Pored partnera, kancelariju čini i širi tim internih saradnika, uz razvijenu mrežu saradnje sa advokatskim kancelarijama i pravnim profesionalcima širom Evrope i Bliskog istoka.",
   ],
   howEyebrow: "PRISTUP",
-  howTitle: "Kako vodimo predmet.",
+  howTitle: "Naš način rada je jednostavan.",
   howLead:
-    "Predmet ima jednog partnera koji odgovara za tok. Od prvog razgovora klijent zna ime. Gde oblast to zahteva, u rad ulaze saradnici pod tim vođenjem.",
+    "Klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i kome se obraća.",
   howSteps: [
     {
       no: "01",
-      title: "Prvo čujemo šta se desilo.",
-      text: "Sastanemo se. Čujemo činjenice, šta klijent hoće, i koji su rokovi. Tek posle toga se piše plan, ne pre.",
+      title: "Ko vodi predmet.",
+      text: "Klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i kome se obraća.",
     },
     {
       no: "02",
-      title: "Jedan partner odgovara.",
-      text: "Predmet preuzima jedan od partnera. Gde je potrebna uža specijalizacija, angažujemo saradnike i partnere za tu oblast, pod njihovim vođenjem. Klijent uvek zna ko vodi spis, i ko stoji iza svakog koraka.",
+      title: "Partneri vode, tim realizuje.",
+      text: "Partneri su neposredno uključeni u vođenje predmeta, dok tim kancelarije obezbeđuje kapacitet za svakodnevni rad, analizu i realizaciju.",
     },
     {
       no: "03",
-      title: "Isti partner do kraja.",
-      text: "Od prvog saveta do zatvaranja posla ili okončanja postupka klijent ostaje sa istim partnerom. Priču ne priča iz početka svaki put.",
+      title: "Brzo, jasno, sa odgovornošću.",
+      text: "Cilj nam je da predmet bude vođen brzo, jasno i sa konkretnom odgovornošću advokata koji ga preuzima.",
     },
   ],
 };
@@ -105,7 +105,6 @@ function buildJsonLd() {
 
 export default function AboutPage() {
   const jsonLd = buildJsonLd();
-  const partners = getPublishedAttorneys();
 
   return (
     <>
@@ -210,7 +209,7 @@ export default function AboutPage() {
                 {copy.storyEyebrow}
               </span>
               <h2
-                className="mt-5 max-w-[14ch] text-[29px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[35px] md:text-[40px] mb-light-heading"
+                className="mt-5 max-w-[12ch] text-[29px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[35px] md:text-[40px] mb-light-heading"
                 style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
               >
                 {copy.storyTitle}
@@ -228,39 +227,16 @@ export default function AboutPage() {
                   {paragraph}
                 </p>
               ))}
-
-              <ul className="mt-12 grid gap-8 border-t border-[#C9C0AF] pt-8 sm:grid-cols-2 sm:gap-x-10">
-                {partners.map((attorney) => (
-                  <li key={attorney.slug}>
-                    <Link
-                      href={`/tim/${attorney.slug}`}
-                      className="group block no-underline"
-                    >
-                      <span className="block text-[10.5px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-                        {attorney.role.toUpperCase()}
-                      </span>
-                      <span
-                        className="mt-2 block text-[18px] font-semibold leading-[1.25] tracking-[-0.01em] transition-colors group-hover:text-[#C78B3E] mb-light-heading md:text-[20px]"
-                        style={{
-                          fontFamily: "var(--font-mb-serif), Georgia, serif",
-                        }}
-                      >
-                        {attorney.name}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <figure className="relative mt-10 flex min-h-[280px] flex-col border border-[#C78B3E]/70 p-2.5 sm:min-h-[340px] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:min-h-0 lg:w-[calc(50%-36px)]">
               <span className="relative block min-h-[260px] flex-1 overflow-hidden sm:min-h-[320px] lg:min-h-0">
                 <Image
                   src={copy.storyPortrait}
-                  alt="Unutrašnjost kancelarije MB Law u Beogradu"
+                  alt="Dušan S. Marković i Milovan M. Bogdanović u kancelariji MB Law"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-[50%_40%]"
+                  className="object-cover object-[50%_38%]"
                 />
               </span>
             </figure>

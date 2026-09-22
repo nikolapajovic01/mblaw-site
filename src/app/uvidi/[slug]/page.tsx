@@ -6,7 +6,7 @@ import MbLawFooter from "@/components/MbLawFooter";
 import MbLawInsightCard from "@/components/MbLawInsightCard";
 import { getInsight, insights } from "@/data/insights";
 
-const FIRM_NAME = "MB Law – Marković, Bogdanović & Partners";
+const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
 
 export function generateStaticParams() {

@@ -10,7 +10,7 @@ import {
   getPublishedAttorneys,
 } from "@/data/team";
 
-const FIRM_NAME = "MB Law – Marković, Bogdanović & Partners";
+const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
 
 export const metadata: Metadata = {

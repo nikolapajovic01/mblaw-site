@@ -5,7 +5,7 @@ import MbLawFooter from "@/components/MbLawFooter";
 import MbLawContactForm from "@/components/MbLawContactForm";
 import { practiceMenuGroups } from "@/data/practice-areas";
 
-const FIRM_NAME = "MB Law – Marković, Bogdanović & Partners";
+const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
 const FIRM_EMAIL = "office@mblaw.rs";
 const FIRM_PHONE = "+381112223344";

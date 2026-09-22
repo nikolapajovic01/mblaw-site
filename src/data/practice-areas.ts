@@ -92,7 +92,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Poreska kontrola, pravna sredstva, transferne cene, carinski postupci i upravni spor pred Upravnim sudom.",
     intro: [
-      "Poreski i carinski postupci pripadaju oblastima u kojima se greška učinjena u ranoj fazi kasnije teško ispravlja. MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć klijentima od trenutka pokretanja kontrole, preko prvostepenog i drugostepenog poreskog ili carinskog postupka, do vođenja upravnog spora pred Upravnim sudom.",
+      "Poreski i carinski postupci pripadaju oblastima u kojima se greška učinjena u ranoj fazi kasnije teško ispravlja. MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu pomoć klijentima od trenutka pokretanja kontrole, preko prvostepenog i drugostepenog poreskog ili carinskog postupka, do vođenja upravnog spora pred Upravnim sudom.",
     ],
     sections: [
       {
@@ -260,7 +260,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Jedinstvena dozvola, vize, boravak, ulaganja, kupovina nepokretnosti i državljanstvo za strana lica.",
     intro: [
-      "MB Law - Marković, Bogdanović & Partners pruža sveobuhvatnu pravnu podršku stranim pravnim i fizičkim licima koja žele da borave, rade, investiraju ili posluju u Srbiji. Strani državljani i njihovi poslovni partneri mogu se osloniti na našu ekspertizu u oblasti zakonodavstva o strancima, uključujući regulisanje boravka i prava na rad, pribavljanje viza i jedinstvenih dozvola za privremeni boravak i rad, kao i vođenje svih relevantnih postupaka u skladu sa važećim propisima Republike Srbije.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža sveobuhvatnu pravnu podršku stranim pravnim i fizičkim licima koja žele da borave, rade, investiraju ili posluju u Srbiji. Strani državljani i njihovi poslovni partneri mogu se osloniti na našu ekspertizu u oblasti zakonodavstva o strancima, uključujući regulisanje boravka i prava na rad, pribavljanje viza i jedinstvenih dozvola za privremeni boravak i rad, kao i vođenje svih relevantnih postupaka u skladu sa važećim propisima Republike Srbije.",
     ],
     sections: [
       {
@@ -321,7 +321,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Savetovanje i zastupanje poslodavaca i zaposlenih u ugovorima, otkazima, sporovima i usklađenosti sa propisima o radu.",
     intro: [
-      "Radno pravo predstavlja jednu od najzahtevnijih pravnih oblasti u Srbiji. MB Law - Marković, Bogdanović & Partners pruža sveobuhvatnu pravnu pomoć u svim pravnim aspektima radnih odnosa, zastupajući podjednako poslodavce i zaposlene u savetodavnim, pregovaračkim i sudskim postupcima.",
+      "Radno pravo predstavlja jednu od najzahtevnijih pravnih oblasti u Srbiji. MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža sveobuhvatnu pravnu pomoć u svim pravnim aspektima radnih odnosa, zastupajući podjednako poslodavce i zaposlene u savetodavnim, pregovaračkim i sudskim postupcima.",
     ],
     sections: [
       {
@@ -382,7 +382,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Imovinski i ugovorni odnosi, porodično i nasledno pravo, naknada štete, stvarna prava i medijacija.",
     intro: [
-      "MB Law - Marković, Bogdanović & Partners pruža pravnu podršku u širokom spektru građanskopravnih odnosa. Tim advokata posvećen je zaštiti prava fizičkih i pravnih lica, s fokusom na imovinske odnose, ugovorne odnose, nasledstvo, porodične odnose i druga pitanja iz oblasti građanskog prava.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku u širokom spektru građanskopravnih odnosa. Tim advokata posvećen je zaštiti prava fizičkih i pravnih lica, s fokusom na imovinske odnose, ugovorne odnose, nasledstvo, porodične odnose i druga pitanja iz oblasti građanskog prava.",
     ],
     sections: [
       {
@@ -390,7 +390,7 @@ export const practiceAreas: PracticeArea[] = [
         items: [
           {
             label: "Rešavanje sporova",
-            desc: "Efikasno zastupanje putem pregovora, medijacije i sudskih postupaka, s posebnim akcentom na kreativna i najefikasnija rešenja. MB Law - Marković, Bogdanović & Partners se posebno ponosi načinom na koji se pristupa rešavanju sporova sudskim putem, onda kada je to komplikovano i kada je potrebno naći kreativno rešenje za konkretan pravni problem.",
+            desc: "Efikasno zastupanje putem pregovora, medijacije i sudskih postupaka, s posebnim akcentom na kreativna i najefikasnija rešenja. MB Law - Zajednička advokatska kancelarija Marković i Bogdanović se posebno ponosi načinom na koji se pristupa rešavanju sporova sudskim putem, onda kada je to komplikovano i kada je potrebno naći kreativno rešenje za konkretan pravni problem.",
           },
           {
             label: "Naknada štete",
@@ -431,7 +431,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Pravna procena, ugovori, katastar, ozakonjenje, građevinski projekti, zakup i zaštita investicije.",
     intro: [
-      "Ova oblast predstavlja jedan od najvažnijih sektora privrede i investicionog razvoja. MB Law - Marković, Bogdanović & Partners nudi kompletnu pravnu podršku u svim segmentima vezanim za nepokretnosti i građevinarstvo, od pravne procene i provere pravnog statusa nepokretnosti, preko pripreme i pregovaranja ugovorne dokumentacije, do realizacije investicionih i građevinskih projekata.",
+      "Ova oblast predstavlja jedan od najvažnijih sektora privrede i investicionog razvoja. MB Law - Zajednička advokatska kancelarija Marković i Bogdanović nudi kompletnu pravnu podršku u svim segmentima vezanim za nepokretnosti i građevinarstvo, od pravne procene i provere pravnog statusa nepokretnosti, preko pripreme i pregovaranja ugovorne dokumentacije, do realizacije investicionih i građevinskih projekata.",
     ],
     sections: [
       {
@@ -488,7 +488,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Zastupanje poverilaca u naplati potraživanja i dužnika radi zaštite njihovih prava u izvršnom postupku.",
     intro: [
-      "Naplata potraživanja je oblast u kojoj ishod u velikoj meri zavisi od brzine reakcije i pravilnog izbora pravnog puta i sredstava izvršenja. MB Law - Marković, Bogdanović & Partners zastupa poverioce u postupcima naplate potraživanja, ali i dužnike radi zaštite njihovih prava u izvršnom postupku.",
+      "Naplata potraživanja je oblast u kojoj ishod u velikoj meri zavisi od brzine reakcije i pravilnog izbora pravnog puta i sredstava izvršenja. MB Law - Zajednička advokatska kancelarija Marković i Bogdanović zastupa poverioce u postupcima naplate potraživanja, ali i dužnike radi zaštite njihovih prava u izvršnom postupku.",
     ],
     sections: [
       {
@@ -533,7 +533,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Zastupanje oštećenih i lica prema kojima je zahtev postavljen, uključujući sporove s društvima za osiguranje.",
     intro: [
-      "MB Law - Marković, Bogdanović & Partners zastupa oštećena lica u postupcima naknade materijalne i nematerijalne štete, kao i lica i privredne subjekte prema kojima je zahtev za naknadu postavljen. Posebno mesto u praksi kancelarije zauzimaju sporovi s društvima za osiguranje.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović zastupa oštećena lica u postupcima naknade materijalne i nematerijalne štete, kao i lica i privredne subjekte prema kojima je zahtev za naknadu postavljen. Posebno mesto u praksi kancelarije zauzimaju sporovi s društvima za osiguranje.",
     ],
     sections: [
       {
@@ -578,7 +578,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Zastupanje u upravnim postupcima pred organima javne vlasti i u upravnim sporovima pred Upravnim sudom.",
     intro: [
-      "MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć u upravnim postupcima pred organima javne vlasti i u upravnim sporovima pred Upravnim sudom. Zastupanje obuhvata postupke iz oblasti imovinskih odnosa, građevinarstva, prava stranaca, penzijskog i socijalnog osiguranja, inspekcijskog nadzora i drugih upravnih oblasti.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu pomoć u upravnim postupcima pred organima javne vlasti i u upravnim sporovima pred Upravnim sudom. Zastupanje obuhvata postupke iz oblasti imovinskih odnosa, građevinarstva, prava stranaca, penzijskog i socijalnog osiguranja, inspekcijskog nadzora i drugih upravnih oblasti.",
     ],
     sections: [
       {
@@ -623,7 +623,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Usklađivanje poslovanja sa Zakonom o zaštiti podataka o ličnosti i GDPR-om, kada je njegova primena relevantna.",
     intro: [
-      "Obrada podataka o ličnosti danas je sastavni deo gotovo svakog poslovnog procesa, a obaveze rukovaoca i obrađivača zahtevaju jasno uređene interne procedure i dokumentaciju. MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć u usklađivanju poslovanja sa Zakonom o zaštiti podataka o ličnosti i GDPR-om kada je njegova primena relevantna.",
+      "Obrada podataka o ličnosti danas je sastavni deo gotovo svakog poslovnog procesa, a obaveze rukovaoca i obrađivača zahtevaju jasno uređene interne procedure i dokumentaciju. MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu pomoć u usklađivanju poslovanja sa Zakonom o zaštiti podataka o ličnosti i GDPR-om kada je njegova primena relevantna.",
     ],
     sections: [
       {
@@ -672,7 +672,7 @@ export const practiceAreas: PracticeArea[] = [
     summary:
       "Pravo životne sredine, IT i intelektualna svojina, i pravna podrška startapima, inovatorima i investitorima.",
     intro: [
-      "MB Law - Marković, Bogdanović & Partners prati razvoj pravnih oblasti koje nastaju i menjaju se zajedno sa tehnologijom, novim poslovnim modelima i regulatornim zahtevima.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović prati razvoj pravnih oblasti koje nastaju i menjaju se zajedno sa tehnologijom, novim poslovnim modelima i regulatornim zahtevima.",
     ],
     sections: [
       {
@@ -745,7 +745,7 @@ export const practiceMenuGroups: PracticeMenuGroup[] = [
     title: "Krivično i prekršajno pravo",
     navLine: "Prekršaji, prestupi i krivična odbrana",
     summary:
-      "MB Law - Marković, Bogdanović & Partners pruža pravnu pomoć i zastupanje u prekršajnim postupcima, postupcima za privredne prestupe i krivičnim postupcima, od prvog kontakta sa nadležnim organom do pravnosnažnog okončanja postupka.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu pomoć i zastupanje u prekršajnim postupcima, postupcima za privredne prestupe i krivičnim postupcima, od prvog kontakta sa nadležnim organom do pravnosnažnog okončanja postupka.",
     areaSlugs: ["prekrsajno-pravo", "privredni-prestupi", "krivicno-pravo"],
   },
   {

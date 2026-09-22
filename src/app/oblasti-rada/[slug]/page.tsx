@@ -19,7 +19,7 @@ import {
   type PracticeMenuGroup,
 } from "@/data/practice-areas";
 
-const FIRM_NAME = "MB Law – Marković, Bogdanović & Partners";
+const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
 
 function toSectionId(heading: string, index: number) {

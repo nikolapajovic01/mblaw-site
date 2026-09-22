@@ -60,13 +60,13 @@ export default function MbLawFooter() {
           <div className="md:col-span-4" style={reveal(0)}>
             <Link
               href="/"
-              aria-label="MB Law – Marković, Bogdanović & Partners, početna strana"
+              aria-label="MB Law - Zajednička advokatska kancelarija Marković i Bogdanović, početna strana"
               className="flex items-center gap-2 no-underline sm:gap-3"
             >
               <div className="inline-flex w-11 flex-col items-stretch md:w-[52px]">
                 <Image
                   src="/mb/mb-logo.webp"
-                  alt="MB Law – Marković, Bogdanović & Partners"
+                  alt="MB Law - Zajednička advokatska kancelarija Marković i Bogdanović"
                   width={52}
                   height={52}
                   className="block h-11 w-full object-contain md:h-[52px]"
@@ -212,7 +212,7 @@ export default function MbLawFooter() {
           style={reveal(0.42)}
         >
           <span>
-            © {new Date().getFullYear()} MB Law – Marković, Bogdanović & Partners. Sva
+            © {new Date().getFullYear()} MB Law - Zajednička advokatska kancelarija Marković i Bogdanović. Sva
             prava zadržana.
           </span>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">

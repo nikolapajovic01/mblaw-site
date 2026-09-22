@@ -11,7 +11,7 @@ import {
 } from "@/data/practice-areas";
 
 export const metadata: Metadata = {
-  title: "Oblasti rada | MB Law – Marković, Bogdanović & Partners",
+  title: "Oblasti rada | MB Law - Zajednička advokatska kancelarija Marković i Bogdanović",
   description:
     "Oblasti rada advokatske kancelarije MB Law u Beogradu: korporativno pravo, krivično i prekršajno pravo, građansko pravo, nepokretnosti, prava stranaca, poresko pravo i ostale oblasti rada.",
 };

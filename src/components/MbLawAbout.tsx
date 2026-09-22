@@ -83,15 +83,16 @@ export default function MbLawAbout() {
             className="mb-about-animate mt-6 text-[16px] leading-[1.75] md:text-[17px] mb-light-body"
             style={reveal(0.32)}
           >
-            MB Law – Marković, Bogdanović & Partners pruža najviši nivo pravnih usluga
-            na tržištu Srbije, uz individualizovan pristup i zaštitu interesa domaćih i
-            inostranih pravnih i fizičkih lica.
+            MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža
+            pravnu podršku domaćim i međunarodnim klijentima u poslovnim, građanskim
+            i spornim pitanjima.
           </p>
           <p
             className="mb-about-animate mt-4 text-[15px] leading-[1.7] md:text-[15.5px] mb-light-muted"
             style={reveal(0.4)}
           >
-            Profesionalnost, etičnost i predanost u svakom predmetu.
+            Klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i
+            kome se obraća.
           </p>
           <div className="mb-about-animate mt-8" style={reveal(0.48)}>
             <Link

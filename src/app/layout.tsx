@@ -19,9 +19,9 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "MB Law – Marković, Bogdanović & Partners | Advokatska kancelarija Beograd",
+  title: "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović | Beograd",
   description:
-    "MB Law – Marković, Bogdanović & Partners je advokatska kancelarija iz Beograda koja pruža sveobuhvatne pravne usluge domaćim i inostranim klijentima.",
+    "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović iz Beograda pruža sveobuhvatne pravne usluge domaćim i inostranim klijentima.",
 };
 
 // suppressHydrationWarning: the intro bootstrap script sets data-mb-intro on

@@ -100,7 +100,7 @@ function TeamMemberCard({
             alt={attorney.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 45vw, 30vw"
-            className="object-cover object-[50%_8%]"
+            className="object-cover object-[50%_18%]"
           />
         ) : (
           <PortraitPlaceholder name={attorney.name} />
@@ -114,7 +114,7 @@ function TeamMemberCard({
         >
           {attorney.name}
         </h3>
-        <p className="mt-1.5 text-[10px] font-semibold tracking-[0.22em] text-[#C78B3E]">
+        <p className="mt-1.5 text-[13px] font-semibold tracking-[0.12em] text-[#C78B3E]">
           {attorney.role}
         </p>
         <p className="mt-2 text-[13.5px] leading-[1.45] md:text-[14px] mb-light-body">
