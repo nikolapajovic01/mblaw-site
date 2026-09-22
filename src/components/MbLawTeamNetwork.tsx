@@ -1,6 +1,13 @@
-import { TEAM_NETWORK_LEAD, TEAM_NETWORK_SUPPORT } from "@/data/team";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
 
-export default function MbLawTeamNetwork() {
+export default function MbLawTeamNetwork({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale).team;
+
   return (
     <section className="relative overflow-hidden bg-[#D5CDC0] px-6 py-16 md:px-[72px] md:py-20 lg:py-24 mb-light-section">
       <div
@@ -25,22 +32,22 @@ export default function MbLawTeamNetwork() {
           <div>
             <div className="h-px w-16 bg-[#C78B3E]" />
             <span className="mt-7 block text-[10.5px] tracking-[0.26em] md:text-[11px] mb-light-eyebrow">
-              BEOGRAD, EVROPA, BLISKI ISTOK
+              {dict.networkEyebrow}
             </span>
             <h2
               className="mt-5 whitespace-nowrap text-[26px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[32px] md:text-[36px] mb-light-heading"
               style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
             >
-              Izvan granica Srbije.
+              {dict.networkHeading}
             </h2>
           </div>
 
           <div className="lg:border-l lg:border-[#C9C0AF] lg:pl-[72px]">
-            <p className="text-[17px] leading-[1.75] md:text-[18px] mb-light-body">
-              {TEAM_NETWORK_LEAD}
+            <p className="text-[17px] leading-[1.75] md:text-[18px] mb-light-body mb-prose">
+              {dict.networkLead}
             </p>
-            <p className="mt-5 text-[16px] leading-[1.75] md:text-[17px] mb-light-muted">
-              {TEAM_NETWORK_SUPPORT}
+            <p className="mt-5 text-[16px] leading-[1.75] md:text-[17px] mb-light-muted mb-prose">
+              {dict.networkSupport}
             </p>
           </div>
         </div>

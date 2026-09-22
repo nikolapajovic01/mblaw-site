@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
 
 const EMAIL = "office@mblaw.rs";
 
@@ -14,9 +16,12 @@ type ContactArea = {
 
 export default function MbLawContactForm({
   areas,
+  locale = defaultLocale,
 }: {
   areas: ContactArea[];
+  locale?: Locale;
 }) {
+  const dict = getDictionary(locale).contactForm;
   const [status, setStatus] = useState<"idle" | "sent">("idle");
   const [error, setError] = useState("");
 
@@ -37,29 +42,29 @@ export default function MbLawContactForm({
     const message = String(data.get("message") ?? "").trim();
 
     if (name.length < 2) {
-      setError("Unesite ime i prezime.");
+      setError(dict.errorName);
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Unesite ispravnu email adresu.");
+      setError(dict.errorEmail);
       return;
     }
     if (message.length < 20) {
-      setError("Napišite ukratko šta vam treba, bar dve rečenice.");
+      setError(dict.errorMessage);
       return;
     }
 
     const lines = [
-      `Ime: ${name}`,
-      `Email: ${email}`,
-      phone ? `Telefon: ${phone}` : "",
-      area ? `Oblast: ${area}` : "",
+      `${dict.nameLabel}: ${name}`,
+      `${dict.emailLabel}: ${email}`,
+      phone ? `${dict.phoneLabel}: ${phone}` : "",
+      area ? `${dict.areaLabel}: ${area}` : "",
       "",
       message,
     ].filter((line) => line !== "");
 
     const href = `mailto:${EMAIL}?subject=${encodeURIComponent(
-      "Upit sa sajta MB Law",
+      dict.mailtoSubject,
     )}&body=${encodeURIComponent(lines.join("\n"))}`;
 
     setError("");
@@ -74,10 +79,10 @@ export default function MbLawContactForm({
           className="text-[24px] font-semibold leading-[1.2] tracking-[-0.015em] text-[#F1EEE7] md:text-[28px]"
           style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
         >
-          Otvoren je vaš program za poštu.
+          {dict.successTitle}
         </p>
         <p className="mt-4 max-w-[46ch] text-[16px] leading-[1.7] text-[#D5CFC6]">
-          Ako se prozor nije pojavio, pošaljite upit na{" "}
+          {dict.successBody}{" "}
           <a
             href={`mailto:${EMAIL}`}
             className="text-[#F1EEE7] underline decoration-[#C78B3E]/50 underline-offset-4 transition-colors hover:text-[#C78B3E]"
@@ -104,7 +109,7 @@ export default function MbLawContactForm({
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
         <label className="block">
           <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-            IME I PREZIME
+            {dict.nameLabel}
           </span>
           <input
             id="contact-name"
@@ -118,7 +123,7 @@ export default function MbLawContactForm({
 
         <label className="block">
           <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-            EMAIL
+            {dict.emailLabel}
           </span>
           <input
             id="contact-email"
@@ -132,7 +137,7 @@ export default function MbLawContactForm({
 
         <label className="block">
           <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-            TELEFON
+            {dict.phoneLabel}
           </span>
           <input
             id="contact-phone"
@@ -145,7 +150,7 @@ export default function MbLawContactForm({
 
         <label className="block">
           <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-            OBLAST, NIJE OBAVEZNO
+            {dict.areaLabel}
           </span>
           <span className="relative block">
             <select
@@ -154,7 +159,7 @@ export default function MbLawContactForm({
               defaultValue=""
               className={`${fieldClass} pr-8`}
             >
-              <option value="">Izaberite celinu rada</option>
+              <option value="">{dict.areaPlaceholder}</option>
               {areas.map((area) => (
                 <option key={area.slug} value={area.title}>
                   {area.title}
@@ -181,7 +186,7 @@ export default function MbLawContactForm({
 
       <label className="mt-8 block">
         <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-          UPIT
+          {dict.messageLabel}
         </span>
         <textarea
           id="contact-message"
@@ -194,14 +199,13 @@ export default function MbLawContactForm({
 
       <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <p className="max-w-[52ch] text-[13px] leading-[1.6] text-[#A39E94]">
-          Nije potrebno da šaljete spise u prvom koraku. Upit koristimo samo da
-          vam odgovorimo.
+          {dict.footnote}
         </p>
         <button
           type="submit"
           className="inline-flex h-[54px] w-full shrink-0 items-center justify-center bg-[#C78B3E] px-10 text-[12px] font-semibold tracking-[0.16em] text-[#171512] transition-colors hover:bg-[#D89B4C] sm:w-auto"
         >
-          POŠALJITE UPIT
+          {dict.submit}
         </button>
       </div>
 

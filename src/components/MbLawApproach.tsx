@@ -13,6 +13,8 @@ type MbLawApproachProps = {
   title: string;
   lead: string;
   steps: ApproachStep[];
+  stepLabel: string;
+  navAriaLabel: string;
 };
 
 function pinEnabled() {
@@ -27,6 +29,8 @@ export default function MbLawApproach({
   title,
   lead,
   steps,
+  stepLabel,
+  navAriaLabel,
 }: MbLawApproachProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
@@ -159,7 +163,7 @@ export default function MbLawApproach({
             <button
               key={step.no}
               type="button"
-              aria-label={`Korak ${step.no}`}
+              aria-label={`${stepLabel} ${step.no}`}
               aria-current={index === active ? "true" : undefined}
               onClick={() => goToStep(index)}
               className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${
@@ -229,7 +233,7 @@ export default function MbLawApproach({
               ))}
 
               <nav
-                aria-label="Koraci vođenja predmeta"
+                aria-label={navAriaLabel}
                 className="relative z-10 flex h-full flex-col justify-center"
               >
                 {steps.map((step, index) => {
@@ -337,7 +341,7 @@ function ApproachIntro({
         className={
           quiet
             ? "mt-5 max-w-[38ch] text-[15.5px] leading-[1.75] text-[#A39E94]"
-            : "mt-6 text-[16px] leading-[1.75] text-[#D5CFC6] md:text-[17px]"
+            : "mt-6 text-[16px] leading-[1.75] text-[#D5CFC6] md:text-[17px] mb-prose"
         }
       >
         {lead}

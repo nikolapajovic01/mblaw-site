@@ -1,13 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Insight } from "@/data/insights";
+import { defaultLocale, intlTags, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavHref } from "@/i18n/nav";
 
 function DateStamp({
   day,
-  month,
-  year,
   isoDate,
-}: Pick<Insight, "day" | "month" | "year" | "isoDate">) {
+  locale,
+}: Pick<Insight, "day" | "isoDate"> & { locale: Locale }) {
+  const month = new Intl.DateTimeFormat(intlTags[locale], { month: "long" })
+    .format(new Date(isoDate))
+    .toUpperCase();
+  const year = new Date(isoDate).getFullYear();
+
   return (
     <time dateTime={isoDate} className="border-l-2 border-[#C78B3E] pl-3">
       <span
@@ -28,15 +35,23 @@ export default function MbLawInsightCard({
   active = true,
   sizes = "(max-width: 768px) 82vw, 360px",
   variant = "slide",
+  locale = defaultLocale,
 }: {
   post: Insight;
   active?: boolean;
   sizes?: string;
   variant?: "slide" | "grid";
+  locale?: Locale;
 }) {
+  const dict = getDictionary(locale).insights;
+  const translated = dict.posts[post.slug];
+  const tag = translated?.tag ?? post.tag;
+  const title = translated?.title ?? post.title;
+  const excerpt = translated?.excerpt ?? post.excerpt;
+
   return (
     <Link
-      href={`/uvidi/${post.slug}`}
+      href={`${getNavHref("insights", locale)}/${post.slug}`}
       draggable={false}
       className={`group relative flex flex-col overflow-hidden border no-underline transition-[border-color,opacity] duration-500 motion-reduce:transition-none ${
         variant === "slide" ? "h-[390px] md:h-[410px]" : "h-full min-h-[390px]"
@@ -76,33 +91,28 @@ export default function MbLawInsightCard({
         />
 
         <div className="absolute bottom-0 left-0 p-4 md:p-5">
-          <DateStamp
-            day={post.day}
-            month={post.month}
-            year={post.year}
-            isoDate={post.isoDate}
-          />
+          <DateStamp day={post.day} isoDate={post.isoDate} locale={locale} />
         </div>
       </div>
 
       <div className="relative flex flex-1 flex-col bg-[#241E18] p-5 md:p-6">
         <span className="text-[10px] font-semibold tracking-[0.14em] text-[#C78B3E]">
-          {post.tag}
+          {tag}
         </span>
 
         <h3
           className="mt-3 text-[18px] font-semibold leading-[1.28] tracking-[-0.01em] text-[#F1EEE7] transition-colors group-hover:text-[#EDE9E1] md:text-[20px]"
           style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
         >
-          {post.title}
+          {title}
         </h3>
 
         <p className="mt-2.5 line-clamp-3 flex-1 text-[13.5px] leading-[1.65] text-[#8C877D]">
-          {post.excerpt}
+          {excerpt}
         </p>
 
         <span className="mt-5 inline-flex items-center gap-1.5 text-[10.5px] font-semibold tracking-[0.12em] text-[#CFC9BF] transition-colors group-hover:text-[#C78B3E]">
-          PROČITAJTE
+          {dict.readMore}
           <svg
             width="10"
             height="10"

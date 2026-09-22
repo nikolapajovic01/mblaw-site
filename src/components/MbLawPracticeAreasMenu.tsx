@@ -3,10 +3,21 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  getPracticeGroupHref,
-  getPracticeGroupNavTitle,
   practiceMenuGroups,
+  type PracticeMenuGroup,
 } from "@/data/practice-areas";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import type { Dictionary } from "@/dictionaries/types";
+import { getNavHref, getPracticeGroupHref } from "@/i18n/nav";
+
+function groupLabel(group: PracticeMenuGroup, dict: Dictionary) {
+  const entry = dict.practiceAreas.groups[group.slug];
+  return {
+    title: entry?.navTitle ?? entry?.title ?? group.navTitle ?? group.title,
+    navLine: entry?.navLine ?? group.navLine,
+  };
+}
 
 export function usePracticeAreasHover(openDelay = 80, closeDelay = 180) {
   const [open, setOpen] = useState(false);
@@ -42,22 +53,24 @@ export function usePracticeAreasHover(openDelay = 80, closeDelay = 180) {
 }
 
 export function PracticeAreasTrigger({
-  href,
   isActive,
   open,
   onEnter,
   onLeave,
+  locale = defaultLocale,
 }: {
-  href: string;
   isActive?: boolean;
   open: boolean;
   onEnter: () => void;
   onLeave: () => void;
+  locale?: Locale;
 }) {
+  const dict = getDictionary(locale);
+
   return (
     <div className="relative" onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <Link
-        href={href}
+        href={getNavHref("practiceAreas", locale)}
         aria-haspopup="true"
         aria-expanded={open}
         className={`group relative inline-flex items-center gap-1.5 pb-1.5 no-underline transition-colors ${
@@ -65,7 +78,7 @@ export function PracticeAreasTrigger({
         }`}
       >
         {isActive ? <span className="h-1 w-1 bg-[#C78B3E]" /> : null}
-        OBLASTI RADA
+        {dict.nav.practiceAreas.toUpperCase()}
         <svg
           width="9"
           height="9"
@@ -107,45 +120,48 @@ export function PracticeAreasTrigger({
           />
 
           <ul className="mt-3 pb-1">
-            {practiceMenuGroups.map((group, index) => (
-              <li key={group.slug}>
-                <Link
-                  href={getPracticeGroupHref(group)}
-                  tabIndex={open ? 0 : -1}
-                  className="mb-practice-menu-item group/item relative grid grid-cols-[32px_minmax(0,1fr)] items-start px-5 py-2.5 no-underline"
-                  style={{ transitionDelay: open ? `${90 + index * 55}ms` : "0ms" }}
-                >
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-y-1.5 left-0 w-px origin-top scale-y-0 bg-[#C78B3E] transition-transform duration-300 ease-out group-hover/item:scale-y-100"
-                  />
-                  <span className="pt-0.5 text-[10.5px] font-semibold tracking-[0.14em] text-[#C78B3E] transition-transform duration-300 group-hover/item:translate-x-0.5">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="min-w-0 transition-transform duration-300 group-hover/item:translate-x-0.5">
+            {practiceMenuGroups.map((group, index) => {
+              const label = groupLabel(group, dict);
+              return (
+                <li key={group.slug}>
+                  <Link
+                    href={getPracticeGroupHref(group, locale)}
+                    tabIndex={open ? 0 : -1}
+                    className="mb-practice-menu-item group/item relative grid grid-cols-[32px_minmax(0,1fr)] items-start px-5 py-2.5 no-underline"
+                    style={{ transitionDelay: open ? `${90 + index * 55}ms` : "0ms" }}
+                  >
                     <span
-                      className="block text-[14.5px] font-semibold normal-case leading-[1.22] tracking-[-0.01em] text-[#EDE9E1] transition-colors duration-200 group-hover/item:text-[#C78B3E]"
-                      style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
-                    >
-                      {getPracticeGroupNavTitle(group)}
+                      aria-hidden="true"
+                      className="absolute inset-y-1.5 left-0 w-px origin-top scale-y-0 bg-[#C78B3E] transition-transform duration-300 ease-out group-hover/item:scale-y-100"
+                    />
+                    <span className="pt-0.5 text-[10.5px] font-semibold tracking-[0.14em] text-[#C78B3E] transition-transform duration-300 group-hover/item:translate-x-0.5">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="mt-0.5 block text-[12px] font-normal normal-case leading-snug tracking-normal text-[#7A746B] transition-colors duration-200 group-hover/item:text-[#A39E94]">
-                      {group.navLine}
+                    <span className="min-w-0 transition-transform duration-300 group-hover/item:translate-x-0.5">
+                      <span
+                        className="block text-[14.5px] font-semibold normal-case leading-[1.22] tracking-[-0.01em] text-[#EDE9E1] transition-colors duration-200 group-hover/item:text-[#C78B3E]"
+                        style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+                      >
+                        {label.title}
+                      </span>
+                      <span className="mt-0.5 block text-[12px] font-normal normal-case leading-snug tracking-normal text-[#7A746B] transition-colors duration-200 group-hover/item:text-[#A39E94]">
+                        {label.navLine}
+                      </span>
                     </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           <Link
-            href="/oblasti-rada"
+            href={getNavHref("practiceAreas", locale)}
             tabIndex={open ? 0 : -1}
             className="mb-practice-menu-item group/all mt-1 flex items-center justify-between border-t border-[#2A2723] px-5 py-3 no-underline"
             style={{ transitionDelay: open ? "420ms" : "0ms" }}
           >
             <span className="text-[11px] font-semibold tracking-[0.16em] text-[#7A746B] transition-colors duration-200 group-hover/all:text-[#C78B3E]">
-              SVE OBLASTI
+              {dict.practiceAreas.menuAll}
             </span>
             <svg
               width="11"
@@ -174,11 +190,14 @@ export function PracticeAreasMobile({
   isActive,
   onNavigate,
   menuOpen = false,
+  locale = defaultLocale,
 }: {
   isActive?: boolean;
   onNavigate: () => void;
   menuOpen?: boolean;
+  locale?: Locale;
 }) {
+  const dict = getDictionary(locale);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -197,7 +216,7 @@ export function PracticeAreasMobile({
         }`}
         style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
       >
-        OBLASTI RADA
+        {dict.nav.practiceAreas}
         <svg
           width="12"
           height="12"
@@ -220,36 +239,39 @@ export function PracticeAreasMobile({
         id="mb-mobile-practice-areas"
         className={open ? "mt-5 flex flex-col" : "hidden"}
       >
-          {practiceMenuGroups.map((group, index) => (
-            <Link
-              key={group.slug}
-              href={getPracticeGroupHref(group)}
-              onClick={onNavigate}
-              className="grid grid-cols-[28px_minmax(0,1fr)] gap-x-0 border-b border-[#2A2723] py-3 no-underline"
-            >
-              <span className="text-[10px] font-semibold tracking-[0.12em] text-[#C78B3E]">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span>
-                <span
-                  className="block text-[15px] font-semibold leading-snug text-[#EDE9E1]"
-                  style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
-                >
-                  {getPracticeGroupNavTitle(group)}
+          {practiceMenuGroups.map((group, index) => {
+            const label = groupLabel(group, dict);
+            return (
+              <Link
+                key={group.slug}
+                href={getPracticeGroupHref(group, locale)}
+                onClick={onNavigate}
+                className="grid grid-cols-[28px_minmax(0,1fr)] gap-x-0 border-b border-[#2A2723] py-3 no-underline"
+              >
+                <span className="text-[10px] font-semibold tracking-[0.12em] text-[#C78B3E]">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="mt-0.5 block text-[12.5px] text-[#7A746B]">
-                  {group.navLine}
+                <span>
+                  <span
+                    className="block text-[15px] font-semibold leading-snug text-[#EDE9E1]"
+                    style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
+                  >
+                    {label.title}
+                  </span>
+                  <span className="mt-0.5 block text-[12.5px] text-[#7A746B]">
+                    {label.navLine}
+                  </span>
                 </span>
-              </span>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
           <Link
-            href="/oblasti-rada"
+            href={getNavHref("practiceAreas", locale)}
             onClick={onNavigate}
             className="flex items-center justify-between py-3.5 no-underline"
           >
             <span className="text-[11px] font-semibold tracking-[0.16em] text-[#7A746B]">
-              SVE OBLASTI
+              {dict.practiceAreas.menuAll}
             </span>
             <svg
               width="11"

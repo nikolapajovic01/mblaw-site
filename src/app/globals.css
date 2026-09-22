@@ -219,6 +219,25 @@ html[data-mb-intro="leaving"] [data-mb-intro-panel] {
   font-weight: 500;
 }
 
+/* Running body copy: even the right edge without stretching short lines.
+   Last line stays left-aligned. Hyphenation + a hair of tighter spacing
+   keeps Serbian from opening large word gaps. Skip this class on narrow
+   cards and 2-column service lists. */
+p {
+  text-wrap: pretty;
+}
+
+.mb-prose {
+  text-align: justify;
+  text-align-last: left;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  word-spacing: -0.03em;
+  letter-spacing: -0.008em;
+}
+
 .mb-light-section .mb-light-muted {
   color: #4a443c;
   font-weight: 500;

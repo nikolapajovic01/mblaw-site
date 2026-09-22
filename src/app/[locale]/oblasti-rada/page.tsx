@@ -6,9 +6,11 @@ import MbLawFooter from "@/components/MbLawFooter";
 import {
   getPracticeArea,
   getPracticeAreaTag,
-  getPracticeGroupHref,
   practiceMenuGroups,
 } from "@/data/practice-areas";
+import { isLocale, defaultLocale } from "@/i18n/config";
+import { getNavHref, getPracticeGroupHref } from "@/i18n/nav";
+import { getDictionary, getPracticeContent } from "@/dictionaries";
 
 export const metadata: Metadata = {
   title: "Oblasti rada | MB Law - Zajednička advokatska kancelarija Marković i Bogdanović",
@@ -16,7 +18,14 @@ export const metadata: Metadata = {
     "Oblasti rada advokatske kancelarije MB Law u Beogradu: korporativno pravo, krivično i prekršajno pravo, građansko pravo, nepokretnosti, prava stranaca, poresko pravo i ostale oblasti rada.",
 };
 
-export default function PracticeAreasIndexPage() {
+export default async function PracticeAreasIndexPage({
+  params,
+}: PageProps<"/[locale]/oblasti-rada">) {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  const content = getPracticeContent(locale);
+
   return (
     <>
       <section className="relative flex h-[50dvh] min-h-[380px] w-full flex-col bg-[#1B1916] md:min-h-[440px]">
@@ -55,24 +64,24 @@ export default function PracticeAreasIndexPage() {
           />
         </div>
 
-        <MbLawSiteHeader active="OBLASTI RADA" overlay />
+        <MbLawSiteHeader active="practiceAreas" overlay locale={locale} />
 
         <div className="relative z-30 mx-6 mt-6 hidden h-px bg-[#2A2723] md:mx-[72px] md:block" />
 
         <div className="relative z-20 flex flex-1 flex-col justify-center px-6 py-5 md:w-[640px] md:px-[72px] md:py-0">
           <div className="flex flex-nowrap items-center gap-2 text-[11px] font-semibold tracking-[0.08em] text-[#C0B9AE] sm:gap-4 sm:text-[11.5px] sm:tracking-[0.2em]">
-            <span className="whitespace-nowrap">OBLASTI RADA</span>
+            <span className="whitespace-nowrap">{dict.practiceAreas.eyebrow}</span>
             <span className="h-[13px] w-px shrink-0 bg-[#4A443C]" />
-            <span className="whitespace-nowrap text-[#8C877D]">BEOGRAD, SRBIJA</span>
+            <span className="whitespace-nowrap text-[#8C877D]">{dict.hero.eyebrowRight}</span>
           </div>
           <h1
             className="mt-3 text-[30px] font-bold leading-[1.12] tracking-[-0.02em] text-[#F1EEE7] sm:text-[40px] md:mt-4 md:text-[48px] md:leading-[1.08] lg:text-[54px]"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            Ključne oblasti naše pravne prakse.
+            {dict.practiceAreas.heading}
           </h1>
-          <p className="mt-3 max-w-[46ch] text-[15.5px] font-medium leading-[1.6] text-[#ACA69D] md:mt-4 md:text-[16.5px] md:font-normal md:leading-[1.7]">
-            Svaka celina okuplja srodne oblasti. Otvorite temu koja vas se tiče.
+          <p className="mt-3 max-w-[46ch] text-[15.5px] font-medium leading-[1.6] text-[#ACA69D] md:mt-4 md:text-[16.5px] md:font-normal md:leading-[1.7] mb-prose">
+            {dict.practiceAreas.indexLead}
           </p>
         </div>
 
@@ -95,6 +104,7 @@ export default function PracticeAreasIndexPage() {
           <ol className="grid border-t border-l border-[#2A2723] md:grid-cols-2 xl:grid-cols-3">
             {practiceMenuGroups.map((group, index) => {
               const isOther = group.slug === "ostale-oblasti-rada";
+              const label = dict.practiceAreas.groups[group.slug];
 
               return (
                 <li
@@ -124,14 +134,14 @@ export default function PracticeAreasIndexPage() {
                         style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
                       >
                         <Link
-                          href={getPracticeGroupHref(group)}
+                          href={getPracticeGroupHref(group, locale)}
                           className="text-[#EDE9E1] no-underline transition-colors hover:text-[#C78B3E]"
                         >
-                          {group.title}
+                          {label?.title ?? group.title}
                         </Link>
                       </h2>
                       <p className="mt-3 text-[13.5px] leading-[1.55] text-[#8C877D]">
-                        {group.navLine}
+                        {label?.navLine ?? group.navLine}
                       </p>
                     </div>
                     {group.areaSlugs.length > 1 ? (
@@ -153,10 +163,10 @@ export default function PracticeAreasIndexPage() {
                                 </span>
                               ) : null}
                               <Link
-                                href={`/oblasti-rada/${area.slug}`}
+                                href={`${getNavHref("practiceAreas", locale)}/${area.slug}`}
                                 className="text-[12.5px] text-[#C2BCB2] no-underline transition-colors hover:text-[#C78B3E]"
                               >
-                                {getPracticeAreaTag(area)}
+                                {content?.areaTags[area.slug] ?? getPracticeAreaTag(area)}
                               </Link>
                             </li>
                           );
@@ -171,7 +181,7 @@ export default function PracticeAreasIndexPage() {
         </section>
       </main>
 
-      <MbLawFooter />
+      <MbLawFooter locale={locale} />
     </>
   );
 }

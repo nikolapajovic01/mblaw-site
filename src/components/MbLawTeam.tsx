@@ -3,9 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import MbLawTeamCards from "@/components/MbLawTeamCards";
-import { TEAM_HEADING, TEAM_PARTNERS_LABEL } from "@/data/team";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
 
-export default function MbLawTeam() {
+export default function MbLawTeam({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale).team;
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -93,13 +99,13 @@ export default function MbLawTeam() {
             }
           />
           <span className="mt-7 block text-[10.5px] tracking-[0.26em] md:mt-3 md:text-[11px] mb-light-eyebrow">
-            TIM
+            {dict.eyebrow}
           </span>
           <h2
             className="mt-5 whitespace-nowrap text-[22px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[29px] md:mt-2.5 md:text-[30px] mb-light-heading"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            {TEAM_HEADING}
+            {dict.heading}
           </h2>
         </header>
 
@@ -108,10 +114,10 @@ export default function MbLawTeam() {
           style={reveal(0.08)}
         >
           <span className="block text-[10.5px] font-semibold tracking-[0.22em] text-[#C78B3E]">
-            {TEAM_PARTNERS_LABEL}
+            {dict.partnersLabel}
           </span>
           <div className="mt-5 md:mt-4">
-            <MbLawTeamCards visible={visible} />
+            <MbLawTeamCards visible={visible} locale={locale} />
           </div>
         </div>
       </div>

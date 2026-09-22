@@ -4,8 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavHref } from "@/i18n/nav";
 
-export default function MbLawAbout() {
+export default function MbLawAbout({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale).about;
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -68,7 +76,7 @@ export default function MbLawAbout() {
             className="mb-about-animate mt-7 block text-[10.5px] tracking-[0.26em] md:text-[11px] mb-light-eyebrow"
             style={reveal(0.12)}
           >
-            O NAMA
+            {dict.eyebrow}
           </span>
           <h2
             className="mb-about-animate mt-5 text-[29px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[35px] md:text-[40px] mb-light-heading"
@@ -77,30 +85,27 @@ export default function MbLawAbout() {
               ...reveal(0.2),
             }}
           >
-            Od pitanja do rešenja.
+            {dict.heading}
           </h2>
           <p
-            className="mb-about-animate mt-6 text-[16px] leading-[1.75] md:text-[17px] mb-light-body"
+            className="mb-about-animate mt-6 text-[16px] leading-[1.75] md:text-[17px] mb-light-body mb-prose"
             style={reveal(0.32)}
           >
-            MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža
-            pravnu podršku domaćim i međunarodnim klijentima u poslovnim, građanskim
-            i spornim pitanjima.
+            {dict.paragraph1}
           </p>
           <p
-            className="mb-about-animate mt-4 text-[15px] leading-[1.7] md:text-[15.5px] mb-light-muted"
+            className="mb-about-animate mt-4 text-[15px] leading-[1.7] md:text-[15.5px] mb-light-muted mb-prose"
             style={reveal(0.4)}
           >
-            Klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i
-            kome se obraća.
+            {dict.paragraph2}
           </p>
           <div className="mb-about-animate mt-8" style={reveal(0.48)}>
             <Link
-              href="/o-nama"
+              href={getNavHref("about", locale)}
               className="group inline-flex items-center gap-1.5 text-[12.5px] tracking-[0.15em] no-underline transition-colors hover:text-[#171512] mb-light-link"
             >
               <span className="border-b border-[#C9C0AF] pb-1.5 leading-none transition-colors group-hover:border-[#C78B3E]">
-                SAZNAJTE VIŠE O NAMA
+                {dict.link}
               </span>
               <svg
                 width="11"

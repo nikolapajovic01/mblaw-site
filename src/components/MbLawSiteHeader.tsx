@@ -9,23 +9,21 @@ import {
   usePracticeAreasHover,
 } from "@/components/MbLawPracticeAreasMenu";
 import { useMobileMenu } from "@/components/useLockBodyScroll";
-
-const navItems = [
-  { label: "POČETNA", href: "/" },
-  { label: "O NAMA", href: "/o-nama" },
-  { label: "OBLASTI RADA", href: "/oblasti-rada" },
-  { label: "TIM", href: "/tim" },
-  { label: "UVIDI", href: "/uvidi" },
-  { label: "KONTAKT", href: "/kontakt" },
-];
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavItems, type NavKey } from "@/i18n/nav";
 
 export default function MbLawSiteHeader({
   active,
   overlay = false,
+  locale = defaultLocale,
 }: {
-  active?: string;
+  active?: NavKey;
   overlay?: boolean;
+  locale?: Locale;
 }) {
+  const dict = getDictionary(locale);
+  const navItems = getNavItems(dict, locale);
   const { menuOpen, setMenuOpen, menuId } = useMobileMenu();
   const areas = usePracticeAreasHover();
 
@@ -44,7 +42,7 @@ export default function MbLawSiteHeader({
           } ${menuOpen ? "bg-[#171512]" : ""}`}
         >
         <Link
-          href="/"
+          href={navItems[0].href}
           aria-label="MB Law - Zajednička advokatska kancelarija Marković i Bogdanović, početna strana"
           className="flex items-center gap-2 no-underline sm:gap-3"
         >
@@ -80,42 +78,42 @@ export default function MbLawSiteHeader({
         <nav className="flex items-center gap-4 text-xs font-semibold tracking-[0.13em] sm:gap-6 lg:gap-9">
           <div className="hidden items-center gap-9 lg:flex">
             {navItems.map((item) => {
-              const isActive = item.label === active;
+              const isActive = item.key === active;
 
-              if (item.label === "OBLASTI RADA") {
+              if (item.key === "practiceAreas") {
                 return (
                   <PracticeAreasTrigger
-                    key={item.label}
-                    href={item.href}
+                    key={item.key}
                     isActive={isActive}
                     open={areas.open}
                     onEnter={areas.onEnter}
                     onLeave={areas.onLeave}
+                    locale={locale}
                   />
                 );
               }
 
               return (
                 <Link
-                  key={item.label}
+                  key={item.key}
                   href={item.href}
                   className={`group relative inline-flex items-center gap-2 pb-1.5 no-underline transition-colors ${
                     isActive ? "text-[#F1EEE7]" : "text-[#C2BCB2] hover:text-[#C78B3E]"
                   }`}
                 >
                   {isActive && <span className="h-1 w-1 bg-[#C78B3E]" />}
-                  {item.label}
+                  {item.label.toUpperCase()}
                   <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-300 ease-out group-hover:scale-x-100" />
                 </Link>
               );
             })}
           </div>
 
-          <MbLawLangSwitch />
+          <MbLawLangSwitch locale={locale} />
 
           <button
             type="button"
-            aria-label={menuOpen ? "Zatvori meni" : "Otvori meni"}
+            aria-label={menuOpen ? dict.header.closeMenu : dict.header.openMenu}
             aria-expanded={menuOpen}
             aria-controls={menuId}
             onClick={() => setMenuOpen((v) => !v)}
@@ -150,24 +148,25 @@ export default function MbLawSiteHeader({
       >
         <nav className="flex min-h-0 flex-1 flex-col items-start gap-7 overflow-y-auto overscroll-contain">
         {navItems.map((item) => {
-          if (item.label === "OBLASTI RADA") {
+          if (item.key === "practiceAreas") {
             return (
               <PracticeAreasMobile
-                key={item.label}
-                isActive={item.label === active}
+                key={item.key}
+                isActive={item.key === active}
                 menuOpen={menuOpen}
                 onNavigate={() => setMenuOpen(false)}
+                locale={locale}
               />
             );
           }
 
           return (
             <Link
-              key={item.label}
+              key={item.key}
               href={item.href}
               onClick={() => setMenuOpen(false)}
               className={`text-2xl font-semibold tracking-wide no-underline ${
-                item.label === active ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
+                item.key === active ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
               }`}
               style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
             >

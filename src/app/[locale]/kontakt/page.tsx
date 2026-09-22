@@ -4,6 +4,8 @@ import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawContactForm from "@/components/MbLawContactForm";
 import { practiceMenuGroups } from "@/data/practice-areas";
+import { isLocale, defaultLocale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
 
 const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
@@ -15,34 +17,27 @@ const FIRM_CITY = "Beograd";
 const FIRM_COUNTRY = "RS";
 const MAPS_QUERY = "Resavska 68, Beograd";
 const MAPS_HREF = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAPS_QUERY)}`;
-const MAPS_EMBED = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&hl=sr&z=16&output=embed`;
 
-const copy = {
-  metaTitle: `Kontakt | ${FIRM_NAME}`,
-  metaDescription:
-    "Kontaktirajte advokatsku kancelariju Marković i Bogdanović u Resavskoj 68 u Beogradu. Telefon, email ili pisani upit.",
-  eyebrow: "KONTAKT",
-  title: "Prvi korak je razgovor.",
-  lead: "Nazovite, pišite ili pošaljite upit. Odgovaramo ko vodi predmet, i da li možemo da ga preuzmemo.",
-  formEyebrow: "UPIT",
-  formTitle: "Napišite nam.",
-  formLead:
-    "Kratko šta se desilo i šta vam treba. Nije potrebno da šaljete spise u prvom koraku.",
-};
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/kontakt">): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  return {
+    title: `${dict.nav.contact} | ${FIRM_NAME}`,
+    description: dict.contactPage.lead,
+  };
+}
 
-export const metadata: Metadata = {
-  title: copy.metaTitle,
-  description: copy.metaDescription,
-};
-
-function buildJsonLd() {
+function buildJsonLd(title: string, description: string) {
   return {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "@id": `${FIRM_URL}/kontakt#page`,
     url: `${FIRM_URL}/kontakt`,
-    name: copy.metaTitle,
-    description: copy.metaDescription,
+    name: title,
+    description,
     mainEntity: {
       "@type": ["LegalService", "Organization"],
       "@id": `${FIRM_URL}/o-nama#organization`,
@@ -67,11 +62,16 @@ function buildJsonLd() {
   };
 }
 
-export default function ContactPage() {
-  const jsonLd = buildJsonLd();
+export default async function ContactPage({ params }: PageProps<"/[locale]/kontakt">) {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  const metaTitle = `${dict.nav.contact} | ${FIRM_NAME}`;
+  const jsonLd = buildJsonLd(metaTitle, dict.contactPage.lead);
+  const mapsEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&hl=${locale}&z=16&output=embed`;
   const areas = practiceMenuGroups.map((group) => ({
     slug: group.slug,
-    title: group.title,
+    title: dict.practiceAreas.groups[group.slug]?.title ?? group.title,
   }));
 
   return (
@@ -83,7 +83,7 @@ export default function ContactPage() {
         }}
       />
 
-      <MbLawSiteHeader active="KONTAKT" />
+      <MbLawSiteHeader active="contact" locale={locale} />
 
       <main className="w-full bg-[#171512]">
         <section className="relative grid w-full overflow-hidden bg-[#D5CDC0] lg:min-h-[560px] lg:grid-cols-2 mb-light-section">
@@ -108,22 +108,22 @@ export default function ContactPage() {
             <div className="relative max-w-[520px]">
               <div className="h-px w-16 bg-[#C78B3E]" />
               <span className="mt-7 block text-[10.5px] tracking-[0.26em] md:text-[11px] mb-light-eyebrow">
-                {copy.eyebrow}
+                {dict.footer.contactHeading}
               </span>
               <h1
                 className="mt-5 text-[32px] font-bold leading-[1.12] tracking-[-0.02em] sm:text-[40px] md:text-[46px] mb-light-heading"
                 style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
               >
-                {copy.title}
+                {dict.cta.heading}
               </h1>
-              <p className="mt-5 text-[16px] leading-[1.75] md:text-[17px] mb-light-body">
-                {copy.lead}
+              <p className="mt-5 text-[16px] leading-[1.75] md:text-[17px] mb-light-body mb-prose">
+                {dict.contactPage.lead}
               </p>
 
               <ul className="mt-8 flex flex-col border-t border-[#C9C0AF]">
                 <li className="border-b border-[#C9C0AF] py-5">
                   <span className="block text-[10px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-                    TELEFON
+                    {dict.cta.phoneLabel}
                   </span>
                   <a
                     href={`tel:${FIRM_PHONE}`}
@@ -137,7 +137,7 @@ export default function ContactPage() {
                 </li>
                 <li className="border-b border-[#C9C0AF] py-5">
                   <span className="block text-[10px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-                    EMAIL
+                    {dict.cta.emailLabel}
                   </span>
                   <a
                     href={`mailto:${FIRM_EMAIL}`}
@@ -151,7 +151,7 @@ export default function ContactPage() {
                 </li>
                 <li className="py-5">
                   <span className="block text-[10px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-                    ADRESA
+                    {dict.cta.addressLabel}
                   </span>
                   <p
                     className="mt-2 text-[20px] font-semibold leading-[1.25] tracking-[-0.015em] mb-light-heading md:text-[22px]"
@@ -159,7 +159,7 @@ export default function ContactPage() {
                       fontFamily: "var(--font-mb-serif), Georgia, serif",
                     }}
                   >
-                    {FIRM_STREET}, {FIRM_CITY}
+                    {FIRM_STREET}, {dict.cta.city}
                   </p>
                   <a
                     href={MAPS_HREF}
@@ -167,7 +167,7 @@ export default function ContactPage() {
                     rel="noreferrer"
                     className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold tracking-[0.14em] no-underline transition-colors hover:text-[#C78B3E] mb-light-link"
                   >
-                    OTVORI U MAPAMA
+                    {dict.contactPage.openInMaps}
                     <svg
                       width="11"
                       height="11"
@@ -192,7 +192,7 @@ export default function ContactPage() {
           <div className="relative min-h-[320px] overflow-hidden sm:min-h-[400px] lg:min-h-full">
             <iframe
               title="Kancelarija MB Law, Resavska 68, Beograd"
-              src={MAPS_EMBED}
+              src={mapsEmbed}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="absolute inset-0 h-full w-full border-0"
@@ -226,25 +226,25 @@ export default function ContactPage() {
               <div className="lg:col-span-5">
                 <div className="h-px w-16 bg-[#C78B3E]" />
                 <span className="mt-6 block text-[10.5px] font-semibold tracking-[0.26em] text-[#C78B3E] md:text-[11px]">
-                  {copy.formEyebrow}
+                  {dict.contactPage.formEyebrow}
                 </span>
                 <h2
                   className="mt-4 text-[32px] font-bold leading-[1.12] tracking-[-0.015em] text-[#F1EEE7] sm:text-[38px] md:text-[42px]"
                   style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
                 >
-                  {copy.formTitle}
+                  {dict.contactPage.formTitle}
                 </h2>
               </div>
-              <p className="max-w-[46ch] text-[16px] leading-[1.7] text-[#EDE9E1] lg:col-span-5 lg:col-start-8 md:text-[17px]">
-                {copy.formLead}
+              <p className="max-w-[46ch] text-[16px] leading-[1.7] text-[#EDE9E1] lg:col-span-5 lg:col-start-8 md:text-[17px] mb-prose">
+                {dict.contactPage.formLead}
               </p>
             </div>
-            <MbLawContactForm areas={areas} />
+            <MbLawContactForm areas={areas} locale={locale} />
           </div>
         </section>
       </main>
 
-      <MbLawFooter />
+      <MbLawFooter locale={locale} />
     </>
   );
 }

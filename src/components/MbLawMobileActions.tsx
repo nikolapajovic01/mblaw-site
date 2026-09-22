@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
 
 const PHONE = "+381112223344";
 const VIBER_HREF = "viber://chat?number=%2B381112223344";
@@ -9,7 +11,12 @@ const WHATSAPP_HREF = "https://wa.me/381112223344";
 const circle =
   "pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#2A2723] bg-[#171512] text-[#EDE9E1] shadow-[0_10px_24px_rgba(0,0,0,0.35)] transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7]";
 
-export default function MbLawMobileActions() {
+export default function MbLawMobileActions({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale).mobileActions;
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
@@ -31,7 +38,7 @@ export default function MbLawMobileActions() {
       {showTop ? (
         <button
           type="button"
-          aria-label="Na vrh strane"
+          aria-label={dict.scrollTop}
           onClick={() => {
             const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
@@ -50,7 +57,7 @@ export default function MbLawMobileActions() {
         </button>
       ) : null}
 
-      <a href={VIBER_HREF} aria-label="Otvori Viber" className={circle}>
+      <a href={VIBER_HREF} aria-label={dict.openViber} className={circle}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect x="4.75" y="2.6" width="14.5" height="18.8" rx="4.4" stroke="currentColor" strokeWidth="1.55" />
           <path
@@ -64,7 +71,7 @@ export default function MbLawMobileActions() {
 
       <a
         href={WHATSAPP_HREF}
-        aria-label="Otvori WhatsApp"
+        aria-label={dict.openWhatsapp}
         target="_blank"
         rel="noopener noreferrer"
         className={circle}
@@ -76,7 +83,7 @@ export default function MbLawMobileActions() {
 
       <a
         href={`tel:${PHONE}`}
-        aria-label="Pozovi kancelariju"
+        aria-label={dict.callOffice}
         className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#C78B3E] text-[#120F0A] shadow-[0_10px_24px_rgba(0,0,0,0.35)] transition-colors hover:bg-[#D49A4A]"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">

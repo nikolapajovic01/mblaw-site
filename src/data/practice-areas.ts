@@ -319,7 +319,7 @@ export const practiceAreas: PracticeArea[] = [
     no: "08",
     title: "Radno pravo",
     summary:
-      "Savetovanje i zastupanje poslodavaca i zaposlenih u ugovorima, otkazima, sporovima i usklađenosti sa propisima o radu.",
+      "Savetovanje i zastupanje poslodavaca i zaposlenih o ugovorima, otkazima, sporovima i usklađenosti sa propisima o radu.",
     intro: [
       "Radno pravo predstavlja jednu od najzahtevnijih pravnih oblasti u Srbiji. MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža sveobuhvatnu pravnu pomoć u svim pravnim aspektima radnih odnosa, zastupajući podjednako poslodavce i zaposlene u savetodavnim, pregovaračkim i sudskim postupcima.",
     ],
@@ -402,7 +402,7 @@ export const practiceAreas: PracticeArea[] = [
           },
           {
             label: "Porodično pravo",
-            desc: "Savetovanje i zastupanje u svim porodičnopravnim postupcima, uključujući razvod braka, vršenje roditeljskog prava, uređivanje ličnih odnosa roditelja i dece, izdržavanje, deobu bračne tekovine, utvrđivanje i osporavanje očinstva i materinstva, izradu bračnih ugovora, kao i zaštitu od nasilja u porodici.",
+            desc: "Savetovanje i zastupanje u svim porodičnopravnim postupcima, uključujući razvod braka, vršenje roditeljskog prava, uređivanje ličnih odnosa roditelja i dece, izdržavanje, deobu bračne tekovine, utvrđivanje i osporavanje očinstva i materinstva, izradu bračnih ugovora, kao i pravnu zaštitu i zastupanje u slučajevima nasilja u porodici.",
           },
           {
             label: "Nasledno pravo",
@@ -414,7 +414,7 @@ export const practiceAreas: PracticeArea[] = [
           },
           {
             label: "Vanparnični postupci",
-            desc: "Zastupanje u postupcima uređenja međa, deobe zajedničkih stvari, lišenja i vraćanja poslovne sposobnosti, proglašenja nestalog lica za umrlo i dokazivanja smrti.",
+            desc: "Zastupanje u postupcima uređenja međa, deobe zajedničkih stvari, lišenja i vraćanja poslovne sposobnosti, proglašenja nestalog lica za umrlo, dokazivanja smrti i utvrđivanja postojanja vanbračne zajednice.",
           },
           {
             label: "Medijacija i vansudsko rešavanje sporova",

@@ -4,27 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import {
-  getPracticeGroupHref,
-  getPracticeGroupNavTitle,
-  practiceMenuGroups,
-} from "@/data/practice-areas";
+import { practiceMenuGroups } from "@/data/practice-areas";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavItems, getNavHref, getPracticeGroupHref } from "@/i18n/nav";
 
-const navLinks = [
-  { label: "Početna", href: "/" },
-  { label: "O nama", href: "/o-nama" },
-  { label: "Oblasti rada", href: "/oblasti-rada" },
-  { label: "Tim", href: "/tim" },
-  { label: "Uvidi", href: "/uvidi" },
-  { label: "Kontakt", href: "/kontakt" },
-];
-
-const legalLinks = [
-  { label: "Politika privatnosti", href: "#" },
-  { label: "Uslovi korišćenja", href: "#" },
-];
-
-export default function MbLawFooter() {
+export default function MbLawFooter({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale);
+  const navItems = getNavItems(dict, locale);
   const footerRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -59,7 +50,7 @@ export default function MbLawFooter() {
           {/* brand */}
           <div className="md:col-span-4" style={reveal(0)}>
             <Link
-              href="/"
+              href={getNavHref("home", locale)}
               aria-label="MB Law - Zajednička advokatska kancelarija Marković i Bogdanović, početna strana"
               className="flex items-center gap-2 no-underline sm:gap-3"
             >
@@ -93,8 +84,7 @@ export default function MbLawFooter() {
             </Link>
 
             <p className="mt-6 max-w-[320px] text-[14.5px] leading-[1.7] text-[#8C877D]">
-              Sveobuhvatna pravna podrška domaćim i međunarodnim klijentima, uz
-              strateški pristup i pouzdanu zaštitu poslovnih i ličnih interesa.
+              {dict.footer.tagline}
             </p>
 
             <div className="mt-7 flex items-center gap-3">
@@ -124,11 +114,11 @@ export default function MbLawFooter() {
           {/* navigacija */}
           <div className="md:col-span-2 md:col-start-6" style={reveal(0.1)}>
             <span className="block text-[10.5px] font-semibold tracking-[0.26em] text-[#6B6459]">
-              NAVIGACIJA
+              {dict.footer.navHeading}
             </span>
             <ul className="mt-6 flex flex-col gap-3.5">
-              {navLinks.map((item) => (
-                <li key={item.label}>
+              {navItems.map((item) => (
+                <li key={item.key}>
                   <Link
                     href={item.href}
                     className="text-[14.5px] text-[#ACA69D] no-underline transition-colors hover:text-[#C78B3E]"
@@ -143,26 +133,29 @@ export default function MbLawFooter() {
           {/* oblasti rada */}
           <div className="md:col-span-2" style={reveal(0.18)}>
             <span className="block text-[10.5px] font-semibold tracking-[0.26em] text-[#6B6459]">
-              OBLASTI RADA
+              {dict.footer.practiceHeading}
             </span>
             <ul className="mt-6 flex flex-col gap-3.5">
-              {practiceMenuGroups.map((group) => (
-                <li key={group.slug}>
-                  <Link
-                    href={getPracticeGroupHref(group)}
-                    className="text-[14.5px] text-[#ACA69D] no-underline transition-colors hover:text-[#C78B3E]"
-                  >
-                    {getPracticeGroupNavTitle(group)}
-                  </Link>
-                </li>
-              ))}
+              {practiceMenuGroups.map((group) => {
+                const label = dict.practiceAreas.groups[group.slug];
+                return (
+                  <li key={group.slug}>
+                    <Link
+                      href={getPracticeGroupHref(group, locale)}
+                      className="text-[14.5px] text-[#ACA69D] no-underline transition-colors hover:text-[#C78B3E]"
+                    >
+                      {label?.navTitle ?? label?.title ?? group.navTitle ?? group.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           {/* kontakt */}
           <div className="md:col-span-3" style={reveal(0.26)}>
             <span className="block text-[10.5px] font-semibold tracking-[0.26em] text-[#6B6459]">
-              KONTAKT
+              {dict.footer.contactHeading}
             </span>
             <ul className="mt-6 flex flex-col gap-4">
               <li className="flex items-start gap-3">
@@ -173,7 +166,7 @@ export default function MbLawFooter() {
                 <span className="text-[14.5px] leading-[1.6] text-[#ACA69D]">
                   Resavska 68,
                   <br />
-                  Beograd
+                  {dict.footer.city}
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -212,19 +205,22 @@ export default function MbLawFooter() {
           style={reveal(0.42)}
         >
           <span>
-            © {new Date().getFullYear()} MB Law - Zajednička advokatska kancelarija Marković i Bogdanović. Sva
-            prava zadržana.
+            © {new Date().getFullYear()} MB Law - Zajednička advokatska kancelarija Marković i Bogdanović.{" "}
+            {dict.footer.rights}
           </span>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            {legalLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-[#6B6459] no-underline transition-colors hover:text-[#C78B3E]"
-              >
-                {item.label}
-              </Link>
-            ))}
+            <Link
+              href="#"
+              className="text-[#6B6459] no-underline transition-colors hover:text-[#C78B3E]"
+            >
+              {dict.footer.privacyPolicy}
+            </Link>
+            <Link
+              href="#"
+              className="text-[#6B6459] no-underline transition-colors hover:text-[#C78B3E]"
+            >
+              {dict.footer.termsOfUse}
+            </Link>
           </div>
         </div>
       </div>

@@ -2,20 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getPublishedAttorneys, type Attorney } from "@/data/team";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavHref } from "@/i18n/nav";
 
 function isExternalHref(href: string) {
   return href.startsWith("http://") || href.startsWith("https://");
 }
 
-function ProfileLink({ href, name }: { href: string; name: string }) {
+function ProfileLink({
+  href,
+  name,
+  label,
+}: {
+  href: string;
+  name: string;
+  label: string;
+}) {
   return (
     <Link
       href={href}
       className="group inline-flex items-center gap-1.5 text-[12px] tracking-[0.14em] no-underline transition-colors hover:text-[#171512] mb-light-link"
-      aria-label={`Profil advokata: ${name}`}
+      aria-label={`${label}: ${name}`}
     >
       <span className="border-b border-[#C9C0AF] pb-1 leading-none transition-colors group-hover:border-[#C78B3E]">
-        VIŠE O ADVOKATU
+        {label}
       </span>
       <svg
         width="11"
@@ -37,7 +48,15 @@ function ProfileLink({ href, name }: { href: string; name: string }) {
   );
 }
 
-function LinkedInMark({ href, name }: { href: string; name: string }) {
+function LinkedInMark({
+  href,
+  name,
+  label,
+}: {
+  href: string;
+  name: string;
+  label: string;
+}) {
   return (
     <Link
       href={href}
@@ -52,7 +71,7 @@ function LinkedInMark({ href, name }: { href: string; name: string }) {
           <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V23.5h-4V8.5zM8.5 8.5h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v9.35h-4v-8.28c0-1.97-.04-4.5-2.74-4.5-2.74 0-3.16 2.14-3.16 4.35v8.43h-4V8.5z" />
         </svg>
       </span>
-      LINKEDIN
+      {label}
     </Link>
   );
 }
@@ -81,11 +100,19 @@ function TeamMemberCard({
   attorney,
   index,
   visible,
+  locale,
 }: {
   attorney: Attorney;
   index: number;
   visible: boolean;
+  locale: Locale;
 }) {
+  const dict = getDictionary(locale).team;
+  const translated = dict.attorneys[attorney.slug];
+  const role = translated?.role ?? attorney.role;
+  const bio = translated?.bio ?? attorney.bio;
+  const detail = translated?.detail ?? attorney.detail;
+
   const reveal = (delay: number): CSSProperties =>
     visible
       ? { animation: `mbUp .9s cubic-bezier(.2,.7,.2,1) ${delay}s both` }
@@ -100,7 +127,12 @@ function TeamMemberCard({
             alt={attorney.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 45vw, 30vw"
-            className="object-cover object-[50%_18%]"
+            className={
+              attorney.cardPhotoClass ??
+              attorney.photoClass ??
+              "object-cover object-[50%_18%]"
+            }
+            quality={90}
           />
         ) : (
           <PortraitPlaceholder name={attorney.name} />
@@ -115,26 +147,34 @@ function TeamMemberCard({
           {attorney.name}
         </h3>
         <p className="mt-1.5 text-[13px] font-semibold tracking-[0.12em] text-[#C78B3E]">
-          {attorney.role}
+          {role}
         </p>
         <p className="mt-2 text-[13.5px] leading-[1.45] md:text-[14px] mb-light-body">
-          {attorney.bio}
+          {bio}
         </p>
         <p className="mt-2 text-[13px] leading-[1.45] md:text-[13.5px] mb-light-muted">
-          {attorney.detail}
+          {detail}
         </p>
 
         <div className="mt-auto pt-3">
           {attorney.comingSoon ? (
             <span className="inline-block text-[12px] tracking-[0.14em] mb-light-muted">
-              PROFIL USKORO
+              {dict.comingSoon}
             </span>
           ) : (
             <>
-              <ProfileLink href={`/tim/${attorney.slug}`} name={attorney.name} />
+              <ProfileLink
+                href={`${getNavHref("team", locale)}/${attorney.slug}`}
+                name={attorney.name}
+                label={dict.moreAboutAttorney}
+              />
               {isExternalHref(attorney.linkedIn) ? (
                 <div className="mt-3">
-                  <LinkedInMark href={attorney.linkedIn} name={attorney.name} />
+                  <LinkedInMark
+                    href={attorney.linkedIn}
+                    name={attorney.name}
+                    label={dict.linkedIn}
+                  />
                 </div>
               ) : null}
             </>
@@ -145,7 +185,13 @@ function TeamMemberCard({
   );
 }
 
-export default function MbLawTeamCards({ visible = true }: { visible?: boolean }) {
+export default function MbLawTeamCards({
+  visible = true,
+  locale = defaultLocale,
+}: {
+  visible?: boolean;
+  locale?: Locale;
+}) {
   return (
     <div className="grid grid-cols-1 gap-7 md:grid-cols-2 md:items-stretch md:gap-x-8 md:gap-y-6 lg:grid-cols-3 lg:gap-x-10">
       {getPublishedAttorneys().map((attorney, index) => (
@@ -158,7 +204,7 @@ export default function MbLawTeamCards({ visible = true }: { visible?: boolean }
               }`}
             />
           ) : null}
-          <TeamMemberCard attorney={attorney} index={index} visible={visible} />
+          <TeamMemberCard attorney={attorney} index={index} visible={visible} locale={locale} />
         </div>
       ))}
     </div>

@@ -1,13 +1,25 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { locales, defaultLocale, type Locale } from "@/i18n/config";
+import { withLocale } from "@/i18n/path";
+import { getDictionary } from "@/dictionaries";
 
-const languages = [
-  { code: "SR", name: "Srpski", lang: "sr", href: null, current: true },
-  { code: "EN", name: "English", lang: "en", href: "#", current: false },
-] as const;
+const languageNames: Record<Locale, string> = {
+  sr: "Srpski",
+  en: "English",
+  ru: "Русский",
+};
 
-export default function MbLawLangSwitch() {
+export default function MbLawLangSwitch({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale);
+  const pathname = usePathname() ?? `/${locale}`;
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -76,7 +88,7 @@ export default function MbLawLangSwitch() {
     >
       <button
         type="button"
-        aria-label="Jezik"
+        aria-label={dict.langSwitch.label}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
@@ -85,7 +97,7 @@ export default function MbLawLangSwitch() {
           open ? "text-[#F1EEE7]" : "text-[#C2BCB2] hover:text-[#C78B3E]"
         }`}
       >
-        SR
+        {locale.toUpperCase()}
         <svg
           width="9"
           height="9"
@@ -126,10 +138,11 @@ export default function MbLawLangSwitch() {
             }
           />
 
-          <ul id={menuId} role="menu" aria-label="Jezik" className="mt-2 pb-2">
-            {languages.map((language, index) => {
+          <ul id={menuId} role="menu" aria-label={dict.langSwitch.label} className="mt-2 pb-2">
+            {locales.map((code, index) => {
+              const isCurrent = code === locale;
               const className = `mb-practice-menu-item group/item relative flex items-baseline gap-3 px-4 py-2.5 no-underline ${
-                language.current ? "cursor-default" : ""
+                isCurrent ? "cursor-default" : ""
               }`;
               const style = { transitionDelay: open ? `${90 + index * 55}ms` : "0ms" };
               const body = (
@@ -137,45 +150,29 @@ export default function MbLawLangSwitch() {
                   <span
                     aria-hidden="true"
                     className={`absolute inset-y-1.5 left-0 w-px origin-top bg-[#C78B3E] transition-transform duration-300 ease-out ${
-                      language.current ? "scale-y-100" : "scale-y-0 group-hover/item:scale-y-100"
+                      isCurrent ? "scale-y-100" : "scale-y-0 group-hover/item:scale-y-100"
                     }`}
                   />
                   <span className="w-6 shrink-0 text-[10.5px] font-semibold tracking-[0.14em] text-[#C78B3E] transition-transform duration-300 group-hover/item:translate-x-0.5">
-                    {language.code}
+                    {code.toUpperCase()}
                   </span>
                   <span
-                    lang={language.lang}
+                    lang={code}
                     className={`text-[14.5px] font-semibold normal-case leading-[1.22] tracking-[-0.01em] transition-colors duration-200 ${
-                      language.current
+                      isCurrent
                         ? "text-[#F1EEE7]"
                         : "text-[#A39E94] group-hover/item:text-[#C78B3E]"
                     }`}
                     style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
                   >
-                    {language.name}
+                    {languageNames[code]}
                   </span>
                 </>
               );
 
               return (
-                <li key={language.code} role="none">
-                  {language.href ? (
-                    <a
-                      href={language.href}
-                      lang={language.lang}
-                      hrefLang={language.lang}
-                      role="menuitem"
-                      tabIndex={open ? 0 : -1}
-                      className={className}
-                      style={style}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        setOpen(false);
-                      }}
-                    >
-                      {body}
-                    </a>
-                  ) : (
+                <li key={code} role="none">
+                  {isCurrent ? (
                     <span
                       role="menuitem"
                       aria-current="true"
@@ -185,6 +182,19 @@ export default function MbLawLangSwitch() {
                     >
                       {body}
                     </span>
+                  ) : (
+                    <Link
+                      href={withLocale(pathname, code)}
+                      lang={code}
+                      hrefLang={code}
+                      role="menuitem"
+                      tabIndex={open ? 0 : -1}
+                      className={className}
+                      style={style}
+                      onClick={() => setOpen(false)}
+                    >
+                      {body}
+                    </Link>
                   )}
                 </li>
               );

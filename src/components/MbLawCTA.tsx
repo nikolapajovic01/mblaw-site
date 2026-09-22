@@ -4,8 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavHref } from "@/i18n/nav";
 
-export default function MbLawCTA() {
+export default function MbLawCTA({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale).cta;
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -68,36 +76,35 @@ export default function MbLawCTA() {
             }
           />
           <span className="mt-6 block text-[11px] font-semibold tracking-[0.24em] text-[#C78B3E]">
-            KONSULTACIJA
+            {dict.eyebrow}
           </span>
           <h2
             className="mt-4 text-[32px] font-bold leading-[1.12] tracking-[-0.015em] text-[#F1EEE7] sm:text-[38px] md:text-[42px]"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            Prvi korak je razgovor.
+            {dict.heading}
           </h2>
-          <p className="mt-5 max-w-[52ch] text-[16px] leading-[1.7] text-[#EDE9E1] md:text-[18px]">
-            Zakažite inicijalni sastanak i dobijte jasan pregled opcija pre nego što
-            donesete odluku. Diskretno, precizno i usmereno ka vašem cilju.
+          <p className="mt-5 max-w-[52ch] text-[16px] leading-[1.7] text-[#EDE9E1] md:text-[18px] mb-prose">
+            {dict.paragraph}
           </p>
 
           <div className="mt-8">
             <Link
-              href="/kontakt"
+              href={getNavHref("contact", locale)}
               className="inline-flex h-[54px] w-full items-center justify-center bg-[#C78B3E] px-10 text-[12px] font-semibold tracking-[0.16em] text-[#171512] no-underline transition-colors hover:bg-[#D89B4C] sm:w-auto"
             >
-              ZAKAŽITE KONSULTACIJU
+              {dict.button}
             </Link>
 
             <div className="mt-8 border-t border-[#4A453E]/60 pt-7">
               <p className="text-[13px] leading-[1.6] text-[#A39E94] md:text-[14px]">
-                Ili nas kontaktirajte direktno.
+                {dict.orContact}
               </p>
 
               <div className="mt-5 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-start lg:flex-nowrap lg:gap-0">
                 <div className="sm:pr-8 lg:pr-10">
                   <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-                    TELEFON
+                    {dict.phoneLabel}
                   </span>
                   <a
                     href="tel:+381112223344"
@@ -116,12 +123,12 @@ export default function MbLawCTA() {
 
                 <div className="sm:px-8 lg:px-10">
                   <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-                    ADRESA
+                    {dict.addressLabel}
                   </span>
                   <p className="mt-2 text-[16px] font-medium leading-[1.45] tracking-[0.01em] text-[#F1EEE7] md:text-[17px]">
                     Resavska 68,
                     <br />
-                    Beograd
+                    {dict.city}
                   </p>
                 </div>
 
@@ -132,7 +139,7 @@ export default function MbLawCTA() {
 
                 <div className="sm:pl-8 lg:pl-10">
                   <span className="block text-[10px] font-semibold tracking-[0.22em] text-[#8C877D]">
-                    EMAIL
+                    {dict.emailLabel}
                   </span>
                   <a
                     href="mailto:office@mblaw.rs"

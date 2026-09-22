@@ -10,7 +10,6 @@ import {
   getPracticeArea,
   getPracticeAreaTag,
   getPracticeGroupForArea,
-  getPracticeGroupHref,
   getPracticeMenuGroup,
   practiceAreas,
   practiceMenuGroups,
@@ -18,6 +17,30 @@ import {
   type PracticeAreaSection,
   type PracticeMenuGroup,
 } from "@/data/practice-areas";
+import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
+import { getNavHref, getPracticeGroupHref } from "@/i18n/nav";
+import { getDictionary } from "@/dictionaries";
+import { getPracticeContent } from "@/dictionaries";
+import type { Dictionary } from "@/dictionaries/types";
+import type { PracticeContentTranslation } from "@/dictionaries/practice-content/types";
+
+function localizedArea(area: PracticeArea, content?: PracticeContentTranslation): PracticeArea {
+  const t = content?.areas[area.slug];
+  if (!t) return area;
+  return { ...area, title: t.title, summary: t.summary, intro: t.intro, sections: t.sections, closing: t.closing };
+}
+
+function groupTitle(group: PracticeMenuGroup, dict: Dictionary): string {
+  return dict.practiceAreas.groups[group.slug]?.title ?? group.title;
+}
+
+function groupSummary(group: PracticeMenuGroup, content?: PracticeContentTranslation): string {
+  return content?.groupSummaries[group.slug] ?? group.summary;
+}
+
+function areaTag(area: PracticeArea, content?: PracticeContentTranslation): string {
+  return content?.areaTags[area.slug] ?? getPracticeAreaTag(area);
+}
 
 const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
@@ -46,13 +69,17 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/oblasti-rada/[slug]">): Promise<Metadata> {
-  const { slug } = await params;
+}: PageProps<"/[locale]/oblasti-rada/[slug]">): Promise<Metadata> {
+  const { slug, locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const content = getPracticeContent(locale);
+
   const area = getPracticeArea(slug);
   if (area) {
+    const localized = localizedArea(area, content);
     return {
-      title: `${area.title} | ${FIRM_NAME}`,
-      description: area.summary,
+      title: `${localized.title} | ${FIRM_NAME}`,
+      description: localized.summary,
     };
   }
 
@@ -60,16 +87,18 @@ export async function generateMetadata({
   if (group?.areaSlugs.length === 1) {
     const leaf = getPracticeArea(group.areaSlugs[0]);
     if (leaf) {
+      const localized = localizedArea(leaf, content);
       return {
-        title: `${leaf.title} | ${FIRM_NAME}`,
-        description: leaf.summary,
+        title: `${localized.title} | ${FIRM_NAME}`,
+        description: localized.summary,
       };
     }
   }
   if (group) {
+    const dict = getDictionary(locale);
     return {
-      title: `${group.title} | ${FIRM_NAME}`,
-      description: group.summary,
+      title: `${groupTitle(group, dict)} | ${FIRM_NAME}`,
+      description: groupSummary(group, content),
     };
   }
 
@@ -78,18 +107,22 @@ export async function generateMetadata({
 
 export default async function PracticeAreaPage({
   params,
-}: PageProps<"/oblasti-rada/[slug]">) {
-  const { slug } = await params;
+}: PageProps<"/[locale]/oblasti-rada/[slug]">) {
+  const { slug, locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  const content = getPracticeContent(locale);
   const groupPage = getPracticeMenuGroup(slug);
   if (groupPage && groupPage.areaSlugs.length === 1 && !getPracticeArea(slug)) {
-    redirect(`/oblasti-rada/${groupPage.areaSlugs[0]}`);
+    redirect(`${getNavHref("practiceAreas", locale)}/${groupPage.areaSlugs[0]}`);
   }
   if (groupPage && !getPracticeArea(slug)) {
-    return <PracticeGroupHub group={groupPage} />;
+    return <PracticeGroupHub group={groupPage} locale={locale} />;
   }
 
-  const area = getPracticeArea(slug);
-  if (!area) notFound();
+  const rawArea = getPracticeArea(slug);
+  if (!rawArea) notFound();
+  const area = localizedArea(rawArea, content);
 
   const group = getPracticeGroupForArea(slug);
   const groupSlugs = group?.areaSlugs ?? [];
@@ -106,7 +139,7 @@ export default async function PracticeAreaPage({
     name: area.title,
     description: area.summary,
     url: `${FIRM_URL}/oblasti-rada/${area.slug}`,
-    inLanguage: "sr",
+    inLanguage: locale,
     provider: {
       "@type": "LegalService",
       name: FIRM_NAME,
@@ -137,27 +170,24 @@ export default async function PracticeAreaPage({
   return (
     <ParchmentPage
       jsonLd={jsonLd}
-      pager={<PracticePager prev={prev} next={next} />}
+      pager={<PracticePager prev={prev} next={next} locale={locale} dict={dict} content={content} />}
+      locale={locale}
     >
-      <PracticeBreadcrumb current={area.title} />
+      <PracticeBreadcrumb current={area.title} locale={locale} dict={dict} />
 
       <div className="relative mt-10 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 lg:grid-cols-[minmax(0,54ch)_minmax(0,1fr)] lg:gap-x-16">
         <div className="min-w-0">
           <div className="h-px w-16 bg-[#C78B3E]" />
           {group ? (
             <Link
-              href={
-                group.areaSlugs.length > 1
-                  ? `/oblasti-rada/${group.slug}`
-                  : "/oblasti-rada"
-              }
+              href={getPracticeGroupHref(group, locale)}
               className="mt-6 inline-block text-[10.5px] font-semibold tracking-[0.22em] no-underline transition-colors hover:text-[#C78B3E] mb-light-eyebrow"
             >
-              {group.title}
+              {groupTitle(group, dict)}
             </Link>
           ) : (
             <span className="mt-6 block text-[10.5px] tracking-[0.26em] mb-light-eyebrow">
-              OBLASTI RADA
+              {dict.practiceAreas.eyebrow}
             </span>
           )}
           <h1
@@ -171,7 +201,7 @@ export default async function PracticeAreaPage({
           {area.intro.map((paragraph, i) => (
             <p
               key={paragraph.slice(0, 32)}
-              className={`text-[16px] leading-[1.75] md:text-[17px] mb-light-body ${
+              className={`text-[16px] leading-[1.75] md:text-[17px] mb-light-body mb-prose ${
                 i === 0 ? "mt-6" : "mt-5"
               }`}
             >
@@ -195,6 +225,9 @@ export default async function PracticeAreaPage({
             group={group}
             currentSlug={area.slug}
             headings={headings}
+            locale={locale}
+            dict={dict}
+            content={content}
           />
         ) : null}
 
@@ -210,20 +243,20 @@ export default async function PracticeAreaPage({
           </div>
 
           {area.closing ? (
-            <p className="mt-10 max-w-[54ch] text-[16px] leading-[1.75] md:text-[17px] mb-light-body">
+            <p className="mt-10 max-w-[54ch] text-[16px] leading-[1.75] md:text-[17px] mb-light-body mb-prose">
               {area.closing}
             </p>
           ) : null}
 
           <div className="mt-12 border-t border-[#C9C0AF] pt-8">
             <p className="max-w-[46ch] text-[15px] leading-[1.7] mb-light-muted">
-              Ako je ovo vaš predmet, prvi korak je razgovor.
+              {dict.common.firstStepCta}
             </p>
             <Link
-              href="/kontakt"
+              href={getNavHref("contact", locale)}
               className="mt-5 inline-flex h-[50px] items-center bg-[#C78B3E] px-8 text-[11px] font-semibold tracking-[0.17em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px]"
             >
-              ZAKAŽITE KONSULTACIJU
+              {dict.hero.ctaPrimary}
             </Link>
           </div>
         </article>
@@ -232,10 +265,21 @@ export default async function PracticeAreaPage({
   );
 }
 
-function PracticeGroupHub({ group }: { group: PracticeMenuGroup }) {
+function PracticeGroupHub({
+  group,
+  locale,
+}: {
+  group: PracticeMenuGroup;
+  locale: Locale;
+}) {
+  const dict = getDictionary(locale);
+  const content = getPracticeContent(locale);
   const areas = group.areaSlugs
     .map((item) => getPracticeArea(item))
-    .filter((item): item is PracticeArea => Boolean(item));
+    .filter((item): item is PracticeArea => Boolean(item))
+    .map((item) => localizedArea(item, content));
+  const title = groupTitle(group, dict);
+  const summary = groupSummary(group, content);
   const groupNo = String(practiceMenuGroups.findIndex((item) => item.slug === group.slug) + 1).padStart(
     2,
     "0",
@@ -244,10 +288,10 @@ function PracticeGroupHub({ group }: { group: PracticeMenuGroup }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: group.title,
-    description: group.summary,
+    name: title,
+    description: summary,
     url: `${FIRM_URL}/oblasti-rada/${group.slug}`,
-    inLanguage: "sr",
+    inLanguage: locale,
     isPartOf: { "@type": "WebSite", name: FIRM_NAME, url: FIRM_URL },
     mainEntity: {
       "@type": "ItemList",
@@ -263,10 +307,11 @@ function PracticeGroupHub({ group }: { group: PracticeMenuGroup }) {
   return (
     <ParchmentPage
       jsonLd={jsonLd}
+      locale={locale}
       pager={
-        <nav aria-label="Navigacija oblasti" className="mt-14 border-t border-[#C9C0AF] pt-8">
+        <nav aria-label={dict.practiceAreas.groupNavLabel} className="mt-14 border-t border-[#C9C0AF] pt-8">
           <Link
-            href="/oblasti-rada"
+            href={getNavHref("practiceAreas", locale)}
             className="group inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.16em] no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
           >
             <svg
@@ -285,27 +330,27 @@ function PracticeGroupHub({ group }: { group: PracticeMenuGroup }) {
                 strokeLinejoin="round"
               />
             </svg>
-            SVE OBLASTI RADA
+            {dict.practiceAreas.viewAll}
           </Link>
         </nav>
       }
     >
-      <PracticeBreadcrumb current={group.title} />
+      <PracticeBreadcrumb current={title} locale={locale} dict={dict} />
 
       <div className="relative mt-10 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 lg:grid-cols-[minmax(0,54ch)_minmax(0,1fr)] lg:gap-x-16">
         <div className="min-w-0">
           <div className="h-px w-16 bg-[#C78B3E]" />
           <span className="mt-6 block text-[10.5px] tracking-[0.26em] mb-light-eyebrow">
-            OBLASTI RADA · {groupNo}
+            {dict.practiceAreas.groupPrefix} · {groupNo}
           </span>
           <h1
             className="mt-5 max-w-[16ch] text-[32px] font-bold leading-[1.12] tracking-[-0.02em] sm:text-[40px] md:text-[46px] mb-light-heading"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            {group.title}
+            {title}
           </h1>
-          <p className="mt-6 text-[16px] leading-[1.75] md:text-[17px] mb-light-body">
-            {group.summary}
+          <p className="mt-6 text-[16px] leading-[1.75] md:text-[17px] mb-light-body mb-prose">
+            {summary}
           </p>
         </div>
 
@@ -324,7 +369,7 @@ function PracticeGroupHub({ group }: { group: PracticeMenuGroup }) {
         {areas.map((area, index) => (
           <li key={area.slug} className="border-b border-r border-[#C9C0AF]">
             <Link
-              href={`/oblasti-rada/${area.slug}`}
+              href={`${getNavHref("practiceAreas", locale)}/${area.slug}`}
               className="group/row relative flex h-full flex-col px-5 py-7 no-underline md:px-6 md:py-8"
             >
               <span
@@ -344,7 +389,7 @@ function PracticeGroupHub({ group }: { group: PracticeMenuGroup }) {
                 {area.summary}
               </span>
               <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[10.5px] font-semibold tracking-[0.16em] text-[#8A8173] transition-colors duration-300 group-hover/row:text-[#C78B3E]">
-                DETALJI
+                {dict.practiceAreas.details}
                 <svg
                   width="11"
                   height="11"
@@ -395,7 +440,7 @@ function PracticeSection({
       {section.intro?.map((paragraph, i) => (
         <p
           key={i}
-          className={`max-w-[54ch] text-[15.5px] leading-[1.75] md:text-[16.5px] mb-light-muted ${
+          className={`max-w-[54ch] text-[15.5px] leading-[1.75] md:text-[16.5px] mb-light-muted mb-prose ${
             section.heading || i > 0 ? "mt-5" : "mt-0"
           }`}
         >
@@ -406,7 +451,7 @@ function PracticeSection({
       {unlabeled.map((item, i) => (
         <p
           key={`plain-${i}`}
-          className={`max-w-[54ch] text-[15.5px] leading-[1.75] md:text-[16.5px] mb-light-muted ${
+          className={`max-w-[54ch] text-[15.5px] leading-[1.75] md:text-[16.5px] mb-light-muted mb-prose ${
             hasLead || i > 0 ? "mt-5" : "mt-0"
           }`}
         >
@@ -431,7 +476,7 @@ function PracticeSection({
               >
                 {item.label}
               </h3>
-              <p className="mt-2.5 text-[14.5px] leading-[1.7] md:text-[15px] mb-light-muted">
+              <p className="mt-2.5 text-[14.5px] leading-[1.7] md:text-[15px] mb-light-muted mb-prose">
                 {item.desc}
               </p>
             </li>
@@ -446,10 +491,16 @@ function PracticeAside({
   group,
   currentSlug,
   headings,
+  locale,
+  dict,
+  content,
 }: {
   group?: PracticeMenuGroup | null;
   currentSlug: string;
   headings: { id: string; label: string }[];
+  locale: Locale;
+  dict: Dictionary;
+  content?: PracticeContentTranslation;
 }) {
   const showCelina = Boolean(group && group.areaSlugs.length > 1);
   const showToc = headings.length >= 2;
@@ -458,9 +509,9 @@ function PracticeAside({
   return (
     <aside className="border-t border-[#C9C0AF] pt-6 lg:col-start-2 lg:row-start-1 lg:sticky lg:top-8 lg:border-t-0 lg:pt-0">
       {showToc ? (
-        <nav aria-label="Sadržaj stranice">
+        <nav aria-label={dict.practiceAreas.tocLabel}>
           <span className="block text-[10.5px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-            NA OVOJ STRANICI
+            {dict.practiceAreas.onThisPage}
           </span>
           <ol className="mt-4 flex flex-col">
             {headings.map((item, index) => (
@@ -485,14 +536,14 @@ function PracticeAside({
       {showCelina && group ? (
         <div className={showToc ? "mt-10" : ""}>
           <span className="block text-[10.5px] font-semibold tracking-[0.22em] mb-light-eyebrow">
-            U OVOJ CELINI
+            {dict.practiceAreas.inThisGroup}
           </span>
           <Link
-            href={getPracticeGroupHref(group)}
+            href={getPracticeGroupHref(group, locale)}
             className="mt-3 block text-[15px] font-semibold leading-snug no-underline transition-colors hover:text-[#C78B3E] mb-light-heading"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            {group.title}
+            {groupTitle(group, dict)}
           </Link>
           <ul className="mt-4 flex flex-col gap-2.5">
             {group.areaSlugs.map((slug) => {
@@ -503,14 +554,14 @@ function PracticeAside({
                 <li key={item.slug}>
                   {current ? (
                     <span className="text-[14px] leading-snug mb-light-heading" aria-current="page">
-                      {getPracticeAreaTag(item)}
+                      {areaTag(item, content)}
                     </span>
                   ) : (
                     <Link
-                      href={`/oblasti-rada/${item.slug}`}
+                      href={`${getNavHref("practiceAreas", locale)}/${item.slug}`}
                       className="text-[14px] leading-snug no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
                     >
-                      {getPracticeAreaTag(item)}
+                      {areaTag(item, content)}
                     </Link>
                   )}
                 </li>
@@ -540,23 +591,31 @@ function PracticeMonogram() {
   );
 }
 
-function PracticeBreadcrumb({ current }: { current: string }) {
+function PracticeBreadcrumb({
+  current,
+  locale,
+  dict,
+}: {
+  current: string;
+  locale: Locale;
+  dict: Dictionary;
+}) {
   return (
     <nav
-      aria-label="Putanja"
+      aria-label={dict.practiceAreas.breadcrumbLabel}
       className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[13.5px] md:text-[14px] mb-light-muted"
     >
-      <Link href="/" className="no-underline transition-colors hover:text-[#C78B3E]">
-        Početna
+      <Link href={getNavHref("home", locale)} className="no-underline transition-colors hover:text-[#C78B3E]">
+        {dict.nav.home}
       </Link>
       <span aria-hidden="true" className="text-[#A39A8C]">
         /
       </span>
       <Link
-        href="/oblasti-rada"
+        href={getNavHref("practiceAreas", locale)}
         className="no-underline transition-colors hover:text-[#C78B3E]"
       >
-        Oblasti rada
+        {dict.nav.practiceAreas}
       </Link>
       <span aria-hidden="true" className="text-[#A39A8C]">
         /
@@ -569,18 +628,24 @@ function PracticeBreadcrumb({ current }: { current: string }) {
 function PracticePager({
   prev,
   next,
+  locale,
+  dict,
+  content,
 }: {
   prev?: PracticeArea;
   next?: PracticeArea;
+  locale: Locale;
+  dict: Dictionary;
+  content?: PracticeContentTranslation;
 }) {
   return (
     <nav
-      aria-label="Susedne oblasti"
+      aria-label={dict.practiceAreas.pagerLabel}
       className="mt-14 flex items-center justify-between gap-6 border-t border-[#C9C0AF] pt-8"
     >
       {prev ? (
         <Link
-          href={`/oblasti-rada/${prev.slug}`}
+          href={`${getNavHref("practiceAreas", locale)}/${prev.slug}`}
           className="group inline-flex min-w-0 items-center gap-2 text-[12px] font-semibold tracking-[0.14em] no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
         >
           <svg
@@ -599,11 +664,11 @@ function PracticePager({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="truncate">{getPracticeAreaTag(prev)}</span>
+          <span className="truncate">{areaTag(prev, content)}</span>
         </Link>
       ) : (
         <Link
-          href="/oblasti-rada"
+          href={getNavHref("practiceAreas", locale)}
           className="group inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.16em] no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
         >
           <svg
@@ -622,15 +687,15 @@ function PracticePager({
               strokeLinejoin="round"
             />
           </svg>
-          SVE OBLASTI RADA
+          {dict.practiceAreas.viewAll}
         </Link>
       )}
       {next ? (
         <Link
-          href={`/oblasti-rada/${next.slug}`}
+          href={`${getNavHref("practiceAreas", locale)}/${next.slug}`}
           className="group inline-flex min-w-0 items-center gap-2 text-right text-[12px] font-semibold tracking-[0.14em] no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
         >
-          <span className="truncate">{getPracticeAreaTag(next)}</span>
+          <span className="truncate">{areaTag(next, content)}</span>
           <svg
             width="11"
             height="11"
@@ -659,10 +724,12 @@ function ParchmentPage({
   jsonLd,
   children,
   pager,
+  locale,
 }: {
   jsonLd: object;
   children: ReactNode;
   pager?: ReactNode;
+  locale: Locale;
 }) {
   return (
     <>
@@ -671,7 +738,7 @@ function ParchmentPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <MbLawSiteHeader active="OBLASTI RADA" />
+      <MbLawSiteHeader active="practiceAreas" locale={locale} />
 
       <main className="w-full bg-[#D5CDC0]">
         <section className="relative isolate overflow-hidden bg-[#D5CDC0] px-6 py-14 md:px-[72px] md:py-16 lg:py-20 mb-light-section">
@@ -700,10 +767,10 @@ function ParchmentPage({
           </div>
         </section>
 
-        <MbLawCTA />
+        <MbLawCTA locale={locale} />
       </main>
 
-      <MbLawFooter />
+      <MbLawFooter locale={locale} />
     </>
   );
 }

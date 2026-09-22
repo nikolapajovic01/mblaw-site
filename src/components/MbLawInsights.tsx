@@ -5,18 +5,21 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { insights } from "@/data/insights";
 import MbLawInsightCard from "@/components/MbLawInsightCard";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavHref } from "@/i18n/nav";
 
 function NavArrow({
   direction,
   disabled,
   onClick,
+  label,
 }: {
   direction: "prev" | "next";
   disabled: boolean;
   onClick: () => void;
+  label: string;
 }) {
-  const label = direction === "prev" ? "Prethodni uvidi" : "Sledeći uvidi";
-
   return (
     <button
       type="button"
@@ -45,7 +48,12 @@ function NavArrow({
   );
 }
 
-export default function MbLawInsights() {
+export default function MbLawInsights({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale).insights;
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLLIElement | null)[]>([]);
@@ -255,13 +263,13 @@ export default function MbLawInsights() {
               }
             />
             <span className="mt-5 block text-[10.5px] font-semibold tracking-[0.26em] text-[#77726A]">
-              UVIDI
+              {dict.eyebrow}
             </span>
             <h2
               className="mt-3 text-[26px] font-bold leading-[1.16] tracking-[-0.015em] text-[#F1EEE7] sm:text-[30px] md:text-[34px]"
               style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
             >
-              Najnovije analize i pravna praksa.
+              {dict.heading}
             </h2>
           </header>
 
@@ -271,6 +279,7 @@ export default function MbLawInsights() {
                 direction="prev"
                 disabled={activeIndex === 0}
                 onClick={() => scrollToIndex(activeIndex - 1)}
+                label={dict.prev}
               />
               <span
                 className="min-w-[72px] text-center text-[11px] font-semibold tracking-[0.18em] text-[#8C877D]"
@@ -286,15 +295,16 @@ export default function MbLawInsights() {
                 direction="next"
                 disabled={activeIndex === insights.length - 1}
                 onClick={() => scrollToIndex(activeIndex + 1)}
+                label={dict.next}
               />
             </div>
 
             <Link
-              href="/uvidi"
+              href={getNavHref("insights", locale)}
               className="group inline-flex items-center gap-1.5 text-[11.5px] font-medium tracking-[0.15em] text-[#CFC9BF] no-underline transition-colors hover:text-[#F1EEE7]"
             >
               <span className="border-b border-[#3A3831] pb-1 leading-none transition-colors group-hover:border-[#C78B3E]">
-                SVI UVIDI
+                {dict.viewAll}
               </span>
               <svg
                 width="10"
@@ -349,7 +359,7 @@ export default function MbLawInsights() {
                     }}
                     className="w-[min(82vw,320px)] shrink-0 snap-start sm:w-[300px] md:w-[340px]"
                   >
-                    <MbLawInsightCard post={post} active={isActive} />
+                    <MbLawInsightCard post={post} active={isActive} locale={locale} />
                   </li>
                 );
               })}

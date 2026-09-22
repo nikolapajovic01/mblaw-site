@@ -13,6 +13,8 @@ export type Attorney = {
   focus: AttorneyFocus[];
   linkedIn: string;
   photo?: string;
+  photoClass?: string;
+  cardPhotoClass?: string;
   comingSoon?: boolean;
   founder?: boolean;
 };
@@ -30,11 +32,11 @@ export const attorneys: Attorney[] = [
     slug: "dusan-s-markovic",
     name: "Dušan S. Marković",
     role: "Senior Partner",
-    bio: "Praksa usmerena na korporativno i privredno pravo, radno pravo, rešavanje sporova, nepokretnosti, investicije, prekršajno pravo i zastupanje u složenim postupcima.",
+    bio: "Praksa usmerena na korporativno i privredno pravo, radno pravo, rešavanje sporova, nepokretnosti, investicije i zastupanje u složenim postupcima.",
     detail:
       "Njegov pristup zasniva se na detaljnoj analizi pravnog i činjeničnog okvira, jasnoj strategiji i neposrednom radu sa klijentom tokom celog angažmana.",
     paragraphs: [
-      "Dušan S. Marković je advokat i jedan od osnivača MB Law - Zajedničke advokatske kancelarije Marković i Bogdanović. Njegova praksa usmerena je na korporativno i privredno pravo, radno pravo, rešavanje sporova, nepokretnosti, investicije, prekršajno pravo, kao i zastupanje klijenata u složenim sudskim i drugim postupcima.",
+      "Dušan S. Marković je advokat i jedan od osnivača MB Law - Zajedničke advokatske kancelarije Marković i Bogdanović. Njegova praksa usmerena je na korporativno i privredno pravo, radno pravo, rešavanje sporova, nepokretnosti, investicije, kao i zastupanje klijenata u složenim sudskim i drugim postupcima.",
       "Tokom dosadašnje prakse savetovao je domaće i međunarodne privredne subjekte u vezi sa osnivanjem i poslovanjem u Srbiji, ugovornim odnosima, korporativnim promenama i investicionim pitanjima, dok značajan deo njegove prakse čini i zastupanje fizičkih i pravnih lica u građanskim, privrednim, odštetnim i drugim sporovima.",
       "Značajan deo njegove prakse čini zastupanje pred sudovima različite stvarne i mesne nadležnosti, u predmetima koji zahtevaju detaljnu procesnu strategiju, pažljivu analizu dokaza i kontinuirano vođenje postupka od njegovog pokretanja do pravnosnažnog okončanja.",
       "Pored advokatske prakse, redovno učestvuje u televizijskim emisijama na nacionalnim frekvencijama, gde kao pravni komentator govori o aktuelnim pravnim pitanjima i temama od šireg društvenog značaja. Kroz takve nastupe nastoji da složena pravna pitanja približi široj javnosti i doprinese boljem razumevanju prava, pravnih postupaka i njihovih praktičnih posledica.",
@@ -47,7 +49,7 @@ export const attorneys: Attorney[] = [
       { label: "Građansko pravo", href: "/oblasti-rada/gradjansko-pravo" },
     ],
     linkedIn: "#",
-    photo: "/slike jpg/IMG_7277.webp",
+    photo: "/slike jpg/IMG_7277_kancelarija.webp",
     founder: true,
   },
   {
@@ -71,7 +73,7 @@ export const attorneys: Attorney[] = [
       { label: "Prava stranaca", href: "/oblasti-rada/prava-stranaca" },
     ],
     linkedIn: "#",
-    photo: "/slike jpg/IMG_7276.webp",
+    photo: "/slike jpg/IMG_7276_kancelarija.webp",
     founder: true,
   },
   {
@@ -96,7 +98,9 @@ export const attorneys: Attorney[] = [
       },
     ],
     linkedIn: "#",
-    photo: "/slike jpg/IsidoraNovaSlika.webp",
+    photo: "/slike jpg/isidora.png",
+    photoClass: "object-cover object-top scale-[1.12] origin-top",
+    cardPhotoClass: "object-cover object-[50%_8%]",
   },
 ];
 

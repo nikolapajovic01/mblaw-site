@@ -9,17 +9,17 @@ import {
   usePracticeAreasHover,
 } from "@/components/MbLawPracticeAreasMenu";
 import { useMobileMenu } from "@/components/useLockBodyScroll";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavHref, getNavItems } from "@/i18n/nav";
 
-const navItems = [
-  { label: "POČETNA", href: "/", active: true },
-  { label: "O NAMA", href: "/o-nama" },
-  { label: "OBLASTI RADA", href: "/oblasti-rada" },
-  { label: "TIM", href: "/tim" },
-  { label: "UVIDI", href: "/uvidi" },
-  { label: "KONTAKT", href: "/kontakt" },
-];
-
-export default function MbLawHero() {
+export default function MbLawHero({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale);
+  const navItems = getNavItems(dict, locale);
   const { menuOpen, setMenuOpen, menuId } = useMobileMenu();
   const areas = usePracticeAreasHover();
 
@@ -79,7 +79,7 @@ export default function MbLawHero() {
         style={{ animation: "mbFade 1s ease-out .1s both" }}
       >
         <Link
-          href="/"
+          href={getNavHref("home", locale)}
           aria-label="MB Law - Zajednička advokatska kancelarija Marković i Bogdanović, početna strana"
           className="flex items-center gap-2 no-underline sm:gap-3"
         >
@@ -115,40 +115,42 @@ export default function MbLawHero() {
         <nav className="flex items-center gap-4 text-xs font-semibold tracking-[0.13em] sm:gap-6 lg:gap-9">
           <div className="hidden items-center gap-9 lg:flex">
             {navItems.map((item) => {
-              if (item.label === "OBLASTI RADA") {
+              const isActive = item.key === "home";
+
+              if (item.key === "practiceAreas") {
                 return (
                   <PracticeAreasTrigger
-                    key={item.label}
-                    href={item.href}
-                    isActive={item.active}
+                    key={item.key}
+                    isActive={isActive}
                     open={areas.open}
                     onEnter={areas.onEnter}
                     onLeave={areas.onLeave}
+                    locale={locale}
                   />
                 );
               }
 
               return (
                 <Link
-                  key={item.label}
+                  key={item.key}
                   href={item.href}
                   className={`group relative inline-flex items-center gap-2 pb-1.5 no-underline transition-colors ${
-                    item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2] hover:text-[#C78B3E]"
+                    isActive ? "text-[#F1EEE7]" : "text-[#C2BCB2] hover:text-[#C78B3E]"
                   }`}
                 >
-                  {item.active && <span className="h-1 w-1 bg-[#C78B3E]" />}
-                  {item.label}
+                  {isActive && <span className="h-1 w-1 bg-[#C78B3E]" />}
+                  {item.label.toUpperCase()}
                   <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#C78B3E] transition-transform duration-300 ease-out group-hover:scale-x-100" />
                 </Link>
               );
             })}
           </div>
 
-          <MbLawLangSwitch />
+          <MbLawLangSwitch locale={locale} />
 
           <button
             type="button"
-            aria-label={menuOpen ? "Zatvori meni" : "Otvori meni"}
+            aria-label={menuOpen ? dict.header.closeMenu : dict.header.openMenu}
             aria-expanded={menuOpen}
             aria-controls={menuId}
             onClick={() => setMenuOpen((v) => !v)}
@@ -184,24 +186,25 @@ export default function MbLawHero() {
       >
         <nav className="flex min-h-0 flex-1 flex-col items-start gap-7 overflow-y-auto overscroll-contain">
         {navItems.map((item) => {
-          if (item.label === "OBLASTI RADA") {
+          if (item.key === "practiceAreas") {
             return (
               <PracticeAreasMobile
-                key={item.label}
-                isActive={item.active}
+                key={item.key}
+                isActive={false}
                 menuOpen={menuOpen}
                 onNavigate={() => setMenuOpen(false)}
+                locale={locale}
               />
             );
           }
 
           return (
             <Link
-              key={item.label}
+              key={item.key}
               href={item.href}
               onClick={() => setMenuOpen(false)}
               className={`text-2xl font-semibold tracking-wide no-underline ${
-                item.active ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
+                item.key === "home" ? "text-[#F1EEE7]" : "text-[#C2BCB2]"
               }`}
               style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
             >
@@ -218,9 +221,9 @@ export default function MbLawHero() {
           className="flex flex-nowrap items-center gap-2 text-[11px] font-semibold tracking-[0.08em] text-[#C0B9AE] sm:gap-4 sm:text-[11.5px] sm:tracking-[0.2em]"
           style={{ animation: "mbUp .9s cubic-bezier(.2,.7,.2,1) .25s both" }}
         >
-          <span className="whitespace-nowrap">ADVOKATSKA KANCELARIJA</span>
+          <span className="whitespace-nowrap">{dict.hero.eyebrowLeft}</span>
           <span className="h-[13px] w-px shrink-0 bg-[#4A443C]" />
-          <span className="whitespace-nowrap text-[#8C877D]">BEOGRAD, SRBIJA</span>
+          <span className="whitespace-nowrap text-[#8C877D]">{dict.hero.eyebrowRight}</span>
         </div>
 
         <h1
@@ -231,24 +234,22 @@ export default function MbLawHero() {
             className="inline-block md:whitespace-nowrap"
             style={{ animation: "mbClipReveal 1s cubic-bezier(.16,1,.3,1) .32s both" }}
           >
-            Gde pravo postaje
+            {dict.hero.headingLine1}
           </span>
           <br />
           <span
             className="inline-block md:whitespace-nowrap"
             style={{ animation: "mbClipReveal 1s cubic-bezier(.16,1,.3,1) .48s both" }}
           >
-            vaša prednost.
+            {dict.hero.headingLine2}
           </span>
         </h1>
 
         <p
-          className="mt-4 max-w-[520px] text-[16px] font-medium leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:font-normal md:leading-[1.72]"
+          className="mt-4 max-w-[520px] text-[16px] font-medium leading-[1.6] text-[#ACA69D] md:mt-6 md:text-[16.5px] md:font-normal md:leading-[1.72] mb-prose"
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .56s both" }}
         >
-          Sveobuhvatna pravna podrška domaćim i međunarodnim klijentima - uz
-          strateški pristup, razumevanje njihovih potreba i pouzdanu zaštitu
-          poslovnih i ličnih interesa.
+          {dict.hero.paragraph}
         </p>
 
         <div
@@ -256,17 +257,17 @@ export default function MbLawHero() {
           style={{ animation: "mbUp 1s cubic-bezier(.2,.7,.2,1) .72s both" }}
         >
           <Link
-            href="/kontakt"
+            href={getNavHref("contact", locale)}
             className="inline-flex h-[50px] shrink-0 items-center whitespace-nowrap bg-[#C78B3E] px-4 text-[11px] font-semibold tracking-[0.08em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px] sm:px-8 sm:text-[11px] sm:tracking-[0.17em]"
           >
-            ZAKAŽITE KONSULTACIJU
+            {dict.hero.ctaPrimary}
           </Link>
           <Link
-            href="/oblasti-rada"
+            href={getNavHref("practiceAreas", locale)}
             className="group inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap text-[10.5px] font-semibold tracking-[0.06em] text-[#CFC9BF] no-underline transition-colors hover:text-[#F1EEE7] sm:min-h-0 sm:text-[12.5px] sm:font-medium sm:tracking-[0.15em]"
           >
             <span className="inline-flex items-center gap-1.5 border-b border-[#3A3831] pb-1.5 leading-none transition-colors group-hover:border-[#C78B3E]">
-              ISTRAŽITE OBLASTI RADA
+              {dict.hero.ctaSecondary}
               <svg
                 width="11"
                 height="11"

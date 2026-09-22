@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import { getAttorney, getPublishedAttorneys } from "@/data/team";
+import { isLocale, defaultLocale } from "@/i18n/config";
+import { getNavHref } from "@/i18n/nav";
+import { getDictionary } from "@/dictionaries";
 
 export function generateStaticParams() {
   return getPublishedAttorneys().map((attorney) => ({ slug: attorney.slug }));
@@ -13,14 +16,16 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/tim/[slug]">): Promise<Metadata> {
-  const { slug } = await params;
+}: PageProps<"/[locale]/tim/[slug]">): Promise<Metadata> {
+  const { slug, locale: rawLocale } = await params;
   const attorney = getAttorney(slug);
   if (!attorney) return {};
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const bio = getDictionary(locale).team.attorneys[slug]?.bio ?? attorney.bio;
 
   return {
     title: `${attorney.name} | MB Law - Zajednička advokatska kancelarija Marković i Bogdanović`,
-    description: attorney.bio,
+    description: bio,
   };
 }
 
@@ -56,7 +61,15 @@ function PortraitPlaceholder({ name }: { name: string }) {
   );
 }
 
-function Portrait({ name, photo }: { name: string; photo?: string }) {
+function Portrait({
+  name,
+  photo,
+  photoClass,
+}: {
+  name: string;
+  photo?: string;
+  photoClass?: string;
+}) {
   return (
     <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#C9C0AF]/40">
       {photo ? (
@@ -65,7 +78,8 @@ function Portrait({ name, photo }: { name: string; photo?: string }) {
           alt={name}
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-cover object-[50%_18%]"
+          className={photoClass ?? "object-cover object-[50%_18%]"}
+          quality={90}
           priority
         />
       ) : (
@@ -77,10 +91,16 @@ function Portrait({ name, photo }: { name: string; photo?: string }) {
 
 export default async function AttorneyPage({
   params,
-}: PageProps<"/tim/[slug]">) {
-  const { slug } = await params;
+}: PageProps<"/[locale]/tim/[slug]">) {
+  const { slug, locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const attorney = getAttorney(slug);
   if (!attorney) notFound();
+
+  const dict = getDictionary(locale);
+  const translated = dict.team.attorneys[attorney.slug];
+  const role = translated?.role ?? attorney.role;
+  const paragraphs = translated?.paragraphs ?? attorney.paragraphs;
 
   const published = getPublishedAttorneys();
   const index = published.findIndex((item) => item.slug === attorney.slug);
@@ -88,7 +108,7 @@ export default async function AttorneyPage({
 
   return (
     <>
-      <MbLawSiteHeader active="TIM" />
+      <MbLawSiteHeader active="team" locale={locale} />
 
       <main className="w-full bg-[#D5CDC0]">
         <section className="relative overflow-hidden px-6 py-14 md:px-[72px] md:py-16 lg:py-20 mb-light-section">
@@ -111,7 +131,7 @@ export default async function AttorneyPage({
 
           <div className="relative mb-section-shell">
             <Link
-              href="/tim"
+              href={getNavHref("team", locale)}
               className="mb-about-animate inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
               style={revealFade(0)}
             >
@@ -130,7 +150,7 @@ export default async function AttorneyPage({
                   strokeLinejoin="round"
                 />
               </svg>
-              TIM
+              {dict.nav.team.toUpperCase()}
             </Link>
 
             <div className="mt-10 grid items-start gap-10 lg:grid-cols-2 lg:gap-x-[72px]">
@@ -143,7 +163,7 @@ export default async function AttorneyPage({
                 />
                 <div className="mb-about-animate" style={revealUp(0.16)}>
                 <span className="mt-7 block text-[13px] font-semibold tracking-[0.12em] text-[#C78B3E]">
-                  {attorney.role}
+                  {role}
                 </span>
                 <h1
                   className="mt-4 text-[32px] font-bold leading-[1.12] tracking-[-0.02em] sm:text-[40px] md:text-[46px] mb-light-heading"
@@ -153,13 +173,13 @@ export default async function AttorneyPage({
                 </h1>
 
                 <div className="mt-8 lg:hidden">
-                  <Portrait name={attorney.name} photo={attorney.photo} />
+                  <Portrait name={attorney.name} photo={attorney.photo} photoClass={attorney.photoClass} />
                 </div>
 
-                {attorney.paragraphs.map((paragraph) => (
+                {paragraphs.map((paragraph) => (
                   <p
                     key={paragraph.slice(0, 28)}
-                    className="mt-5 max-w-[54ch] text-[16px] leading-[1.75] first:mt-6 md:text-[17px] mb-light-body"
+                    className="mt-5 max-w-[54ch] text-[16px] leading-[1.75] first:mt-6 md:text-[17px] mb-light-body mb-prose"
                   >
                     {paragraph}
                   </p>
@@ -167,10 +187,10 @@ export default async function AttorneyPage({
 
                 <div className="mt-10">
                   <Link
-                    href="/kontakt"
+                    href={getNavHref("contact", locale)}
                     className="inline-flex h-[50px] items-center bg-[#C78B3E] px-8 text-[11px] font-semibold tracking-[0.17em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px]"
                   >
-                    ZAKAŽITE KONSULTACIJU
+                    {dict.hero.ctaPrimary}
                   </Link>
                 </div>
                 </div>
@@ -180,7 +200,7 @@ export default async function AttorneyPage({
                 className="mb-about-animate hidden lg:block"
                 style={revealFade(0.22)}
               >
-                <Portrait name={attorney.name} photo={attorney.photo} />
+                <Portrait name={attorney.name} photo={attorney.photo} photoClass={attorney.photoClass} />
               </div>
             </div>
           </div>
@@ -198,13 +218,13 @@ export default async function AttorneyPage({
             />
             <div className="relative flex items-center justify-between gap-6 text-[14.5px]">
               <Link
-                href="/tim"
+                href={getNavHref("team", locale)}
                 className="no-underline transition-colors hover:text-[#C78B3E] mb-light-muted"
               >
-                Svi partneri
+                {dict.team.allPartners}
               </Link>
               <Link
-                href={`/tim/${other.slug}`}
+                href={`${getNavHref("team", locale)}/${other.slug}`}
                 className="group inline-flex min-w-0 items-center gap-2 text-right no-underline transition-colors hover:text-[#C78B3E] mb-light-heading"
               >
                 <span className="truncate">{other.name}</span>
@@ -230,7 +250,7 @@ export default async function AttorneyPage({
         ) : null}
       </main>
 
-      <MbLawFooter />
+      <MbLawFooter locale={locale} />
     </>
   );
 }

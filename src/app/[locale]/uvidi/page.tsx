@@ -10,15 +10,26 @@ import {
   insightTopics,
   insights,
 } from "@/data/insights";
+import { isLocale, defaultLocale } from "@/i18n/config";
+import { getNavHref } from "@/i18n/nav";
+import { getDictionary } from "@/dictionaries";
 
 const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
 
-export const metadata: Metadata = {
-  title: `Uvidi | ${FIRM_NAME}`,
-  description:
-    "Analize i pravna praksa advokatske kancelarije Marković i Bogdanović: privredno pravo, nekretnine, radni odnosi i odbrana u postupku.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  return {
+    title: `${dict.nav.insights} | ${FIRM_NAME}`,
+    description: dict.insights.indexLead,
+  };
+}
 
 function buildJsonLd() {
   return {
@@ -41,27 +52,33 @@ function buildJsonLd() {
   };
 }
 
-function filterHref(slug?: string) {
-  return slug ? `/uvidi?oblast=${slug}` : "/uvidi";
+function filterHref(base: string, slug?: string) {
+  return slug ? `${base}?oblast=${slug}` : base;
 }
 
 export default async function InsightsPage({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ oblast?: string | string[] }>;
 }) {
-  const params = await searchParams;
-  const raw = params.oblast;
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  const base = getNavHref("insights", locale);
+  const query = await searchParams;
+  const raw = query.oblast;
   const oblast = Array.isArray(raw) ? raw[0] : raw;
   const activeTopic = getInsightTopic(oblast);
   const filtered = getInsightsByTopic(activeTopic?.slug);
   const jsonLd = buildJsonLd();
 
   const filters = [
-    { slug: undefined as string | undefined, label: "Sve", active: !activeTopic },
+    { slug: undefined as string | undefined, label: dict.insights.filterAll, active: !activeTopic },
     ...insightTopics.map((topic) => ({
       slug: topic.slug as string | undefined,
-      label: topic.label,
+      label: dict.insights.topics[topic.slug] ?? topic.label,
       active: activeTopic?.slug === topic.slug,
     })),
   ];
@@ -75,7 +92,7 @@ export default async function InsightsPage({
         }}
       />
 
-      <MbLawSiteHeader active="UVIDI" />
+      <MbLawSiteHeader active="insights" locale={locale} />
 
       <main className="w-full bg-[#2A231C]">
         <section className="relative overflow-hidden px-6 py-14 md:px-[72px] md:py-16 lg:py-20">
@@ -87,25 +104,24 @@ export default async function InsightsPage({
           <div className="relative mb-section-shell">
             <div className="h-px w-16 bg-[#C78B3E]" />
             <span className="mt-6 block text-[10.5px] font-semibold tracking-[0.26em] text-[#77726A] md:text-[11px]">
-              UVIDI
+              {dict.insights.eyebrow}
             </span>
             <h1
               className="mt-4 max-w-[18ch] text-[32px] font-bold leading-[1.12] tracking-[-0.02em] text-[#F1EEE7] sm:text-[40px] md:text-[48px]"
               style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
             >
-              Najnovije analize i pravna praksa.
+              {dict.insights.heading}
             </h1>
-            <p className="mt-5 max-w-[46ch] text-[16px] leading-[1.75] text-[#D5CFC6] md:text-[17px]">
-              Kratki tekstovi o propisima i praksi. Otvorite temu koja vas se
-              tiče.
+            <p className="mt-5 max-w-[46ch] text-[16px] leading-[1.75] text-[#D5CFC6] md:text-[17px] mb-prose">
+              {dict.insights.indexLead}
             </p>
 
-            <nav aria-label="Filter uvida po oblasti" className="mt-8">
+            <nav aria-label={dict.insights.filterAriaLabel} className="mt-8">
               <ul className="flex gap-x-6 gap-y-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {filters.map((item) => (
                   <li key={item.label} className="shrink-0">
                     <Link
-                      href={filterHref(item.slug)}
+                      href={filterHref(base, item.slug)}
                       scroll={false}
                       aria-current={item.active ? "page" : undefined}
                       className={`block pb-1 text-[13px] font-semibold tracking-[0.06em] no-underline transition-colors ${
@@ -128,6 +144,7 @@ export default async function InsightsPage({
                     post={post}
                     variant="grid"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    locale={locale}
                   />
                 </li>
               ))}
@@ -135,10 +152,10 @@ export default async function InsightsPage({
           </div>
         </section>
 
-        <MbLawCTA />
+        <MbLawCTA locale={locale} />
       </main>
 
-      <MbLawFooter />
+      <MbLawFooter locale={locale} />
     </>
   );
 }

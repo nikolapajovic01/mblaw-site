@@ -5,6 +5,9 @@ import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawInsightCard from "@/components/MbLawInsightCard";
 import { getInsight, insights } from "@/data/insights";
+import { isLocale, defaultLocale, intlTags } from "@/i18n/config";
+import { getNavHref } from "@/i18n/nav";
+import { getDictionary } from "@/dictionaries";
 
 const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
@@ -15,23 +18,37 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/uvidi/[slug]">): Promise<Metadata> {
-  const { slug } = await params;
+}: PageProps<"/[locale]/uvidi/[slug]">): Promise<Metadata> {
+  const { slug, locale: rawLocale } = await params;
   const post = getInsight(slug);
   if (!post) return {};
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const translated = getDictionary(locale).insights.posts[slug];
 
   return {
-    title: `${post.title} | ${FIRM_NAME}`,
-    description: post.excerpt,
+    title: `${translated?.title ?? post.title} | ${FIRM_NAME}`,
+    description: translated?.excerpt ?? post.excerpt,
   };
 }
 
 export default async function InsightArticlePage({
   params,
-}: PageProps<"/uvidi/[slug]">) {
-  const { slug } = await params;
+}: PageProps<"/[locale]/uvidi/[slug]">) {
+  const { slug, locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const post = getInsight(slug);
   if (!post) notFound();
+
+  const dict = getDictionary(locale);
+  const translated = dict.insights.posts[slug];
+  const tag = translated?.tag ?? post.tag;
+  const title = translated?.title ?? post.title;
+  const excerpt = translated?.excerpt ?? post.excerpt;
+  const body = translated?.body ?? post.body;
+  const month = new Intl.DateTimeFormat(intlTags[locale], { month: "long" })
+    .format(new Date(post.isoDate))
+    .toUpperCase();
+  const year = new Date(post.isoDate).getFullYear();
 
   const related = [
     ...insights.filter((item) => item.slug !== slug && item.topic === post.topic),
@@ -41,10 +58,10 @@ export default async function InsightArticlePage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
+    headline: title,
+    description: excerpt,
     datePublished: post.isoDate,
-    articleSection: post.tag,
+    articleSection: tag,
     url: `${FIRM_URL}/uvidi/${post.slug}`,
     publisher: {
       "@type": "Organization",
@@ -62,7 +79,7 @@ export default async function InsightArticlePage({
         }}
       />
 
-      <MbLawSiteHeader active="UVIDI" />
+      <MbLawSiteHeader active="insights" locale={locale} />
 
       <main className="w-full bg-[#2A231C]">
         <article className="relative overflow-hidden px-6 pb-14 pt-12 md:px-[72px] md:pb-20 md:pt-16">
@@ -73,7 +90,7 @@ export default async function InsightArticlePage({
 
           <div className="relative max-w-[680px]">
             <Link
-              href="/uvidi"
+              href={getNavHref("insights", locale)}
               className="inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] text-[#8C877D] no-underline transition-colors hover:text-[#C78B3E]"
             >
               <svg
@@ -91,7 +108,7 @@ export default async function InsightArticlePage({
                   strokeLinejoin="round"
                 />
               </svg>
-              UVIDI
+              {dict.insights.eyebrow}
             </Link>
 
             <div className="mt-10">
@@ -106,29 +123,29 @@ export default async function InsightArticlePage({
                   {post.day}
                 </span>
                 <span className="mt-1.5 block text-[11px] font-semibold tracking-[0.2em] text-[#C78B3E]">
-                  {post.month} {post.year}
+                  {month} {year}
                 </span>
               </time>
             </div>
 
             <span className="mt-8 block text-[10px] font-semibold tracking-[0.14em] text-[#C78B3E]">
-              {post.tag}
+              {tag}
             </span>
             <h1
               className="mt-4 text-[32px] font-bold leading-[1.14] tracking-[-0.02em] text-[#F1EEE7] sm:text-[40px] md:text-[46px]"
               style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
             >
-              {post.title}
+              {title}
             </h1>
-            <p className="mt-6 text-[17px] leading-[1.75] text-[#D5CFC6] md:text-[18px]">
-              {post.excerpt}
+            <p className="mt-6 text-[17px] leading-[1.75] text-[#D5CFC6] md:text-[18px] mb-prose">
+              {excerpt}
             </p>
 
             <div className="mt-10 flex flex-col gap-5 border-t border-[#4A4034] pt-10">
-              {post.body.map((paragraph) => (
+              {body.map((paragraph) => (
                 <p
                   key={paragraph.slice(0, 32)}
-                  className="text-[16px] leading-[1.8] text-[#C2BCB2] md:text-[17px]"
+                  className="text-[16px] leading-[1.8] text-[#C2BCB2] md:text-[17px] mb-prose"
                 >
                   {paragraph}
                 </p>
@@ -137,13 +154,13 @@ export default async function InsightArticlePage({
 
             <div className="mt-12 border-t border-[#4A4034] pt-10">
               <p className="text-[15px] leading-[1.65] text-[#8C877D]">
-                Ako je ovo vaš predmet, prvi korak je razgovor.
+                {dict.common.firstStepCta}
               </p>
               <Link
-                href="/kontakt"
+                href={getNavHref("contact", locale)}
                 className="mt-5 inline-flex h-[50px] items-center bg-[#C78B3E] px-8 text-[11px] font-semibold tracking-[0.17em] text-[#120F0A] no-underline transition-colors hover:bg-[#D89B4C] sm:h-[52px]"
               >
-                ZAKAŽITE KONSULTACIJU
+                {dict.hero.ctaPrimary}
               </Link>
             </div>
           </div>
@@ -154,13 +171,13 @@ export default async function InsightArticlePage({
             <div className="relative mb-section-shell border-t border-[#4A4034] pt-12">
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <span className="text-[10.5px] font-semibold tracking-[0.26em] text-[#77726A]">
-                  JOŠ UVIDA
+                  {dict.insights.moreInsights}
                 </span>
                 <Link
-                  href="/uvidi"
+                  href={getNavHref("insights", locale)}
                   className="text-[11.5px] font-medium tracking-[0.15em] text-[#CFC9BF] no-underline transition-colors hover:text-[#C78B3E]"
                 >
-                  SVI UVIDI
+                  {dict.insights.viewAll}
                 </Link>
               </div>
 
@@ -171,6 +188,7 @@ export default async function InsightArticlePage({
                       post={item}
                       variant="grid"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      locale={locale}
                     />
                   </li>
                 ))}
@@ -180,7 +198,7 @@ export default async function InsightArticlePage({
         ) : null}
       </main>
 
-      <MbLawFooter />
+      <MbLawFooter locale={locale} />
     </>
   );
 }

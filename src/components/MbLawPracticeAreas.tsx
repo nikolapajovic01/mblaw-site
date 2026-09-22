@@ -4,12 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import {
-  getPracticeGroupHref,
-  practiceMenuGroups,
-} from "@/data/practice-areas";
+import { practiceMenuGroups } from "@/data/practice-areas";
+import { defaultLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/dictionaries";
+import { getNavHref, getPracticeGroupHref } from "@/i18n/nav";
 
-export default function MbLawPracticeAreas() {
+export default function MbLawPracticeAreas({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
+  const dict = getDictionary(locale).practiceAreas;
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -67,21 +72,23 @@ export default function MbLawPracticeAreas() {
             }
           />
           <span className="mt-5 block text-[10.5px] font-semibold tracking-[0.26em] text-[#77726A] md:text-[11px]">
-            OBLASTI RADA
+            {dict.eyebrow}
           </span>
           <h2
             className="mt-3 text-[26px] font-bold leading-[1.14] tracking-[-0.015em] text-[#F1EEE7] sm:text-[30px] md:text-[34px]"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
-            Ključne oblasti naše pravne prakse.
+            {dict.heading}
           </h2>
         </header>
 
         <ul className="mt-7 border-t border-[#2A2723] md:mt-8">
-          {practiceMenuGroups.map((group, i) => (
+          {practiceMenuGroups.map((group, i) => {
+            const label = dict.groups[group.slug];
+            return (
             <li key={group.slug} style={reveal(0.12 + i * 0.08)}>
               <Link
-                href={getPracticeGroupHref(group)}
+                href={getPracticeGroupHref(group, locale)}
                 className="group relative grid grid-cols-1 gap-3 border-b border-[#2A2723] py-3.5 no-underline transition-colors hover:border-[#3A3530] md:grid-cols-12 md:items-center md:gap-x-6 md:py-5 lg:gap-x-10"
               >
                 <span
@@ -97,15 +104,15 @@ export default function MbLawPracticeAreas() {
                   className="text-[20px] font-semibold leading-[1.12] tracking-[-0.01em] text-[#EDE9E1] transition-colors group-hover:text-[#F1EEE7] sm:text-[22px] md:col-span-4 lg:text-[24px]"
                   style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
                 >
-                  {group.title}
+                  {label?.title ?? group.title}
                 </span>
 
                 <span className="text-[13.5px] leading-[1.55] text-[#8C877D] transition-colors group-hover:text-[#A39E94] md:col-span-6 lg:col-span-5">
-                  {group.navLine}
+                  {label?.navLine ?? group.navLine}
                 </span>
 
                 <span className="inline-flex items-center gap-1.5 text-[10.5px] font-semibold tracking-[0.12em] text-[#7A746B] transition-colors group-hover:text-[#C78B3E] md:col-span-1 md:justify-end">
-                  <span className="hidden sm:inline">DETALJI</span>
+                  <span className="hidden sm:inline">{dict.details}</span>
                   <svg
                     width="11"
                     height="11"
@@ -125,16 +132,17 @@ export default function MbLawPracticeAreas() {
                 </span>
               </Link>
             </li>
-          ))}
+            );
+          })}
         </ul>
 
         <div className="mt-6 md:mt-7" style={reveal(0.62)}>
           <Link
-            href="/oblasti-rada"
+            href={getNavHref("practiceAreas", locale)}
             className="group inline-flex items-center gap-1.5 text-[12.5px] font-medium tracking-[0.15em] text-[#CFC9BF] no-underline transition-colors hover:text-[#F1EEE7]"
           >
             <span className="border-b border-[#3A3831] pb-1.5 leading-none transition-colors group-hover:border-[#C78B3E]">
-              SVE OBLASTI RADA
+              {dict.viewAll}
             </span>
             <svg
               width="11"
