@@ -100,7 +100,8 @@ export const attorneys: Attorney[] = [
     linkedIn: "#",
     photo: "/slike jpg/isidora.png",
     photoClass: "object-cover object-top scale-[1.12] origin-top",
-    cardPhotoClass: "object-cover object-[50%_8%]",
+    cardPhotoClass:
+      "object-cover origin-top object-top scale-[1.15] lg:scale-100 lg:object-[50%_8%]",
   },
 ];
 
