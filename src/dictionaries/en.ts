@@ -42,7 +42,7 @@ const en = {
     eyebrowLeft: "LAW FIRM",
     eyebrowRight: "BELGRADE, SERBIA",
     headingLine1: "Where the law becomes",
-    headingLine2: "your advantage.",
+    headingLine2: "your advantage",
     paragraph:
       "Comprehensive legal support for domestic and international clients - with a strategic approach, an understanding of their needs and reliable protection of business and personal interests.",
     ctaPrimary: "SCHEDULE A CONSULTATION",
@@ -50,7 +50,7 @@ const en = {
   },
   about: {
     eyebrow: "ABOUT US",
-    heading: "From question to resolution.",
+    heading: "From question to resolution",
     paragraph1:
       "MB Law - Marković & Bogdanović Joint Law Office provides legal support to domestic and international clients on corporate, civil and criminal matters.",
     paragraph2:
@@ -90,7 +90,7 @@ const en = {
   },
   practiceAreas: {
     eyebrow: "PRACTICE AREAS",
-    heading: "Key areas of our legal practice.",
+    heading: "Key areas of our legal practice",
     details: "DETAILS",
     viewAll: "ALL PRACTICE AREAS",
     menuAll: "ALL AREAS",
@@ -193,7 +193,7 @@ const en = {
   },
   insights: {
     eyebrow: "INSIGHTS",
-    heading: "The latest analysis and legal practice.",
+    heading: "The latest analysis and legal practice",
     prev: "Previous insights",
     next: "Next insights",
     viewAll: "ALL INSIGHTS",
@@ -279,7 +279,7 @@ const en = {
   },
   cta: {
     eyebrow: "CONSULTATION",
-    heading: "The first step is a conversation.",
+    heading: "The first step is a conversation",
     paragraph:
       "Schedule an initial meeting and get a clear overview of your options before making a decision. Discreet, precise and focused on your goal.",
     button: "SCHEDULE A CONSULTATION",

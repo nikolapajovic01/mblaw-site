@@ -43,7 +43,7 @@ const sr = {
     eyebrowLeft: "ADVOKATSKA KANCELARIJA",
     eyebrowRight: "BEOGRAD, SRBIJA",
     headingLine1: "Gde pravo postaje",
-    headingLine2: "vaša prednost.",
+    headingLine2: "vaša prednost",
     paragraph:
       "Sveobuhvatna pravna podrška domaćim i međunarodnim klijentima - uz strateški pristup, razumevanje njihovih potreba i pouzdanu zaštitu poslovnih i ličnih interesa.",
     ctaPrimary: "ZAKAŽITE KONSULTACIJU",
@@ -51,7 +51,7 @@ const sr = {
   },
   about: {
     eyebrow: "O NAMA",
-    heading: "Od pitanja do rešenja.",
+    heading: "Od pitanja do rešenja",
     paragraph1:
       "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku domaćim i međunarodnim klijentima u korporativnim, građanskim i kaznenim pitanjima.",
     paragraph2:
@@ -91,7 +91,7 @@ const sr = {
   },
   practiceAreas: {
     eyebrow: "OBLASTI RADA",
-    heading: "Ključne oblasti naše pravne prakse.",
+    heading: "Ključne oblasti naše pravne prakse",
     details: "DETALJI",
     viewAll: "SVE OBLASTI RADA",
     menuAll: "SVE OBLASTI",
@@ -194,7 +194,7 @@ const sr = {
   },
   insights: {
     eyebrow: "UVIDI",
-    heading: "Najnovije analize i pravna praksa.",
+    heading: "Najnovije analize i pravna praksa",
     prev: "Prethodni uvidi",
     next: "Sledeći uvidi",
     viewAll: "SVI UVIDI",
@@ -280,7 +280,7 @@ const sr = {
   },
   cta: {
     eyebrow: "KONSULTACIJA",
-    heading: "Prvi korak je razgovor.",
+    heading: "Prvi korak je razgovor",
     paragraph:
       "Zakažite inicijalni sastanak i dobijte jasan pregled opcija pre nego što donesete odluku. Diskretno, precizno i usmereno ka vašem cilju.",
     button: "ZAKAŽITE KONSULTACIJU",
