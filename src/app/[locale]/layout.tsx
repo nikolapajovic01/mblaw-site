@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Newsreader, Instrument_Sans, Lora, Manrope } from "next/font/google";
 import MbLawMobileActions from "@/components/MbLawMobileActions";
 import { locales, htmlLang, isLocale } from "@/i18n/config";
 import { getDictionary } from "@/dictionaries";
+import { FIRM, OG_IMAGE, SITE_URL, jsonLdString, organizationJsonLd } from "@/lib/seo";
 import "../globals.css";
 
 // latin-ext covers the Serbian diacritics (ć č š ž đ); plain latin does not.
@@ -48,14 +49,52 @@ export async function generateMetadata({
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
 
+  // Page-level metadata (canonical, hreflang, Open Graph) comes from pageMetadata()
+  // in each page; these are only the defaults every page inherits.
   return {
-    title: dict.meta.homeTitle,
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: dict.meta.homeTitle,
+      template: `%s | ${FIRM.shortName}`,
+    },
     description: dict.meta.homeDescription,
-    alternates: {
-      languages: Object.fromEntries(locales.map((l) => [l, `/${l}`])),
+    applicationName: FIRM.shortName,
+    authors: [{ name: FIRM.name, url: SITE_URL }],
+    creator: FIRM.name,
+    publisher: FIRM.name,
+    formatDetection: { telephone: false, email: false, address: false },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
+    openGraph: {
+      siteName: FIRM.shortName,
+      type: "website",
+      images: [OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [OG_IMAGE.url],
+    },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+      other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+        ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+        : undefined,
     },
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: "#1B1916",
+};
 
 // suppressHydrationWarning: the intro bootstrap script sets data-mb-intro on
 // <html> before hydration, which React would otherwise report as a mismatch.
@@ -75,6 +114,12 @@ export default async function RootLayout({
         className={`${fontVariables} flex min-h-dvh flex-col bg-[#1B1916]`}
         style={{ fontFamily: "var(--font-mb-sans), Helvetica, sans-serif" }}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: jsonLdString(organizationJsonLd(locale, getDictionary(locale).meta.homeDescription)),
+          }}
+        />
         {children}
         <MbLawMobileActions locale={locale} />
       </body>

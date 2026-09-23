@@ -5,6 +5,18 @@ const en = {
     homeTitle: "MB Law - Marković & Bogdanović Joint Law Office | Belgrade",
     homeDescription:
       "MB Law - Marković & Bogdanović Joint Law Office in Belgrade provides comprehensive legal services to domestic and international clients.",
+    practiceTitleSuffix: "Belgrade law firm",
+    aboutDescription:
+      "MB Law is the Marković & Bogdanović Joint Law Office in Belgrade, Serbia. Learn who handles your case and how we work with local and foreign clients.",
+    practiceAreasDescription:
+      "Practice areas of MB Law in Belgrade, Serbia: corporate, criminal, civil, employment and tax law, real estate and immigration for foreign nationals.",
+    teamDescription:
+      "Partners of MB Law in Belgrade: Dušan S. Marković, Milovan M. Bogdanović and Isidora V. Marković. Meet the lawyers who will handle your case.",
+    insightsDescription:
+      "Legal analysis from MB Law in Belgrade on Serbian regulations and case law: company law, real estate, employment and criminal law.",
+    contactDescription:
+      "Contact MB Law at Resavska 68, Belgrade, Serbia. Phone +381 65 389 4111, email office@mblaw.rs. Book a consultation with a partner.",
+    attorneyTitleSuffix: "lawyer in Belgrade",
   },
   nav: {
     home: "Home",

@@ -10,12 +10,21 @@ import {
   insightTopics,
   insights,
 } from "@/data/insights";
-import { isLocale, defaultLocale } from "@/i18n/config";
+import { isLocale, defaultLocale, htmlLang, type Locale } from "@/i18n/config";
 import { getNavHref } from "@/i18n/nav";
-import { getDictionary } from "@/dictionaries";
+import { getDictionary, type Dictionary } from "@/dictionaries";
+import {
+  FIRM,
+  ORGANIZATION_ID,
+  WEBSITE_ID,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdString,
+  localePath,
+  pageMetadata,
+} from "@/lib/seo";
 
-const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
-const FIRM_URL = "https://mblaw.rs";
+const PATH = "/uvidi";
 
 export async function generateMetadata({
   params,
@@ -25,30 +34,44 @@ export async function generateMetadata({
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const dict = getDictionary(locale);
-  return {
-    title: `${dict.nav.insights} | ${FIRM_NAME}`,
-    description: dict.insights.indexLead,
-  };
+  // ?oblast= filter views share this canonical, so they don't compete with it.
+  return pageMetadata({
+    locale,
+    path: PATH,
+    title: dict.nav.insights,
+    description: dict.meta.insightsDescription,
+  });
 }
 
-function buildJsonLd() {
+function buildJsonLd(locale: Locale, dict: Dictionary) {
+  const url = absoluteUrl(localePath(locale, PATH));
   return {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": `${FIRM_URL}/uvidi#page`,
-    url: `${FIRM_URL}/uvidi`,
-    name: `Uvidi | ${FIRM_NAME}`,
-    description:
-      "Analize i pravna praksa advokatske kancelarije Marković i Bogdanović.",
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: insights.map((post, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: `${FIRM_URL}/uvidi/${post.slug}`,
-        name: post.title,
-      })),
-    },
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${url}#page`,
+        url,
+        name: `${dict.nav.insights} | ${FIRM.shortName}`,
+        description: dict.meta.insightsDescription,
+        inLanguage: htmlLang[locale],
+        isPartOf: { "@id": WEBSITE_ID },
+        publisher: { "@id": ORGANIZATION_ID },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: insights.map((post, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: absoluteUrl(localePath(locale, `${PATH}/${post.slug}`)),
+            name: dict.insights.posts[post.slug]?.title ?? post.title,
+          })),
+        },
+      },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.insights, path: localePath(locale, PATH) },
+      ]),
+    ],
   };
 }
 
@@ -72,7 +95,7 @@ export default async function InsightsPage({
   const oblast = Array.isArray(raw) ? raw[0] : raw;
   const activeTopic = getInsightTopic(oblast);
   const filtered = getInsightsByTopic(activeTopic?.slug);
-  const jsonLd = buildJsonLd();
+  const jsonLd = buildJsonLd(locale, dict);
 
   const filters = [
     { slug: undefined as string | undefined, label: dict.insights.filterAll, active: !activeTopic },
@@ -88,7 +111,7 @@ export default async function InsightsPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
+          __html: jsonLdString(jsonLd),
         }}
       />
 

@@ -2,6 +2,15 @@ export type Dictionary = {
   meta: {
     homeTitle: string;
     homeDescription: string;
+    /** Suffix appended to practice-area titles, e.g. "Radno pravo - advokat Beograd". */
+    practiceTitleSuffix: string;
+    aboutDescription: string;
+    practiceAreasDescription: string;
+    teamDescription: string;
+    insightsDescription: string;
+    contactDescription: string;
+    /** Used for attorney pages: "{name}, {role} | MB Law". */
+    attorneyTitleSuffix: string;
   };
   nav: {
     home: string;

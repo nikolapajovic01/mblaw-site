@@ -5,10 +5,21 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
-import { getAttorney, getPublishedAttorneys } from "@/data/team";
-import { isLocale, defaultLocale } from "@/i18n/config";
+import { getAttorney, getPublishedAttorneys, type Attorney } from "@/data/team";
+import { isLocale, defaultLocale, htmlLang, type Locale } from "@/i18n/config";
 import { getNavHref } from "@/i18n/nav";
-import { getDictionary } from "@/dictionaries";
+import { getDictionary, type Dictionary } from "@/dictionaries";
+import {
+  FIRM,
+  ORGANIZATION_ID,
+  SITE_URL,
+  WEBSITE_ID,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdString,
+  localePath,
+  pageMetadata,
+} from "@/lib/seo";
 
 export function generateStaticParams() {
   return getPublishedAttorneys().map((attorney) => ({ slug: attorney.slug }));
@@ -21,11 +32,53 @@ export async function generateMetadata({
   const attorney = getAttorney(slug);
   if (!attorney) return {};
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
-  const bio = getDictionary(locale).team.attorneys[slug]?.bio ?? attorney.bio;
+  const dict = getDictionary(locale);
+  const bio = dict.team.attorneys[slug]?.bio ?? attorney.bio;
+
+  return pageMetadata({
+    locale,
+    path: `/tim/${attorney.slug}`,
+    title: `${attorney.name}, ${dict.meta.attorneyTitleSuffix}`,
+    description: bio,
+    type: "profile",
+  });
+}
+
+function buildJsonLd(attorney: Attorney, locale: Locale, dict: Dictionary) {
+  const translated = dict.team.attorneys[attorney.slug];
+  const url = absoluteUrl(localePath(locale, `/tim/${attorney.slug}`));
+  const sameAs = attorney.linkedIn.startsWith("http") ? [attorney.linkedIn] : undefined;
 
   return {
-    title: `${attorney.name} | MB Law - Zajednička advokatska kancelarija Marković i Bogdanović`,
-    description: bio,
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": `${url}#page`,
+        url,
+        name: `${attorney.name} | ${FIRM.shortName}`,
+        inLanguage: htmlLang[locale],
+        isPartOf: { "@id": WEBSITE_ID },
+        mainEntity: { "@id": `${SITE_URL}/#person-${attorney.slug}` },
+      },
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person-${attorney.slug}`,
+        name: attorney.name,
+        jobTitle: translated?.role ?? attorney.role,
+        description: translated?.bio ?? attorney.bio,
+        url,
+        image: attorney.photo ? absoluteUrl(encodeURI(attorney.photo)) : undefined,
+        worksFor: { "@id": ORGANIZATION_ID },
+        knowsAbout: attorney.focus.map((item) => item.label),
+        sameAs,
+      },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.team, path: localePath(locale, "/tim") },
+        { name: attorney.name, path: localePath(locale, `/tim/${attorney.slug}`) },
+      ]),
+    ],
   };
 }
 
@@ -108,6 +161,11 @@ export default async function AttorneyPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdString(buildJsonLd(attorney, locale, dict)) }}
+      />
+
       <MbLawSiteHeader active="team" locale={locale} />
 
       <main className="w-full bg-[#D5CDC0]">

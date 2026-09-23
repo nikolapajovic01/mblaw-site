@@ -17,12 +17,22 @@ import {
   type PracticeAreaSection,
   type PracticeMenuGroup,
 } from "@/data/practice-areas";
-import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
+import { isLocale, defaultLocale, htmlLang, type Locale } from "@/i18n/config";
 import { getNavHref, getPracticeGroupHref } from "@/i18n/nav";
 import { getDictionary } from "@/dictionaries";
 import { getPracticeContent } from "@/dictionaries";
 import type { Dictionary } from "@/dictionaries/types";
 import type { PracticeContentTranslation } from "@/dictionaries/practice-content/types";
+import {
+  ORGANIZATION_ID,
+  WEBSITE_ID,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdString,
+  localePath,
+  pageMetadata,
+  withTitleSuffix,
+} from "@/lib/seo";
 
 function localizedArea(area: PracticeArea, content?: PracticeContentTranslation): PracticeArea {
   const t = content?.areas[area.slug];
@@ -42,8 +52,7 @@ function areaTag(area: PracticeArea, content?: PracticeContentTranslation): stri
   return content?.areaTags[area.slug] ?? getPracticeAreaTag(area);
 }
 
-const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
-const FIRM_URL = "https://mblaw.rs";
+const PATH = "/oblasti-rada";
 
 function toSectionId(heading: string, index: number) {
   const slug = heading
@@ -72,34 +81,31 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/oblasti-rada/[slug]">): Promise<Metadata> {
   const { slug, locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
   const content = getPracticeContent(locale);
 
-  const area = getPracticeArea(slug);
+  // Single-area groups redirect to their area, so describe the area they land on.
+  const group = getPracticeMenuGroup(slug);
+  const area =
+    getPracticeArea(slug) ??
+    (group?.areaSlugs.length === 1 ? getPracticeArea(group.areaSlugs[0]) : undefined);
+
   if (area) {
     const localized = localizedArea(area, content);
-    return {
-      title: `${localized.title} | ${FIRM_NAME}`,
+    return pageMetadata({
+      locale,
+      path: `${PATH}/${area.slug}`,
+      title: withTitleSuffix(localized.title, dict.meta.practiceTitleSuffix),
       description: localized.summary,
-    };
-  }
-
-  const group = getPracticeMenuGroup(slug);
-  if (group?.areaSlugs.length === 1) {
-    const leaf = getPracticeArea(group.areaSlugs[0]);
-    if (leaf) {
-      const localized = localizedArea(leaf, content);
-      return {
-        title: `${localized.title} | ${FIRM_NAME}`,
-        description: localized.summary,
-      };
-    }
+    });
   }
   if (group) {
-    const dict = getDictionary(locale);
-    return {
-      title: `${groupTitle(group, dict)} | ${FIRM_NAME}`,
+    return pageMetadata({
+      locale,
+      path: `${PATH}/${group.slug}`,
+      title: withTitleSuffix(groupTitle(group, dict), dict.meta.practiceTitleSuffix),
       description: groupSummary(group, content),
-    };
+    });
   }
 
   return {};
@@ -133,27 +139,41 @@ export default async function PracticeAreaPage({
       ? getPracticeArea(groupSlugs[groupIndex + 1])
       : undefined;
 
+  const url = absoluteUrl(localePath(locale, `${PATH}/${area.slug}`));
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: area.title,
-    description: area.summary,
-    url: `${FIRM_URL}/oblasti-rada/${area.slug}`,
-    inLanguage: locale,
-    provider: {
-      "@type": "LegalService",
-      name: FIRM_NAME,
-      url: FIRM_URL,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Resavska 68",
-        addressLocality: "Beograd",
-        addressCountry: "RS",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#page`,
+        url,
+        name: area.title,
+        description: area.summary,
+        inLanguage: htmlLang[locale],
+        isPartOf: { "@id": WEBSITE_ID },
+        mainEntity: { "@id": `${url}#service` },
       },
-    },
-    areaServed: [
-      { "@type": "City", name: "Belgrade" },
-      { "@type": "Country", name: "Serbia" },
+      {
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: area.title,
+        serviceType: area.title,
+        description: area.summary,
+        url,
+        provider: { "@id": ORGANIZATION_ID },
+        areaServed: [
+          { "@type": "City", name: "Belgrade" },
+          { "@type": "Country", name: "Serbia" },
+        ],
+      },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.practiceAreas, path: localePath(locale, PATH) },
+        ...(group && group.areaSlugs.length > 1
+          ? [{ name: groupTitle(group, dict), path: localePath(locale, `${PATH}/${group.slug}`) }]
+          : []),
+        { name: area.title, path: localePath(locale, `${PATH}/${area.slug}`) },
+      ]),
     ],
   };
 
@@ -285,23 +305,35 @@ function PracticeGroupHub({
     "0",
   );
 
+  const url = absoluteUrl(localePath(locale, `${PATH}/${group.slug}`));
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: title,
-    description: summary,
-    url: `${FIRM_URL}/oblasti-rada/${group.slug}`,
-    inLanguage: locale,
-    isPartOf: { "@type": "WebSite", name: FIRM_NAME, url: FIRM_URL },
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: areas.map((area, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: `${FIRM_URL}/oblasti-rada/${area.slug}`,
-        name: area.title,
-      })),
-    },
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${url}#page`,
+        name: title,
+        description: summary,
+        url,
+        inLanguage: htmlLang[locale],
+        isPartOf: { "@id": WEBSITE_ID },
+        about: { "@id": ORGANIZATION_ID },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: areas.map((area, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: absoluteUrl(localePath(locale, `${PATH}/${area.slug}`)),
+            name: area.title,
+          })),
+        },
+      },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.practiceAreas, path: localePath(locale, PATH) },
+        { name: title, path: localePath(locale, `${PATH}/${group.slug}`) },
+      ]),
+    ],
   };
 
   return (
@@ -735,7 +767,7 @@ function ParchmentPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
 
       <MbLawSiteHeader active="practiceAreas" locale={locale} />

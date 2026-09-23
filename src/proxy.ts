@@ -15,7 +15,8 @@ export function proxy(request: NextRequest) {
 
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  // Permanent: the locale is never negotiated, so search engines should index /sr directly.
+  return NextResponse.redirect(url, 308);
 }
 
 export const config = {

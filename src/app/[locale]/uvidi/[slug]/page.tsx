@@ -5,12 +5,19 @@ import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawInsightCard from "@/components/MbLawInsightCard";
 import { getInsight, insights } from "@/data/insights";
-import { isLocale, defaultLocale, intlTags } from "@/i18n/config";
+import { isLocale, defaultLocale, intlTags, htmlLang } from "@/i18n/config";
 import { getNavHref } from "@/i18n/nav";
 import { getDictionary } from "@/dictionaries";
-
-const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
-const FIRM_URL = "https://mblaw.rs";
+import {
+  FIRM,
+  ORGANIZATION_ID,
+  WEBSITE_ID,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdString,
+  localePath,
+  pageMetadata,
+} from "@/lib/seo";
 
 export function generateStaticParams() {
   return insights.map((post) => ({ slug: post.slug }));
@@ -25,10 +32,14 @@ export async function generateMetadata({
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const translated = getDictionary(locale).insights.posts[slug];
 
-  return {
-    title: `${translated?.title ?? post.title} | ${FIRM_NAME}`,
+  return pageMetadata({
+    locale,
+    path: `/uvidi/${post.slug}`,
+    title: (translated?.title ?? post.title).replace(/\.$/, ""),
     description: translated?.excerpt ?? post.excerpt,
-  };
+    type: "article",
+    publishedTime: post.isoDate,
+  });
 }
 
 export default async function InsightArticlePage({
@@ -55,19 +66,32 @@ export default async function InsightArticlePage({
     ...insights.filter((item) => item.slug !== slug && item.topic !== post.topic),
   ].slice(0, 3);
 
+  const url = absoluteUrl(localePath(locale, `/uvidi/${post.slug}`));
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: title,
-    description: excerpt,
-    datePublished: post.isoDate,
-    articleSection: tag,
-    url: `${FIRM_URL}/uvidi/${post.slug}`,
-    publisher: {
-      "@type": "Organization",
-      name: FIRM_NAME,
-      url: FIRM_URL,
-    },
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        headline: title,
+        description: excerpt,
+        datePublished: post.isoDate,
+        dateModified: post.isoDate,
+        articleSection: tag,
+        inLanguage: htmlLang[locale],
+        url,
+        mainEntityOfPage: url,
+        image: absoluteUrl(post.image ? encodeURI(post.image) : FIRM.image),
+        author: { "@id": ORGANIZATION_ID },
+        publisher: { "@id": ORGANIZATION_ID },
+        isPartOf: { "@id": WEBSITE_ID },
+      },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.insights, path: localePath(locale, "/uvidi") },
+        { name: title, path: localePath(locale, `/uvidi/${post.slug}`) },
+      ]),
+    ],
   };
 
   return (
@@ -75,7 +99,7 @@ export default async function InsightArticlePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
+          __html: jsonLdString(jsonLd),
         }}
       />
 

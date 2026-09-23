@@ -4,19 +4,26 @@ import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawContactForm from "@/components/MbLawContactForm";
 import { practiceMenuGroups } from "@/data/practice-areas";
-import { isLocale, defaultLocale } from "@/i18n/config";
-import { getDictionary } from "@/dictionaries";
+import { isLocale, defaultLocale, htmlLang, type Locale } from "@/i18n/config";
+import { getDictionary, type Dictionary } from "@/dictionaries";
+import {
+  FIRM,
+  ORGANIZATION_ID,
+  WEBSITE_ID,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdString,
+  localePath,
+  pageMetadata,
+} from "@/lib/seo";
 
-const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
-const FIRM_URL = "https://mblaw.rs";
-const FIRM_EMAIL = "office@mblaw.rs";
-const FIRM_PHONE = "+381653894111";
+const FIRM_EMAIL = FIRM.email;
+const FIRM_PHONE = FIRM.phone;
 const FIRM_PHONE_DISPLAY = "065 389 4111";
-const FIRM_STREET = "Resavska 68";
-const FIRM_CITY = "Beograd";
-const FIRM_COUNTRY = "RS";
+const FIRM_STREET = FIRM.street;
 const MAPS_QUERY = "Resavska 68, Beograd";
 const MAPS_HREF = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAPS_QUERY)}`;
+const PATH = "/kontakt";
 
 export async function generateMetadata({
   params,
@@ -24,41 +31,35 @@ export async function generateMetadata({
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const dict = getDictionary(locale);
-  return {
-    title: `${dict.nav.contact} | ${FIRM_NAME}`,
-    description: dict.contactPage.lead,
-  };
+  return pageMetadata({
+    locale,
+    path: PATH,
+    title: dict.nav.contact,
+    description: dict.meta.contactDescription,
+  });
 }
 
-function buildJsonLd(title: string, description: string) {
+function buildJsonLd(locale: Locale, dict: Dictionary) {
+  const url = absoluteUrl(localePath(locale, PATH));
   return {
     "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "@id": `${FIRM_URL}/kontakt#page`,
-    url: `${FIRM_URL}/kontakt`,
-    name: title,
-    description,
-    mainEntity: {
-      "@type": ["LegalService", "Organization"],
-      "@id": `${FIRM_URL}/o-nama#organization`,
-      name: FIRM_NAME,
-      url: FIRM_URL,
-      email: FIRM_EMAIL,
-      telephone: FIRM_PHONE,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: FIRM_STREET,
-        addressLocality: FIRM_CITY,
-        addressCountry: FIRM_COUNTRY,
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "@id": `${url}#page`,
+        url,
+        name: `${dict.nav.contact} | ${FIRM.shortName}`,
+        description: dict.meta.contactDescription,
+        inLanguage: htmlLang[locale],
+        isPartOf: { "@id": WEBSITE_ID },
+        about: { "@id": ORGANIZATION_ID },
+        mainEntity: { "@id": ORGANIZATION_ID },
       },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: FIRM_PHONE,
-        email: FIRM_EMAIL,
-        contactType: "customer service",
-        areaServed: "RS",
-      },
-    },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.contact, path: localePath(locale, PATH) },
+      ]),
+    ],
   };
 }
 
@@ -66,8 +67,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/konta
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const dict = getDictionary(locale);
-  const metaTitle = `${dict.nav.contact} | ${FIRM_NAME}`;
-  const jsonLd = buildJsonLd(metaTitle, dict.contactPage.lead);
+  const jsonLd = buildJsonLd(locale, dict);
   const mapsEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&hl=${locale}&z=16&output=embed`;
   const areas = practiceMenuGroups.map((group) => ({
     slug: group.slug,
@@ -79,7 +79,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/konta
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
+          __html: jsonLdString(jsonLd),
         }}
       />
 

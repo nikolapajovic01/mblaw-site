@@ -6,6 +6,18 @@ const sr = {
       "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović | Beograd",
     homeDescription:
       "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović iz Beograda pruža sveobuhvatne pravne usluge domaćim i inostranim klijentima.",
+    practiceTitleSuffix: "advokat Beograd",
+    aboutDescription:
+      "MB Law je zajednička advokatska kancelarija Marković i Bogdanović iz Beograda. Saznajte ko vodi vaš predmet i kako radimo sa domaćim i stranim klijentima.",
+    practiceAreasDescription:
+      "Oblasti rada advokatske kancelarije MB Law u Beogradu: korporativno, krivično, građansko, radno i poresko pravo, nepokretnosti i prava stranaca.",
+    teamDescription:
+      "Partneri advokatske kancelarije MB Law u Beogradu: Dušan S. Marković, Milovan M. Bogdanović i Isidora V. Marković. Upoznajte advokate koji vode vaš predmet.",
+    insightsDescription:
+      "Analize propisa i sudske prakse advokatske kancelarije MB Law iz Beograda: privredno pravo, nepokretnosti, radno pravo i kazneno pravo.",
+    contactDescription:
+      "Kontakt advokatske kancelarije MB Law: Resavska 68, Beograd. Telefon 065 389 4111, e-mail office@mblaw.rs. Zakažite razgovor sa partnerom.",
+    attorneyTitleSuffix: "advokat u Beogradu",
   },
   nav: {
     home: "Početna",

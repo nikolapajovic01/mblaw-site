@@ -8,15 +8,67 @@ import {
   getPracticeAreaTag,
   practiceMenuGroups,
 } from "@/data/practice-areas";
-import { isLocale, defaultLocale } from "@/i18n/config";
+import { isLocale, defaultLocale, htmlLang, type Locale } from "@/i18n/config";
 import { getNavHref, getPracticeGroupHref } from "@/i18n/nav";
-import { getDictionary, getPracticeContent } from "@/dictionaries";
+import { getDictionary, getPracticeContent, type Dictionary } from "@/dictionaries";
+import {
+  FIRM,
+  ORGANIZATION_ID,
+  WEBSITE_ID,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdString,
+  localePath,
+  pageMetadata,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Oblasti rada | MB Law - Zajednička advokatska kancelarija Marković i Bogdanović",
-  description:
-    "Oblasti rada advokatske kancelarije MB Law u Beogradu: korporativno pravo, krivično i prekršajno pravo, građansko pravo, nepokretnosti, prava stranaca, poresko pravo i ostale oblasti rada.",
-};
+const PATH = "/oblasti-rada";
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/oblasti-rada">): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  return pageMetadata({
+    locale,
+    path: PATH,
+    title: `${dict.nav.practiceAreas}, ${dict.meta.practiceTitleSuffix}`,
+    description: dict.meta.practiceAreasDescription,
+  });
+}
+
+function buildJsonLd(locale: Locale, dict: Dictionary) {
+  const url = absoluteUrl(localePath(locale, PATH));
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${url}#page`,
+        url,
+        name: `${dict.nav.practiceAreas} | ${FIRM.shortName}`,
+        description: dict.meta.practiceAreasDescription,
+        inLanguage: htmlLang[locale],
+        isPartOf: { "@id": WEBSITE_ID },
+        about: { "@id": ORGANIZATION_ID },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: practiceMenuGroups.map((group, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: absoluteUrl(getPracticeGroupHref(group, locale)),
+            name: dict.practiceAreas.groups[group.slug]?.title ?? group.title,
+          })),
+        },
+      },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.practiceAreas, path: localePath(locale, PATH) },
+      ]),
+    ],
+  };
+}
 
 export default async function PracticeAreasIndexPage({
   params,
@@ -28,6 +80,10 @@ export default async function PracticeAreasIndexPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdString(buildJsonLd(locale, dict)) }}
+      />
       <section className="relative flex h-[50dvh] min-h-[380px] w-full flex-col bg-[#1B1916] md:min-h-[440px]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <Image

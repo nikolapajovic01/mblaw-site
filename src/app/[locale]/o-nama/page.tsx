@@ -5,19 +5,23 @@ import MbLawFooter from "@/components/MbLawFooter";
 import MbLawCTA from "@/components/MbLawCTA";
 import MbLawApproach from "@/components/MbLawApproach";
 import { getPublishedAttorneys } from "@/data/team";
-import { isLocale, defaultLocale, intlTags } from "@/i18n/config";
-import { getDictionary } from "@/dictionaries";
-
-const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
-const FIRM_URL = "https://mblaw.rs";
-const FIRM_EMAIL = "office@mblaw.rs";
-const FIRM_PHONE = "+381653894111";
-const FIRM_STREET = "Resavska 68";
-const FIRM_CITY = "Beograd";
-const FIRM_COUNTRY = "RS";
+import { isLocale, defaultLocale, intlTags, htmlLang, type Locale } from "@/i18n/config";
+import { getDictionary, type Dictionary } from "@/dictionaries";
+import {
+  FIRM,
+  ORGANIZATION_ID,
+  SITE_URL,
+  WEBSITE_ID,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdString,
+  localePath,
+  pageMetadata,
+} from "@/lib/seo";
 
 // TODO: sadržaj od klijenta (ISO 8601, npr. "2018")
 const FOUNDING_DATE = "";
+const PATH = "/o-nama";
 
 const STORY_IMAGE = "/mb/ChatGPT Image Sep 4, 2026, 04_43_02 PM.webp";
 const STORY_PORTRAIT = "/slike jpg/kancelarija.png";
@@ -28,49 +32,50 @@ export async function generateMetadata({
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const dict = getDictionary(locale);
-  return {
-    title: `${dict.nav.about} | ${FIRM_NAME}`,
-    description: dict.about.heroLead,
-  };
+  return pageMetadata({
+    locale,
+    path: PATH,
+    title: dict.nav.about,
+    description: dict.meta.aboutDescription,
+  });
 }
 
-function buildJsonLd() {
-  const founders = getPublishedAttorneys()
-    .filter((attorney) => attorney.founder)
-    .map((attorney) => ({
-      "@type": "Person" as const,
-      name: attorney.name,
-      jobTitle: attorney.role,
-      url: `${FIRM_URL}/tim/${attorney.slug}`,
-    }));
-  const partners = getPublishedAttorneys().map((attorney) => ({
+function buildJsonLd(locale: Locale, dict: Dictionary) {
+  const url = absoluteUrl(localePath(locale, PATH));
+  const person = (attorney: ReturnType<typeof getPublishedAttorneys>[number]) => ({
     "@type": "Person" as const,
+    "@id": `${SITE_URL}/#person-${attorney.slug}`,
     name: attorney.name,
-    jobTitle: attorney.role,
-    url: `${FIRM_URL}/tim/${attorney.slug}`,
-  }));
+    jobTitle: dict.team.attorneys[attorney.slug]?.role ?? attorney.role,
+    url: absoluteUrl(localePath(locale, `/tim/${attorney.slug}`)),
+  });
+  const attorneys = getPublishedAttorneys();
 
   return {
     "@context": "https://schema.org",
-    "@type": ["LegalService", "Organization"],
-    "@id": `${FIRM_URL}/o-nama#organization`,
-    name: FIRM_NAME,
-    url: FIRM_URL,
-    email: FIRM_EMAIL,
-    telephone: FIRM_PHONE,
-    foundingDate: FOUNDING_DATE,
-    founder: founders,
-    employee: partners,
-    areaServed: [
-      { "@type": "City", name: "Belgrade" },
-      { "@type": "Country", name: "Serbia" },
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": `${url}#page`,
+        url,
+        name: `${dict.nav.about} | ${FIRM.shortName}`,
+        description: dict.meta.aboutDescription,
+        inLanguage: htmlLang[locale],
+        isPartOf: { "@id": WEBSITE_ID },
+        about: { "@id": ORGANIZATION_ID },
+      },
+      {
+        "@type": ["LegalService", "Organization"],
+        "@id": ORGANIZATION_ID,
+        foundingDate: FOUNDING_DATE,
+        founder: attorneys.filter((attorney) => attorney.founder).map(person),
+        employee: attorneys.map(person),
+      },
+      breadcrumbJsonLd([
+        { name: dict.nav.home, path: localePath(locale) },
+        { name: dict.nav.about, path: localePath(locale, PATH) },
+      ]),
     ],
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: FIRM_STREET,
-      addressLocality: FIRM_CITY,
-      addressCountry: FIRM_COUNTRY,
-    },
   };
 }
 
@@ -78,16 +83,14 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/o-nama"
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const dict = getDictionary(locale);
-  const jsonLd = buildJsonLd();
+  const jsonLd = buildJsonLd(locale, dict);
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd, (_, value) =>
-            value === "" ? undefined : value,
-          ),
+          __html: jsonLdString(jsonLd),
         }}
       />
 
