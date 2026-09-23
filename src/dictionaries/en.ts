@@ -35,16 +35,16 @@ const en = {
     eyebrow: "ABOUT US",
     heading: "From question to resolution.",
     paragraph1:
-      "MB Law - Marković & Bogdanović Joint Law Office provides legal support to domestic and international clients on business, civil and contentious matters.",
+      "MB Law - Marković & Bogdanović Joint Law Office provides legal support to domestic and international clients on corporate, civil and criminal matters.",
     paragraph2:
       "From the outset, the client knows who is handling their case, who makes the key decisions, and who to turn to.",
     link: "LEARN MORE ABOUT US",
     heroLead:
-      "Legal support to domestic and international clients on business, civil and contentious matters.",
+      "Legal support to domestic and international clients on corporate, civil and criminal matters.",
     storyEyebrow: "ABOUT THE FIRM",
-    storyTitle: "About us.",
+    storyTitle: "About us",
     storyParagraphs: [
-      "MB Law - Marković & Bogdanović Joint Law Office provides legal support to domestic and international clients on business, civil and contentious matters.",
+      "MB Law - Marković & Bogdanović Joint Law Office provides legal support to domestic and international clients on corporate, civil and criminal matters.",
       "Our way of working is simple: from the outset, the client knows who is handling their case, who makes the key decisions, and who to turn to. Partners are directly involved in running each case, while the firm's team provides the capacity for day-to-day work, analysis and execution.",
       "Our goal is for a case to be handled quickly, clearly, and with concrete accountability from the attorney who takes it on.",
       "Alongside the partners, the firm is made up of a wider team of in-house associates, backed by a developed network of cooperation with law firms and legal professionals across Europe and the Middle East.",
@@ -120,7 +120,7 @@ const en = {
   },
   team: {
     eyebrow: "TEAM",
-    heading: "Meet your legal team.",
+    heading: "Meet your legal team",
     partnersLabel: "Partners",
     moreAboutAttorney: "MORE ABOUT THE ATTORNEY",
     linkedIn: "LINKEDIN",

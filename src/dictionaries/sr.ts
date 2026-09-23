@@ -36,16 +36,16 @@ const sr = {
     eyebrow: "O NAMA",
     heading: "Od pitanja do rešenja.",
     paragraph1:
-      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku domaćim i međunarodnim klijentima u poslovnim, građanskim i spornim pitanjima.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku domaćim i međunarodnim klijentima u korporativnim, građanskim i kaznenim pitanjima.",
     paragraph2:
       "Klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i kome se obraća.",
     link: "SAZNAJTE VIŠE O NAMA",
     heroLead:
-      "Pravna podrška domaćim i međunarodnim klijentima u poslovnim, građanskim i spornim pitanjima.",
+      "Pravna podrška domaćim i međunarodnim klijentima u korporativnim, građanskim i kaznenim pitanjima.",
     storyEyebrow: "O KANCELARIJI",
-    storyTitle: "O nama.",
+    storyTitle: "O nama",
     storyParagraphs: [
-      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku domaćim i međunarodnim klijentima u poslovnim, građanskim i spornim pitanjima.",
+      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović pruža pravnu podršku domaćim i međunarodnim klijentima u korporativnim, građanskim i kaznenim pitanjima.",
       "Naš način rada je jednostavan: klijent od početka zna ko vodi njegov predmet, ko donosi ključne odluke i kome se obraća. Partneri su neposredno uključeni u vođenje predmeta, dok tim kancelarije obezbeđuje kapacitet za svakodnevni rad, analizu i realizaciju.",
       "Cilj nam je da predmet bude vođen brzo, jasno i sa konkretnom odgovornošću advokata koji ga preuzima.",
       "Pored partnera, kancelariju čini i širi tim internih saradnika, uz razvijenu mrežu saradnje sa advokatskim kancelarijama i pravnim profesionalcima širom Evrope i Bliskog istoka.",
@@ -121,7 +121,7 @@ const sr = {
   },
   team: {
     eyebrow: "TIM",
-    heading: "Upoznajte Vaš pravni tim.",
+    heading: "Upoznajte Vaš pravni tim",
     partnersLabel: "Partneri",
     moreAboutAttorney: "VIŠE O ADVOKATU",
     linkedIn: "LINKEDIN",

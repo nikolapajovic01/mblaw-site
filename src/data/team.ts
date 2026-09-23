@@ -19,7 +19,7 @@ export type Attorney = {
   founder?: boolean;
 };
 
-export const TEAM_HEADING = "Upoznajte Vaš pravni tim.";
+export const TEAM_HEADING = "Upoznajte Vaš pravni tim";
 export const TEAM_PARTNERS_LABEL = "Partneri";
 export const TEAM_NETWORK_LEAD =
   "Pored partnera, kancelariju čini i širi tim internih saradnika, uz razvijenu mrežu saradnje sa advokatskim kancelarijama i pravnim profesionalcima širom Evrope i Bliskog istoka.";

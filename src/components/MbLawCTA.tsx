@@ -107,11 +107,11 @@ export default function MbLawCTA({
                     {dict.phoneLabel}
                   </span>
                   <a
-                    href="tel:+381112223344"
+                    href="tel:+381653894111"
                     className="group mt-2 inline-block no-underline"
                   >
                     <span className="border-b border-[#F1EEE7]/20 pb-0.5 text-[16px] font-medium tracking-[0.03em] text-[#F1EEE7] transition-colors group-hover:border-[#C78B3E] group-hover:text-[#EDE9E1] md:text-[17px]">
-                      +381 11 222 3344
+                      065 389 4111
                     </span>
                   </a>
                 </div>

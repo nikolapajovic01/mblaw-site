@@ -173,8 +173,8 @@ export default function MbLawFooter({
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C78B3E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
                   <path d="M3.5 5.5c0-1.1.9-2 2-2H8l2 5-2.4 1.6a11 11 0 0 0 5.3 5.3L14.5 13l5 2v2.5c0 1.1-.9 2-2 2C9.4 19.5 3.5 13.6 3.5 5.5Z" />
                 </svg>
-                <a href="tel:+381112223344" className="text-[14.5px] text-[#ACA69D] no-underline transition-colors hover:text-[#C78B3E]">
-                  +381 11 222 3344
+                <a href="tel:+381653894111" className="text-[14.5px] text-[#ACA69D] no-underline transition-colors hover:text-[#C78B3E]">
+                  065 389 4111
                 </a>
               </li>
               <li className="flex items-center gap-3">

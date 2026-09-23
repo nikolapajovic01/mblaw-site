@@ -11,7 +11,7 @@ import { getDictionary } from "@/dictionaries";
 const FIRM_NAME = "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović";
 const FIRM_URL = "https://mblaw.rs";
 const FIRM_EMAIL = "office@mblaw.rs";
-const FIRM_PHONE = "+381112223344";
+const FIRM_PHONE = "+381653894111";
 const FIRM_STREET = "Resavska 68";
 const FIRM_CITY = "Beograd";
 const FIRM_COUNTRY = "RS";

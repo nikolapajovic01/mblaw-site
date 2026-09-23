@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { defaultLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/dictionaries";
 
-const PHONE = "+381112223344";
-const VIBER_HREF = "viber://chat?number=%2B381112223344";
-const WHATSAPP_HREF = "https://wa.me/381112223344";
+const PHONE = "+381653894111";
+const VIBER_HREF = "viber://chat?number=%2B381653894111";
+const WHATSAPP_HREF = "https://wa.me/381653894111";
 
 const circle =
   "pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#2A2723] bg-[#171512] text-[#EDE9E1] shadow-[0_10px_24px_rgba(0,0,0,0.35)] transition-colors hover:border-[#C78B3E] hover:text-[#F1EEE7]";
