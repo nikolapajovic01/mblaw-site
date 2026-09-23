@@ -24,8 +24,10 @@ const instrumentSans = Instrument_Sans({
 
 // Newsreader and Instrument Sans ship no Cyrillic glyphs, so Russian pages use
 // this visually close pair instead (same CSS variables, picked per-locale below).
+// preload: false keeps /sr and /en from downloading Cyrillic fonts they never use.
 const lora = Lora({
   subsets: ["latin", "latin-ext", "cyrillic"],
+  preload: false,
   weight: ["400", "600", "700"],
   variable: "--font-mb-serif",
   display: "swap",
@@ -33,6 +35,7 @@ const lora = Lora({
 
 const manrope = Manrope({
   subsets: ["latin", "latin-ext", "cyrillic"],
+  preload: false,
   weight: ["400", "500", "600"],
   variable: "--font-mb-sans",
   display: "swap",

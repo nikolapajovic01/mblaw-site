@@ -30,10 +30,13 @@ export default function MbLawHero({
       }`}
     >
       {/* background photo */}
-      <div
-        aria-hidden="true"
-        className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] bg-[#1B1916] bg-cover bg-[50%_42%] bg-no-repeat brightness-[1.08] contrast-[1.04] saturate-[1.06]"
-        style={{ backgroundImage: "url(/mb/mwlawfirma.webp)" }}
+      <Image
+        src="/mb/mwlawfirma.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="mb-hero-photo pointer-events-none absolute inset-0 z-[1] bg-[#1B1916] object-cover object-[50%_42%] brightness-[1.08] contrast-[1.04] saturate-[1.06]"
       />
 
       {/* light sweep */}
