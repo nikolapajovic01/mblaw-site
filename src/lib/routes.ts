@@ -1,6 +1,5 @@
 import { practiceAreas, practiceMenuGroups } from "@/data/practice-areas";
 import { getPublishedAttorneys } from "@/data/team";
-import { insights } from "@/data/insights";
 
 export type SiteRoute = {
   /** Locale-less path, e.g. "/o-nama". */
@@ -10,10 +9,12 @@ export type SiteRoute = {
   priority: number;
 };
 
-/** Every indexable page, once per locale. Single-area menu groups redirect, so they are left out. */
+/**
+ * Every indexable page, once per locale. Single-area menu groups redirect, so
+ * they are left out. Individual insight posts stay out until real articles go live.
+ */
 export function getSiteRoutes(): SiteRoute[] {
   const areaSlugs = new Set(practiceAreas.map((area) => area.slug));
-  const newestInsight = insights.map((post) => post.isoDate).sort().at(-1);
 
   return [
     { path: "", changeFrequency: "monthly", priority: 1 },
@@ -37,13 +38,19 @@ export function getSiteRoutes(): SiteRoute[] {
       changeFrequency: "yearly" as const,
       priority: 0.7,
     })),
-    { path: "/uvidi", lastModified: newestInsight, changeFrequency: "weekly", priority: 0.6 },
-    ...insights.map((post) => ({
-      path: `/uvidi/${post.slug}`,
-      lastModified: post.isoDate,
-      changeFrequency: "yearly" as const,
-      priority: 0.5,
-    })),
+    { path: "/uvidi", changeFrequency: "weekly", priority: 0.6 },
     { path: "/kontakt", changeFrequency: "yearly", priority: 0.8 },
+    {
+      path: "/politika-privatnosti",
+      lastModified: "2026-09-24",
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      path: "/uslovi-koriscenja",
+      lastModified: "2026-09-24",
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 }

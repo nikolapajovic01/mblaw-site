@@ -5,19 +5,10 @@ import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawInsightCard from "@/components/MbLawInsightCard";
 import { getInsight, insights } from "@/data/insights";
-import { isLocale, defaultLocale, intlTags, htmlLang } from "@/i18n/config";
+import { isLocale, defaultLocale, intlTags } from "@/i18n/config";
 import { getNavHref } from "@/i18n/nav";
 import { getDictionary } from "@/dictionaries";
-import {
-  FIRM,
-  ORGANIZATION_ID,
-  WEBSITE_ID,
-  absoluteUrl,
-  breadcrumbJsonLd,
-  jsonLdString,
-  localePath,
-  pageMetadata,
-} from "@/lib/seo";
+import { breadcrumbJsonLd, jsonLdString, localePath, pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return insights.map((post) => ({ slug: post.slug }));
@@ -32,14 +23,17 @@ export async function generateMetadata({
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const translated = getDictionary(locale).insights.posts[slug];
 
-  return pageMetadata({
-    locale,
-    path: `/uvidi/${post.slug}`,
-    title: (translated?.title ?? post.title).replace(/\.$/, ""),
-    description: translated?.excerpt ?? post.excerpt,
-    type: "article",
-    publishedTime: post.isoDate,
-  });
+  return {
+    ...pageMetadata({
+      locale,
+      path: `/uvidi/${post.slug}`,
+      title: (translated?.title ?? post.title).replace(/\.$/, ""),
+      description: translated?.excerpt ?? post.excerpt,
+      type: "article",
+      publishedTime: post.isoDate,
+    }),
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function InsightArticlePage({
@@ -66,26 +60,9 @@ export default async function InsightArticlePage({
     ...insights.filter((item) => item.slug !== slug && item.topic !== post.topic),
   ].slice(0, 3);
 
-  const url = absoluteUrl(localePath(locale, `/uvidi/${post.slug}`));
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "BlogPosting",
-        "@id": `${url}#article`,
-        headline: title,
-        description: excerpt,
-        datePublished: post.isoDate,
-        dateModified: post.isoDate,
-        articleSection: tag,
-        inLanguage: htmlLang[locale],
-        url,
-        mainEntityOfPage: url,
-        image: absoluteUrl(post.image ? encodeURI(post.image) : FIRM.image),
-        author: { "@id": ORGANIZATION_ID },
-        publisher: { "@id": ORGANIZATION_ID },
-        isPartOf: { "@id": WEBSITE_ID },
-      },
       breadcrumbJsonLd([
         { name: dict.nav.home, path: localePath(locale) },
         { name: dict.nav.insights, path: localePath(locale, "/uvidi") },

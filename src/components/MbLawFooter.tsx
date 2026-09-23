@@ -7,7 +7,7 @@ import type { CSSProperties } from "react";
 import { practiceMenuGroups } from "@/data/practice-areas";
 import { defaultLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/dictionaries";
-import { getNavItems, getNavHref, getPracticeGroupHref } from "@/i18n/nav";
+import { getNavItems, getNavHref, getPracticeGroupHref, getLegalHref } from "@/i18n/nav";
 
 export default function MbLawFooter({
   locale = defaultLocale,
@@ -210,13 +210,13 @@ export default function MbLawFooter({
           </span>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link
-              href="#"
+              href={getLegalHref("privacy", locale)}
               className="text-[#6B6459] no-underline transition-colors hover:text-[#C78B3E]"
             >
               {dict.footer.privacyPolicy}
             </Link>
             <Link
-              href="#"
+              href={getLegalHref("terms", locale)}
               className="text-[#6B6459] no-underline transition-colors hover:text-[#C78B3E]"
             >
               {dict.footer.termsOfUse}

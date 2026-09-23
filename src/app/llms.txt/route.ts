@@ -1,6 +1,5 @@
 import { practiceAreas } from "@/data/practice-areas";
 import { getPublishedAttorneys } from "@/data/team";
-import { insights } from "@/data/insights";
 import { getDictionary, getPracticeContent } from "@/dictionaries";
 import { FIRM, absoluteUrl, localePath } from "@/lib/seo";
 
@@ -27,6 +26,8 @@ export function GET() {
     "",
     `- [About the firm](${link("/o-nama")}): ${en.meta.aboutDescription}`,
     `- [Contact](${link("/kontakt")}): ${en.meta.contactDescription}`,
+    `- [Privacy Policy](${link("/politika-privatnosti")}): ${en.meta.privacyDescription}`,
+    `- [Terms of Use](${link("/uslovi-koriscenja")}): ${en.meta.termsDescription}`,
     "",
     "## Practice areas",
     "",
@@ -44,10 +45,7 @@ export function GET() {
     "",
     "## Insights",
     "",
-    ...insights.map((post) => {
-      const t = en.insights.posts[post.slug];
-      return `- [${t?.title ?? post.title}](${link(`/uvidi/${post.slug}`)}): ${t?.excerpt ?? post.excerpt}`;
-    }),
+    `- [Insights](${link("/uvidi")}): ${en.meta.insightsDescription}`,
     "",
     "## Optional",
     "",

@@ -57,15 +57,6 @@ function buildJsonLd(locale: Locale, dict: Dictionary) {
         inLanguage: htmlLang[locale],
         isPartOf: { "@id": WEBSITE_ID },
         publisher: { "@id": ORGANIZATION_ID },
-        mainEntity: {
-          "@type": "ItemList",
-          itemListElement: insights.map((post, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            url: absoluteUrl(localePath(locale, `${PATH}/${post.slug}`)),
-            name: dict.insights.posts[post.slug]?.title ?? post.title,
-          })),
-        },
       },
       breadcrumbJsonLd([
         { name: dict.nav.home, path: localePath(locale) },

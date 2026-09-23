@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/dictionaries/types";
+import { legalEn } from "@/dictionaries/legal/en";
 
 const en = {
   meta: {
@@ -16,6 +17,10 @@ const en = {
       "Legal analysis from MB Law in Belgrade on Serbian regulations and case law: company law, real estate, employment and criminal law.",
     contactDescription:
       "Contact MB Law at Resavska 68, Belgrade, Serbia. Phone +381 65 389 4111, email office@mblaw.rs. Book a consultation with a partner.",
+    privacyDescription:
+      "Privacy policy of the MB Law website: what data mblaw.rs collects, how it is used, and what rights you have.",
+    termsDescription:
+      "Terms of use of the MB Law website. The site is not legal advice. An inquiry is not an automatic engagement of the firm.",
     attorneyTitleSuffix: "lawyer in Belgrade",
   },
   nav: {
@@ -329,6 +334,7 @@ const en = {
   common: {
     firstStepCta: "If this is your matter, the first step is a conversation.",
   },
+  legal: legalEn,
 } satisfies Dictionary;
 
 export default en;

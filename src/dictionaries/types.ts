@@ -9,6 +9,8 @@ export type Dictionary = {
     teamDescription: string;
     insightsDescription: string;
     contactDescription: string;
+    privacyDescription: string;
+    termsDescription: string;
     /** Used for attorney pages: "{name}, {role} | MB Law". */
     attorneyTitleSuffix: string;
   };
@@ -152,4 +154,17 @@ export type Dictionary = {
   common: {
     firstStepCta: string;
   };
+  legal: {
+    privacy: LegalDocument;
+    terms: LegalDocument;
+  };
+};
+
+export type LegalDocument = {
+  eyebrow: string;
+  title: string;
+  updated: string;
+  intro: string;
+  sections: { heading: string; paragraphs: string[] }[];
+  otherPage: string;
 };

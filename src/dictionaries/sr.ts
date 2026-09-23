@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/dictionaries/types";
+import { legalSr } from "@/dictionaries/legal/sr";
 
 const sr = {
   meta: {
@@ -17,6 +18,10 @@ const sr = {
       "Analize propisa i sudske prakse advokatske kancelarije MB Law iz Beograda: privredno pravo, nepokretnosti, radno pravo i kazneno pravo.",
     contactDescription:
       "Kontakt advokatske kancelarije MB Law: Resavska 68, Beograd. Telefon 065 389 4111, e-mail office@mblaw.rs. Zakažite razgovor sa partnerom.",
+    privacyDescription:
+      "Politika privatnosti sajta MB Law: koji podaci se prikupljaju na mblaw.rs, kako se koriste i koja prava imate.",
+    termsDescription:
+      "Uslovi korišćenja sajta MB Law. Sajt nije pravni savet. Upit sa sajta nije automatski angažman kancelarije.",
     attorneyTitleSuffix: "advokat u Beogradu",
   },
   nav: {
@@ -330,6 +335,7 @@ const sr = {
   common: {
     firstStepCta: "Ako je ovo vaš predmet, prvi korak je razgovor.",
   },
+  legal: legalSr,
 } satisfies Dictionary;
 
 export default sr;

@@ -15,8 +15,19 @@ const navPaths: Record<NavKey, string> = {
 
 export const navKeys = Object.keys(navPaths) as NavKey[];
 
+export const legalPaths = {
+  privacy: "/politika-privatnosti",
+  terms: "/uslovi-koriscenja",
+} as const;
+
+export type LegalKey = keyof typeof legalPaths;
+
 export function getNavHref(key: NavKey, locale: Locale): string {
   return `/${locale}${navPaths[key]}`;
+}
+
+export function getLegalHref(key: LegalKey, locale: Locale): string {
+  return `/${locale}${legalPaths[key]}`;
 }
 
 export function getPracticeGroupHref(group: PracticeMenuGroup, locale: Locale): string {
