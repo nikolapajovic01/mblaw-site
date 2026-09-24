@@ -144,12 +144,13 @@ export type Dictionary = {
     messageLabel: string;
     footnote: string;
     submit: string;
+    sending: string;
     successTitle: string;
     successBody: string;
     errorName: string;
     errorEmail: string;
     errorMessage: string;
-    mailtoSubject: string;
+    errorSend: string;
   };
   common: {
     firstStepCta: string;

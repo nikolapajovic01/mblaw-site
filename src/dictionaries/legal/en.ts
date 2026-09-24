@@ -18,7 +18,7 @@ export const legalEn: Dictionary["legal"] = {
       {
         heading: "What we collect",
         paragraphs: [
-          "The contact form asks for your name, email, optional phone and practice area, and your message. The form does not send data to our server. It opens your email program and prepares a message to office@mblaw.rs. If you do not send it, we do not receive those details.",
+          "The contact form asks for your name, email, optional phone and practice area, and your message. When you submit an inquiry, the data is sent to our server and delivered to office@mblaw.rs through Resend, so we can reply.",
           "If you call us, or write on Viber or WhatsApp, the exchange goes through your device and those services.",
           "The site is hosted on Vercel. When you visit, the server may log technical data such as IP address, browser and the page requested, for security and to keep the site running.",
           "The Contact page embeds Google Maps. Google may process data under its own rules.",
@@ -40,7 +40,7 @@ export const legalEn: Dictionary["legal"] = {
       {
         heading: "Who we share data with",
         paragraphs: [
-          "We do not sell personal data. Access is limited to the office and, where necessary, hosting and email infrastructure. If the law requires it, we may disclose data to a competent authority.",
+          "We do not sell personal data. Access is limited to the office and, where necessary, hosting (Vercel) and email delivery (Resend). If the law requires it, we may disclose data to a competent authority.",
         ],
       },
       {

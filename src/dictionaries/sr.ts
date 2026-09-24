@@ -325,12 +325,13 @@ const sr = {
     footnote:
       "Nije potrebno da šaljete spise u prvom koraku. Upit koristimo samo da vam odgovorimo.",
     submit: "POŠALJITE UPIT",
-    successTitle: "Otvoren je vaš program za poštu.",
-    successBody: "Ako se prozor nije pojavio, pošaljite upit na",
+    sending: "ŠALJE SE",
+    successTitle: "Upit je poslat.",
+    successBody: "Odgovorićemo na adresu koju ste ostavili. Ako je hitno, pišite na",
     errorName: "Unesite ime i prezime.",
     errorEmail: "Unesite ispravnu email adresu.",
     errorMessage: "Napišite ukratko šta vam treba, bar dve rečenice.",
-    mailtoSubject: "Upit sa sajta MB Law",
+    errorSend: "Upit nije poslat. Pokušajte ponovo ili pišite na office@mblaw.rs.",
   },
   common: {
     firstStepCta: "Ako je ovo vaš predmet, prvi korak je razgovor.",

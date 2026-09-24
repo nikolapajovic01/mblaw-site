@@ -324,12 +324,13 @@ const en = {
     footnote:
       "There's no need to send any files at this first step. We only use your inquiry to get back to you.",
     submit: "SEND INQUIRY",
-    successTitle: "Your email client has been opened.",
-    successBody: "If the window didn't appear, send your inquiry to",
+    sending: "SENDING",
+    successTitle: "Your inquiry has been sent.",
+    successBody: "We will reply to the address you left. If it is urgent, write to",
     errorName: "Please enter your full name.",
     errorEmail: "Please enter a valid email address.",
     errorMessage: "Please briefly describe what you need, at least two sentences.",
-    mailtoSubject: "Inquiry from the MB Law website",
+    errorSend: "The inquiry was not sent. Please try again or write to office@mblaw.rs.",
   },
   common: {
     firstStepCta: "If this is your matter, the first step is a conversation.",

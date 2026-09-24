@@ -18,7 +18,7 @@ export const legalSr: Dictionary["legal"] = {
       {
         heading: "Koje podatke prikupljamo",
         paragraphs: [
-          "Kontakt forma traži ime i prezime, email, po izboru telefon i oblast rada, i tekst upita. Forma ne šalje podatke na naš server. Otvara vaš program za poštu i priprema poruku za office@mblaw.rs. Ako je ne pošaljete, mi te podatke ne primamo.",
+          "Kontakt forma traži ime i prezime, email, po izboru telefon i oblast rada, i tekst upita. Kada pošaljete upit, podaci idu na naš server i putem Resend servisa stižu na office@mblaw.rs, da bismo vam odgovorili.",
           "Ako nas zovete, pišete na Viber ili WhatsApp, razmena ide preko vašeg uređaja i tih servisa.",
           "Sajt je hostovan na Vercel-u. Prilikom posete, server može da zabeleži tehničke podatke kao što su IP adresa, pregledač i tražena stranica, radi bezbednosti i rada sajta.",
           "Na stranici Kontakt ugrađene su Google mape. Google može da obrađuje podatke prema svojim pravilima.",
@@ -40,7 +40,7 @@ export const legalSr: Dictionary["legal"] = {
       {
         heading: "Kome ustupamo podatke",
         paragraphs: [
-          "Ne prodajemo lične podatke. Pristup imaju kancelarija i, gde je nužno, hosting i email infrastruktura. Ako zakon nalaže, podatke možemo dati nadležnom organu.",
+          "Ne prodajemo lične podatke. Pristup imaju kancelarija i, gde je nužno, hosting (Vercel) i slanje emaila (Resend). Ako zakon nalaže, podatke možemo dati nadležnom organu.",
         ],
       },
       {

@@ -22,24 +22,20 @@ export default function MbLawContactForm({
   locale?: Locale;
 }) {
   const dict = getDictionary(locale).contactForm;
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sent" | "sending">("idle");
   const [error, setError] = useState("");
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-
-    if (String(data.get("website") ?? "").trim()) {
-      setStatus("sent");
-      return;
-    }
 
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
     const area = String(data.get("area") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
+    const website = String(data.get("website") ?? "").trim();
 
     if (name.length < 2) {
       setError(dict.errorName);
@@ -54,22 +50,25 @@ export default function MbLawContactForm({
       return;
     }
 
-    const lines = [
-      `${dict.nameLabel}: ${name}`,
-      `${dict.emailLabel}: ${email}`,
-      phone ? `${dict.phoneLabel}: ${phone}` : "",
-      area ? `${dict.areaLabel}: ${area}` : "",
-      "",
-      message,
-    ].filter((line) => line !== "");
-
-    const href = `mailto:${EMAIL}?subject=${encodeURIComponent(
-      dict.mailtoSubject,
-    )}&body=${encodeURIComponent(lines.join("\n"))}`;
-
     setError("");
-    setStatus("sent");
-    window.location.href = href;
+    setStatus("sending");
+
+    try {
+      const response = await fetch("/api/kontakt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, area, message, website }),
+      });
+      if (!response.ok) {
+        setStatus("idle");
+        setError(dict.errorSend);
+        return;
+      }
+      setStatus("sent");
+    } catch {
+      setStatus("idle");
+      setError(dict.errorSend);
+    }
   };
 
   if (status === "sent") {
@@ -203,9 +202,10 @@ export default function MbLawContactForm({
         </p>
         <button
           type="submit"
-          className="inline-flex h-[54px] w-full shrink-0 items-center justify-center bg-[#C78B3E] px-10 text-[12px] font-semibold tracking-[0.16em] text-[#171512] transition-colors hover:bg-[#D89B4C] sm:w-auto"
+          disabled={status === "sending"}
+          className="inline-flex h-[54px] w-full shrink-0 items-center justify-center bg-[#C78B3E] px-10 text-[12px] font-semibold tracking-[0.16em] text-[#171512] transition-colors hover:bg-[#D89B4C] disabled:cursor-wait disabled:opacity-70 sm:w-auto"
         >
-          {dict.submit}
+          {status === "sending" ? dict.sending : dict.submit}
         </button>
       </div>
 
