@@ -82,9 +82,17 @@ export async function generateMetadata({
       type: "website",
       images: [OG_IMAGE],
     },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    },
     twitter: {
       card: "summary_large_image",
-      images: [OG_IMAGE.url],
+      images: [{ url: OG_IMAGE.url, alt: OG_IMAGE.alt }],
     },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,

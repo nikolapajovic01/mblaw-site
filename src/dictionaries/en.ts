@@ -3,7 +3,7 @@ import { legalEn } from "@/dictionaries/legal/en";
 
 const en = {
   meta: {
-    homeTitle: "MB Law - Marković & Bogdanović Joint Law Office | Belgrade",
+    homeTitle: "MB Law - Marković & Bogdanović Law Office | Belgrade",
     homeDescription:
       "MB Law - Marković & Bogdanović Joint Law Office in Belgrade provides comprehensive legal services to domestic and international clients.",
     practiceTitleSuffix: "Belgrade law firm",

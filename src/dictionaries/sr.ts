@@ -3,8 +3,7 @@ import { legalSr } from "@/dictionaries/legal/sr";
 
 const sr = {
   meta: {
-    homeTitle:
-      "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović | Beograd",
+    homeTitle: "MB Law - advokatska kancelarija Marković i Bogdanović",
     homeDescription:
       "MB Law - Zajednička advokatska kancelarija Marković i Bogdanović iz Beograda pruža sveobuhvatne pravne usluge domaćim i inostranim klijentima.",
     practiceTitleSuffix: "advokat Beograd",

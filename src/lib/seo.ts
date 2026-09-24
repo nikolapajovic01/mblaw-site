@@ -122,7 +122,7 @@ export function pageMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [image.url],
+      images: [{ url: image.url, alt: image.alt }],
     },
   };
 }

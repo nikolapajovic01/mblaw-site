@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="MB Law">
+  <style>
+    .bg { fill: #171512; }
+    .mark { fill: #C78B3E; font: 700 13px/1 Georgia, "Times New Roman", serif; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #171512; }
+      .mark { fill: #C78B3E; }
+    }
+  </style>
+  <rect class="bg" width="32" height="32"/>
+  <text class="mark" x="16" y="21" text-anchor="middle">MB</text>
+</svg>
