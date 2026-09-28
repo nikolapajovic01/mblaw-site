@@ -144,7 +144,7 @@ const sr = {
     comingSoon: "PROFIL USKORO",
     allPartners: "Svi partneri",
     networkEyebrow: "BEOGRAD, EVROPA, BLISKI ISTOK",
-    networkHeading: "Izvan granica Srbije.",
+    networkHeading: "Izvan granica Srbije",
     networkLead:
       "Pored partnera, kancelariju čini i širi tim internih saradnika, uz razvijenu mrežu saradnje sa advokatskim kancelarijama i pravnim profesionalcima širom Evrope i Bliskog istoka.",
     networkSupport:

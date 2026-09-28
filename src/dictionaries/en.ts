@@ -144,7 +144,7 @@ const en = {
     comingSoon: "PROFILE COMING SOON",
     allPartners: "All partners",
     networkEyebrow: "BELGRADE, EUROPE, MIDDLE EAST",
-    networkHeading: "Beyond Serbia's borders.",
+    networkHeading: "Beyond Serbia's borders",
     networkLead:
       "Alongside the partners, the firm is made up of a wider team of in-house associates, backed by a developed network of cooperation with law firms and legal professionals across Europe and the Middle East.",
     networkSupport:

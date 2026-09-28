@@ -102,7 +102,7 @@ export default function MbLawTeam({
             {dict.eyebrow}
           </span>
           <h2
-            className="mt-5 whitespace-nowrap text-[22px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[29px] md:mt-2.5 md:text-[30px] mb-light-heading"
+            className="mt-5 text-balance text-[22px] font-bold leading-[1.16] tracking-[-0.015em] sm:text-[29px] md:mt-2.5 md:text-[30px] mb-light-heading"
             style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
           >
             {dict.heading}
