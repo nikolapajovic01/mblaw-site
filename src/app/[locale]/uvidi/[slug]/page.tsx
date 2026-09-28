@@ -98,6 +98,16 @@ const bodyComponents: PortableTextComponents = {
       </h3>
     ),
   },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="flex flex-col gap-2 pl-5 text-[16px] leading-[1.75] text-[#C2BCB2] marker:text-[#C78B3E] md:text-[17px] list-disc">
+        {children}
+      </ul>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="pl-1">{children}</li>,
+  },
   marks: {
     strong: ({ children }) => <strong className="font-semibold text-[#EDE9E1]">{children}</strong>,
     link: ({ value, children }) => {

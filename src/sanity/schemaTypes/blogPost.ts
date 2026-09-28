@@ -90,7 +90,7 @@ export const blogPost = defineType({
             { title: "Naslov H2", value: "h2" },
             { title: "Naslov H3", value: "h3" },
           ],
-          lists: [],
+          lists: [{ title: "Lista", value: "bullet" }],
           marks: {
             decorators: [{ title: "Bold", value: "strong" }],
             annotations: [
