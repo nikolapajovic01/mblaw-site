@@ -133,7 +133,7 @@ const bodyComponents: PortableTextComponents = {
             alt={value.alt ?? ""}
             width={value.width ?? 1600}
             height={value.height ?? 900}
-            sizes="(max-width: 768px) 100vw, 680px"
+            sizes="100vw"
             className="h-auto w-full border border-[#4A4034]"
           />
         </figure>
@@ -276,7 +276,7 @@ export default async function InsightArticlePage({
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(199,139,62,0.14),transparent_52%),radial-gradient(ellipse_at_82%_100%,rgba(199,139,62,0.1),transparent_48%)]"
           />
 
-          <div className="relative max-w-[680px]">
+          <div className="relative mb-section-shell">
             <Link
               href={getNavHref("insights", locale)}
               className="inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] text-[#8C877D] no-underline transition-colors hover:text-[#C78B3E]"
@@ -339,7 +339,7 @@ export default async function InsightArticlePage({
                   alt={post.heroImageAlt ?? ""}
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 680px"
+                  sizes="100vw"
                   className="object-cover"
                 />
               </div>
