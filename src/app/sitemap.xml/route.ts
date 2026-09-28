@@ -1,8 +1,11 @@
 import { locales, defaultLocale, htmlLang } from "@/i18n/config";
 import { absoluteUrl, localePath } from "@/lib/seo";
 import { getSiteRoutes } from "@/lib/routes";
+import { getInsights } from "@/data/insights";
 
-export const dynamic = "force-static";
+// Rebuilt every minute (matching INSIGHTS_REVALIDATE) so newly published articles are
+// listed without a redeploy.
+export const revalidate = 60;
 
 function escapeXml(value: string) {
   return value
@@ -12,7 +15,7 @@ function escapeXml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
-export function GET() {
+export async function GET() {
   const defaultUrl = (path: string) => absoluteUrl(localePath(defaultLocale, path));
   const languageLinks = (path: string) =>
     [
@@ -40,11 +43,23 @@ ${links}${lastmod}
     });
   });
 
+  // Articles exist in Serbian only, so each gets a single entry with no alternates.
+  const posts = await getInsights();
+  const postEntries = posts.map((post) => {
+    const loc = absoluteUrl(localePath(defaultLocale, `/uvidi/${post.slug}`));
+    return `  <url>
+    <loc>${escapeXml(loc)}</loc>
+    <lastmod>${escapeXml(post.publishedAt)}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+  });
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${entries.join("\n")}
+${[...entries, ...postEntries].join("\n")}
 </urlset>
 `;
 

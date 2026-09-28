@@ -4,12 +4,8 @@ import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawCTA from "@/components/MbLawCTA";
 import MbLawInsightCard from "@/components/MbLawInsightCard";
-import {
-  getInsightTopic,
-  getInsightsByTopic,
-  insightTopics,
-  insights,
-} from "@/data/insights";
+import { getInsights, toCardData } from "@/data/insights";
+import { practiceAreas } from "@/data/practice-areas";
 import { isLocale, defaultLocale, htmlLang, type Locale } from "@/i18n/config";
 import { getNavHref } from "@/i18n/nav";
 import { getDictionary, type Dictionary } from "@/dictionaries";
@@ -25,6 +21,9 @@ import {
 } from "@/lib/seo";
 
 const PATH = "/uvidi";
+
+// Must be a literal (Next reads it statically); keep in sync with INSIGHTS_REVALIDATE.
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -84,16 +83,24 @@ export default async function InsightsPage({
   const query = await searchParams;
   const raw = query.oblast;
   const oblast = Array.isArray(raw) ? raw[0] : raw;
-  const activeTopic = getInsightTopic(oblast);
-  const filtered = getInsightsByTopic(activeTopic?.slug);
+  // Articles exist in Serbian only; other locales point readers to the Serbian list.
+  const posts = locale === "sr" ? await getInsights() : [];
+  // Filters list only the practice areas that actually have articles.
+  const areas = practiceAreas.filter((area) =>
+    posts.some((post) => post.practiceArea === area.slug)
+  );
+  const activeArea = areas.find((area) => area.slug === oblast);
+  const filtered = activeArea
+    ? posts.filter((post) => post.practiceArea === activeArea.slug)
+    : posts;
   const jsonLd = buildJsonLd(locale, dict);
 
   const filters = [
-    { slug: undefined as string | undefined, label: dict.insights.filterAll, active: !activeTopic },
-    ...insightTopics.map((topic) => ({
-      slug: topic.slug as string | undefined,
-      label: dict.insights.topics[topic.slug] ?? topic.label,
-      active: activeTopic?.slug === topic.slug,
+    { slug: undefined as string | undefined, label: dict.insights.filterAll, active: !activeArea },
+    ...areas.map((area) => ({
+      slug: area.slug as string | undefined,
+      label: area.title,
+      active: activeArea?.slug === area.slug,
     })),
   ];
 
@@ -130,32 +137,50 @@ export default async function InsightsPage({
               {dict.insights.indexLead}
             </p>
 
-            <nav aria-label={dict.insights.filterAriaLabel} className="mt-8">
-              <ul className="flex gap-x-6 gap-y-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {filters.map((item) => (
-                  <li key={item.label} className="shrink-0">
-                    <Link
-                      href={filterHref(base, item.slug)}
-                      scroll={false}
-                      aria-current={item.active ? "page" : undefined}
-                      className={`block pb-1 text-[13px] font-semibold tracking-[0.06em] no-underline transition-colors ${
-                        item.active
-                          ? "border-b border-[#C78B3E] text-[#F1EEE7]"
-                          : "border-b border-transparent text-[#8C877D] hover:text-[#C78B3E]"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            {areas.length > 0 ? (
+              <nav aria-label={dict.insights.filterAriaLabel} className="mt-8">
+                <ul className="flex gap-x-6 gap-y-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {filters.map((item) => (
+                    <li key={item.label} className="shrink-0">
+                      <Link
+                        href={filterHref(base, item.slug)}
+                        scroll={false}
+                        aria-current={item.active ? "page" : undefined}
+                        className={`block pb-1 text-[13px] font-semibold tracking-[0.06em] no-underline transition-colors ${
+                          item.active
+                            ? "border-b border-[#C78B3E] text-[#F1EEE7]"
+                            : "border-b border-transparent text-[#8C877D] hover:text-[#C78B3E]"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ) : null}
+
+            {filtered.length === 0 ? (
+              <div className="mt-10 border-t border-[#4A4034] pt-8">
+                <p className="text-[16px] leading-[1.75] text-[#C2BCB2]">
+                  {dict.insights.emptyState}
+                </p>
+                {locale !== "sr" ? (
+                  <Link
+                    href={getNavHref("insights", "sr")}
+                    className="mt-5 inline-block text-[11.5px] font-semibold tracking-[0.15em] text-[#C78B3E] no-underline transition-colors hover:text-[#D89B4C]"
+                  >
+                    {dict.insights.serbianOnlyLink}
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
 
             <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-5">
               {filtered.map((post) => (
                 <li key={post.slug} className="min-w-0">
                   <MbLawInsightCard
-                    post={post}
+                    post={toCardData(post, dict.insights.eyebrow)}
                     variant="grid"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     locale={locale}

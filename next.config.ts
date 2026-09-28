@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [75, 90],
+    // Article images uploaded to Sanity.
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
   },
   async redirects() {
     return [

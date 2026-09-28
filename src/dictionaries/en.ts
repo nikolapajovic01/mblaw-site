@@ -202,80 +202,11 @@ const en = {
     filterAll: "All",
     filterAriaLabel: "Filter insights by topic",
     moreInsights: "MORE INSIGHTS",
-    topics: {
-      "privredno-pravo": "Commercial Law",
-      nekretnine: "Real Estate",
-      "radno-pravo": "Employment Law",
-      "kazneno-pravo": "Criminal Law",
-    },
-    posts: {
-      "izmene-propisa-i-poslovanje": {
-        tag: "COMMERCIAL LAW",
-        title: "Regulatory changes and their impact on business.",
-        excerpt:
-          "A brief overview of the most important changes and their impact on the operations of companies.",
-        body: [
-          "When a regulation changes, the first question isn't what the explanatory note says, but what it actually changes for a specific company: contracts, deadlines, filings and the liability of its officers.",
-          "We review what has already entered into force, what is about to, and where a transitional regime applies. Only then do we set out what needs to be done, and by when.",
-          "If a change touches your matter, get in touch. The partner will tell you whether you need to amend your bylaws, your contracts, or simply track a deadline.",
-        ],
-      },
-      "provera-pre-kupoprodaje-nepokretnosti": {
-        tag: "REAL ESTATE",
-        title: "What to check before buying or selling real estate.",
-        excerpt:
-          "What needs to be checked before a sale and how to avoid the most common legal risks.",
-        body: [
-          "A sale doesn't begin at the notary's office. It begins with a review of the property's status: the land register entry, any encumbrances, permits, and whether the seller can actually transfer title at all.",
-          "The most common risk isn't the price, but a gap in the paperwork that only surfaces once the file is opened. That's why the check happens before the deposit, not after.",
-          "If you're buying or selling, the first step is for us to review the file. That determines whether to proceed, and on what terms.",
-        ],
-      },
-      "izmene-internih-akata-i-ugovora-o-radu": {
-        tag: "EMPLOYMENT LAW",
-        title: "Amending internal policies and employment contracts.",
-        excerpt:
-          "Practical guidance for employers when amending internal policies and employment contracts.",
-        body: [
-          "An internal policy or an employment contract isn't amended overnight. The change has to track the law, the existing contracts and the way the company actually operates.",
-          "An employer needs to know what is changing, who it affects, and how the change is communicated. Otherwise a dispute ends up being about procedure, not substance.",
-          "If you're preparing to amend a policy or a contract, the current text comes first. The plan is written after that.",
-        ],
-      },
-      "prvi-koraci-u-odbrani": {
-        tag: "CRIMINAL LAW",
-        title: "The first steps in a criminal defense.",
-        excerpt:
-          "How to prepare a defense and which steps to take in the early stage of proceedings.",
-        body: [
-          "Cases are often won or lost in the early stage. The first step is establishing where the client stands in the proceedings, what has already been said, and what the deadlines are.",
-          "A defense isn't drafted before the facts are known. A meeting, the file, then a plan. If it's urgent, the work starts from the moment of detention, not from the office the next morning.",
-          "If you've been summoned, brought in, or detained, get in touch immediately. The partner takes over the conversation and tells you what happens next.",
-        ],
-      },
-      "ugovori-koji-prate-rast-drustva": {
-        tag: "COMMERCIAL LAW",
-        title: "Contracts that keep pace with a company's growth.",
-        excerpt:
-          "As a company grows, old contracts often stay in place. What to review before the next round of business.",
-        body: [
-          "Growth changes the relationship with suppliers, employees and partners. A contract that worked at the start often doesn't cover the new volume, deadlines or liability.",
-          "The review starts from what the company does today, not from the folder in the drawer. Only then is it clear what needs updating, and what can stay as is.",
-          "If you're entering a new deal or a new round of negotiations, the existing contracts get opened first. The plan for amending them comes after that.",
-        ],
-      },
-      "upis-i-tereti-pre-avansa": {
-        tag: "REAL ESTATE",
-        title: "Registration and encumbrances before the deposit.",
-        excerpt:
-          "What the land registry must show before a deposit is paid, and what happens if it doesn't.",
-        body: [
-          "A deposit is often requested before the state of the land register entry is clear. If an encumbrance or a notation surfaces after payment, the negotiation continues from a weaker position.",
-          "The check isn't a formality. It looks at the registration, any encumbrances, and whether the seller can transfer title on the terms that were represented.",
-          "If you're preparing a purchase, the file is opened before the deposit. That determines whether the payment goes ahead, and on what terms.",
-        ],
-      },
-    },
+    emptyState: "Our insights are currently published in Serbian only.",
+    serbianOnlyLink: "READ IN SERBIAN",
+    authorLabel: "AUTHOR",
+    readingTime: "min read",
+    faqHeading: "Frequently asked questions",
   },
   cta: {
     eyebrow: "CONSULTATION",

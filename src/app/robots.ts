@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/seo";
 // are all welcome: being cited by them is part of how clients find the firm.
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/" },
+    rules: { userAgent: "*", allow: "/", disallow: "/studio" },
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,
   };

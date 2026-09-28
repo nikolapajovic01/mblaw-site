@@ -1,19 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Insight } from "@/data/insights";
 import { defaultLocale, intlTags, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/dictionaries";
 import { getNavHref } from "@/i18n/nav";
 
-function DateStamp({
-  day,
-  isoDate,
-  locale,
-}: Pick<Insight, "day" | "isoDate"> & { locale: Locale }) {
-  const month = new Intl.DateTimeFormat(intlTags[locale], { month: "long" })
-    .format(new Date(isoDate))
-    .toUpperCase();
-  const year = new Date(isoDate).getFullYear();
+// Plain, serializable card data, so the homepage carousel (a client component) can
+// render cards without pulling the Sanity client into the browser bundle.
+export type InsightCardData = {
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  publishedAt: string;
+  tag: string;
+  imageUrl: string | null;
+};
+
+function DateStamp({ isoDate, locale }: { isoDate: string; locale: Locale }) {
+  // Belgrade time, so an article published just after midnight shows the right day
+  // regardless of the server's own timezone.
+  const date = new Date(isoDate);
+  // formatToParts, because Serbian formatting appends a period to a bare day or year.
+  const part = (type: "day" | "month" | "year", options: Intl.DateTimeFormatOptions) =>
+    new Intl.DateTimeFormat(intlTags[locale], { timeZone: "Europe/Belgrade", ...options })
+      .formatToParts(date)
+      .find((item) => item.type === type)?.value ?? "";
+  const day = part("day", { day: "2-digit" });
+  const month = part("month", { month: "long" }).toUpperCase();
+  const year = part("year", { year: "numeric" });
 
   return (
     <time dateTime={isoDate} className="border-l-2 border-[#C78B3E] pl-3">
@@ -37,17 +50,14 @@ export default function MbLawInsightCard({
   variant = "slide",
   locale = defaultLocale,
 }: {
-  post: Insight;
+  post: InsightCardData;
   active?: boolean;
   sizes?: string;
   variant?: "slide" | "grid";
   locale?: Locale;
 }) {
   const dict = getDictionary(locale).insights;
-  const translated = dict.posts[post.slug];
-  const tag = translated?.tag ?? post.tag;
-  const title = translated?.title ?? post.title;
-  const excerpt = translated?.excerpt ?? post.excerpt;
+  const { tag, title, excerpt } = post;
 
   return (
     <Link
@@ -69,9 +79,9 @@ export default function MbLawInsightCard({
       />
 
       <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#141210]">
-        {post.image ? (
+        {post.imageUrl ? (
           <Image
-            src={post.image}
+            src={post.imageUrl}
             alt=""
             fill
             draggable={false}
@@ -91,7 +101,7 @@ export default function MbLawInsightCard({
         />
 
         <div className="absolute bottom-0 left-0 p-4 md:p-5">
-          <DateStamp day={post.day} isoDate={post.isoDate} locale={locale} />
+          <DateStamp isoDate={post.publishedAt} locale={locale} />
         </div>
       </div>
 

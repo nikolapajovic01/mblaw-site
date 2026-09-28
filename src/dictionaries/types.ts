@@ -98,8 +98,13 @@ export type Dictionary = {
     filterAll: string;
     filterAriaLabel: string;
     moreInsights: string;
-    topics: Record<string, string>;
-    posts: Record<string, { tag: string; title: string; excerpt: string; body: string[] }>;
+    // On non-Serbian locales this explains that articles exist in Serbian only.
+    emptyState: string;
+    // Link to the Serbian list, shown on non-Serbian locales (empty on sr).
+    serbianOnlyLink: string;
+    authorLabel: string;
+    readingTime: string;
+    faqHeading: string;
   };
   cta: {
     eyebrow: string;

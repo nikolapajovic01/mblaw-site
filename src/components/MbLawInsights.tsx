@@ -3,8 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { insights } from "@/data/insights";
-import MbLawInsightCard from "@/components/MbLawInsightCard";
+import MbLawInsightCard, { type InsightCardData } from "@/components/MbLawInsightCard";
 import { defaultLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/dictionaries";
 import { getNavHref } from "@/i18n/nav";
@@ -49,8 +48,10 @@ function NavArrow({
 }
 
 export default function MbLawInsights({
+  insights,
   locale = defaultLocale,
 }: {
+  insights: InsightCardData[];
   locale?: Locale;
 }) {
   const dict = getDictionary(locale).insights;
