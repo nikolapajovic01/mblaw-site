@@ -173,9 +173,7 @@ export default function MbLawInsights({
       pointerIdRef.current = event.pointerId;
       startXRef.current = event.clientX;
       scrollLeftRef.current = track.scrollLeft;
-      setIsDragging(true);
       track.style.scrollSnapType = "none";
-      track.setPointerCapture(event.pointerId);
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -184,6 +182,12 @@ export default function MbLawInsights({
       event.preventDefault();
       const delta = event.clientX - startXRef.current;
       dragMovedRef.current = Math.max(dragMovedRef.current, Math.abs(delta));
+      // Capture only once it is a real drag: capturing on pointerdown retargets the
+      // click to the track, so a plain click never reaches the card link.
+      if (dragMovedRef.current > 6 && !track.hasPointerCapture(event.pointerId)) {
+        track.setPointerCapture(event.pointerId);
+        setIsDragging(true);
+      }
       track.scrollLeft = scrollLeftRef.current - delta;
     };
 
@@ -344,7 +348,7 @@ export default function MbLawInsights({
           <div
             ref={trackRef}
             className={`snap-x snap-mandatory overflow-x-auto overflow-y-hidden overscroll-x-contain pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-              isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+              isDragging ? "cursor-grabbing select-none [&_a]:cursor-grabbing" : "cursor-grab"
             }`}
             style={{ touchAction: "pan-x" }}
           >
@@ -358,7 +362,7 @@ export default function MbLawInsights({
                     ref={(node) => {
                       slideRefs.current[index] = node;
                     }}
-                    className="w-[min(82vw,320px)] shrink-0 snap-start sm:w-[300px] md:w-[340px]"
+                    className="w-[min(82vw,320px)] shrink-0 snap-start pt-1 sm:w-[300px] md:w-[340px]"
                   >
                     <MbLawInsightCard post={post} active={isActive} locale={locale} />
                   </li>

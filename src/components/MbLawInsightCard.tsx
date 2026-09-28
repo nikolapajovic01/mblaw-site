@@ -63,12 +63,12 @@ export default function MbLawInsightCard({
     <Link
       href={`${getNavHref("insights", locale)}/${post.slug}`}
       draggable={false}
-      className={`group relative flex flex-col overflow-hidden border no-underline transition-[border-color,opacity] duration-500 motion-reduce:transition-none ${
-        variant === "slide" ? "h-[390px] md:h-[410px]" : "h-full min-h-[390px]"
+      className={`group relative flex h-full cursor-pointer flex-col overflow-hidden border no-underline transition-[border-color,opacity,transform,box-shadow] duration-500 hover:-translate-y-1 hover:border-[#C78B3E] hover:shadow-[0_18px_40px_-20px_rgba(0,0,0,0.7)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${
+        variant === "grid" ? "min-h-[390px]" : ""
       } ${
         active
           ? "border-[#C78B3E]/60 opacity-100"
-          : "border-[#4A4034] opacity-[0.72] hover:opacity-90"
+          : "border-[#4A4034] opacity-[0.72] hover:opacity-100"
       }`}
     >
       <span
@@ -111,7 +111,7 @@ export default function MbLawInsightCard({
         </span>
 
         <h3
-          className="mt-3 text-[18px] font-semibold leading-[1.28] tracking-[-0.01em] text-[#F1EEE7] transition-colors group-hover:text-[#EDE9E1] md:text-[20px]"
+          className="mt-3 line-clamp-3 text-[18px] font-semibold leading-[1.28] tracking-[-0.01em] text-[#F1EEE7] transition-colors group-hover:text-[#EDE9E1] md:text-[20px]"
           style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
         >
           {title}
@@ -121,14 +121,14 @@ export default function MbLawInsightCard({
           {excerpt}
         </p>
 
-        <span className="mt-5 inline-flex items-center gap-1.5 text-[10.5px] font-semibold tracking-[0.12em] text-[#CFC9BF] transition-colors group-hover:text-[#C78B3E]">
+        <span className="mt-5 inline-flex items-center gap-2 self-start border-b border-[#C78B3E]/40 pb-1 text-[10.5px] font-semibold tracking-[0.14em] text-[#C78B3E] transition-colors group-hover:border-[#C78B3E] group-hover:text-[#D89B4C]">
           {dict.readMore}
           <svg
             width="10"
             height="10"
             viewBox="0 0 12 12"
             fill="none"
-            className="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+            className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
             aria-hidden="true"
           >
             <path
