@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { PortableText, type PortableTextComponents } from "next-sanity";
 import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
@@ -183,7 +183,9 @@ export default async function InsightArticlePage({
 }: PageProps<"/[locale]/uvidi/[slug]">) {
   const { slug, locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
-  if (locale !== "sr") notFound();
+  // Articles exist in Serbian only; send other locales to their Uvidi list,
+  // which explains that and links to the Serbian articles.
+  if (locale !== "sr") redirect(localePath(locale, "/uvidi"));
   const post = await getInsight(slug);
   if (!post) notFound();
 
