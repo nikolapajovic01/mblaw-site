@@ -105,6 +105,12 @@ export type Dictionary = {
     authorLabel: string;
     readingTime: string;
     faqHeading: string;
+    /** Shown next to the publish date when the article was edited on a later day. */
+    updatedLabel: string;
+    tocHeading: string;
+    shareLabel: string;
+    copyLink: string;
+    linkCopied: string;
   };
   cta: {
     eyebrow: string;

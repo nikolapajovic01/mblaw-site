@@ -6,11 +6,15 @@ import { PortableText, type PortableTextComponents } from "next-sanity";
 import MbLawSiteHeader from "@/components/MbLawSiteHeader";
 import MbLawFooter from "@/components/MbLawFooter";
 import MbLawInsightCard from "@/components/MbLawInsightCard";
+import MbLawShare from "@/components/MbLawShare";
 import {
   getInsight,
   getInsightTag,
   getInsights,
   getTranslationsBySlug,
+  getTableOfContents,
+  blockText,
+  headingId,
   toCardData,
   type InsightTableRow,
   type InsightTranslation,
@@ -40,6 +44,11 @@ export async function generateStaticParams({
   if (!isLocale(params.locale)) return [];
   const posts = await getInsights(params.locale);
   return posts.map((post) => ({ slug: post.slug }));
+}
+
+/** Hero image as a 1200x630 JPG: link previews on LinkedIn and some messengers drop WebP. */
+function shareImageUrl(heroImageUrl: string) {
+  return `${heroImageUrl}?w=1200&h=630&fit=crop&fm=jpg&q=82`;
 }
 
 /** hreflang map for the language versions that actually exist (never advertise a missing one). */
@@ -74,7 +83,14 @@ export async function generateMetadata({
     type: "article",
     publishedTime: post.publishedAt,
     ...(post.heroImageUrl
-      ? { image: { url: post.heroImageUrl, alt: post.heroImageAlt ?? post.title } }
+      ? {
+          image: {
+            url: shareImageUrl(post.heroImageUrl),
+            width: 1200,
+            height: 630,
+            alt: post.heroImageAlt ?? post.title,
+          },
+        }
       : {}),
   });
 
@@ -94,9 +110,10 @@ const bodyComponents: PortableTextComponents = {
         {children}
       </p>
     ),
-    h2: ({ children }) => (
+    h2: ({ children, value }) => (
       <h2
-        className="mt-6 text-[24px] font-bold leading-[1.2] tracking-[-0.015em] text-[#F1EEE7] md:text-[28px]"
+        id={headingId(blockText(value))}
+        className="scroll-mt-28 mt-6 text-[24px] font-bold leading-[1.2] tracking-[-0.015em] text-[#F1EEE7] md:text-[28px]"
         style={{ fontFamily: "var(--font-mb-serif), Georgia, serif" }}
       >
         {children}
@@ -224,6 +241,22 @@ export default async function InsightArticlePage({
   const month = datePart("month", { month: "long" }).toUpperCase();
   const year = datePart("year", { year: "numeric" });
 
+  // "Updated" only when the article was edited on a later (Belgrade) day than it was published.
+  const belgradeDay = (iso: string) =>
+    new Intl.DateTimeFormat(intlTags[locale], {
+      timeZone: "Europe/Belgrade",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }).format(new Date(iso));
+  const updatedOn =
+    post.updatedAt &&
+    new Date(post.updatedAt) > date &&
+    belgradeDay(post.updatedAt) !== belgradeDay(post.publishedAt)
+      ? belgradeDay(post.updatedAt)
+      : null;
+  const toc = getTableOfContents(post.body);
+
   const others = (await getInsights(locale)).filter((item) => item.slug !== post.slug);
   const sameArea = (item: { practiceArea: string | null }) =>
     Boolean(post.practiceArea) && item.practiceArea === post.practiceArea;
@@ -243,6 +276,7 @@ export default async function InsightArticlePage({
         headline: post.title,
         description: post.metaDescription ?? post.excerpt ?? undefined,
         datePublished: post.publishedAt,
+        ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
         inLanguage: htmlLang[locale],
         ...(post.heroImageUrl ? { image: post.heroImageUrl } : {}),
         ...(author
@@ -335,6 +369,12 @@ export default async function InsightArticlePage({
                   {post.readingTime ? ` · ${post.readingTime} ${dict.insights.readingTime.toUpperCase()}` : ""}
                 </span>
               </time>
+              {updatedOn ? (
+                <span className="mt-3 block pl-3.5 text-[10.5px] font-semibold tracking-[0.18em] text-[#8C877D]">
+                  {dict.insights.updatedLabel}{" "}
+                  <time dateTime={post.updatedAt}>{updatedOn}</time>
+                </span>
+              ) : null}
             </div>
 
             <span className="mt-8 block text-[10px] font-semibold tracking-[0.14em] text-[#C78B3E]">
@@ -363,6 +403,29 @@ export default async function InsightArticlePage({
                   className="object-cover"
                 />
               </div>
+            ) : null}
+
+            {toc.length >= 3 ? (
+              <nav
+                aria-label={dict.insights.tocHeading}
+                className="mt-10 border-l-2 border-[#C78B3E] bg-[#241E18] px-6 py-5"
+              >
+                <span className="block text-[10.5px] font-semibold tracking-[0.2em] text-[#C78B3E]">
+                  {dict.insights.tocHeading.toUpperCase()}
+                </span>
+                <ol className="mt-3 flex list-decimal flex-col gap-1.5 pl-5 text-[15px] leading-[1.55] text-[#C2BCB2] marker:text-[#77726A]">
+                  {toc.map((item) => (
+                    <li key={item.id} className="pl-1">
+                      <a
+                        href={`#${item.id}`}
+                        className="text-[#CFC9BF] no-underline transition-colors hover:text-[#C78B3E]"
+                      >
+                        {item.text}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
             ) : null}
 
             <div className="mt-10 flex flex-col gap-5 border-t border-[#4A4034] pt-10">
@@ -400,6 +463,17 @@ export default async function InsightArticlePage({
                 </div>
               </section>
             ) : null}
+
+            <div className="mt-12 border-t border-[#4A4034] pt-8">
+              <MbLawShare
+                url={url}
+                title={post.title}
+                locale={locale}
+                label={dict.insights.shareLabel}
+                copyLabel={dict.insights.copyLink}
+                copiedLabel={dict.insights.linkCopied}
+              />
+            </div>
 
             {author ? (
               <Link

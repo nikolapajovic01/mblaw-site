@@ -28,6 +28,8 @@ export type InsightTranslation = { language: Locale; slug: string };
 export type InsightTableRow = { _key: string; cells: string[] | null; highlight: boolean | null };
 
 export type Insight = InsightSummary & {
+  /** Last edit in Sanity (_updatedAt); shown as "updated" when later than publishedAt. */
+  updatedAt: string;
   metaTitle: string | null;
   metaDescription: string | null;
   readingTime: number | null;
@@ -76,6 +78,7 @@ const ALL_INSIGHTS_QUERY = defineQuery(`
 const INSIGHT_QUERY = defineQuery(`
   *[${PUBLISHED} && slug.current == $slug && ${LANGUAGE} == $locale][0] {
     ${SUMMARY_PROJECTION},
+    "updatedAt": _updatedAt,
     metaTitle,
     metaDescription,
     readingTime,
@@ -122,6 +125,38 @@ export async function getTranslationsBySlug(slug: string): Promise<InsightTransl
       fetchOptions
     )) ?? []
   );
+}
+
+/** Heading text -> URL fragment, keeping Cyrillic letters (e.g. "Kada je potrebna..." -> "kada-je-potrebna"). */
+export function headingId(text: string): string {
+  return text
+    // Drop accents on Latin letters (č -> c) but recompose Cyrillic (й stays й).
+    .normalize("NFKD")
+    .replace(/([a-z])[\u0300-\u036f]+/gi, "$1")
+    .normalize("NFC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+}
+
+/** Plain text of a Portable Text block (its spans joined). */
+export function blockText(block: { children?: unknown[] }): string {
+  return (block.children ?? [])
+    .map((child) => (child as { text?: unknown }).text)
+    .filter((text): text is string => typeof text === "string")
+    .join("");
+}
+
+/** H2 headings of an article body, for the table of contents. */
+export function getTableOfContents(body: PortableTextBlock[] | null): { id: string; text: string }[] {
+  return (body ?? [])
+    .filter((block) => block._type === "block" && block.style === "h2")
+    .map((block) => {
+      const text = blockText(block as { children?: unknown[] });
+      return { id: headingId(text), text };
+    })
+    .filter((item) => item.id);
 }
 
 /** Card label: the practice area's title in the page's language, or null when none. */

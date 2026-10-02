@@ -207,6 +207,11 @@ const en = {
     authorLabel: "AUTHOR",
     readingTime: "min read",
     faqHeading: "Frequently asked questions",
+    updatedLabel: "UPDATED",
+    tocHeading: "Contents",
+    shareLabel: "SHARE",
+    copyLink: "Copy link",
+    linkCopied: "Link copied",
   },
   cta: {
     eyebrow: "CONSULTATION",

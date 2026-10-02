@@ -207,6 +207,11 @@ const sr = {
     authorLabel: "AUTOR",
     readingTime: "min čitanja",
     faqHeading: "Česta pitanja",
+    updatedLabel: "AŽURIRANO",
+    tocHeading: "Sadržaj",
+    shareLabel: "PODELITE",
+    copyLink: "Kopiraj link",
+    linkCopied: "Link je kopiran",
   },
   cta: {
     eyebrow: "KONSULTACIJA",

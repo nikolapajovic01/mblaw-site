@@ -207,6 +207,11 @@ const ru = {
     authorLabel: "АВТОР",
     readingTime: "мин чтения",
     faqHeading: "Частые вопросы",
+    updatedLabel: "ОБНОВЛЕНО",
+    tocHeading: "Содержание",
+    shareLabel: "ПОДЕЛИТЬСЯ",
+    copyLink: "Скопировать ссылку",
+    linkCopied: "Ссылка скопирована",
   },
   cta: {
     eyebrow: "КОНСУЛЬТАЦИЯ",
