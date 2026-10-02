@@ -2,7 +2,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { practiceAreas } from "../../data/practice-areas";
 import { attorneys } from "../../data/team";
 
-// One "Uvid" (blog article), rendered at /{language}/uvidi/{slug}. Author and practice
+// One blog post, rendered at /{language}/blog/{slug}. Author and practice
 // area are stored as slugs and resolved against src/data/team.ts and practice-areas.ts,
 // so names, photos and links stay defined in one place.
 //
@@ -12,7 +12,7 @@ import { attorneys } from "../../data/team";
 // publishes) are Serbian.
 export const blogPost = defineType({
   name: "blogPost",
-  title: "Uvid",
+  title: "Blog tekst",
   type: "document",
   fields: [
     defineField({

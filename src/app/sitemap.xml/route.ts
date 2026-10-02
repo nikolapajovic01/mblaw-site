@@ -47,7 +47,7 @@ ${links}${lastmod}
   // other language versions only (never to a translation that doesn't exist).
   const posts = await getAllInsights();
   const postEntries = posts.map((post) => {
-    const loc = absoluteUrl(localePath(post.language, `/uvidi/${post.slug}`));
+    const loc = absoluteUrl(localePath(post.language, `/blog/${post.slug}`));
     const versions = locales
       .map((code) => post.translations.find((translation) => translation.language === code))
       .filter((translation) => translation !== undefined);
@@ -58,9 +58,9 @@ ${links}${lastmod}
           [
             ...versions.map(
               (translation) =>
-                [htmlLang[translation.language], absoluteUrl(localePath(translation.language, `/uvidi/${translation.slug}`))] as const
+                [htmlLang[translation.language], absoluteUrl(localePath(translation.language, `/blog/${translation.slug}`))] as const
             ),
-            ["x-default", absoluteUrl(localePath(fallback.language, `/uvidi/${fallback.slug}`))] as const,
+            ["x-default", absoluteUrl(localePath(fallback.language, `/blog/${fallback.slug}`))] as const,
           ]
             .map(
               ([lang, href]) =>

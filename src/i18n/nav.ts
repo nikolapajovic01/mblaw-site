@@ -9,7 +9,7 @@ const navPaths: Record<NavKey, string> = {
   about: "/o-nama",
   practiceAreas: "/oblasti-rada",
   team: "/tim",
-  insights: "/uvidi",
+  insights: "/blog",
   contact: "/kontakt",
 };
 

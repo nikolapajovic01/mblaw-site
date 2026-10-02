@@ -9,6 +9,17 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The section was renamed from Uvidi to Blog; old article links are indexed and shared.
+      {
+        source: "/:locale(sr|en|ru)/uvidi/:path*",
+        destination: "/:locale/blog/:path*",
+        permanent: true,
+      },
+      {
+        source: "/uvidi/:path*",
+        destination: "/sr/blog/:path*",
+        permanent: true,
+      },
       {
         source: "/oblasti-rada/poslovanje-i-kompanije",
         destination: "/oblasti-rada/korporativno-pravo",

@@ -43,9 +43,9 @@ export function GET() {
       return `- [${attorney.name}, ${t?.role ?? attorney.role}](${link(`/tim/${attorney.slug}`)}): ${t?.bio ?? attorney.bio}`;
     }),
     "",
-    "## Insights",
+    "## Blog",
     "",
-    `- [Insights](${link("/uvidi")}): ${en.meta.insightsDescription}`,
+    `- [Blog](${link("/blog")}): ${en.meta.insightsDescription}`,
     "",
     "## Optional",
     "",

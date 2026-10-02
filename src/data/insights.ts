@@ -94,7 +94,7 @@ const INSIGHT_QUERY = defineQuery(`
 
 // The article a slug belongs to in any language, with all its language versions. Used
 // when a URL pairs a slug with the wrong locale (e.g. the language switcher sends
-// /sr/uvidi/{sr-slug} to /ru/uvidi/{sr-slug}).
+// /sr/blog/{sr-slug} to /ru/blog/{sr-slug}).
 const TRANSLATIONS_BY_SLUG_QUERY = defineQuery(`
   *[${PUBLISHED} && slug.current == $slug][0] { ${TRANSLATIONS_PROJECTION} }.translations
 `);

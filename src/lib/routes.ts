@@ -38,7 +38,7 @@ export function getSiteRoutes(): SiteRoute[] {
       changeFrequency: "yearly" as const,
       priority: 0.7,
     })),
-    { path: "/uvidi", changeFrequency: "weekly", priority: 0.6 },
+    { path: "/blog", changeFrequency: "weekly", priority: 0.6 },
     { path: "/kontakt", changeFrequency: "yearly", priority: 0.8 },
     {
       path: "/politika-privatnosti",

@@ -20,7 +20,7 @@ import {
   pageMetadata,
 } from "@/lib/seo";
 
-const PATH = "/uvidi";
+const PATH = "/blog";
 
 // Must be a literal (Next reads it statically); keep in sync with INSIGHTS_REVALIDATE.
 export const revalidate = 60;

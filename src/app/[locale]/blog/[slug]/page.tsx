@@ -54,7 +54,7 @@ function shareImageUrl(heroImageUrl: string) {
 /** hreflang map for the language versions that actually exist (never advertise a missing one). */
 function translationAlternates(translations: InsightTranslation[]) {
   const pathFor = (translation: InsightTranslation) =>
-    localePath(translation.language, `/uvidi/${translation.slug}`);
+    localePath(translation.language, `/blog/${translation.slug}`);
   const available = locales
     .map((code) => translations.find((translation) => translation.language === code))
     .filter((translation): translation is InsightTranslation => Boolean(translation));
@@ -67,13 +67,13 @@ function translationAlternates(translations: InsightTranslation[]) {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/[locale]/uvidi/[slug]">): Promise<Metadata> {
+}: PageProps<"/[locale]/blog/[slug]">): Promise<Metadata> {
   const { slug, locale: rawLocale } = await params;
   if (!isLocale(rawLocale)) return {};
   const locale: Locale = rawLocale;
   const post = await getInsight(slug, locale);
   if (!post) return {};
-  const path = `/uvidi/${post.slug}`;
+  const path = `/blog/${post.slug}`;
 
   const metadata = pageMetadata({
     locale,
@@ -210,25 +210,25 @@ const bodyComponents: PortableTextComponents = {
 
 export default async function InsightArticlePage({
   params,
-}: PageProps<"/[locale]/uvidi/[slug]">) {
+}: PageProps<"/[locale]/blog/[slug]">) {
   const { slug, locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const post = await getInsight(slug, locale);
   if (!post) {
     // The slug exists in another language (e.g. the language switcher kept the slug
     // and only swapped the locale): go to this locale's version, or to this locale's
-    // Uvidi list when the article isn't translated.
+    // blog list when the article isn't translated.
     const translations = await getTranslationsBySlug(slug);
     if (translations.length === 0) notFound();
     const match = translations.find((translation) => translation.language === locale);
-    redirect(localePath(locale, match ? `/uvidi/${match.slug}` : "/uvidi"));
+    redirect(localePath(locale, match ? `/blog/${match.slug}` : "/blog"));
   }
 
   const dict = getDictionary(locale);
   const tag = getInsightTag(post.practiceArea, locale) ?? dict.insights.eyebrow;
   const author = post.author ? getAttorney(post.author) : undefined;
   const faq = (post.faq ?? []).filter((item) => item.q && item.a);
-  const path = `/uvidi/${post.slug}`;
+  const path = `/blog/${post.slug}`;
   const url = absoluteUrl(localePath(locale, path));
 
   // formatToParts, because Serbian formatting appends a period to a bare day or year.
@@ -306,7 +306,7 @@ export default async function InsightArticlePage({
         : []),
       breadcrumbJsonLd([
         { name: dict.nav.home, path: localePath(locale) },
-        { name: dict.nav.insights, path: localePath(locale, "/uvidi") },
+        { name: dict.nav.insights, path: localePath(locale, "/blog") },
         { name: post.title, path: localePath(locale, path) },
       ]),
     ],
