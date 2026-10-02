@@ -10,6 +10,18 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // The section was renamed from Uvidi to Blog; old article links are indexed and shared.
+      // The list pages get their own rules: an empty :path* leaves a trailing slash on
+      // Vercel, which costs an extra redirect.
+      {
+        source: "/:locale(sr|en|ru)/uvidi",
+        destination: "/:locale/blog",
+        permanent: true,
+      },
+      {
+        source: "/uvidi",
+        destination: "/sr/blog",
+        permanent: true,
+      },
       {
         source: "/:locale(sr|en|ru)/uvidi/:path*",
         destination: "/:locale/blog/:path*",
