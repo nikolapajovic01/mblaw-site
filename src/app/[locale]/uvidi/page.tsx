@@ -8,7 +8,7 @@ import { getInsights, toCardData } from "@/data/insights";
 import { practiceAreas } from "@/data/practice-areas";
 import { isLocale, defaultLocale, htmlLang, type Locale } from "@/i18n/config";
 import { getNavHref } from "@/i18n/nav";
-import { getDictionary, type Dictionary } from "@/dictionaries";
+import { getDictionary, getPracticeContent, type Dictionary } from "@/dictionaries";
 import {
   FIRM,
   ORGANIZATION_ID,
@@ -83,8 +83,7 @@ export default async function InsightsPage({
   const query = await searchParams;
   const raw = query.oblast;
   const oblast = Array.isArray(raw) ? raw[0] : raw;
-  // Articles exist in Serbian only; other locales point readers to the Serbian list.
-  const posts = locale === "sr" ? await getInsights() : [];
+  const posts = await getInsights(locale);
   // Filters list only the practice areas that actually have articles.
   const areas = practiceAreas.filter((area) =>
     posts.some((post) => post.practiceArea === area.slug)
@@ -99,7 +98,7 @@ export default async function InsightsPage({
     { slug: undefined as string | undefined, label: dict.insights.filterAll, active: !activeArea },
     ...areas.map((area) => ({
       slug: area.slug as string | undefined,
-      label: area.title,
+      label: getPracticeContent(locale)?.areas[area.slug]?.title ?? area.title,
       active: activeArea?.slug === area.slug,
     })),
   ];
@@ -180,7 +179,7 @@ export default async function InsightsPage({
               {filtered.map((post) => (
                 <li key={post.slug} className="min-w-0">
                   <MbLawInsightCard
-                    post={toCardData(post, dict.insights.eyebrow)}
+                    post={toCardData(post, dict.insights.eyebrow, locale)}
                     variant="grid"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     locale={locale}

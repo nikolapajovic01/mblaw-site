@@ -35,8 +35,8 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
-  // Articles exist in Serbian only; the section is hidden until there is one to show.
-  const insights = locale === "sr" ? await getInsights() : [];
+  // The section is hidden until there is an article in this language to show.
+  const insights = await getInsights(locale);
 
   return (
     <>
@@ -47,7 +47,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <MbLawTeam locale={locale} />
       {insights.length > 0 ? (
         <MbLawInsights
-          insights={insights.slice(0, 8).map((post) => toCardData(post, dict.insights.eyebrow))}
+          insights={insights.slice(0, 8).map((post) => toCardData(post, dict.insights.eyebrow, locale))}
           locale={locale}
         />
       ) : null}

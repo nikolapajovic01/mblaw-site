@@ -1,7 +1,7 @@
 import { locales, defaultLocale, htmlLang } from "@/i18n/config";
 import { absoluteUrl, localePath } from "@/lib/seo";
 import { getSiteRoutes } from "@/lib/routes";
-import { getInsights } from "@/data/insights";
+import { getAllInsights } from "@/data/insights";
 
 // Rebuilt every minute (matching INSIGHTS_REVALIDATE) so newly published articles are
 // listed without a redeploy.
@@ -43,12 +43,33 @@ ${links}${lastmod}
     });
   });
 
-  // Articles exist in Serbian only, so each gets a single entry with no alternates.
-  const posts = await getInsights();
+  // One entry per article per language it exists in, with hreflang links to its
+  // other language versions only (never to a translation that doesn't exist).
+  const posts = await getAllInsights();
   const postEntries = posts.map((post) => {
-    const loc = absoluteUrl(localePath(defaultLocale, `/uvidi/${post.slug}`));
+    const loc = absoluteUrl(localePath(post.language, `/uvidi/${post.slug}`));
+    const versions = locales
+      .map((code) => post.translations.find((translation) => translation.language === code))
+      .filter((translation) => translation !== undefined);
+    const fallback = versions.find((translation) => translation.language === defaultLocale) ?? versions[0];
+    const links =
+      versions.length > 1
+        ? "\n" +
+          [
+            ...versions.map(
+              (translation) =>
+                [htmlLang[translation.language], absoluteUrl(localePath(translation.language, `/uvidi/${translation.slug}`))] as const
+            ),
+            ["x-default", absoluteUrl(localePath(fallback.language, `/uvidi/${fallback.slug}`))] as const,
+          ]
+            .map(
+              ([lang, href]) =>
+                `    <xhtml:link rel="alternate" hreflang="${escapeXml(lang)}" href="${escapeXml(href)}" />`
+            )
+            .join("\n")
+        : "";
     return `  <url>
-    <loc>${escapeXml(loc)}</loc>
+    <loc>${escapeXml(loc)}</loc>${links}
     <lastmod>${escapeXml(post.publishedAt)}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

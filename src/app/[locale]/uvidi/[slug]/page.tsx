@@ -10,11 +10,13 @@ import {
   getInsight,
   getInsightTag,
   getInsights,
+  getTranslationsBySlug,
   toCardData,
   type InsightTableRow,
+  type InsightTranslation,
 } from "@/data/insights";
 import { getAttorney } from "@/data/team";
-import { isLocale, defaultLocale, htmlLang, intlTags } from "@/i18n/config";
+import { isLocale, defaultLocale, htmlLang, intlTags, locales, type Locale } from "@/i18n/config";
 import { getNavHref } from "@/i18n/nav";
 import { getDictionary } from "@/dictionaries";
 import {
@@ -29,28 +31,43 @@ import {
 // Must be a literal (Next reads it statically); keep in sync with INSIGHTS_REVALIDATE.
 export const revalidate = 60;
 
-// Articles exist in Serbian only, so only /sr/uvidi/{slug} is ever rendered.
+// Each locale renders only the articles written in its language.
 export async function generateStaticParams({
   params,
 }: {
   params: { locale: string };
 }) {
-  if (params.locale !== "sr") return [];
-  const posts = await getInsights();
+  if (!isLocale(params.locale)) return [];
+  const posts = await getInsights(params.locale);
   return posts.map((post) => ({ slug: post.slug }));
+}
+
+/** hreflang map for the language versions that actually exist (never advertise a missing one). */
+function translationAlternates(translations: InsightTranslation[]) {
+  const pathFor = (translation: InsightTranslation) =>
+    localePath(translation.language, `/uvidi/${translation.slug}`);
+  const available = locales
+    .map((code) => translations.find((translation) => translation.language === code))
+    .filter((translation): translation is InsightTranslation => Boolean(translation));
+  const fallback = available.find((translation) => translation.language === defaultLocale) ?? available[0];
+  return {
+    ...Object.fromEntries(available.map((translation) => [htmlLang[translation.language], pathFor(translation)])),
+    ...(fallback ? { "x-default": pathFor(fallback) } : {}),
+  };
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/uvidi/[slug]">): Promise<Metadata> {
   const { slug, locale: rawLocale } = await params;
-  if (rawLocale !== "sr") return {};
-  const post = await getInsight(slug);
+  if (!isLocale(rawLocale)) return {};
+  const locale: Locale = rawLocale;
+  const post = await getInsight(slug, locale);
   if (!post) return {};
   const path = `/uvidi/${post.slug}`;
 
   const metadata = pageMetadata({
-    locale: "sr",
+    locale,
     path,
     title: (post.metaTitle ?? post.title).replace(/\.$/, ""),
     description: post.metaDescription ?? post.excerpt ?? "",
@@ -61,15 +78,11 @@ export async function generateMetadata({
       : {}),
   });
 
-  // No English or Russian version exists, so don't advertise one.
   return {
     ...metadata,
     alternates: {
-      canonical: localePath("sr", path),
-      languages: {
-        [htmlLang.sr]: localePath("sr", path),
-        "x-default": localePath("sr", path),
-      },
+      canonical: localePath(locale, path),
+      languages: translationAlternates(post.translations ?? []),
     },
   };
 }
@@ -183,14 +196,19 @@ export default async function InsightArticlePage({
 }: PageProps<"/[locale]/uvidi/[slug]">) {
   const { slug, locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
-  // Articles exist in Serbian only; send other locales to their Uvidi list,
-  // which explains that and links to the Serbian articles.
-  if (locale !== "sr") redirect(localePath(locale, "/uvidi"));
-  const post = await getInsight(slug);
-  if (!post) notFound();
+  const post = await getInsight(slug, locale);
+  if (!post) {
+    // The slug exists in another language (e.g. the language switcher kept the slug
+    // and only swapped the locale): go to this locale's version, or to this locale's
+    // Uvidi list when the article isn't translated.
+    const translations = await getTranslationsBySlug(slug);
+    if (translations.length === 0) notFound();
+    const match = translations.find((translation) => translation.language === locale);
+    redirect(localePath(locale, match ? `/uvidi/${match.slug}` : "/uvidi"));
+  }
 
   const dict = getDictionary(locale);
-  const tag = getInsightTag(post.practiceArea) ?? dict.insights.eyebrow;
+  const tag = getInsightTag(post.practiceArea, locale) ?? dict.insights.eyebrow;
   const author = post.author ? getAttorney(post.author) : undefined;
   const faq = (post.faq ?? []).filter((item) => item.q && item.a);
   const path = `/uvidi/${post.slug}`;
@@ -206,7 +224,7 @@ export default async function InsightArticlePage({
   const month = datePart("month", { month: "long" }).toUpperCase();
   const year = datePart("year", { year: "numeric" });
 
-  const others = (await getInsights()).filter((item) => item.slug !== post.slug);
+  const others = (await getInsights(locale)).filter((item) => item.slug !== post.slug);
   const sameArea = (item: { practiceArea: string | null }) =>
     Boolean(post.practiceArea) && item.practiceArea === post.practiceArea;
   const related = [
@@ -447,7 +465,7 @@ export default async function InsightArticlePage({
                 {related.map((item) => (
                   <li key={item.slug} className="min-w-0">
                     <MbLawInsightCard
-                      post={toCardData(item, dict.insights.eyebrow)}
+                      post={toCardData(item, dict.insights.eyebrow, locale)}
                       variant="grid"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       locale={locale}

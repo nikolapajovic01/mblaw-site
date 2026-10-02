@@ -2,14 +2,41 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { practiceAreas } from "../../data/practice-areas";
 import { attorneys } from "../../data/team";
 
-// One "Uvid" (blog article), rendered at /sr/uvidi/{slug}. Author and practice area
-// are stored as slugs and resolved against src/data/team.ts and practice-areas.ts, so
-// names, photos and links stay defined in one place.
+// One "Uvid" (blog article), rendered at /{language}/uvidi/{slug}. Author and practice
+// area are stored as slugs and resolved against src/data/team.ts and practice-areas.ts,
+// so names, photos and links stay defined in one place.
+//
+// Translations are separate documents with their own slug. A translation stores the
+// Serbian original's slug in translationKey; a Serbian article leaves it empty and its
+// own slug is the key. Documents without a language (everything the content pipeline
+// publishes) are Serbian.
 export const blogPost = defineType({
   name: "blogPost",
   title: "Uvid",
   type: "document",
   fields: [
+    defineField({
+      name: "language",
+      title: "Jezik",
+      type: "string",
+      options: {
+        list: [
+          { title: "Srpski", value: "sr" },
+          { title: "English", value: "en" },
+          { title: "Русский", value: "ru" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      initialValue: "sr",
+    }),
+    defineField({
+      name: "translationKey",
+      title: "Prevod članka (slug srpskog originala)",
+      description: "Samo za prevode: slug srpskog članka čiji je ovo prevod.",
+      type: "string",
+      hidden: ({ document }) => !document?.language || document.language === "sr",
+    }),
     defineField({
       name: "title",
       title: "Naslov",
@@ -143,6 +170,11 @@ export const blogPost = defineType({
     },
   ],
   preview: {
-    select: { title: "title", subtitle: "publishedAt", media: "heroImage" },
+    select: { title: "title", language: "language", publishedAt: "publishedAt", media: "heroImage" },
+    prepare: ({ title, language, publishedAt, media }) => ({
+      title,
+      subtitle: `${(language ?? "sr").toUpperCase()} · ${publishedAt ?? ""}`,
+      media,
+    }),
   },
 });
