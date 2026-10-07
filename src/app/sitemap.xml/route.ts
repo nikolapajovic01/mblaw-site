@@ -84,10 +84,9 @@ ${[...entries, ...postEntries].join("\n")}
 </urlset>
 `;
 
+  // No Cache-Control here: Next derives it from `revalidate`. A hand-set s-maxage made
+  // Vercel's CDN hold the sitemap far past the 60s window, so new articles never showed.
   return new Response(xml, {
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
-    },
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }
