@@ -240,6 +240,7 @@ const en = {
     scrollTop: "Back to top",
     openViber: "Open Viber",
     openWhatsapp: "Open WhatsApp",
+    openTelegram: "Open Telegram",
     callOffice: "Call the office",
   },
   contactPage: {

@@ -137,6 +137,7 @@ export type Dictionary = {
     scrollTop: string;
     openViber: string;
     openWhatsapp: string;
+    openTelegram: string;
     callOffice: string;
   };
   contactPage: {

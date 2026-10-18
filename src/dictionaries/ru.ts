@@ -240,6 +240,7 @@ const ru = {
     scrollTop: "Наверх",
     openViber: "Открыть Viber",
     openWhatsapp: "Открыть WhatsApp",
+    openTelegram: "Открыть Telegram",
     callOffice: "Позвонить в офис",
   },
   contactPage: {

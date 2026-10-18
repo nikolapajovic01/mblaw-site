@@ -240,6 +240,7 @@ const sr = {
     scrollTop: "Na vrh strane",
     openViber: "Otvori Viber",
     openWhatsapp: "Otvori WhatsApp",
+    openTelegram: "Otvori Telegram",
     callOffice: "Pozovi kancelariju",
   },
   contactPage: {
