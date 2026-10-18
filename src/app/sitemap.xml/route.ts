@@ -3,9 +3,10 @@ import { absoluteUrl, localePath } from "@/lib/seo";
 import { getSiteRoutes } from "@/lib/routes";
 import { getAllInsights } from "@/data/insights";
 
-// Rebuilt every minute (matching INSIGHTS_REVALIDATE) so newly published articles are
-// listed without a redeploy.
-export const revalidate = 60;
+// Built on every request: the ISR version (revalidate = 60) kept serving the article
+// list from the last deploy on Vercel, so articles published since were missing. One
+// small Sanity query per crawl is cheap.
+export const dynamic = "force-dynamic";
 
 function escapeXml(value: string) {
   return value
@@ -84,8 +85,6 @@ ${[...entries, ...postEntries].join("\n")}
 </urlset>
 `;
 
-  // No Cache-Control here: Next derives it from `revalidate`. A hand-set s-maxage made
-  // Vercel's CDN hold the sitemap far past the 60s window, so new articles never showed.
   return new Response(xml, {
     headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
